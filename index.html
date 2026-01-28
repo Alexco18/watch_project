@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>ChronoBase - Accueil</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0f0f0f;
+            color: white;
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            font-weight: 300;
+        }
+
+        /* HEADER */
+        header {
+            width: 100%;
+            padding: 25px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        nav a {
+            margin-left: 30px;
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #cfcfcf;
+        }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            margin-top: 120px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            color: #b3b3b3;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        /* SEARCH BAR */
+        .search-bar {
+            margin-top: 40px;
+        }
+
+        .search-bar input {
+            width: 60%;
+            max-width: 600px;
+            padding: 15px 25px;
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.05);
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .search-bar input::placeholder {
+            color: #777;
+        }
+
+        .search-bar input:focus {
+            border-color: #ccc;
+        }
+
+        /* SECTIONS */
+        .sections {
+            max-width: 1200px;
+            margin: 120px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 0 20px 80px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #b3b3b3;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <h2>ChronoBase</h2>
+            <nav>
+                <a href="#">Présentation</a>
+                <a href="#">Cours</a>
+                <a href="#">Les montres</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1>La référence mondiale des montres</h1>
+        <p>Explorez des milliers de modèles, apprenez l’horlogerie, découvrez l’histoire des marques.</p>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Rechercher une marque, un modèle, une année...">
+        </div>
+    </section>
+
+    <!-- SECTIONS -->
+    <section class="sections">
+        <div class="card">
+            <h3>📚 Cours d’horlogerie</h3>
+            <p>Apprenez les bases, les techniques avancées et l’histoire des grandes maisons.</p>
+        </div>
+
+        <div class="card">
+            <h3>⌚ Base de données</h3>
+            <p>Accédez à des fiches détaillées, photos HD, mouvements, années, références.</p>
+        </div>
+
+        <div class="card">
+            <h3>🛠️ Expertise horlogère</h3>
+            <p>Contenu validé par des horlogers professionnels et passionnés.</p>
+        </div>
+    </section>
+
+</body>
+</html>
