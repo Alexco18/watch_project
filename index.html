@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>ChronoBase - Accueil</title>
+
     <style>
         body {
             margin: 0;
             padding: 0;
-            background: #0f0f0f;
-            color: white;
+            background: linear-gradient(180deg, #0a0a0a, #111111, #0d0d0d);
+            color: #d4af37; /* Doré élégant */
             font-family: "Helvetica Neue", Arial, sans-serif;
             font-weight: 300;
         }
@@ -17,7 +18,8 @@
         header {
             width: 100%;
             padding: 25px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            background: #0b0b0b;
         }
 
         .header-container {
@@ -32,7 +34,7 @@
         nav a {
             margin-left: 30px;
             text-decoration: none;
-            color: white;
+            color: #d4af37;
             font-size: 14px;
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -40,7 +42,7 @@
         }
 
         nav a:hover {
-            color: #cfcfcf;
+            color: #f5d98c;
         }
 
         /* HERO */
@@ -54,10 +56,11 @@
             font-size: 55px;
             font-weight: 300;
             letter-spacing: 2px;
+            color: #d4af37;
         }
 
         .hero p {
-            color: #b3b3b3;
+            color: #c1a96b;
             font-size: 18px;
             max-width: 600px;
             margin: 20px auto;
@@ -73,20 +76,21 @@
             max-width: 600px;
             padding: 15px 25px;
             border-radius: 40px;
-            border: 1px solid rgba(255,255,255,0.15);
-            background: rgba(255,255,255,0.05);
-            color: white;
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(255,255,255,0.03);
+            color: #d4af37;
             font-size: 16px;
             outline: none;
             transition: 0.3s;
         }
 
         .search-bar input::placeholder {
-            color: #777;
+            color: #8c7a45;
         }
 
         .search-bar input:focus {
-            border-color: #ccc;
+            border-color: #f5d98c;
+            background: rgba(255,255,255,0.06);
         }
 
         /* SECTIONS */
@@ -100,24 +104,26 @@
         }
 
         .card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: linear-gradient(180deg, #111111, #0c0c0c);
+            border: 1px solid rgba(212,175,55,0.15);
             padding: 30px;
             border-radius: 12px;
             transition: 0.3s;
         }
 
         .card:hover {
-            background: rgba(255,255,255,0.1);
+            background: linear-gradient(180deg, #1a1a1a, #111111);
+            border-color: rgba(212,175,55,0.35);
         }
 
         .card h3 {
             font-size: 22px;
             margin-bottom: 10px;
+            color: #d4af37;
         }
 
         .card p {
-            color: #b3b3b3;
+            color: #c1a96b;
             font-size: 15px;
             line-height: 1.5;
         }
@@ -129,7 +135,7 @@
     <!-- HEADER -->
     <header>
         <div class="header-container">
-            <h2>ChronoBase</h2>
+            <h2 style="color:#d4af37;">ChronoBase</h2>
             <nav>
                 <a href="#">Présentation</a>
                 <a href="#">Cours</a>
@@ -152,17 +158,17 @@
     <!-- SECTIONS -->
     <section class="sections">
         <div class="card">
-            <h3>📚 Cours d’horlogerie</h3>
+            <h3>Cours d’horlogerie</h3>
             <p>Apprenez les bases, les techniques avancées et l’histoire des grandes maisons.</p>
         </div>
 
         <div class="card">
-            <h3>⌚ Base de données</h3>
+            <h3>Base de données</h3>
             <p>Accédez à des fiches détaillées, photos HD, mouvements, années, références.</p>
         </div>
 
         <div class="card">
-            <h3>🛠️ Expertise horlogère</h3>
+            <h3>Expertise horlogère</h3>
             <p>Contenu validé par des horlogers professionnels et passionnés.</p>
         </div>
     </section>
