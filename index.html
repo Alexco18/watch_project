@@ -44,10 +44,10 @@
             100% { background-position: 200%; }
         }
 
-        /* HEADER */
+        /* HEADER AFFINÉ */
         header {
             width: 100%;
-            padding: 25px 0;
+            padding: 12px 0;
             border-bottom: 1px solid rgba(212,175,55,0.2);
             background: #0b0b0b;
             position: fixed;
@@ -128,6 +128,29 @@
             transition: 0.3s;
         }
 
+        /* SECTIONS ACCUEIL */
+        .sections {
+            max-width: 1200px;
+            margin: 120px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 0 20px 80px;
+        }
+
+        .card {
+            background: linear-gradient(180deg, #111111, #0c0c0c);
+            border: 1px solid rgba(212,175,55,0.15);
+            padding: 30px;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            background: linear-gradient(180deg, #1a1a1a, #111111);
+            border-color: rgba(212,175,55,0.35);
+        }
+
         /* PAGE MONTRES */
         #watches-view h1 {
             text-align: center;
@@ -144,8 +167,7 @@
             margin-bottom: 40px;
         }
 
-        .filters select,
-        .filters input {
+        .filters select {
             padding: 10px 15px;
             border-radius: 8px;
             border: 1px solid rgba(212,175,55,0.25);
@@ -182,10 +204,63 @@
         }
 
         .watch-info {
-            display: flex;
-            justify-content: space-between;
             margin-top: 10px;
             color: #d4af37;
+        }
+
+        .watch-info .brand {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .watch-info .name-year {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* MODALE STYLE BOÎTE DE MONTRE */
+        .modal-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+        }
+
+        .modal {
+            background: #0b0b0b;
+            border: 1px solid rgba(212,175,55,0.4);
+            padding: 30px;
+            border-radius: 12px;
+            width: 350px;
+            box-shadow: inset 0 0 20px rgba(212,175,55,0.15);
+            text-align: center;
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+        }
+
+        .modal button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(212,175,55,0.3);
+            color: #d4af37;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .modal button:hover {
+            background: rgba(212,175,55,0.15);
         }
     </style>
 </head>
@@ -213,28 +288,51 @@
                 <input type="text" placeholder="Rechercher une marque, un modèle, une année...">
             </div>
         </div>
+
+        <section class="sections">
+            <div class="card">
+                <h3>Cours d’horlogerie</h3>
+                <p>Apprenez les bases, les techniques avancées et l’histoire des grandes maisons.</p>
+            </div>
+
+            <div class="card">
+                <h3>Base de données</h3>
+                <p>Accédez à des fiches détaillées, photos HD, mouvements, années, références.</p>
+            </div>
+
+            <div class="card">
+                <h3>Expertise horlogère</h3>
+                <p>Contenu validé par des horlogers professionnels et passionnés.</p>
+            </div>
+        </section>
     </section>
 
     <!-- PAGE LES MONTRES -->
     <section id="watches-view" class="view">
         <h1 class="gold-text">Toutes les montres</h1>
 
-        <!-- FILTRES -->
+        <!-- FILTRE PRINCIPAL -->
         <div class="filters">
-            <select id="category-filter">
-                <option value="">Catégorie</option>
-                <option value="sport">Sport</option>
-                <option value="habillée">Habillée</option>
-                <option value="plongée">Plongée</option>
+            <select id="main-filter">
+                <option value="">Trier par...</option>
+                <option value="dateAZ">Par date A → Z</option>
+                <option value="dateZA">Par date Z → A</option>
+                <option value="brand">Par nom</option>
+                <option value="year">Par année</option>
             </select>
-
-            <input type="number" id="year-min" placeholder="Année min">
-            <input type="number" id="year-max" placeholder="Année max">
         </div>
 
         <!-- GRILLE DES MONTRES -->
         <div class="watch-grid" id="watch-grid"></div>
     </section>
+
+    <!-- MODALE -->
+    <div class="modal-bg" id="modal-bg">
+        <div class="modal" id="modal-content">
+            <h2 class="gold-text">Choisissez</h2>
+            <div id="modal-options"></div>
+        </div>
+    </div>
 
     <script>
         /* NAVIGATION ENTRE LES VUES */
@@ -245,43 +343,84 @@
 
         /* DONNÉES TEMPORAIRES DES MONTRES */
         const watches = [
-            { name: "Rolex Daytona", year: 2016, category: "sport", img: "https://via.placeholder.com/300" },
-            { name: "Omega Speedmaster", year: 1969, category: "sport", img: "https://via.placeholder.com/300" },
-            { name: "Patek Philippe Calatrava", year: 1932, category: "habillée", img: "https://via.placeholder.com/300" },
-            { name: "Rolex Submariner", year: 1953, category: "plongée", img: "https://via.placeholder.com/300" }
+            { brand: "Rolex", name: "Daytona", year: 2016, category: "sport", img: "https://via.placeholder.com/300" },
+            { brand: "Omega", name: "Speedmaster", year: 1969, category: "sport", img: "https://via.placeholder.com/300" },
+            { brand: "Patek Philippe", name: "Calatrava", year: 1932, category: "habillée", img: "https://via.placeholder.com/300" },
+            { brand: "Rolex", name: "Submariner", year: 1953, category: "plongée", img: "https://via.placeholder.com/300" },
+            { brand: "Seiko", name: "SKX007", year: 1996, category: "plongée", img: "https://via.placeholder.com/300" }
         ];
 
         /* AFFICHAGE DES MONTRES */
-        function displayWatches() {
+        function displayWatches(list = watches) {
             const grid = document.getElementById("watch-grid");
             grid.innerHTML = "";
 
-            const category = document.getElementById("category-filter").value;
-            const yearMin = document.getElementById("year-min").value;
-            const yearMax = document.getElementById("year-max").value;
-
-            watches
-                .filter(w => !category || w.category === category)
-                .filter(w => !yearMin || w.year >= yearMin)
-                .filter(w => !yearMax || w.year <= yearMax)
-                .sort((a, b) => b.year - a.year)
-                .forEach(w => {
-                    grid.innerHTML += `
-                        <div class="watch-card">
-                            <img src="${w.img}">
-                            <div class="watch-info">
+            list.forEach(w => {
+                grid.innerHTML += `
+                    <div class="watch-card">
+                        <img src="${w.img}">
+                        <div class="watch-info">
+                            <div class="brand">${w.brand}</div>
+                            <div class="name-year">
                                 <span>${w.name}</span>
                                 <span>${w.year}</span>
                             </div>
                         </div>
-                    `;
-                });
+                    </div>
+                `;
+            });
         }
 
-        document.querySelectorAll('.filters select, .filters input')
-            .forEach(el => el.addEventListener('input', displayWatches));
-
         displayWatches();
+
+        /* MODALE */
+        const modalBg = document.getElementById("modal-bg");
+        const modalOptions = document.getElementById("modal-options");
+
+        function openModal(options, callback) {
+            modalOptions.innerHTML = "";
+            options.forEach(opt => {
+                const btn = document.createElement("button");
+                btn.textContent = opt;
+                btn.onclick = () => {
+                    modalBg.style.display = "none";
+                    callback(opt);
+                };
+                modalOptions.appendChild(btn);
+            });
+            modalBg.style.display = "flex";
+        }
+
+        modalBg.onclick = (e) => {
+            if (e.target === modalBg) modalBg.style.display = "none";
+        };
+
+        /* FILTRE PRINCIPAL */
+        document.getElementById("main-filter").addEventListener("change", function () {
+            const value = this.value;
+
+            if (value === "dateAZ") {
+                displayWatches([...watches].sort((a, b) => b.year - a.year));
+            }
+
+            else if (value === "dateZA") {
+                displayWatches([...watches].sort((a, b) => a.year - b.year));
+            }
+
+            else if (value === "brand") {
+                const brands = [...new Set(watches.map(w => w.brand))];
+                openModal(brands, (selectedBrand) => {
+                    displayWatches(watches.filter(w => w.brand === selectedBrand));
+                });
+            }
+
+            else if (value === "year") {
+                const years = [...new Set(watches.map(w => w.year))].sort((a, b) => b - a);
+                openModal(years, (selectedYear) => {
+                    displayWatches(watches.filter(w => w.year === selectedYear));
+                });
+            }
+        });
     </script>
 
 </body>
