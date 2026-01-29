@@ -4,14 +4,43 @@
     <meta charset="UTF-8">
     <title>ChronoBase - Accueil</title>
 
+    <!-- POLICE PREMIUM -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
     <style>
+        /* VARIABLES DORÉES */
+        :root {
+            --gold-gradient: linear-gradient(90deg, #d4af37, #f5d98c, #c8a951);
+        }
+
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(180deg, #0a0a0a, #111111, #0d0d0d);
-            color: #d4af37; /* Doré élégant */
-            font-family: "Helvetica Neue", Arial, sans-serif;
+            font-family: 'Montserrat', sans-serif;
+
+            /* FOND NOIR TEXTURÉ + DÉGRADÉ */
+            background: radial-gradient(circle at top, #1a1a1a 0%, #0b0b0b 60%, #000000 100%);
+            background-image:
+                radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                radial-gradient(circle at top, #1a1a1a 0%, #0b0b0b 60%, #000000 100%);
+            background-size: 3px 3px, 6px 6px, cover;
+            color: #d4af37;
             font-weight: 300;
+        }
+
+        /* CLASSE POUR TEXTE DORÉ BRILLANT */
+        .gold-text {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: shine 6s infinite linear;
+            background-size: 200%;
+        }
+
+        @keyframes shine {
+            0% { background-position: 0%; }
+            100% { background-position: 200%; }
         }
 
         /* HEADER */
@@ -56,7 +85,6 @@
             font-size: 55px;
             font-weight: 300;
             letter-spacing: 2px;
-            color: #d4af37;
         }
 
         .hero p {
@@ -135,7 +163,7 @@
     <!-- HEADER -->
     <header>
         <div class="header-container">
-            <h2 style="color:#d4af37;">ChronoBase</h2>
+            <h2 class="gold-text">ChronoBase</h2>
             <nav>
                 <a href="#">Présentation</a>
                 <a href="#">Cours</a>
@@ -147,7 +175,7 @@
 
     <!-- HERO -->
     <section class="hero">
-        <h1>La référence mondiale des montres</h1>
+        <h1 class="gold-text">La référence mondiale des montres</h1>
         <p>Explorez des milliers de modèles, apprenez l’horlogerie, découvrez l’histoire des marques.</p>
 
         <div class="search-bar">
