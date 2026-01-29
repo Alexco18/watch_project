@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>ChronoBase - Accueil</title>
+    <title>ChronoBase</title>
 
     <!-- POLICE PREMIUM -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
@@ -27,9 +27,10 @@
             background-size: 3px 3px, 6px 6px, cover;
             color: #d4af37;
             font-weight: 300;
+            overflow-x: hidden;
         }
 
-        /* CLASSE POUR TEXTE DORÉ BRILLANT */
+        /* TEXTE DORÉ BRILLANT */
         .gold-text {
             background: var(--gold-gradient);
             -webkit-background-clip: text;
@@ -49,6 +50,10 @@
             padding: 25px 0;
             border-bottom: 1px solid rgba(212,175,55,0.2);
             background: #0b0b0b;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
         }
 
         .header-container {
@@ -68,16 +73,32 @@
             letter-spacing: 1px;
             text-transform: uppercase;
             transition: 0.3s;
+            cursor: pointer;
         }
 
         nav a:hover {
             color: #f5d98c;
         }
 
-        /* HERO */
+        /* VUES */
+        .view {
+            min-height: 100vh;
+            padding-top: 120px;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: 0.6s ease;
+            display: none;
+        }
+
+        .view.active {
+            display: block;
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* HERO ACCUEIL */
         .hero {
             text-align: center;
-            margin-top: 120px;
             padding: 0 20px;
         }
 
@@ -94,11 +115,6 @@
             margin: 20px auto;
         }
 
-        /* SEARCH BAR */
-        .search-bar {
-            margin-top: 40px;
-        }
-
         .search-bar input {
             width: 60%;
             max-width: 600px;
@@ -112,94 +128,161 @@
             transition: 0.3s;
         }
 
-        .search-bar input::placeholder {
-            color: #8c7a45;
+        /* PAGE MONTRES */
+        #watches-view h1 {
+            text-align: center;
+            font-size: 45px;
+            margin-bottom: 40px;
         }
 
-        .search-bar input:focus {
-            border-color: #f5d98c;
-            background: rgba(255,255,255,0.06);
-        }
-
-        /* SECTIONS */
-        .sections {
+        .filters {
             max-width: 1200px;
-            margin: 120px auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            padding: 0 20px 80px;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
         }
 
-        .card {
-            background: linear-gradient(180deg, #111111, #0c0c0c);
-            border: 1px solid rgba(212,175,55,0.15);
-            padding: 30px;
-            border-radius: 12px;
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            background: linear-gradient(180deg, #1a1a1a, #111111);
-            border-color: rgba(212,175,55,0.35);
-        }
-
-        .card h3 {
-            font-size: 22px;
-            margin-bottom: 10px;
+        .filters select,
+        .filters input {
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(255,255,255,0.03);
             color: #d4af37;
         }
 
-        .card p {
-            color: #c1a96b;
-            font-size: 15px;
-            line-height: 1.5;
+        .watch-grid {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            padding-bottom: 80px;
+        }
+
+        .watch-card {
+            background: linear-gradient(180deg, #111111, #0c0c0c);
+            border: 1px solid rgba(212,175,55,0.15);
+            border-radius: 12px;
+            padding: 20px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .watch-card:hover {
+            transform: scale(1.03);
+            border-color: rgba(212,175,55,0.35);
+        }
+
+        .watch-card img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .watch-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            color: #d4af37;
         }
     </style>
 </head>
 
 <body>
 
-    <!-- HEADER -->
+    <!-- HEADER GLOBAL -->
     <header>
         <div class="header-container">
             <h2 class="gold-text">ChronoBase</h2>
             <nav>
-                <a href="#">Présentation</a>
-                <a href="#">Cours</a>
-                <a href="#">Les montres</a>
-                <a href="#">Contact</a>
+                <a onclick="showView('home-view')">Accueil</a>
+                <a onclick="showView('watches-view')">Les montres</a>
             </nav>
         </div>
     </header>
 
-    <!-- HERO -->
-    <section class="hero">
-        <h1 class="gold-text">La référence mondiale des montres</h1>
-        <p>Explorez des milliers de modèles, apprenez l’horlogerie, découvrez l’histoire des marques.</p>
+    <!-- PAGE ACCUEIL -->
+    <section id="home-view" class="view active">
+        <div class="hero">
+            <h1 class="gold-text">La référence mondiale des montres</h1>
+            <p>Explorez des milliers de modèles, apprenez l’horlogerie, découvrez l’histoire des marques.</p>
 
-        <div class="search-bar">
-            <input type="text" placeholder="Rechercher une marque, un modèle, une année...">
+            <div class="search-bar">
+                <input type="text" placeholder="Rechercher une marque, un modèle, une année...">
+            </div>
         </div>
     </section>
 
-    <!-- SECTIONS -->
-    <section class="sections">
-        <div class="card">
-            <h3>Cours d’horlogerie</h3>
-            <p>Apprenez les bases, les techniques avancées et l’histoire des grandes maisons.</p>
+    <!-- PAGE LES MONTRES -->
+    <section id="watches-view" class="view">
+        <h1 class="gold-text">Toutes les montres</h1>
+
+        <!-- FILTRES -->
+        <div class="filters">
+            <select id="category-filter">
+                <option value="">Catégorie</option>
+                <option value="sport">Sport</option>
+                <option value="habillée">Habillée</option>
+                <option value="plongée">Plongée</option>
+            </select>
+
+            <input type="number" id="year-min" placeholder="Année min">
+            <input type="number" id="year-max" placeholder="Année max">
         </div>
 
-        <div class="card">
-            <h3>Base de données</h3>
-            <p>Accédez à des fiches détaillées, photos HD, mouvements, années, références.</p>
-        </div>
-
-        <div class="card">
-            <h3>Expertise horlogère</h3>
-            <p>Contenu validé par des horlogers professionnels et passionnés.</p>
-        </div>
+        <!-- GRILLE DES MONTRES -->
+        <div class="watch-grid" id="watch-grid"></div>
     </section>
+
+    <script>
+        /* NAVIGATION ENTRE LES VUES */
+        function showView(viewId) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+        }
+
+        /* DONNÉES TEMPORAIRES DES MONTRES */
+        const watches = [
+            { name: "Rolex Daytona", year: 2016, category: "sport", img: "https://via.placeholder.com/300" },
+            { name: "Omega Speedmaster", year: 1969, category: "sport", img: "https://via.placeholder.com/300" },
+            { name: "Patek Philippe Calatrava", year: 1932, category: "habillée", img: "https://via.placeholder.com/300" },
+            { name: "Rolex Submariner", year: 1953, category: "plongée", img: "https://via.placeholder.com/300" }
+        ];
+
+        /* AFFICHAGE DES MONTRES */
+        function displayWatches() {
+            const grid = document.getElementById("watch-grid");
+            grid.innerHTML = "";
+
+            const category = document.getElementById("category-filter").value;
+            const yearMin = document.getElementById("year-min").value;
+            const yearMax = document.getElementById("year-max").value;
+
+            watches
+                .filter(w => !category || w.category === category)
+                .filter(w => !yearMin || w.year >= yearMin)
+                .filter(w => !yearMax || w.year <= yearMax)
+                .sort((a, b) => b.year - a.year)
+                .forEach(w => {
+                    grid.innerHTML += `
+                        <div class="watch-card">
+                            <img src="${w.img}">
+                            <div class="watch-info">
+                                <span>${w.name}</span>
+                                <span>${w.year}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+        }
+
+        document.querySelectorAll('.filters select, .filters input')
+            .forEach(el => el.addEventListener('input', displayWatches));
+
+        displayWatches();
+    </script>
 
 </body>
 </html>
