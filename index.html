@@ -154,7 +154,7 @@
         /* PAGE MONTRES */
         #watches-view h1 {
             text-align: center;
-            font-size: 45px;
+            font-size: 55px;
             margin-bottom: 40px;
         }
 
@@ -175,6 +175,39 @@
             color: #d4af37;
         }
 
+        /* ZONE DE PLAGES */
+        .year-range-zone {
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+            display: none;
+            text-align: center;
+        }
+
+        .year-range-zone h3 {
+            margin-bottom: 15px;
+        }
+
+        .range-cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .range-card {
+            padding: 12px 20px;
+            border: 1px solid rgba(212,175,55,0.3);
+            background: #0c0c0c;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .range-card:hover {
+            background: rgba(212,175,55,0.15);
+        }
+
+        /* GRILLE DES MONTRES */
         .watch-grid {
             max-width: 1200px;
             margin: auto;
@@ -237,7 +270,7 @@
             border: 1px solid rgba(212,175,55,0.4);
             padding: 30px;
             border-radius: 12px;
-            width: 350px;
+            width: 450px;
             box-shadow: inset 0 0 20px rgba(212,175,55,0.15);
             text-align: center;
         }
@@ -246,20 +279,23 @@
             margin-bottom: 20px;
         }
 
-        .modal button {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            background: rgba(255,255,255,0.05);
+        .modal-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .modal-option {
+            padding: 12px 20px;
             border: 1px solid rgba(212,175,55,0.3);
-            color: #d4af37;
-            border-radius: 8px;
+            background: #0c0c0c;
+            border-radius: 10px;
             cursor: pointer;
             transition: 0.3s;
         }
 
-        .modal button:hover {
+        .modal-option:hover {
             background: rgba(212,175,55,0.15);
         }
     </style>
@@ -322,6 +358,12 @@
             </select>
         </div>
 
+        <!-- ZONE DE PLAGES -->
+        <div class="year-range-zone" id="year-range-zone">
+            <h3 class="gold-text">Changer de plage</h3>
+            <div class="range-cards" id="range-cards"></div>
+        </div>
+
         <!-- GRILLE DES MONTRES -->
         <div class="watch-grid" id="watch-grid"></div>
     </section>
@@ -330,7 +372,7 @@
     <div class="modal-bg" id="modal-bg">
         <div class="modal" id="modal-content">
             <h2 class="gold-text">Choisissez</h2>
-            <div id="modal-options"></div>
+            <div class="modal-options" id="modal-options"></div>
         </div>
     </div>
 
@@ -380,13 +422,14 @@
         function openModal(options, callback) {
             modalOptions.innerHTML = "";
             options.forEach(opt => {
-                const btn = document.createElement("button");
-                btn.textContent = opt;
-                btn.onclick = () => {
+                const div = document.createElement("div");
+                div.className = "modal-option";
+                div.textContent = opt;
+                div.onclick = () => {
                     modalBg.style.display = "none";
                     callback(opt);
                 };
-                modalOptions.appendChild(btn);
+                modalOptions.appendChild(div);
             });
             modalBg.style.display = "flex";
         }
@@ -395,9 +438,61 @@
             if (e.target === modalBg) modalBg.style.display = "none";
         };
 
+        /* GÉNÉRATION DES PLAGES D'ANNÉES */
+        function generateYearRanges() {
+            const years = watches.map(w => w.year);
+            const minYear = Math.min(...years);
+            const maxYear = Math.max(...years);
+
+            const ranges = [];
+            for (let start = Math.floor(minYear / 10) * 10; start <= maxYear; start += 10) {
+                const end = start + 9;
+                ranges.push(`${start}–${end}`);
+            }
+            return ranges;
+        }
+
+        /* AFFICHAGE DES PLAGES DANS LA ZONE */
+        function showYearRangeZone(ranges, selectedRange) {
+            const zone = document.getElementById("year-range-zone");
+            const container = document.getElementById("range-cards");
+
+            zone.style.display = "block";
+            container.innerHTML = "";
+
+            ranges.forEach(r => {
+                const div = document.createElement("div");
+                div.className = "range-card";
+                div.textContent = r;
+
+                if (r === selectedRange) {
+                    div.style.background = "rgba(212,175,55,0.25)";
+                }
+
+                div.onclick = () => {
+                    filterByRange(r);
+                };
+
+                container.appendChild(div);
+            });
+        }
+
+        /* FILTRE PAR PLAGE */
+        function filterByRange(range) {
+            const [start, end] = range.split("–").map(Number);
+            const filtered = watches.filter(w => w.year >= start && w.year <= end);
+
+            displayWatches(filtered);
+
+            const ranges = generateYearRanges();
+            showYearRangeZone(ranges, range);
+        }
+
         /* FILTRE PRINCIPAL */
         document.getElementById("main-filter").addEventListener("change", function () {
             const value = this.value;
+
+            document.getElementById("year-range-zone").style.display = "none";
 
             if (value === "dateAZ") {
                 displayWatches([...watches].sort((a, b) => b.year - a.year));
@@ -415,9 +510,9 @@
             }
 
             else if (value === "year") {
-                const years = [...new Set(watches.map(w => w.year))].sort((a, b) => b - a);
-                openModal(years, (selectedYear) => {
-                    displayWatches(watches.filter(w => w.year === selectedYear));
+                const ranges = generateYearRanges();
+                openModal(ranges, (selectedRange) => {
+                    filterByRange(selectedRange);
                 });
             }
         });
