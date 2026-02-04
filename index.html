@@ -144,7 +144,7 @@
             border-color: rgba(212,175,55,0.35);
         }
 
-        #watches-view h1 {
+        #watches-view h1, #about-view h1 {
             text-align: center;
             font-size: 55px;
             font-weight: 300;
@@ -300,15 +300,16 @@
         <nav>
             <a onclick="showView('home-view')">Accueil</a>
             <a onclick="showView('watches-view')">Les montres</a>
+            <a onclick="showView('about-view')">À propos</a>
         </nav>
     </div>
 </header>
 
+<!-- PAGE ACCUEIL -->
 <section id="home-view" class="view active">
     <div class="hero">
         <h1 class="gold-text">La référence mondiale des montres</h1>
         <p>Explorez des milliers de modèles, apprenez l’horlogerie, découvrez l’histoire des marques.</p>
-
         <div class="search-bar">
             <input type="text" placeholder="Rechercher une marque, un modèle, une année...">
         </div>
@@ -332,6 +333,7 @@
     </section>
 </section>
 
+<!-- PAGE LES MONTRES -->
 <section id="watches-view" class="view">
     <h1 class="gold-text">Toutes les montres</h1>
 
@@ -353,6 +355,42 @@
     <div class="watch-grid" id="watch-grid"></div>
 </section>
 
+<!-- PAGE À PROPOS -->
+<section id="about-view" class="view">
+    <h1 class="gold-text">Qui sommes-nous ?</h1>
+
+    <div class="sections" style="max-width:900px; margin:auto; padding:40px 20px; display:grid; grid-gap:30px; grid-template-columns:1fr;">
+        <div class="card">
+            <h3>Notre mission</h3>
+            <p>
+                ChronoBase a pour objectif de créer la plus grande base de données de montres au monde.
+                Que vous soyez amateur ou professionnel, vous trouverez des fiches détaillées, photos,
+                tutoriels et procédures pour tout savoir sur l'horlogerie.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Les créateurs</h3>
+            <p>
+                Cette plateforme a été conçue par des passionnés d’horlogerie et de technologie.
+                Nous partageons notre passion et notre expertise pour faire découvrir l’univers des montres à tous.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Nos références et réseaux</h3>
+            <p>
+                Retrouvez-nous sur nos réseaux sociaux : 
+                <a href="#" style="color:#f5d98c;">Instagram</a>, 
+                <a href="#" style="color:#f5d98c;">YouTube</a>, 
+                <a href="#" style="color:#f5d98c;">Twitter</a>.<br>
+                Nous citons et respectons les sources officielles des marques horlogères.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- MODALE -->
 <div class="modal-bg" id="modal-bg">
     <div class="modal" id="modal-content">
         <h2 class="gold-text">Choisissez</h2>
@@ -365,6 +403,14 @@
         document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
         document.getElementById(viewId).classList.add('active');
     }
+
+    // Ouvre la vue correspondant au hash dans l'URL (ex: #watches-view)
+    window.addEventListener('DOMContentLoaded', () => {
+        const hash = window.location.hash.substring(1);
+        if (hash && document.getElementById(hash)) {
+            showView(hash);
+        }
+    });
 
     const watches = [
         { id: "rolex-daytona-2016", brand: "Rolex", name: "Daytona", year: 2016, category: "sport", img: "https://via.placeholder.com/300" },
@@ -458,21 +504,16 @@
     document.getElementById("main-filter").addEventListener("change", function () {
         const value = this.value;
         document.getElementById("year-range-zone").style.display = "none";
-        if (value === "dateAZ") displayWatches([...watches].sort((a,b)=>b.year-a.year));
-        else if (value === "dateZA") displayWatches([...watches].sort((a,b)=>a.year-b.year));
+        if (value === "dateAZ") displayWatches([...watches].sort((a, b) => a.year - b.year));
+        else if (value === "dateZA") displayWatches([...watches].sort((a, b) => b.year - a.year));
         else if (value === "brand") {
             const brands = [...new Set(watches.map(w => w.brand))];
-            openModal(brands, selectedBrand => displayWatches(watches.filter(w => w.brand === selectedBrand)));
+            openModal(brands, (selectedBrand) => displayWatches(watches.filter(w => w.brand === selectedBrand)));
         }
-        else if (value === "year") openModal(generateYearRanges(), filterByRange);
+        else if (value === "year") {
+            openModal(generateYearRanges(), (selectedRange) => filterByRange(selectedRange));
+        }
     });
-    // Vérifie le hash dans l'URL au chargement de la page
-window.addEventListener('DOMContentLoaded', () => {
-    const hash = window.location.hash.substring(1); // retire le #
-    if (hash && document.getElementById(hash)) {
-        showView(hash);
-    }
-});
 </script>
 
 </body>
