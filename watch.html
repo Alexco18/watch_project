@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>ChronoBase – Rolex Daytona</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: radial-gradient(circle at top, #1a1a1a 0%, #0b0b0b 60%, #000 100%);
+      color: #d4af37;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #0b0b0b;
+      border-bottom: 1px solid rgba(212,175,55,0.2);
+      padding: 12px 0;
+      z-index: 10;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .watch-page {
+      max-width: 1200px;
+      margin: auto;
+      padding: 140px 20px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+    }
+
+    .watch-gallery img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      border: 1px solid rgba(212,175,55,0.2);
+    }
+
+    .watch-details h1 {
+      font-size: 42px;
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+
+    .watch-details p {
+      color: #c1a96b;
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    .watch-specs {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .watch-specs li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(212,175,55,0.2);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .watch-price {
+      font-size: 26px;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 900px) {
+      .watch-page {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-container">
+    <h2>ChronoBase</h2>
+    <nav>
+      <a href="index.html" style="color:#d4af37;text-decoration:none;">Retour</a>
+    </nav>
+  </div>
+</header>
+
+<section class="watch-page">
+
+  <!-- GALERIE -->
+  <div class="watch-gallery">
+    <img src="https://via.placeholder.com/800x800" alt="Rolex Daytona face">
+    <img src="https://via.placeholder.com/800x800" alt="Rolex Daytona profil">
+    <img src="https://via.placeholder.com/800x800" alt="Rolex Daytona fond">
+  </div>
+
+  <!-- DÉTAILS -->
+  <div class="watch-details">
+    <h1>Rolex Daytona – 2016</h1>
+
+    <p>
+      Le Rolex Daytona est un chronographe emblématique conçu pour les pilotes automobiles.
+      Son design intemporel et son mouvement de haute précision en font une icône de l’horlogerie.
+    </p>
+
+    <ul class="watch-specs">
+      <li><span>Boîtier</span><span>Acier 40 mm</span></li>
+      <li><span>Mouvement</span><span>Automatique</span></li>
+      <li><span>Réserve de marche</span><span>72 heures</span></li>
+      <li><span>Étanchéité</span><span>100 m</span></li>
+      <li><span>Bracelet</span><span>Acier Oyster</span></li>
+    </ul>
+
+    <div class="watch-price">
+      Prix estimé : <strong>25 000 €</strong>
+    </div>
+  </div>
+
+</section>
+
+</body>
+</html>
