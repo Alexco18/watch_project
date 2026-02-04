@@ -466,6 +466,13 @@
         }
         else if (value === "year") openModal(generateYearRanges(), filterByRange);
     });
+    // Vérifie le hash dans l'URL au chargement de la page
+window.addEventListener('DOMContentLoaded', () => {
+    const hash = window.location.hash.substring(1); // retire le #
+    if (hash && document.getElementById(hash)) {
+        showView(hash);
+    }
+});
 </script>
 
 </body>
