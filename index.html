@@ -7,6 +7,9 @@
     <!-- POLICE PREMIUM -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
+    <!-- SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/supabase.min.js"></script>
+
     <style>
         /* VARIABLES DORÉES */
         :root {
@@ -305,7 +308,6 @@
     </div>
 </header>
 
-<!-- PAGE ACCUEIL -->
 <section id="home-view" class="view active">
     <div class="hero">
         <h1 class="gold-text">La référence mondiale des montres</h1>
@@ -333,7 +335,6 @@
     </section>
 </section>
 
-<!-- PAGE LES MONTRES -->
 <section id="watches-view" class="view">
     <h1 class="gold-text">Toutes les montres</h1>
 
@@ -355,7 +356,6 @@
     <div class="watch-grid" id="watch-grid"></div>
 </section>
 
-<!-- PAGE À PROPOS -->
 <section id="about-view" class="view">
     <h1 class="gold-text">Qui sommes-nous ?</h1>
 
@@ -390,7 +390,6 @@
     </div>
 </section>
 
-<!-- MODALE -->
 <div class="modal-bg" id="modal-bg">
     <div class="modal" id="modal-content">
         <h2 class="gold-text">Choisissez</h2>
@@ -399,28 +398,33 @@
 </div>
 
 <script>
+    // --------------------------- VUES ---------------------------
     function showView(viewId) {
         document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
         document.getElementById(viewId).classList.add('active');
     }
 
-    // Ouvre la vue correspondant au hash dans l'URL (ex: #watches-view)
     window.addEventListener('DOMContentLoaded', () => {
         const hash = window.location.hash.substring(1);
-        if (hash && document.getElementById(hash)) {
-            showView(hash);
-        }
+        if (hash && document.getElementById(hash)) showView(hash);
     });
 
-    const watches = [
-        { id: "rolex-daytona-2016", brand: "Rolex", name: "Daytona", year: 2016, category: "sport", img: "https://via.placeholder.com/300" },
-        { id: "omega-speedmaster-1969", brand: "Omega", name: "Speedmaster", year: 1969, category: "sport", img: "https://via.placeholder.com/300" },
-        { id: "patek-calatrava-1932", brand: "Patek Philippe", name: "Calatrava", year: 1932, category: "habillée", img: "https://via.placeholder.com/300" },
-        { id: "rolex-submariner-1953", brand: "Rolex", name: "Submariner", year: 1953, category: "plongée", img: "https://via.placeholder.com/300" },
-        { id: "seiko-skx007-1996", brand: "Seiko", name: "SKX007", year: 1996, category: "plongée", img: "https://via.placeholder.com/300" }
-    ];
+    // --------------------------- SUPABASE ---------------------------
+    const SUPABASE_URL = "https://ccmdttddmyqpbfevhslo.supabase.co"; // <--- à remplacer
+    const SUPABASE_ANON_KEY = "sb_publishable_c4R2XgfSxzDDhCyC9b0pnA_-GeA4EkD";       // <--- à remplacer
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    function displayWatches(list = watches) {
+    async function fetchWatches() {
+        const { data, error } = await supabase.from('watches').select('*');
+        if (error) {
+            console.error("Erreur Supabase:", error);
+            return [];
+        }
+        return data;
+    }
+
+    // --------------------------- AFFICHAGE ---------------------------
+    function displayWatches(list) {
         const grid = document.getElementById("watch-grid");
         grid.innerHTML = "";
         list.forEach(w => {
@@ -443,8 +447,7 @@
         window.location.href = `watch.html?id=${id}`;
     }
 
-    displayWatches();
-
+    // --------------------------- MODALE ---------------------------
     const modalBg = document.getElementById("modal-bg");
     const modalOptions = document.getElementById("modal-options");
 
@@ -467,8 +470,9 @@
         if (e.target === modalBg) modalBg.style.display = "none";
     };
 
-    function generateYearRanges() {
-        const years = watches.map(w => w.year);
+    // --------------------------- FILTRAGE ---------------------------
+    function generateYearRanges(list) {
+        const years = list.map(w => w.year);
         const minYear = Math.min(...years);
         const maxYear = Math.max(...years);
         const ranges = [];
@@ -496,25 +500,33 @@
 
     function filterByRange(range) {
         const [start, end] = range.split("–").map(Number);
-        const filtered = watches.filter(w => w.year >= start && w.year <= end);
+        const filtered = window.watches.filter(w => w.year >= start && w.year <= end);
         displayWatches(filtered);
-        showYearRangeZone(generateYearRanges(), range);
+        showYearRangeZone(generateYearRanges(window.watches), range);
     }
 
     document.getElementById("main-filter").addEventListener("change", function () {
         const value = this.value;
         document.getElementById("year-range-zone").style.display = "none";
-        if (value === "dateAZ") displayWatches([...watches].sort((a, b) => a.year - b.year));
-        else if (value === "dateZA") displayWatches([...watches].sort((a, b) => b.year - a.year));
+
+        if (value === "dateAZ") displayWatches([...window.watches].sort((a,b)=>a.year-b.year));
+        else if (value === "dateZA") displayWatches([...window.watches].sort((a,b)=>b.year-a.year));
         else if (value === "brand") {
-            const brands = [...new Set(watches.map(w => w.brand))];
-            openModal(brands, (selectedBrand) => displayWatches(watches.filter(w => w.brand === selectedBrand)));
+            const brands = [...new Set(window.watches.map(w => w.brand))];
+            openModal(brands, b => displayWatches(window.watches.filter(w => w.brand===b)));
         }
         else if (value === "year") {
-            openModal(generateYearRanges(), (selectedRange) => filterByRange(selectedRange));
+            openModal(generateYearRanges(window.watches), r => filterByRange(r));
         }
     });
-</script>
 
+    // --------------------------- INITIALISATION ---------------------------
+    async function initWatches() {
+        window.watches = await fetchWatches();
+        displayWatches(window.watches);
+    }
+
+    initWatches();
+</script>
 </body>
 </html>
