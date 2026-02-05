@@ -424,6 +424,15 @@
         return data;
     }
 
+    <script>
+(async () => {
+  const { data, error } = await supabase.from('watches').select('*');
+  console.log("Supabase data:", data);
+  console.log("Supabase error:", error);
+  window.watches = data;
+})();
+</script>
+
     // --------------------------- AFFICHAGE ---------------------------
     function displayWatches(list) {
         const grid = document.getElementById("watch-grid");
