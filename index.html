@@ -15,13 +15,6 @@
         :root {
             --gold-gradient: linear-gradient(90deg, #d4af37, #f5d98c, #c8a951);
         }
-<script>
-(async () => {
-  const { data, error } = await supabase.from('watches').select('*');
-  console.log("Supabase data:", data);
-  console.log("Supabase error:", error);
-  window.watches = data;
-})();
 </script>
 
         body {
