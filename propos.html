@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>À propos – ChronoBase</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root { --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951); }
+
+body{
+  margin:0;padding:0;font-family:'Montserrat',sans-serif;
+  background:radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
+  color:#d4af37;font-weight:300;overflow-x:hidden;
+}
+
+.gold-text{
+  background:var(--gold-gradient);
+  -webkit-background-clip:text;color:transparent;
+  animation:shine 6s infinite linear;background-size:200%;
+}
+@keyframes shine{0%{background-position:0%}100%{background-position:200%}}
+
+header{
+  width:100%;padding:12px 0;border-bottom:1px solid rgba(212,175,55,0.2);
+  background:#0b0b0b;position:fixed;top:0;left:0;z-index:10;
+}
+.header-container{
+  max-width:1200px;margin:auto;display:flex;justify-content:space-between;
+  align-items:center;padding:0 20px;
+}
+nav a{
+  margin-left:30px;text-decoration:none;color:#d4af37;
+  font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;
+}
+nav a:hover{color:#f5d98c}
+
+.sections{
+  max-width:1200px;margin:120px auto 80px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;padding:0 20px;
+}
+.card{
+  background:linear-gradient(180deg,#111,#0c0c0c);
+  border:1px solid rgba(212,175,55,0.15);
+  padding:30px;border-radius:12px;
+}
+.card:hover{border-color:rgba(212,175,55,.35)}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-container">
+    <h2 class="gold-text">ChronoBase</h2>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="index.html#watches-view">Les montres</a>
+      <a href="propos.html">À propos</a>
+    </nav>
+  </div>
+</header>
+
+<section class="sections">
+  <div class="card">
+    <h1 class="gold-text" style="text-align:center;margin-top:0">À propos</h1>
+    <p>
+      ChronoBase est un projet indépendant dédié à la mémoire horlogère.
+      Notre objectif est de créer la base de données la plus complète possible
+      sur les montres de toutes époques, en rassemblant informations techniques,
+      archives, documents rares et ressources pédagogiques.
+    </p>
+    <p>
+      Ce projet évolue constamment grâce à la passion, à la recherche et à la
+      collaboration avec des amateurs, collectionneurs et professionnels.
+    </p>
+  </div>
+</section>
+
+</body>
+</html>
