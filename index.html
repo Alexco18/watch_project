@@ -8,139 +8,216 @@
 
 <style>
 :root { --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951); }
-body {
-    margin:0;padding:0;font-family:'Montserrat',sans-serif;
-    background:radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
-    color:#d4af37;font-weight:300;overflow-x:hidden;
+
+body{
+  margin:0;padding:0;font-family:'Montserrat',sans-serif;
+  background:radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
+  color:#d4af37;font-weight:300;overflow-x:hidden;
 }
-.gold-text{background:var(--gold-gradient);-webkit-background-clip:text;color:transparent;animation:shine 6s infinite linear;background-size:200%}
+
+.gold-text{
+  background:var(--gold-gradient);
+  -webkit-background-clip:text;color:transparent;
+  animation:shine 6s infinite linear;background-size:200%;
+}
 @keyframes shine{0%{background-position:0%}100%{background-position:200%}}
 
-header{position:fixed;top:0;width:100%;background:#0b0b0b;border-bottom:1px solid rgba(212,175,55,.2);z-index:10}
-.header-container{max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:12px 20px}
-nav a{margin-left:30px;color:#d4af37;text-decoration:none;cursor:pointer}
+header{
+  width:100%;padding:12px 0;border-bottom:1px solid rgba(212,175,55,0.2);
+  background:#0b0b0b;position:fixed;top:0;left:0;z-index:10;
+}
+.header-container{
+  max-width:1200px;margin:auto;display:flex;justify-content:space-between;
+  align-items:center;padding:0 20px;
+}
+nav a{
+  margin-left:30px;text-decoration:none;color:#d4af37;
+  font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;
+}
 nav a:hover{color:#f5d98c}
 
-.view{min-height:100vh;padding-top:120px;display:none;opacity:0;transform:translateX(40px);transition:.6s}
-.view.active{display:block;opacity:1;transform:translateX(0)}
+.view{min-height:100vh;padding-top:120px;display:none;opacity:0;transition:.5s}
+.view.active{display:block;opacity:1}
 
-.hero{text-align:center}
+.hero{text-align:center;padding:0 20px}
 .hero h1{font-size:55px;font-weight:300}
-.hero p{color:#c1a96b;max-width:600px;margin:20px auto}
+.hero p{color:#c1a96b;font-size:18px;max-width:600px;margin:20px auto}
 
-.watch-grid{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px;padding-bottom:80px}
-.watch-card{background:#0c0c0c;border:1px solid rgba(212,175,55,.15);padding:20px;border-radius:12px;cursor:pointer}
+.sections{
+  max-width:1200px;margin:80px auto;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;padding:0 20px 80px;
+}
+.card{
+  background:linear-gradient(180deg,#111,#0c0c0c);
+  border:1px solid rgba(212,175,55,0.15);
+  padding:30px;border-radius:12px;
+}
+.card:hover{border-color:rgba(212,175,55,.35)}
+
+.watch-grid{
+  max-width:1200px;margin:auto;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;padding-bottom:80px;
+}
+.watch-card{
+  background:linear-gradient(180deg,#111,#0c0c0c);
+  border:1px solid rgba(212,175,55,.15);
+  border-radius:12px;padding:20px;cursor:pointer;
+}
 .watch-card:hover{transform:scale(1.03)}
 .watch-card img{width:100%;border-radius:8px}
 
-.filters{display:flex;justify-content:center;margin-bottom:30px}
-.filters select{padding:10px;border-radius:8px;background:#111;color:#d4af37}
-
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;justify-content:center;align-items:center}
-.modal{background:#0b0b0b;border:1px solid rgba(212,175,55,.4);padding:30px;border-radius:12px}
-.modal-option{border:1px solid rgba(212,175,55,.3);padding:10px 20px;cursor:pointer}
+.modal-bg{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,.7);display:none;
+  justify-content:center;align-items:center;z-index:20;
+}
+.modal{
+  background:#0b0b0b;border:1px solid rgba(212,175,55,.4);
+  padding:30px;border-radius:12px;width:450px;text-align:center;
+}
+.modal-option{
+  padding:12px 20px;border:1px solid rgba(212,175,55,.3);
+  background:#0c0c0c;border-radius:10px;cursor:pointer;
+}
+.modal-option:hover{background:rgba(212,175,55,.15)}
 </style>
 </head>
 
 <body>
 
 <header>
-<div class="header-container">
+  <div class="header-container">
     <h2 class="gold-text">ChronoBase</h2>
     <nav>
-        <a onclick="showView('home-view')">Accueil</a>
-        <a onclick="showView('watches-view')">Les montres</a>
-        <a onclick="showView('about-view')">À propos</a>
+      <a onclick="showView('home-view')">Accueil</a>
+      <a onclick="showView('watches-view')">Les montres</a>
+      <a onclick="showView('about-view')">À propos</a>
     </nav>
-</div>
+  </div>
 </header>
 
+<!-- ACCUEIL -->
 <section id="home-view" class="view active">
-<div class="hero">
+  <div class="hero">
     <h1 class="gold-text">La référence mondiale des montres</h1>
-    <p>Explorez les modèles iconiques de l’horlogerie.</p>
-</div>
+    <p>Explorez l’histoire horlogère à travers des modèles mythiques.</p>
+
+    <p style="opacity:.8">
+      👥 <span id="visit-counter">–</span> passionnés ont déjà visité ChronoBase
+    </p>
+  </div>
+
+  <section class="sections">
+    <div class="card">
+      <h3>Dernières montres ajoutées</h3>
+      <div id="latest-watches"></div>
+    </div>
+
+    <div class="card">
+      <h3>Pourquoi ChronoBase ?</h3>
+      <p>
+        Une encyclopédie horlogère construite par passion,
+        pensée pour préserver l’histoire des grandes maisons.
+      </p>
+      <p style="cursor:pointer;color:#f5d98c" onclick="showView('about-view')">
+        → Découvrir le projet
+      </p>
+    </div>
+  </section>
 </section>
 
+<!-- MONTRES -->
 <section id="watches-view" class="view">
-<h1 class="gold-text" style="text-align:center">Toutes les montres</h1>
-
-<div class="filters">
-<select id="main-filter">
-<option value="">Trier par…</option>
-<option value="yearAZ">Année ↑</option>
-<option value="yearZA">Année ↓</option>
-<option value="brand">Marque</option>
-</select>
-</div>
-
-<div class="watch-grid" id="watch-grid"></div>
+  <h1 class="gold-text" style="text-align:center">Toutes les montres</h1>
+  <div class="watch-grid" id="watch-grid"></div>
 </section>
 
+<!-- A PROPOS -->
 <section id="about-view" class="view">
-<h1 class="gold-text" style="text-align:center">À propos</h1>
-<p style="text-align:center">Projet encyclopédique horloger.</p>
+  <h1 class="gold-text" style="text-align:center">À propos</h1>
+  <section class="sections">
+    <div class="card">
+      ChronoBase est un projet indépendant dédié à la mémoire horlogère.
+    </div>
+  </section>
 </section>
 
+<!-- MODALE -->
 <div class="modal-bg" id="modal-bg">
-<div class="modal" id="modal-options"></div>
+  <div class="modal">
+    <h2 class="gold-text">Choisissez</h2>
+    <div id="modal-options"></div>
+  </div>
 </div>
 
 <script>
-// ---------- NAV ----------
+// ---------- VUES ----------
 function showView(id){
-    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 }
 
-// ---------- DATA LOCAL (TEST) ----------
-window.watches = [
- {id:"rolex-daytona",brand:"Rolex",name:"Daytona",year:2016,img:"https://via.placeholder.com/400"},
- {id:"omega-speedmaster",brand:"Omega",name:"Speedmaster",year:1969,img:"https://via.placeholder.com/400"},
- {id:"patek-nautilus",brand:"Patek Philippe",name:"Nautilus",year:1976,img:"https://via.placeholder.com/400"}
+// ---------- DONNÉES (statique GitHub) ----------
+const watches = [
+  {id:"rolex-daytona",brand:"Rolex",name:"Daytona",year:2016,img:"https://via.placeholder.com/300"},
+  {id:"omega-speedmaster",brand:"Omega",name:"Speedmaster",year:1969,img:"https://via.placeholder.com/300"},
+  {id:"patek-calatrava",brand:"Patek Philippe",name:"Calatrava",year:1932,img:"https://via.placeholder.com/300"}
 ];
 
-// ---------- DISPLAY ----------
+window.watches = watches;
+
+// ---------- AFFICHAGE ----------
 function displayWatches(list){
-    const grid=document.getElementById("watch-grid");
-    grid.innerHTML="";
-    list.forEach(w=>{
-        grid.innerHTML+=`
-        <div class="watch-card" onclick="alert('${w.name}')">
-            <img src="${w.img}">
-            <p>${w.brand} — ${w.name} (${w.year})</p>
-        </div>`;
+  const grid=document.getElementById("watch-grid");
+  grid.innerHTML="";
+  list.forEach(w=>{
+    grid.innerHTML+=`
+      <div class="watch-card" onclick="openWatch('${w.id}')">
+        <img src="${w.img}">
+        <p><strong>${w.brand}</strong> ${w.name} (${w.year})</p>
+        <p style="font-size:13px;opacity:.7">
+          👁️ <span id="count-${w.id}">–</span> lectures
+        </p>
+      </div>`;
+    loadWatchCounter(w.id);
+  });
+}
+
+displayWatches(watches);
+
+// ---------- DERNIÈRES MONTRES ----------
+function displayLatestWatches(){
+  const c=document.getElementById("latest-watches");
+  c.innerHTML="";
+  [...watches].slice(-3).reverse().forEach(w=>{
+    c.innerHTML+=`<p>➜ ${w.brand} ${w.name} (${w.year})</p>`;
+  });
+}
+displayLatestWatches();
+
+// ---------- COUNTAPI ----------
+function updateSiteCounter(){
+  fetch("https://api.countapi.xyz/hit/chronobase/visits")
+    .then(r=>r.json())
+    .then(d=>document.getElementById("visit-counter").textContent=d.value);
+}
+updateSiteCounter();
+
+function openWatch(id){
+  fetch(`https://api.countapi.xyz/hit/chronobase-watch-${id}/clicks`);
+  alert("Ouverture de la montre : "+id);
+}
+
+function loadWatchCounter(id){
+  fetch(`https://api.countapi.xyz/get/chronobase-watch-${id}/clicks`)
+    .then(r=>r.json())
+    .then(d=>{
+      const el=document.getElementById("count-"+id);
+      if(el) el.textContent=d.value||0;
     });
 }
-displayWatches(window.watches);
-
-// ---------- FILTER ----------
-document.getElementById("main-filter").addEventListener("change",function(){
-    if(this.value==="yearAZ") displayWatches([...watches].sort((a,b)=>a.year-b.year));
-    if(this.value==="yearZA") displayWatches([...watches].sort((a,b)=>b.year-a.year));
-    if(this.value==="brand"){
-        const brands=[...new Set(watches.map(w=>w.brand))];
-        showModal(brands);
-    }
-});
-
-// ---------- MODAL ----------
-function showModal(items){
-    const bg=document.getElementById("modal-bg");
-    const box=document.getElementById("modal-options");
-    box.innerHTML="";
-    items.forEach(i=>{
-        const d=document.createElement("div");
-        d.className="modal-option";
-        d.textContent=i;
-        d.onclick=()=>{displayWatches(watches.filter(w=>w.brand===i));bg.style.display="none";}
-        box.appendChild(d);
-    });
-    bg.style.display="flex";
-}
-document.getElementById("modal-bg").onclick=e=>{
-    if(e.target.id==="modal-bg") e.target.style.display="none";
-};
 </script>
 
 </body>
