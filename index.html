@@ -93,7 +93,7 @@ nav a:hover{color:#f5d98c}
     <nav>
       <a onclick="showView('home-view')">Accueil</a>
       <a onclick="showView('watches-view')">Les montres</a>
-      <a onclick="showView('about-view')">À propos</a>
+      <a href="propos.html">À propos</a>
     </nav>
   </div>
 </header>
@@ -121,7 +121,7 @@ nav a:hover{color:#f5d98c}
         Une encyclopédie horlogère construite par passion,
         pensée pour préserver l’histoire des grandes maisons.
       </p>
-      <p style="cursor:pointer;color:#f5d98c" onclick="showView('about-view')">
+      <p style="cursor:pointer;color:#f5d98c" onclick="window.location='propos.html'">
         → Découvrir le projet
       </p>
     </div>
@@ -132,16 +132,6 @@ nav a:hover{color:#f5d98c}
 <section id="watches-view" class="view">
   <h1 class="gold-text" style="text-align:center">Toutes les montres</h1>
   <div class="watch-grid" id="watch-grid"></div>
-</section>
-
-<!-- A PROPOS -->
-<section id="about-view" class="view">
-  <h1 class="gold-text" style="text-align:center">À propos</h1>
-  <section class="sections">
-    <div class="card">
-      ChronoBase est un projet indépendant dédié à la mémoire horlogère.
-    </div>
-  </section>
 </section>
 
 <!-- MODALE -->
