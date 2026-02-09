@@ -4,61 +4,44 @@
 <meta charset="UTF-8">
 <title>ChronoBase</title>
 
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
-<!-- Supabase JS -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/supabase.min.js"></script>
-
 <style>
-/* VARIABLES ET STYLES */
 :root { --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951); }
+body {
+    margin:0;padding:0;font-family:'Montserrat',sans-serif;
+    background:radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
+    color:#d4af37;font-weight:300;overflow-x:hidden;
+}
+.gold-text{background:var(--gold-gradient);-webkit-background-clip:text;color:transparent;animation:shine 6s infinite linear;background-size:200%}
+@keyframes shine{0%{background-position:0%}100%{background-position:200%}}
 
-body { margin:0;padding:0;font-family:'Montserrat',sans-serif;background:radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);color:#d4af37;font-weight:300;overflow-x:hidden; }
+header{position:fixed;top:0;width:100%;background:#0b0b0b;border-bottom:1px solid rgba(212,175,55,.2);z-index:10}
+.header-container{max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:12px 20px}
+nav a{margin-left:30px;color:#d4af37;text-decoration:none;cursor:pointer}
+nav a:hover{color:#f5d98c}
 
-.gold-text { background:var(--gold-gradient);-webkit-background-clip:text;color:transparent;animation:shine 6s infinite linear;background-size:200%; }
-@keyframes shine {0%{background-position:0%;}100%{background-position:200%;}}
+.view{min-height:100vh;padding-top:120px;display:none;opacity:0;transform:translateX(40px);transition:.6s}
+.view.active{display:block;opacity:1;transform:translateX(0)}
 
-header{width:100%;padding:12px 0;border-bottom:1px solid rgba(212,175,55,0.2);background:#0b0b0b;position:fixed;top:0;left:0;z-index:10;}
-.header-container{max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:0 20px;}
-nav a{margin-left:30px;text-decoration:none;color:#d4af37;font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;}
-nav a:hover{color:#f5d98c;}
+.hero{text-align:center}
+.hero h1{font-size:55px;font-weight:300}
+.hero p{color:#c1a96b;max-width:600px;margin:20px auto}
 
-.view{min-height:100vh;padding-top:120px;opacity:0;transform:translateX(50px);transition:.6s ease;display:none;}
-.view.active{display:block;opacity:1;transform:translateX(0);}
+.watch-grid{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px;padding-bottom:80px}
+.watch-card{background:#0c0c0c;border:1px solid rgba(212,175,55,.15);padding:20px;border-radius:12px;cursor:pointer}
+.watch-card:hover{transform:scale(1.03)}
+.watch-card img{width:100%;border-radius:8px}
 
-.hero{text-align:center;padding:0 20px;}
-.hero h1{font-size:55px;font-weight:300;letter-spacing:2px;}
-.hero p{color:#c1a96b;font-size:18px;max-width:600px;margin:20px auto;}
-.search-bar input{width:60%;max-width:600px;padding:15px 25px;border-radius:40px;border:1px solid rgba(212,175,55,0.25);background:rgba(255,255,255,0.03);color:#d4af37;font-size:16px;outline:none;}
+.filters{display:flex;justify-content:center;margin-bottom:30px}
+.filters select{padding:10px;border-radius:8px;background:#111;color:#d4af37}
 
-.sections{max-width:1200px;margin:120px auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;padding:0 20px 80px;}
-.card{background:linear-gradient(180deg,#111,#0c0c0c);border:1px solid rgba(212,175,55,0.15);padding:30px;border-radius:12px;transition:.3s;}
-.card:hover{background:linear-gradient(180deg,#1a1a1a,#111);border-color:rgba(212,175,55,0.35);}
-
-.filters{max-width:1200px;margin:auto;display:flex;justify-content:center;gap:20px;margin-bottom:40px;}
-.filters select{padding:10px 15px;border-radius:8px;border:1px solid rgba(212,175,55,0.25);background:rgba(255,255,255,0.03);color:#d4af37;}
-
-.year-range-zone{max-width:1200px;margin:0 auto 40px auto;display:none;text-align:center;}
-.range-cards{display:flex;justify-content:center;flex-wrap:wrap;gap:15px;}
-.range-card{padding:12px 20px;border:1px solid rgba(212,175,55,0.3);background:#0c0c0c;border-radius:10px;cursor:pointer;transition:.3s;}
-.range-card:hover{background:rgba(212,175,55,0.15);}
-
-.watch-grid{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px;padding-bottom:80px;}
-.watch-card{background:linear-gradient(180deg,#111,#0c0c0c);border:1px solid rgba(212,175,55,0.15);border-radius:12px;padding:20px;transition:.3s;cursor:pointer;}
-.watch-card:hover{transform:scale(1.03);border-color:rgba(212,175,55,0.35);}
-.watch-card img{width:100%;border-radius:8px;}
-.watch-info{margin-top:10px;color:#d4af37;}
-.watch-info .brand{font-size:14px;opacity:0.8;}
-.watch-info .name-year{display:flex;justify-content:space-between;}
-.modal-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:none;justify-content:center;align-items:center;z-index:20;}
-.modal{background:#0b0b0b;border:1px solid rgba(212,175,55,0.4);padding:30px;border-radius:12px;width:450px;box-shadow:inset 0 0 20px rgba(212,175,55,0.15);text-align:center;}
-.modal h2{margin-bottom:20px;}
-.modal-options{display:flex;flex-wrap:wrap;gap:15px;justify-content:center;}
-.modal-option{padding:12px 20px;border:1px solid rgba(212,175,55,0.3);background:#0c0c0c;border-radius:10px;cursor:pointer;transition:.3s;}
-.modal-option:hover{background:rgba(212,175,55,0.15);}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;justify-content:center;align-items:center}
+.modal{background:#0b0b0b;border:1px solid rgba(212,175,55,.4);padding:30px;border-radius:12px}
+.modal-option{border:1px solid rgba(212,175,55,.3);padding:10px 20px;cursor:pointer}
 </style>
 </head>
+
 <body>
 
 <header>
@@ -72,161 +55,93 @@ nav a:hover{color:#f5d98c;}
 </div>
 </header>
 
-<!-- VUES -->
 <section id="home-view" class="view active">
 <div class="hero">
     <h1 class="gold-text">La référence mondiale des montres</h1>
-    <p>Explorez des milliers de modèles, apprenez l’horlogerie, découvrez l’histoire des marques.</p>
-    <div class="search-bar">
-        <input type="text" placeholder="Rechercher une marque, un modèle, une année...">
-    </div>
+    <p>Explorez les modèles iconiques de l’horlogerie.</p>
 </div>
-<section class="sections">
-<div class="card"><h3>Cours d’horlogerie</h3><p>Apprenez les bases, techniques avancées et l’histoire des grandes maisons.</p></div>
-<div class="card"><h3>Base de données</h3><p>Accédez à des fiches détaillées, photos HD, mouvements, années, références.</p></div>
-<div class="card"><h3>Expertise horlogère</h3><p>Contenu validé par des horlogers professionnels et passionnés.</p></div>
-</section>
 </section>
 
 <section id="watches-view" class="view">
-<h1 class="gold-text">Toutes les montres</h1>
+<h1 class="gold-text" style="text-align:center">Toutes les montres</h1>
+
 <div class="filters">
-    <select id="main-filter">
-        <option value="">Trier par...</option>
-        <option value="dateAZ">Par date A → Z</option>
-        <option value="dateZA">Par date Z → A</option>
-        <option value="brand">Par nom</option>
-        <option value="year">Par année</option>
-    </select>
+<select id="main-filter">
+<option value="">Trier par…</option>
+<option value="yearAZ">Année ↑</option>
+<option value="yearZA">Année ↓</option>
+<option value="brand">Marque</option>
+</select>
 </div>
-<div class="year-range-zone" id="year-range-zone">
-    <h3 class="gold-text">Changer de plage</h3>
-    <div class="range-cards" id="range-cards"></div>
-</div>
+
 <div class="watch-grid" id="watch-grid"></div>
 </section>
 
 <section id="about-view" class="view">
-<h1 class="gold-text">Qui sommes-nous ?</h1>
-<div class="sections" style="max-width:900px;margin:auto;padding:40px 20px;display:grid;grid-gap:30px;grid-template-columns:1fr;">
-<div class="card"><h3>Notre mission</h3><p>ChronoBase a pour objectif de créer la plus grande base de données de montres au monde...</p></div>
-<div class="card"><h3>Les créateurs</h3><p>Cette plateforme a été conçue par des passionnés d’horlogerie et de technologie...</p></div>
-<div class="card"><h3>Nos références et réseaux</h3><p>Retrouvez-nous sur Instagram, YouTube, Twitter...</p></div>
-</div>
+<h1 class="gold-text" style="text-align:center">À propos</h1>
+<p style="text-align:center">Projet encyclopédique horloger.</p>
 </section>
 
 <div class="modal-bg" id="modal-bg">
-<div class="modal" id="modal-content">
-<h2 class="gold-text">Choisissez</h2>
-<div class="modal-options" id="modal-options"></div>
-</div>
+<div class="modal" id="modal-options"></div>
 </div>
 
 <script>
-// ----- VUES -----
-function showView(viewId){
+// ---------- NAV ----------
+function showView(id){
     document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-    document.getElementById(viewId).classList.add('active');
+    document.getElementById(id).classList.add('active');
 }
 
-// ----- SUPABASE -----
-const SUPABASE_URL = "https://ccmdttddmyqpbfevhslo.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjbWR0dGRkbXlxcGJmZXZoc2xvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyODI5NjMsImV4cCI6MjA4NTg1ODk2M30.ZTNoEQP5rzM3b71mLzp8Lu49Imocx_0K93FnsiWnjzk"; // <-- remplace par ta clé
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// ---------- DATA LOCAL (TEST) ----------
+window.watches = [
+ {id:"rolex-daytona",brand:"Rolex",name:"Daytona",year:2016,img:"https://via.placeholder.com/400"},
+ {id:"omega-speedmaster",brand:"Omega",name:"Speedmaster",year:1969,img:"https://via.placeholder.com/400"},
+ {id:"patek-nautilus",brand:"Patek Philippe",name:"Nautilus",year:1976,img:"https://via.placeholder.com/400"}
+];
 
-// ----- FETCH SUPABASE -----
-async function fetchWatches(){
-    const { data, error } = await supabaseClient.from('watches').select('*');
-    if(error){ console.error("Erreur Supabase:", error); return []; }
-    return data || [];
-}
-
-// ----- AFFICHAGE -----
+// ---------- DISPLAY ----------
 function displayWatches(list){
-    const grid = document.getElementById("watch-grid");
-    grid.innerHTML = "";
+    const grid=document.getElementById("watch-grid");
+    grid.innerHTML="";
     list.forEach(w=>{
-        grid.innerHTML += `
-            <div class="watch-card" onclick="openWatch('${w.id}')">
-                <img src="${w.img || w.image_url}">
-                <div class="watch-info">
-                    <div class="brand">${w.brand}</div>
-                    <div class="name-year"><span>${w.name}</span><span>${w.year || ''}</span></div>
-                </div>
-            </div>
-        `;
-    });
-    window.watches = list;
-}
-
-// ----- MODALE -----
-const modalBg = document.getElementById("modal-bg");
-const modalOptions = document.getElementById("modal-options");
-function openModal(options,callback){
-    modalOptions.innerHTML="";
-    options.forEach(opt=>{
-        const div=document.createElement("div");
-        div.className="modal-option";
-        div.textContent=opt;
-        div.onclick=()=>{ modalBg.style.display="none"; callback(opt); };
-        modalOptions.appendChild(div);
-    });
-    modalBg.style.display="flex";
-}
-modalBg.onclick=e=>{if(e.target===modalBg) modalBg.style.display="none";};
-
-// ----- FILTRES -----
-function generateYearRanges(list){
-    const years=list.map(w=>w.year);
-    const min=Math.min(...years); const max=Math.max(...years);
-    const ranges=[];
-    for(let start=Math.floor(min/10)*10;start<=max;start+=10){ ranges.push(`${start}–${start+9}`); }
-    return ranges;
-}
-function filterByRange(range){
-    const [start,end]=range.split("–").map(Number);
-    displayWatches(window.watches.filter(w=>w.year>=start && w.year<=end));
-    showYearRangeZone(generateYearRanges(window.watches), range);
-}
-function showYearRangeZone(ranges,selectedRange){
-    const zone=document.getElementById("year-range-zone");
-    const container=document.getElementById("range-cards");
-    zone.style.display="block"; container.innerHTML="";
-    ranges.forEach(r=>{
-        const div=document.createElement("div");
-        div.className="range-card"; div.textContent=r;
-        if(r===selectedRange) div.style.background="rgba(212,175,55,0.25)";
-        div.onclick=()=>filterByRange(r);
-        container.appendChild(div);
+        grid.innerHTML+=`
+        <div class="watch-card" onclick="alert('${w.name}')">
+            <img src="${w.img}">
+            <p>${w.brand} — ${w.name} (${w.year})</p>
+        </div>`;
     });
 }
+displayWatches(window.watches);
 
-// ----- HEADER -----
-window.addEventListener('DOMContentLoaded',()=>{ 
-    const hash=window.location.hash.substring(1); if(hash && document.getElementById(hash)) showView(hash);
-});
-
-// ----- INIT -----
-async function initWatches(){
-    const watches = await fetchWatches();
-    displayWatches(watches);
-}
-initWatches();
-
-// ----- OUVERTURE MONTRE -----
-function openWatch(id){ alert("Ouverture de la montre : "+id); }
-
-// ----- FILTRES SELECT -----
+// ---------- FILTER ----------
 document.getElementById("main-filter").addEventListener("change",function(){
-    const value=this.value; document.getElementById("year-range-zone").style.display="none";
-    if(value==="dateAZ") displayWatches([...window.watches].sort((a,b)=>a.year-b.year));
-    else if(value==="dateZA") displayWatches([...window.watches].sort((a,b)=>b.year-a.year));
-    else if(value==="brand"){
-        const brands=[...new Set(window.watches.map(w=>w.brand))];
-        openModal(brands,b=>displayWatches(window.watches.filter(w=>w.brand===b)));
+    if(this.value==="yearAZ") displayWatches([...watches].sort((a,b)=>a.year-b.year));
+    if(this.value==="yearZA") displayWatches([...watches].sort((a,b)=>b.year-a.year));
+    if(this.value==="brand"){
+        const brands=[...new Set(watches.map(w=>w.brand))];
+        showModal(brands);
     }
-    else if(value==="year") openModal(generateYearRanges(window.watches),r=>filterByRange(r));
 });
+
+// ---------- MODAL ----------
+function showModal(items){
+    const bg=document.getElementById("modal-bg");
+    const box=document.getElementById("modal-options");
+    box.innerHTML="";
+    items.forEach(i=>{
+        const d=document.createElement("div");
+        d.className="modal-option";
+        d.textContent=i;
+        d.onclick=()=>{displayWatches(watches.filter(w=>w.brand===i));bg.style.display="none";}
+        box.appendChild(d);
+    });
+    bg.style.display="flex";
+}
+document.getElementById("modal-bg").onclick=e=>{
+    if(e.target.id==="modal-bg") e.target.style.display="none";
+};
 </script>
+
 </body>
 </html>
