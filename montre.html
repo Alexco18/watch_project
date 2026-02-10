@@ -20,7 +20,6 @@ body{
   -webkit-background-clip:text;color:transparent;
   animation:shine 6s infinite linear;background-size:200%;
 }
-@keyframes shine{0%{background-position:0%}100%{background-position:200%}}
 
 header{
   width:100%;padding:12px 0;border-bottom:1px solid rgba(212,175,55,0.2);
@@ -36,11 +35,23 @@ nav a{
 }
 nav a:hover{color:#f5d98c}
 
+#filters{
+  max-width:1200px;margin:140px auto 20px;
+  display:flex;gap:20px;justify-content:center;
+}
+
+select{
+  padding:10px 15px;border-radius:8px;
+  background:#0c0c0c;color:#d4af37;
+  border:1px solid rgba(212,175,55,.3);
+}
+
 .watch-grid{
   max-width:1200px;margin:auto;
   display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:30px;padding:140px 20px 80px;
+  gap:30px;padding:20px 20px 80px;
 }
+
 .watch-card{
   background:linear-gradient(180deg,#111,#0c0c0c);
   border:1px solid rgba(212,175,55,.15);
@@ -48,21 +59,6 @@ nav a:hover{color:#f5d98c}
 }
 .watch-card:hover{transform:scale(1.03)}
 .watch-card img{width:100%;border-radius:8px}
-
-.modal-bg{
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  background:rgba(0,0,0,.7);display:none;
-  justify-content:center;align-items:center;z-index:20;
-}
-.modal{
-  background:#0b0b0b;border:1px solid rgba(212,175,55,.4);
-  padding:30px;border-radius:12px;width:450px;text-align:center;
-}
-.modal-option{
-  padding:12px 20px;border:1px solid rgba(212,175,55,.3);
-  background:#0c0c0c;border-radius:10px;cursor:pointer;
-}
-.modal-option:hover{background:rgba(212,175,55,.15)}
 </style>
 </head>
 
@@ -81,57 +77,55 @@ nav a:hover{color:#f5d98c}
 
 <h1 class="gold-text" style="text-align:center;margin-top:120px">Toutes les montres</h1>
 
-<div class="watch-grid" id="watch-grid"></div>
+<div id="filters">
+  <select id="brand-filter">
+    <option value="all">Toutes les marques</option>
+  </select>
 
-<!-- MODALE -->
-<div class="modal-bg" id="modal-bg">
-  <div class="modal">
-    <h2 class="gold-text">Choisissez</h2>
-    <div id="modal-options"></div>
-  </div>
+  <select id="sort-filter">
+    <option value="none">Tri : Aucun</option>
+    <option value="year-asc">Année : plus ancienne → plus récente</option>
+    <option value="year-desc">Année : plus récente → plus ancienne</option>
+    <option value="brand-az">Marque : A → Z</option>
+    <option value="brand-za">Marque : Z → A</option>
+  </select>
 </div>
 
+<div class="watch-grid" id="watch-grid"></div>
+
+<script src="js/watches-loader.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/ui-watches.js"></script>
+
 <script>
-// ---------- DONNÉES ----------
-const watches = [
-  {id:"rolex-daytona",brand:"Rolex",name:"Daytona",year:2016,img:"https://via.placeholder.com/300"},
-  {id:"omega-speedmaster",brand:"Omega",name:"Speedmaster",year:1969,img:"https://via.placeholder.com/300"},
-  {id:"patek-calatrava",brand:"Patek Philippe",name:"Calatrava",year:1932,img:"https://via.placeholder.com/300"}
-];
+let ALL_WATCHES = [];
 
-// ---------- AFFICHAGE ----------
-function displayWatches(list){
-  const grid=document.getElementById("watch-grid");
-  grid.innerHTML="";
-  list.forEach(w=>{
-    grid.innerHTML+=`
-      <div class="watch-card" onclick="openWatch('${w.id}')">
-        <img src="${w.img}">
-        <p><strong>${w.brand}</strong> ${w.name} (${w.year})</p>
-        <p style="font-size:13px;opacity:.7">
-          👁️ <span id="count-${w.id}">–</span> lectures
-        </p>
-      </div>`;
-    loadWatchCounter(w.id);
-  });
+async function init(){
+  ALL_WATCHES = await loadAllBrands();
+  populateBrandFilter(ALL_WATCHES);
+  displayWatches(ALL_WATCHES);
 }
 
-displayWatches(watches);
+document.getElementById("brand-filter").addEventListener("change", applyFilters);
+document.getElementById("sort-filter").addEventListener("change", applyFilters);
 
-// ---------- COUNTAPI ----------
-function openWatch(id){
-  fetch(`https://api.countapi.xyz/hit/chronobase-watch-${id}/clicks`);
-  alert("Ouverture de la montre : "+id);
+function applyFilters(){
+  let list = [...ALL_WATCHES];
+
+  const brand = document.getElementById("brand-filter").value;
+  const sort = document.getElementById("sort-filter").value;
+
+  if(brand !== "all") list = filterByBrand(brand, list);
+
+  if(sort === "year-asc") list = sortByYearAsc(list);
+  if(sort === "year-desc") list = sortByYearDesc(list);
+  if(sort === "brand-az") list = sortByBrandAZ(list);
+  if(sort === "brand-za") list = sortByBrandZA(list);
+
+  displayWatches(list);
 }
 
-function loadWatchCounter(id){
-  fetch(`https://api.countapi.xyz/get/chronobase-watch-${id}/clicks`)
-    .then(r=>r.json())
-    .then(d=>{
-      const el=document.getElementById("count-"+id);
-      if(el) el.textContent=d.value||0;
-    });
-}
+init();
 </script>
 
 </body>
