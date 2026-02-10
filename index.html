@@ -54,34 +54,6 @@ nav a:hover{color:#f5d98c}
   padding:30px;border-radius:12px;
 }
 .card:hover{border-color:rgba(212,175,55,.35)}
-
-.watch-grid{
-  max-width:1200px;margin:auto;
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:30px;padding-bottom:80px;
-}
-.watch-card{
-  background:linear-gradient(180deg,#111,#0c0c0c);
-  border:1px solid rgba(212,175,55,.15);
-  border-radius:12px;padding:20px;cursor:pointer;
-}
-.watch-card:hover{transform:scale(1.03)}
-.watch-card img{width:100%;border-radius:8px}
-
-.modal-bg{
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  background:rgba(0,0,0,.7);display:none;
-  justify-content:center;align-items:center;z-index:20;
-}
-.modal{
-  background:#0b0b0b;border:1px solid rgba(212,175,55,.4);
-  padding:30px;border-radius:12px;width:450px;text-align:center;
-}
-.modal-option{
-  padding:12px 20px;border:1px solid rgba(212,175,55,.3);
-  background:#0c0c0c;border-radius:10px;cursor:pointer;
-}
-.modal-option:hover{background:rgba(212,175,55,.15)}
 </style>
 </head>
 
@@ -92,7 +64,7 @@ nav a:hover{color:#f5d98c}
     <h2 class="gold-text">ChronoBase</h2>
     <nav>
       <a onclick="showView('home-view')">Accueil</a>
-      <a onclick="showView('watches-view')">Les montres</a>
+      <a href="montre.html">Les montres</a>
       <a href="propos.html">À propos</a>
     </nav>
   </div>
@@ -128,20 +100,6 @@ nav a:hover{color:#f5d98c}
   </section>
 </section>
 
-<!-- MONTRES -->
-<section id="watches-view" class="view">
-  <h1 class="gold-text" style="text-align:center">Toutes les montres</h1>
-  <div class="watch-grid" id="watch-grid"></div>
-</section>
-
-<!-- MODALE -->
-<div class="modal-bg" id="modal-bg">
-  <div class="modal">
-    <h2 class="gold-text">Choisissez</h2>
-    <div id="modal-options"></div>
-  </div>
-</div>
-
 <script>
 // ---------- VUES ----------
 function showView(id){
@@ -149,33 +107,12 @@ function showView(id){
   document.getElementById(id).classList.add('active');
 }
 
-// ---------- DONNÉES (statique GitHub) ----------
+// ---------- DONNÉES (mêmes données que montre.html pour cohérence) ----------
 const watches = [
-  {id:"rolex-daytona",brand:"Rolex",name:"Daytona",year:2016,img:"https://via.placeholder.com/300"},
-  {id:"omega-speedmaster",brand:"Omega",name:"Speedmaster",year:1969,img:"https://via.placeholder.com/300"},
-  {id:"patek-calatrava",brand:"Patek Philippe",name:"Calatrava",year:1932,img:"https://via.placeholder.com/300"}
+  {id:"rolex-daytona",brand:"Rolex",name:"Daytona",year:2016},
+  {id:"omega-speedmaster",brand:"Omega",name:"Speedmaster",year:1969},
+  {id:"patek-calatrava",brand:"Patek Philippe",name:"Calatrava",year:1932}
 ];
-
-window.watches = watches;
-
-// ---------- AFFICHAGE ----------
-function displayWatches(list){
-  const grid=document.getElementById("watch-grid");
-  grid.innerHTML="";
-  list.forEach(w=>{
-    grid.innerHTML+=`
-      <div class="watch-card" onclick="openWatch('${w.id}')">
-        <img src="${w.img}">
-        <p><strong>${w.brand}</strong> ${w.name} (${w.year})</p>
-        <p style="font-size:13px;opacity:.7">
-          👁️ <span id="count-${w.id}">–</span> lectures
-        </p>
-      </div>`;
-    loadWatchCounter(w.id);
-  });
-}
-
-displayWatches(watches);
 
 // ---------- DERNIÈRES MONTRES ----------
 function displayLatestWatches(){
@@ -194,20 +131,6 @@ function updateSiteCounter(){
     .then(d=>document.getElementById("visit-counter").textContent=d.value);
 }
 updateSiteCounter();
-
-function openWatch(id){
-  fetch(`https://api.countapi.xyz/hit/chronobase-watch-${id}/clicks`);
-  alert("Ouverture de la montre : "+id);
-}
-
-function loadWatchCounter(id){
-  fetch(`https://api.countapi.xyz/get/chronobase-watch-${id}/clicks`)
-    .then(r=>r.json())
-    .then(d=>{
-      const el=document.getElementById("count-"+id);
-      if(el) el.textContent=d.value||0;
-    });
-}
 </script>
 
 </body>
