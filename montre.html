@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>ChronoBase – Montres</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root { --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951); }
+
+body{
+  margin:0;padding:0;font-family:'Montserrat',sans-serif;
+  background:radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
+  color:#d4af37;font-weight:300;overflow-x:hidden;
+}
+
+.gold-text{
+  background:var(--gold-gradient);
+  -webkit-background-clip:text;color:transparent;
+  animation:shine 6s infinite linear;background-size:200%;
+}
+@keyframes shine{0%{background-position:0%}100%{background-position:200%}}
+
+header{
+  width:100%;padding:12px 0;border-bottom:1px solid rgba(212,175,55,0.2);
+  background:#0b0b0b;position:fixed;top:0;left:0;z-index:10;
+}
+.header-container{
+  max-width:1200px;margin:auto;display:flex;justify-content:space-between;
+  align-items:center;padding:0 20px;
+}
+nav a{
+  margin-left:30px;text-decoration:none;color:#d4af37;
+  font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;
+}
+nav a:hover{color:#f5d98c}
+
+.watch-grid{
+  max-width:1200px;margin:auto;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;padding:140px 20px 80px;
+}
+.watch-card{
+  background:linear-gradient(180deg,#111,#0c0c0c);
+  border:1px solid rgba(212,175,55,.15);
+  border-radius:12px;padding:20px;cursor:pointer;
+}
+.watch-card:hover{transform:scale(1.03)}
+.watch-card img{width:100%;border-radius:8px}
+
+.modal-bg{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,.7);display:none;
+  justify-content:center;align-items:center;z-index:20;
+}
+.modal{
+  background:#0b0b0b;border:1px solid rgba(212,175,55,.4);
+  padding:30px;border-radius:12px;width:450px;text-align:center;
+}
+.modal-option{
+  padding:12px 20px;border:1px solid rgba(212,175,55,.3);
+  background:#0c0c0c;border-radius:10px;cursor:pointer;
+}
+.modal-option:hover{background:rgba(212,175,55,.15)}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-container">
+    <h2 class="gold-text">ChronoBase</h2>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="montre.html">Les montres</a>
+      <a href="propos.html">À propos</a>
+    </nav>
+  </div>
+</header>
+
+<h1 class="gold-text" style="text-align:center;margin-top:120px">Toutes les montres</h1>
+
+<div class="watch-grid" id="watch-grid"></div>
+
+<!-- MODALE -->
+<div class="modal-bg" id="modal-bg">
+  <div class="modal">
+    <h2 class="gold-text">Choisissez</h2>
+    <div id="modal-options"></div>
+  </div>
+</div>
+
+<script>
+// ---------- DONNÉES ----------
+const watches = [
+  {id:"rolex-daytona",brand:"Rolex",name:"Daytona",year:2016,img:"https://via.placeholder.com/300"},
+  {id:"omega-speedmaster",brand:"Omega",name:"Speedmaster",year:1969,img:"https://via.placeholder.com/300"},
+  {id:"patek-calatrava",brand:"Patek Philippe",name:"Calatrava",year:1932,img:"https://via.placeholder.com/300"}
+];
+
+// ---------- AFFICHAGE ----------
+function displayWatches(list){
+  const grid=document.getElementById("watch-grid");
+  grid.innerHTML="";
+  list.forEach(w=>{
+    grid.innerHTML+=`
+      <div class="watch-card" onclick="openWatch('${w.id}')">
+        <img src="${w.img}">
+        <p><strong>${w.brand}</strong> ${w.name} (${w.year})</p>
+        <p style="font-size:13px;opacity:.7">
+          👁️ <span id="count-${w.id}">–</span> lectures
+        </p>
+      </div>`;
+    loadWatchCounter(w.id);
+  });
+}
+
+displayWatches(watches);
+
+// ---------- COUNTAPI ----------
+function openWatch(id){
+  fetch(`https://api.countapi.xyz/hit/chronobase-watch-${id}/clicks`);
+  alert("Ouverture de la montre : "+id);
+}
+
+function loadWatchCounter(id){
+  fetch(`https://api.countapi.xyz/get/chronobase-watch-${id}/clicks`)
+    .then(r=>r.json())
+    .then(d=>{
+      const el=document.getElementById("count-"+id);
+      if(el) el.textContent=d.value||0;
+    });
+}
+</script>
+
+</body>
+</html>
