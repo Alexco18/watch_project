@@ -111,15 +111,13 @@
 
 </section>
 
-<!-- 🔥 CHARGEMENT DES DONNÉES AVANT LE SCRIPT PRINCIPAL -->
+<!-- 🔥 1. CHARGER LES DONNÉES AVANT LE SCRIPT PRINCIPAL -->
 <script src="brands/lip.js"></script>
 <script src="brands/rolex.js"></script>
-<!-- ajoute omega.js si tu en as un -->
-<!-- <script src="brands/omega.js"></script> -->
 
-<!-- 🔥 SCRIPT PRINCIPAL (doit être APRÈS les brands) -->
+<!-- 🔥 2. SCRIPT PRINCIPAL -->
 <script>
-console.log("WATCHES chargées :", window.WATCHES);
+console.log("WATCHES =", window.WATCHES);
 
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
