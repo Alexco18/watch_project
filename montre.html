@@ -46,20 +46,38 @@ select{
   border:1px solid rgba(212,175,55,.3);
 }
 
+/* 🔥 Nouvelle grille responsive + cartes uniformes */
 .watch-grid{
   max-width:1200px;margin:auto;
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:30px;padding:20px 20px 80px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:30px;
+  padding:20px 20px 80px;
 }
 
 .watch-card{
   background:linear-gradient(180deg,#111,#0c0c0c);
   border:1px solid rgba(212,175,55,.15);
-  border-radius:12px;padding:20px;cursor:pointer;
+  border-radius:12px;
+  padding:20px;
+  cursor:pointer;
   transition:0.2s;
+  display:flex;
+  flex-direction:column;
+  height:100%;
 }
 .watch-card:hover{transform:scale(1.03)}
-.watch-card img{width:100%;border-radius:8px}
+
+.watch-card img{
+  width:100%;
+  height:200px;          /* Hauteur fixe */
+  object-fit:cover;      /* Recadrage propre */
+  border-radius:8px;
+}
+
+.watch-card p{
+  margin-top:auto;       /* Le texte reste en bas */
+}
 </style>
 </head>
 
@@ -102,8 +120,6 @@ window.WATCHES = [];
 <!-- 2. Charger les données des montres -->
 <script src="brands/lip.js"></script>
 <script src="brands/rolex.js"></script>
-<!-- ajoute omega.js si tu en as un -->
-<!-- <script src="brands/omega.js"></script> -->
 
 <!-- 3. Charger les fonctions -->
 <script src="js/filters.js"></script>
