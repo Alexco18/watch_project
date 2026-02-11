@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Versions – ChronoBase</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root { --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951); }
+
+body{
+  margin:0;padding:0;font-family:'Montserrat',sans-serif;
+  background:radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
+  color:#d4af37;font-weight:300;overflow-x:hidden;
+}
+
+.gold-text{
+  background:var(--gold-gradient);
+  -webkit-background-clip:text;color:transparent;
+  animation:shine 6s infinite linear;background-size:200%;
+}
+@keyframes shine{0%{background-position:0%}100%{background-position:200%}}
+
+header{
+  width:100%;padding:12px 0;border-bottom:1px solid rgba(212,175,55,0.2);
+  background:#0b0b0b;position:fixed;top:0;left:0;z-index:10;
+}
+.header-container{
+  max-width:1200px;margin:auto;display:flex;justify-content:space-between;
+  align-items:center;padding:0 20px;
+}
+nav a{
+  margin-left:30px;text-decoration:none;color:#d4af37;
+  font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;
+}
+nav a:hover{color:#f5d98c}
+
+/* Correction : même taille que sur index.html */
+.header-container h2.gold-text {
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.container{
+  max-width:1200px;margin:140px auto 80px;padding:0 20px;
+}
+
+.section-title{
+  font-size:40px;text-align:center;margin-bottom:40px;
+}
+
+.card{
+  background:linear-gradient(180deg,#111,#0c0c0c);
+  border:1px solid rgba(212,175,55,0.15);
+  padding:30px;border-radius:12px;margin-bottom:40px;
+}
+.card:hover{border-color:rgba(212,175,55,.35)}
+
+h2{
+  margin-top:0;font-weight:400;font-size:26px;
+  color:#f5d98c;
+}
+
+ul{
+  margin-top:10px;
+  padding-left:20px;
+  line-height:1.7;
+}
+
+p{line-height:1.7}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-container">
+    <h2 class="gold-text">ChronoBase</h2>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="montre.html">Les montres</a>
+      <a href="propos.html">À propos</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+
+  <h1 class="gold-text section-title">Historique des versions</h1>
+
+  <!-- Version actuelle -->
+  <div class="card">
+    <h2>v1.0.0 — 11 février 2026</h2>
+    <ul>
+      <li>Lancement officiel de ChronoBase</li>
+      <li>Création de la page d’accueil</li>
+      <li>Ajout du système de montres</li>
+      <li>Page détail montre (watch.html)</li>
+      <li>Filtres et tri des montres</li>
+      <li>Design général noir/or</li>
+      <li>Footer global</li>
+      <li>Ajout du numéro de version</li>
+    </ul>
+  </div>
+
+  <!-- Versions mineures -->
+  <div class="card">
+    <h2>v1.0.1 — À venir</h2>
+    <ul>
+      <li>Ajout de nouvelles montres (Lip, Rolex, Omega…)</li>
+      <li>Amélioration du design des cartes</li>
+      <li>Optimisation mobile</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>v1.0.2 — À venir</h2>
+    <ul>
+      <li>Ajout de la page Contact</li>
+      <li>Formulaire de contact (version simple)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>v1.0.3 — À venir</h2>
+    <ul>
+      <li>Ajout d’une page Marques</li>
+      <li>Navigation par marque</li>
+    </ul>
+  </div>
+
+  <!-- Version milestone -->
+  <div class="card">
+    <h2>v1.1.0 — Prévue dans 2 mois</h2>
+    <ul>
+      <li>Mode sombre / clair</li>
+      <li>Refonte du header</li>
+      <li>Animations premium</li>
+      <li>Recherche avancée</li>
+    </ul>
+  </div>
+
+  <!-- Futur -->
+  <div class="card">
+    <h2>v2.0.0 — Vision long terme</h2>
+    <ul>
+      <li>Base de données complète des années 1950 → 2000</li>
+      <li>Compte utilisateur</li>
+      <li>Favoris et collections personnelles</li>
+      <li>API publique ChronoBase</li>
+    </ul>
+  </div>
+
+</div>
+
+</body>
+</html>
