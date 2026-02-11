@@ -171,14 +171,18 @@ nav a:hover{color:#f5d98c}
 .cb-btn {
   display: block;
   width: 100%;
+  box-sizing: border-box;
   background: #d4af37;
   color: #000;
   padding: 10px;
-  margin-top: 10px;
+  margin: 8px 0;
   border-radius: 6px;
   text-align: center;
   cursor: pointer;
   font-weight: 500;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .cb-btn:hover {
   background: #f5d98c;
