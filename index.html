@@ -111,6 +111,18 @@ nav a:hover{color:#f5d98c}
   color: #f5d98c;
   cursor: pointer;
 }
+
+/* ---- STYLE POUR L'IFRAME DU CHATBOT ---- */
+iframe[src="chatbot.html"] {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border: none;
+  z-index: 999;
+  pointer-events: none; /* IMPORTANT pour cliquer sur la bulle */
+}
 </style>
 </head>
 
@@ -225,8 +237,9 @@ function updateSiteCounter(){
 }
 updateSiteCounter();
 </script>
-  
-<iframe src="chatbot.html" style="border:none;width:0;height:0;"></iframe>
+
+<!-- CHATBOT -->
+<iframe src="chatbot.html"></iframe>
 
 </body>
 </html>
