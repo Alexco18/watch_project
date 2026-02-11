@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
+/* ton CSS inchangé */
 :root { --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951); }
 
 body{
@@ -93,24 +94,29 @@ select{
 
 <div class="watch-grid" id="watch-grid"></div>
 
-<script type="module">
-import { loadAllBrands } from "./js/watches-loader.js";
-import { filterByBrand, sortByYearAsc, sortByYearDesc, sortByBrandAZ, sortByBrandZA } from "./js/filters.js";
-import { displayWatches, populateBrandFilter } from "./js/ui-watches.js";
+<!-- CHARGEMENT DES DONNÉES -->
+<script src="brands/lip.js"></script>
+<script src="brands/rolex.js"></script>
+<!-- ajoute omega.js si tu le crées -->
+<!-- <script src="brands/omega.js"></script> -->
 
-let ALL_WATCHES = [];
+<!-- CHARGEMENT DES FONCTIONS -->
+<script src="js/filters.js"></script>
+<script src="js/ui-watches.js"></script>
 
-async function init(){
-  ALL_WATCHES = await loadAllBrands();
-  populateBrandFilter(ALL_WATCHES);
-  displayWatches(ALL_WATCHES);
+<script>
+window.WATCHES = window.WATCHES || [];
+
+function init(){
+  populateBrandFilter(window.WATCHES);
+  displayWatches(window.WATCHES);
 }
 
 document.getElementById("brand-filter").addEventListener("change", applyFilters);
 document.getElementById("sort-filter").addEventListener("change", applyFilters);
 
 function applyFilters(){
-  let list = [...ALL_WATCHES];
+  let list = [...window.WATCHES];
 
   const brand = document.getElementById("brand-filter").value;
   const sort = document.getElementById("sort-filter").value;
