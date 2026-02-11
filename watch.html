@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>ChronoBase – Rolex Daytona</title>
+  <title>ChronoBase – Détails montre</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
@@ -93,7 +93,8 @@
   <div class="header-container">
     <h2>ChronoBase</h2>
     <nav>
-     <a href="index.html#watches-view" id="back-link" style="color:#d4af37;text-decoration:none;">Retour</a>
+      <!-- Retour à la page précédente (montres + filtres conservés) -->
+      <a onclick="history.back()" style="cursor:pointer;color:#d4af37;text-decoration:none;">Retour</a>
     </nav>
   </div>
 </header>
@@ -101,35 +102,89 @@
 <section class="watch-page">
 
   <!-- GALERIE -->
-  <div class="watch-gallery">
-    <img src="https://via.placeholder.com/800x800" alt="Rolex Daytona face">
-    <img src="https://via.placeholder.com/800x800" alt="Rolex Daytona profil">
-    <img src="https://via.placeholder.com/800x800" alt="Rolex Daytona fond">
+  <div class="watch-gallery" id="gallery">
+    <!-- Images insérées dynamiquement -->
   </div>
 
   <!-- DÉTAILS -->
   <div class="watch-details">
-    <h1>Rolex Daytona – 2016</h1>
+    <h1 id="watch-title"></h1>
 
-    <p>
-      Le Rolex Daytona est un chronographe emblématique conçu pour les pilotes automobiles.
-      Son design intemporel et son mouvement de haute précision en font une icône de l’horlogerie.
+    <p id="watch-description">
+      <!-- Description dynamique -->
     </p>
 
-    <ul class="watch-specs">
-      <li><span>Boîtier</span><span>Acier 40 mm</span></li>
-      <li><span>Mouvement</span><span>Automatique</span></li>
-      <li><span>Réserve de marche</span><span>72 heures</span></li>
-      <li><span>Étanchéité</span><span>100 m</span></li>
-      <li><span>Bracelet</span><span>Acier Oyster</span></li>
+    <ul class="watch-specs" id="specs">
+      <!-- Spécifications dynamiques -->
     </ul>
 
-    <div class="watch-price">
-      Prix estimé : <strong>25 000 €</strong>
+    <div class="watch-price" id="price">
+      <!-- Prix dynamique -->
     </div>
   </div>
 
 </section>
+
+<!-- Charger les données des montres -->
+<script src="brands/lip.js"></script>
+<script src="brands/rolex.js"></script>
+<!-- Ajoute omega.js si tu en as un -->
+<!-- <script src="brands/omega.js"></script> -->
+
+<script>
+/* ------------------------------
+   RÉCUPÉRATION DE L’ID DANS L’URL
+--------------------------------*/
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+/* ------------------------------
+   RÉCUPÉRATION DE LA MONTRE
+--------------------------------*/
+const watch = window.WATCHES.find(w => w.id === id);
+
+if (!watch) {
+  document.body.innerHTML = "<h1 style='padding:150px;text-align:center;'>Montre introuvable</h1>";
+  throw new Error("Montre introuvable : " + id);
+}
+
+/* ------------------------------
+   AFFICHAGE DES INFORMATIONS
+--------------------------------*/
+document.getElementById("watch-title").textContent = `${watch.brand} – ${watch.name} (${watch.year})`;
+
+// Description par défaut si tu n’en as pas encore
+document.getElementById("watch-description").textContent =
+  watch.description || "Aucune description disponible pour cette montre.";
+
+// Spécifications (si tu veux en ajouter dans tes fichiers brand)
+const specs = watch.specs || [
+  { label: "Boîtier", value: "Acier 40 mm" },
+  { label: "Mouvement", value: "Automatique" },
+  { label: "Réserve de marche", value: "72 heures" },
+  { label: "Étanchéité", value: "100 m" },
+  { label: "Bracelet", value: "Acier" }
+];
+
+document.getElementById("specs").innerHTML = specs
+  .map(s => `<li><span>${s.label}</span><span>${s.value}</span></li>`)
+  .join("");
+
+// Prix (optionnel)
+document.getElementById("price").innerHTML =
+  watch.price ? `Prix estimé : <strong>${watch.price}</strong>` : "";
+
+// Galerie (si tu veux plusieurs images)
+const gallery = document.getElementById("gallery");
+
+if (watch.images && watch.images.length > 0) {
+  gallery.innerHTML = watch.images
+    .map(img => `<img src="${img}" alt="${watch.name}">`)
+    .join("");
+} else {
+  gallery.innerHTML = `<img src="${watch.img}" alt="${watch.name}">`;
+}
+</script>
 
 </body>
 </html>
