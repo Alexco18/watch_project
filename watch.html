@@ -111,11 +111,16 @@
 
 </section>
 
-<!-- 🔥 1. CHARGER LES DONNÉES AVANT LE SCRIPT PRINCIPAL -->
+<!-- 🔥 IMPORTANT : INITIALISER LE TABLEAU AVANT DE CHARGER LES MARQUES -->
+<script>
+window.WATCHES = [];
+</script>
+
+<!-- 🔥 Charger les données -->
 <script src="brands/lip.js"></script>
 <script src="brands/rolex.js"></script>
 
-<!-- 🔥 2. SCRIPT PRINCIPAL -->
+<!-- 🔥 Script principal -->
 <script>
 console.log("WATCHES =", window.WATCHES);
 
