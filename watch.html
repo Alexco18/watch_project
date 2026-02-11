@@ -111,15 +111,22 @@
 
 </section>
 
-<!-- Charger les données -->
+<!-- 🔥 CHARGEMENT DES DONNÉES AVANT LE SCRIPT PRINCIPAL -->
 <script src="brands/lip.js"></script>
 <script src="brands/rolex.js"></script>
+<!-- ajoute omega.js si tu en as un -->
+<!-- <script src="brands/omega.js"></script> -->
 
+<!-- 🔥 SCRIPT PRINCIPAL (doit être APRÈS les brands) -->
 <script>
+console.log("WATCHES chargées :", window.WATCHES);
+
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
+console.log("ID reçu :", id);
 
 const watch = window.WATCHES.find(w => w.id === id);
+console.log("Montre trouvée :", watch);
 
 if (!watch) {
   document.body.innerHTML = "<h1 style='padding:150px;text-align:center;'>Montre introuvable</h1>";
