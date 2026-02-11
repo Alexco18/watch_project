@@ -4,7 +4,7 @@ function displayWatches(list){
 
   list.forEach(w => {
     grid.innerHTML += `
-      <div class="watch-card">
+      <div class="watch-card" onclick="location.href='watch.html?id=${w.id}'">
         <img src="${w.img}">
         <p><strong>${w.brand}</strong> ${w.name} (${w.year})</p>
       </div>
