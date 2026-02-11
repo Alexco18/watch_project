@@ -97,6 +97,20 @@ nav a:hover{color:#f5d98c}
   font-size: 13px;
   opacity: 0.7;
 }
+
+/* ---- VERSION DISCRÈTE ---- */
+.site-version {
+  margin-top: 5px;
+  font-size: 12px;
+  opacity: 0.6;
+  color: #d4af37;
+  transition: 0.2s;
+}
+.site-version:hover {
+  opacity: 1;
+  color: #f5d98c;
+  cursor: pointer;
+}
 </style>
 </head>
 
@@ -175,6 +189,7 @@ nav a:hover{color:#f5d98c}
 
   <div class="footer-bottom">
     © 2026 ChronoBase — Tous droits réservés
+    <div class="site-version" onclick="window.location='version.html'">v1.0.0</div>
   </div>
 </footer>
 
