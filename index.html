@@ -54,6 +54,49 @@ nav a:hover{color:#f5d98c}
   padding:30px;border-radius:12px;
 }
 .card:hover{border-color:rgba(212,175,55,.35)}
+
+/* ---------------------- FOOTER ---------------------- */
+
+.site-footer {
+  background: #0b0b0b;
+  border-top: 1px solid rgba(212,175,55,0.2);
+  padding: 40px 20px 20px;
+  margin-top: 80px;
+  color: #d4af37;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 30px;
+}
+
+.footer-section h3,
+.footer-section h4 {
+  margin-bottom: 10px;
+  color: #f5d98c;
+}
+
+.footer-section a {
+  display: block;
+  color: #d4af37;
+  text-decoration: none;
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.footer-section a:hover {
+  color: #f5d98c;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 13px;
+  opacity: 0.7;
+}
 </style>
 </head>
 
@@ -100,6 +143,41 @@ nav a:hover{color:#f5d98c}
   </section>
 </section>
 
+<!-- ---------------------- FOOTER ---------------------- -->
+
+<footer class="site-footer">
+  <div class="footer-content">
+
+    <div class="footer-section">
+      <h3>ChronoBase</h3>
+      <p>La base de données des montres iconiques.</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Navigation</h4>
+      <a href="index.html">Accueil</a>
+      <a href="montre.html">Les montres</a>
+      <a href="propos.html">À propos</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <a href="mailto:contact@chronobase.com">Envoyer un email</a>
+      <a href="#">Formulaire (à venir)</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Version</h4>
+      <a href="version.html">Historique des versions</a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 ChronoBase — Tous droits réservés
+  </div>
+</footer>
+
 <script>
 // ---------- VUES ----------
 function showView(id){
@@ -107,7 +185,7 @@ function showView(id){
   document.getElementById(id).classList.add('active');
 }
 
-// ---------- DONNÉES (mêmes données que montre.html pour cohérence) ----------
+// ---------- DONNÉES ----------
 const watches = [
   {id:"rolex-daytona",brand:"Rolex",name:"Daytona",year:2016},
   {id:"omega-speedmaster",brand:"Omega",name:"Speedmaster",year:1969},
