@@ -8,4 +8,15 @@ window.WATCHES.push({
   specs: [
     { label: "Boîtier", value: "Acier 38 mm" }
   ]
+},
+                   {
+  brand: "Lip",
+  id: "lip-calendrier",
+  name: "Calendrier",
+  year: 1946,
+  img: "https://via.placeholder.com/300",
+  description: "Un modèle historique et reconnaissable par sa forme atypique et simpliste.",
+  specs: [
+    { label: "Boîtier", value: "Acier 38 mm" }
+  ]
 });
