@@ -79,6 +79,21 @@
       margin-top: 30px;
     }
 
+    /* 🔥 Boutons PDF */
+    .pdf-button {
+      background: #d4af37;
+      color: #000;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+    .pdf-button:hover {
+      background: #f5d98c;
+    }
+
     @media (max-width: 900px) {
       .watch-page {
         grid-template-columns: 1fr;
@@ -105,32 +120,89 @@
   <div class="watch-details">
     <h1 id="watch-title"></h1>
     <p id="watch-description"></p>
+
     <ul class="watch-specs" id="specs"></ul>
+
     <div class="watch-price" id="price"></div>
+
+    <!-- ⭐ AJOUT : HISTOIRE -->
+    <h3>Histoire & Contexte</h3>
+    <p id="watch-history"></p>
+
+    <!-- ⭐ AJOUT : NOTES -->
+    <h3>Notes & Références</h3>
+    <p id="watch-notes"></p>
+
+    <!-- ⭐ AJOUT : FORMULAIRE PDF -->
+    <h3>Demander le PDF complet</h3>
+    <button id="pdf-btn" class="pdf-button">Demander le PDF</button>
+
+    <div id="pdf-form" style="display:none; margin-top:15px;">
+
+      <label>Votre tranche d'âge :</label>
+      <select id="age-range">
+        <option value="">Sélectionner</option>
+        <option value="moins de 18">Moins de 18 ans</option>
+        <option value="18-25">18–25 ans</option>
+        <option value="26-35">26–35 ans</option>
+        <option value="36-50">36–50 ans</option>
+        <option value="50+">Plus de 50 ans</option>
+      </select>
+
+      <br><br>
+
+      <label>Genre :</label>
+      <select id="gender">
+        <option value="">Sélectionner</option>
+        <option value="Homme">Homme</option>
+        <option value="Femme">Femme</option>
+        <option value="Non-binaire">Non-binaire</option>
+      </select>
+
+      <br><br>
+
+      <label>Domaine professionnel :</label>
+      <select id="domain" onchange="checkDomain()">
+        <option value="">Sélectionner</option>
+        <option value="Horlogerie">Horlogerie</option>
+        <option value="Luxe">Luxe</option>
+        <option value="Industrie">Industrie</option>
+        <option value="Commerce">Commerce</option>
+        <option value="Étudiant">Étudiant</option>
+        <option value="Autre">Autre</option>
+      </select>
+
+      <br><br>
+
+      <div id="job-field" style="display:none;">
+        <label>Intitulé exact du métier :</label>
+        <input type="text" id="job-title" placeholder="Ex : Horloger, Polisseur, Vendeur spécialisé...">
+        <br><br>
+      </div>
+
+      <button id="send-mail" class="pdf-button">Envoyer la demande</button>
+    </div>
+
   </div>
 
 </section>
 
-<!-- 🔥 IMPORTANT : INITIALISER LE TABLEAU AVANT DE CHARGER LES MARQUES -->
+<!-- 🔥 INITIALISATION -->
 <script>
 window.WATCHES = [];
 </script>
 
-<!-- 🔥 Charger les données -->
+<!-- 🔥 CHARGEMENT DES MARQUES -->
 <script src="brands/lip.js"></script>
 <script src="brands/rolex.js"></script>
 <script src="brands/swatch.js"></script>
 
-<!-- 🔥 Script principal -->
+<!-- 🔥 SCRIPT PRINCIPAL -->
 <script>
-console.log("WATCHES =", window.WATCHES);
-
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
-console.log("ID reçu :", id);
 
 const watch = window.WATCHES.find(w => w.id === id);
-console.log("Montre trouvée :", watch);
 
 if (!watch) {
   document.body.innerHTML = "<h1 style='padding:150px;text-align:center;'>Montre introuvable</h1>";
@@ -150,6 +222,13 @@ document.getElementById("specs").innerHTML = (watch.specs || [])
 document.getElementById("price").innerHTML =
   watch.price ? `Prix estimé : <strong>${watch.price}</strong>` : "";
 
+/* ⭐ AJOUT : HISTOIRE */
+document.getElementById("watch-history").textContent = watch.history;
+
+/* ⭐ AJOUT : NOTES */
+document.getElementById("watch-notes").textContent = watch.notes;
+
+/* ⭐ GALERIE */
 const gallery = document.getElementById("gallery");
 
 if (watch.images && watch.images.length > 0) {
@@ -159,6 +238,43 @@ if (watch.images && watch.images.length > 0) {
 } else {
   gallery.innerHTML = `<img src="${watch.img}" alt="${watch.name}">`;
 }
+
+/* ⭐ FORMULAIRE PDF */
+document.getElementById("pdf-btn").onclick = () => {
+  document.getElementById("pdf-form").style.display = "block";
+};
+
+function checkDomain() {
+  const domain = document.getElementById("domain").value;
+  document.getElementById("job-field").style.display =
+    domain === "Horlogerie" ? "block" : "none";
+}
+
+document.getElementById("send-mail").onclick = () => {
+  const age = document.getElementById("age-range").value;
+  const gender = document.getElementById("gender").value;
+  const domain = document.getElementById("domain").value;
+  const job = document.getElementById("job-title").value;
+
+  let body = `
+Demande de PDF pour la montre : ${watch.name}
+
+Informations utilisateur :
+- Tranche d'âge : ${age}
+- Genre : ${gender}
+- Domaine professionnel : ${domain}
+`;
+
+  if (domain === "Horlogerie") {
+    body += `- Métier exact : ${job}\n`;
+  }
+
+  body += `\nMerci d'envoyer le PDF complet à cette personne.\n`;
+
+  const mailto = `mailto:contact@chronobase.com?subject=Demande PDF – ${watch.name}&body=${encodeURIComponent(body)}`;
+
+  window.location.href = mailto;
+};
 </script>
 
 </body>
