@@ -93,7 +93,6 @@
   <div class="header-container">
     <h2>ChronoBase</h2>
     <nav>
-      <!-- Retour à la page précédente (montres + filtres conservés) -->
       <a onclick="history.back()" style="cursor:pointer;color:#d4af37;text-decoration:none;">Retour</a>
     </nav>
   </div>
@@ -101,46 +100,25 @@
 
 <section class="watch-page">
 
-  <!-- GALERIE -->
-  <div class="watch-gallery" id="gallery">
-    <!-- Images insérées dynamiquement -->
-  </div>
+  <div class="watch-gallery" id="gallery"></div>
 
-  <!-- DÉTAILS -->
   <div class="watch-details">
     <h1 id="watch-title"></h1>
-
-    <p id="watch-description">
-      <!-- Description dynamique -->
-    </p>
-
-    <ul class="watch-specs" id="specs">
-      <!-- Spécifications dynamiques -->
-    </ul>
-
-    <div class="watch-price" id="price">
-      <!-- Prix dynamique -->
-    </div>
+    <p id="watch-description"></p>
+    <ul class="watch-specs" id="specs"></ul>
+    <div class="watch-price" id="price"></div>
   </div>
 
 </section>
 
-<!-- Charger les données des montres -->
+<!-- Charger les données -->
 <script src="brands/lip.js"></script>
 <script src="brands/rolex.js"></script>
-<!-- Ajoute omega.js si tu en as un -->
-<!-- <script src="brands/omega.js"></script> -->
 
 <script>
-/* ------------------------------
-   RÉCUPÉRATION DE L’ID DANS L’URL
---------------------------------*/
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
-/* ------------------------------
-   RÉCUPÉRATION DE LA MONTRE
---------------------------------*/
 const watch = window.WATCHES.find(w => w.id === id);
 
 if (!watch) {
@@ -148,33 +126,19 @@ if (!watch) {
   throw new Error("Montre introuvable : " + id);
 }
 
-/* ------------------------------
-   AFFICHAGE DES INFORMATIONS
---------------------------------*/
-document.getElementById("watch-title").textContent = `${watch.brand} – ${watch.name} (${watch.year})`;
+document.getElementById("watch-title").textContent =
+  `${watch.brand} – ${watch.name} (${watch.year})`;
 
-// Description par défaut si tu n’en as pas encore
 document.getElementById("watch-description").textContent =
-  watch.description || "Aucune description disponible pour cette montre.";
+  watch.description || "Aucune description disponible.";
 
-// Spécifications (si tu veux en ajouter dans tes fichiers brand)
-const specs = watch.specs || [
-  { label: "Boîtier", value: "Acier 40 mm" },
-  { label: "Mouvement", value: "Automatique" },
-  { label: "Réserve de marche", value: "72 heures" },
-  { label: "Étanchéité", value: "100 m" },
-  { label: "Bracelet", value: "Acier" }
-];
-
-document.getElementById("specs").innerHTML = specs
+document.getElementById("specs").innerHTML = (watch.specs || [])
   .map(s => `<li><span>${s.label}</span><span>${s.value}</span></li>`)
   .join("");
 
-// Prix (optionnel)
 document.getElementById("price").innerHTML =
   watch.price ? `Prix estimé : <strong>${watch.price}</strong>` : "";
 
-// Galerie (si tu veux plusieurs images)
 const gallery = document.getElementById("gallery");
 
 if (watch.images && watch.images.length > 0) {
