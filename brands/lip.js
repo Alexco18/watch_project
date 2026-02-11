@@ -20,6 +20,17 @@ window.WATCHES.push({
     { label: "Boîtier", value: "Acier 38 mm" }
   ]
 },
+                     {
+  brand: "Lip",
+  id: "lip-test",
+  name: "Test",
+  year: 2015,
+  img: "https://via.placeholder.com/300",
+  description: "Un simple test.",
+  specs: [
+    { label: "TESTS", value: "Acier 70 mm" }
+  ]
+},
                             {
   brand: "Lip",
   id: "lip-incabloc",
