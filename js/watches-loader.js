@@ -1,7 +1,6 @@
 async function loadAllBrands() {
   const brandFiles = [
     "/brands/rolex.js",
-    "/brands/omega.js",
     "/brands/lip.js"
   ];
 
