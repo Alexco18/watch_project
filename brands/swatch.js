@@ -19,11 +19,11 @@ La collection MoonSwatch est née d’une collaboration inattendue entre Swatch 
 
 L’objectif était simple : rendre hommage à la Speedmaster Moonwatch tout en la rendant accessible à un public beaucoup plus large.
 
-Lancée en 2022, la MoonSwatch a immédiatement créé un phénomène mondial, avec des files d’attente devant les boutiques et des ruptures instantanées.
+Lancée en 2022, la MoonSwatch a immédiatement créé un phénomène mondial.
 
-La collection se compose de 11 coloris inspirés des astres du système solaire, chacun reprenant les codes esthétiques de la Speedmaster mais en bioceramic.
+La collection se compose de 11 coloris inspirés des astres du système solaire.
 
-Cette collaboration a marqué l’histoire récente de l’horlogerie en prouvant qu’un design mythique pouvait être réinterprété de manière ludique et accessible.
+Cette collaboration a marqué l’histoire récente de l’horlogerie.
 `,
 
   price: "250 €",
@@ -32,7 +32,6 @@ Cette collaboration a marqué l’histoire récente de l’horlogerie en prouvan
 Toutes les informations proviennent de sources fiables : communiqués Swatch Group, fiches techniques Omega, et analyses horlogères publiées entre 2022 et 2024.
 `,
 
-  /* ⭐ NOUVELLE SECTION : BIBLIOGRAPHIE */
   bibliography: [
     { label: "Site officiel Omega", url: "https://www.omegawatches.com" },
     { label: "Site officiel Swatch", url: "https://www.swatch.com" },
