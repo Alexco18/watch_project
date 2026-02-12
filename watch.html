@@ -44,6 +44,8 @@
 
     .watch-gallery img {
       width: 100%;
+      height: 350px;
+      object-fit: cover;
       border-radius: 12px;
       margin-bottom: 15px;
       border: 1px solid rgba(212,175,55,0.2);
@@ -79,7 +81,6 @@
       margin-top: 30px;
     }
 
-    /* 🔥 Boutons PDF */
     .pdf-button {
       background: #d4af37;
       color: #000;
@@ -125,15 +126,22 @@
 
     <div class="watch-price" id="price"></div>
 
-    <!-- ⭐ AJOUT : HISTOIRE -->
     <h3>Histoire & Contexte</h3>
     <p id="watch-history"></p>
 
-    <!-- ⭐ AJOUT : NOTES -->
     <h3>Notes & Références</h3>
     <p id="watch-notes"></p>
 
-    <!-- ⭐ AJOUT : FORMULAIRE PDF -->
+    <!-- ⭐ BIBLIOGRAPHIE -->
+    <h3>Bibliographie</h3>
+    <ul id="watch-bibliography" class="watch-specs"></ul>
+    <p id="bibliography-note" style="margin-top:10px;color:#c1a96b;"></p>
+
+    <!-- ⭐ SIGNALER UNE ERREUR -->
+    <button id="report-error" class="pdf-button" style="margin-top:20px;">
+      Signaler une erreur / information incorrecte
+    </button>
+
     <h3>Demander le PDF complet</h3>
     <button id="pdf-btn" class="pdf-button">Demander le PDF</button>
 
@@ -187,17 +195,14 @@
 
 </section>
 
-<!-- 🔥 INITIALISATION -->
 <script>
 window.WATCHES = [];
 </script>
 
-<!-- 🔥 CHARGEMENT DES MARQUES -->
 <script src="brands/lip.js"></script>
 <script src="brands/rolex.js"></script>
 <script src="brands/swatch.js"></script>
 
-<!-- 🔥 SCRIPT PRINCIPAL -->
 <script>
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
@@ -222,10 +227,7 @@ document.getElementById("specs").innerHTML = (watch.specs || [])
 document.getElementById("price").innerHTML =
   watch.price ? `Prix estimé : <strong>${watch.price}</strong>` : "";
 
-/* ⭐ AJOUT : HISTOIRE */
 document.getElementById("watch-history").textContent = watch.history;
-
-/* ⭐ AJOUT : NOTES */
 document.getElementById("watch-notes").textContent = watch.notes;
 
 /* ⭐ GALERIE */
@@ -238,6 +240,36 @@ if (watch.images && watch.images.length > 0) {
 } else {
   gallery.innerHTML = `<img src="${watch.img}" alt="${watch.name}">`;
 }
+
+/* ⭐ BIBLIOGRAPHIE */
+const biblioList = document.getElementById("watch-bibliography");
+
+if (watch.bibliography && watch.bibliography.length > 0) {
+  biblioList.innerHTML = watch.bibliography
+    .map(b => `<li><a href="${b.url}" target="_blank" style="color:#d4af37;">${b.label}</a></li>`)
+    .join("");
+} else {
+  biblioList.innerHTML = "<li>Aucune source disponible.</li>";
+}
+
+document.getElementById("bibliography-note").textContent =
+  watch.bibliography_note || "";
+
+/* ⭐ SIGNALER UNE ERREUR */
+document.getElementById("report-error").onclick = () => {
+  const mailBody = `
+Signalement d'erreur concernant la montre : ${watch.name}
+
+Merci d'indiquer ci-dessous ce qui vous semble incorrect :
+- (ex : faute d'orthographe, mauvaise information technique, lien cassé...)
+
+-------------------------
+Votre message :
+`;
+
+  const mailto = `mailto:contact@chronobase.com?subject=Signalement – ${watch.name}&body=${encodeURIComponent(mailBody)}`;
+  window.location.href = mailto;
+};
 
 /* ⭐ FORMULAIRE PDF */
 document.getElementById("pdf-btn").onclick = () => {
