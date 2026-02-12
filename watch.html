@@ -33,21 +33,23 @@
       align-items: center;
     }
 
+    /* 🔥 Nouvelle grille : colonne gauche = image + biblio */
     .watch-page {
       max-width: 1200px;
       margin: auto;
       padding: 140px 20px 80px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 400px 1fr;
       gap: 50px;
     }
 
+    /* 🔥 Image carrée */
     .watch-gallery img {
       width: 100%;
       height: 350px;
       object-fit: cover;
       border-radius: 12px;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       border: 1px solid rgba(212,175,55,0.2);
     }
 
@@ -116,8 +118,20 @@
 
 <section class="watch-page">
 
-  <div class="watch-gallery" id="gallery"></div>
+  <!-- ⭐ COLONNE GAUCHE : IMAGE + BIBLIO -->
+  <div>
+    <div class="watch-gallery" id="gallery"></div>
 
+    <h3>Bibliographie</h3>
+    <ul id="watch-bibliography" class="watch-specs"></ul>
+    <p id="bibliography-note" style="margin-top:10px;color:#c1a96b;"></p>
+
+    <button id="report-error" class="pdf-button" style="margin-top:20px;">
+      Signaler une erreur / information incorrecte
+    </button>
+  </div>
+
+  <!-- ⭐ COLONNE DROITE : INFOS -->
   <div class="watch-details">
     <h1 id="watch-title"></h1>
     <p id="watch-description"></p>
@@ -131,16 +145,6 @@
 
     <h3>Notes & Références</h3>
     <p id="watch-notes"></p>
-
-    <!-- ⭐ BIBLIOGRAPHIE -->
-    <h3>Bibliographie</h3>
-    <ul id="watch-bibliography" class="watch-specs"></ul>
-    <p id="bibliography-note" style="margin-top:10px;color:#c1a96b;"></p>
-
-    <!-- ⭐ SIGNALER UNE ERREUR -->
-    <button id="report-error" class="pdf-button" style="margin-top:20px;">
-      Signaler une erreur / information incorrecte
-    </button>
 
     <h3>Demander le PDF complet</h3>
     <button id="pdf-btn" class="pdf-button">Demander le PDF</button>
@@ -260,7 +264,7 @@ document.getElementById("report-error").onclick = () => {
   const mailBody = `
 Signalement d'erreur concernant la montre : ${watch.name}
 
-Merci d'indiquer ci-dessous ce qui vous semble incorrect :
+Merci d'indiquer ce qui vous semble incorrect :
 - (ex : faute d'orthographe, mauvaise information technique, lien cassé...)
 
 -------------------------
