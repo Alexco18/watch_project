@@ -60,40 +60,33 @@ nav a:hover{color:#f5d98c}
 .site-footer {
   background: #0b0b0b;
   border-top: 1px solid rgba(212,175,55,0.2);
-  padding: 25px 20px 10px;
-  margin-top: 50px;
+  padding: 40px 20px 20px;
+  margin-top: 80px;
   color: #d4af37;
   font-size: 14px;
 }
 
-/* FOOTER CENTRÉ ET RESSERRÉ */
-.footer-wrapper {
-  max-width: 900px;
-  margin: auto;
-}
-
-/* 6 COLONNES PAR LIGNE + largeur suffisante */
 .footer-content {
+  max-width: 1200px;
+  margin: auto;
   display: grid;
-  grid-template-columns: repeat(6, minmax(150px, auto)); /* <<< empêche les retours à la ligne */
-  justify-content: space-between;
-  gap: 5px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 30px;
 }
 
 .footer-section h4 {
-  margin-bottom: 4px;
+  margin-bottom: 10px;
   color: #f5d98c;
   font-size: 15px;
-  white-space: nowrap; /* <<< empêche les retours */
 }
 
 .footer-section a {
   display: block;
   color: #d4af37;
   text-decoration: none;
-  margin: 2px 0;
-  font-size: 13px;
-  white-space: nowrap; /* <<< empêche les retours */
+  margin: 5px 0;
+  font-size: 14px;
+  white-space: nowrap;
 }
 
 .footer-section a:hover {
@@ -102,24 +95,21 @@ nav a:hover{color:#f5d98c}
 
 /* ---- DEUXIÈME LIGNE ---- */
 .footer-legal {
-  margin-top: 12px;
-  padding-top: 12px;
+  margin-top: 25px;
+  padding-top: 25px;
   border-top: 1px solid rgba(212,175,55,0.15);
-  display: grid;
-  grid-template-columns: repeat(6, minmax(150px, auto)); /* <<< même largeur */
-  justify-content: space-between;
 }
 
 .footer-bottom {
   text-align: center;
-  margin-top: 12px;
-  font-size: 12px;
+  margin-top: 30px;
+  font-size: 13px;
   opacity: 0.7;
 }
 
 .site-version {
-  margin-top: 2px;
-  font-size: 11px;
+  margin-top: 5px;
+  font-size: 12px;
   opacity: 0.6;
   color: #d4af37;
   transition: 0.2s;
@@ -254,9 +244,7 @@ nav a:hover{color:#f5d98c}
 <!-- ---------------------- FOOTER ---------------------- -->
 
 <footer class="site-footer">
-<div class="footer-wrapper">
 
-  <!-- LIGNE 1 -->
   <div class="footer-content">
 
     <div class="footer-section">
@@ -282,11 +270,15 @@ nav a:hover{color:#f5d98c}
     </div>
 
     <div class="footer-section">
-      <h4>Ressources</h4>
+      <h4>Ressources horlogères</h4>
       <a href="horlogers.html">📍 Carte des horlogers</a>
       <a href="evenements.html">🗓️ Événements & bourses</a>
       <a href="achats.html">🛠️ Équipements & achats</a>
     </div>
+
+  </div>
+
+  <div class="footer-content footer-legal">
 
     <div class="footer-section">
       <h4>Légal</h4>
@@ -309,7 +301,6 @@ nav a:hover{color:#f5d98c}
     <div class="site-version" onclick="window.location='version.html'">v1.0.0</div>
   </div>
 
-</div>
 </footer>
 
 <script>
