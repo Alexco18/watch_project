@@ -63,14 +63,14 @@ nav a:hover{color:#f5d98c}
   padding: 40px 20px 20px;
   margin-top: 80px;
   color: #d4af37;
-  font-size: 13px; /* TEXTE PLUS PETIT */
+  font-size: 13px;
 }
 
 .footer-content {
   max-width: 1200px;
   margin: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* colonnes plus étroites */
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 25px;
 }
 
@@ -91,6 +91,13 @@ nav a:hover{color:#f5d98c}
 
 .footer-section a:hover {
   color: #f5d98c;
+}
+
+/* ---- DEUXIÈME LIGNE ---- */
+.footer-legal {
+  margin-top: 25px;
+  padding-top: 25px;
+  border-top: 1px solid rgba(212,175,55,0.15);
 }
 
 .footer-bottom {
@@ -237,6 +244,8 @@ nav a:hover{color:#f5d98c}
 <!-- ---------------------- FOOTER ---------------------- -->
 
 <footer class="site-footer">
+
+  <!-- LIGNE 1 -->
   <div class="footer-content">
 
     <div class="footer-section">
@@ -266,12 +275,30 @@ nav a:hover{color:#f5d98c}
       <a href="contributeurs.html">Nos contributeurs</a>      
     </div>
 
-    <!-- NOUVELLE COLONNE -->
     <div class="footer-section">
       <h4>Ressources horlogères</h4>
       <a href="horlogers.html">📍 Carte des horlogers</a>
       <a href="evenements.html">🗓️ Événements & bourses</a>
       <a href="achats.html">🛠️ Équipements & achats</a>
+    </div>
+
+  </div>
+
+  <!-- LIGNE 2 -->
+  <div class="footer-content footer-legal">
+
+    <div class="footer-section">
+      <h4>Légal</h4>
+      <a href="mentions.html">Mentions légales</a>
+      <a href="cgu.html">Conditions d’utilisation</a>
+      <a href="confidentialite.html">Politique de confidentialité</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Règlements</h4>
+      <a href="reglement-site.html">Règlement du site</a>
+      <a href="reglement-reseaux.html">Règlement des réseaux sociaux</a>
+      <a href="cookies.html">Gestion des cookies</a>
     </div>
 
   </div>
