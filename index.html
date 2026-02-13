@@ -68,22 +68,23 @@ nav a:hover{color:#f5d98c}
 
 /* FOOTER CENTRÉ ET RESSERRÉ */
 .footer-wrapper {
-  max-width: 900px;   /* <<< largeur contrôlée */
+  max-width: 900px;
   margin: auto;
 }
 
-/* 6 COLONNES PAR LIGNE */
+/* 6 COLONNES PAR LIGNE + largeur suffisante */
 .footer-content {
   display: grid;
-  grid-template-columns: repeat(6, auto); /* <<< 6 colonnes */
-  justify-content: space-between;         /* <<< colonnes serrées */
-  gap: 5px;                                /* <<< très petit espace */
+  grid-template-columns: repeat(6, minmax(150px, auto)); /* <<< empêche les retours à la ligne */
+  justify-content: space-between;
+  gap: 5px;
 }
 
 .footer-section h4 {
   margin-bottom: 4px;
   color: #f5d98c;
   font-size: 15px;
+  white-space: nowrap; /* <<< empêche les retours */
 }
 
 .footer-section a {
@@ -92,6 +93,7 @@ nav a:hover{color:#f5d98c}
   text-decoration: none;
   margin: 2px 0;
   font-size: 13px;
+  white-space: nowrap; /* <<< empêche les retours */
 }
 
 .footer-section a:hover {
@@ -104,7 +106,7 @@ nav a:hover{color:#f5d98c}
   padding-top: 12px;
   border-top: 1px solid rgba(212,175,55,0.15);
   display: grid;
-  grid-template-columns: repeat(6, auto); /* <<< 6 colonnes aussi */
+  grid-template-columns: repeat(6, minmax(150px, auto)); /* <<< même largeur */
   justify-content: space-between;
 }
 
