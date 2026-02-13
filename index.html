@@ -63,29 +63,34 @@ nav a:hover{color:#f5d98c}
   padding: 25px 20px 10px;
   margin-top: 50px;
   color: #d4af37;
-  font-size: 14px; /* police augmentée */
+  font-size: 14px;
+}
+
+/* FOOTER CENTRÉ ET RESSERRÉ */
+.footer-wrapper {
+  max-width: 700px;   /* <<< largeur limitée */
+  margin: auto;       /* <<< centré */
 }
 
 .footer-content {
-  max-width: 1200px;
-  margin: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* colonnes plus larges */
-  gap: 5px; /* ESPACEMENT RÉDUIT ENTRE COLONNES */
+  grid-template-columns: repeat(4, auto); /* <<< colonnes serrées */
+  justify-content: space-between;         /* <<< rapprochement */
+  gap: 10px;                               /* <<< très petit espace */
 }
 
 .footer-section h4 {
   margin-bottom: 4px;
   color: #f5d98c;
-  font-size: 15px; /* police augmentée */
+  font-size: 15px;
 }
 
 .footer-section a {
   display: block;
   color: #d4af37;
   text-decoration: none;
-  margin: 3px 0;
-  font-size: 13px; /* police augmentée */
+  margin: 2px 0;
+  font-size: 13px;
 }
 
 .footer-section a:hover {
@@ -97,6 +102,9 @@ nav a:hover{color:#f5d98c}
   margin-top: 12px;
   padding-top: 12px;
   border-top: 1px solid rgba(212,175,55,0.15);
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  justify-content: space-between;
 }
 
 .footer-bottom {
@@ -243,6 +251,7 @@ nav a:hover{color:#f5d98c}
 <!-- ---------------------- FOOTER ---------------------- -->
 
 <footer class="site-footer">
+<div class="footer-wrapper">
 
   <!-- LIGNE 1 -->
   <div class="footer-content">
@@ -301,6 +310,8 @@ nav a:hover{color:#f5d98c}
     © 2026 ChronoBase — Tous droits réservés
     <div class="site-version" onclick="window.location='version.html'">v1.0.0</div>
   </div>
+
+</div>
 </footer>
 
 <script>
