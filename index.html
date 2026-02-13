@@ -63,28 +63,30 @@ nav a:hover{color:#f5d98c}
   padding: 40px 20px 20px;
   margin-top: 80px;
   color: #d4af37;
+  font-size: 13px; /* TEXTE PLUS PETIT */
 }
 
 .footer-content {
   max-width: 1200px;
   margin: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* colonnes plus étroites */
+  gap: 25px;
 }
 
 .footer-section h3,
 .footer-section h4 {
   margin-bottom: 10px;
   color: #f5d98c;
+  font-size: 15px;
 }
 
 .footer-section a {
   display: block;
   color: #d4af37;
   text-decoration: none;
-  margin: 5px 0;
-  font-size: 14px;
+  margin: 4px 0;
+  font-size: 13px;
 }
 
 .footer-section a:hover {
@@ -94,14 +96,13 @@ nav a:hover{color:#f5d98c}
 .footer-bottom {
   text-align: center;
   margin-top: 30px;
-  font-size: 13px;
+  font-size: 12px;
   opacity: 0.7;
 }
 
-/* ---- VERSION DISCRÈTE ---- */
 .site-version {
   margin-top: 5px;
-  font-size: 12px;
+  font-size: 11px;
   opacity: 0.6;
   color: #d4af37;
   transition: 0.2s;
@@ -263,6 +264,14 @@ nav a:hover{color:#f5d98c}
       <a href="version.html">Historique des versions</a>
       <a href="maj.html">Historique des mises à jour</a>
       <a href="contributeurs.html">Nos contributeurs</a>      
+    </div>
+
+    <!-- NOUVELLE COLONNE -->
+    <div class="footer-section">
+      <h4>Ressources horlogères</h4>
+      <a href="horlogers.html">📍 Carte des horlogers</a>
+      <a href="evenements.html">🗓️ Événements & bourses</a>
+      <a href="achats.html">🛠️ Équipements & achats</a>
     </div>
 
   </div>
