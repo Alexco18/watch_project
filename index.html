@@ -10,21 +10,29 @@
 :root {
   --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951);
 
-  /* Thème sombre (par défaut) */
+  /* Thème sombre */
   --bg-main: radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
+  --bg-header: #0b0b0b;
+  --bg-footer: #0b0b0b;
   --bg-card: linear-gradient(180deg,#111,#0c0c0c);
+
   --text-main: #d4af37;
   --text-secondary: #c1a96b;
+
   --border-color: rgba(212,175,55,0.2);
 }
 
 /* Thème clair */
 .light-theme {
-  --bg-main: #f7f7f7;
+  --bg-main: #ffffff;
+  --bg-header: #ffffff;
+  --bg-footer: #ffffff;
   --bg-card: #ffffff;
-  --text-main: #444;
-  --text-secondary: #666;
-  --border-color: rgba(0,0,0,0.15);
+
+  --text-main: #000000;
+  --text-secondary: #444444;
+
+  --border-color: rgba(0,0,0,0.2);
 }
 
 /* ---------------------- GLOBAL ---------------------- */
@@ -45,12 +53,20 @@ body{
 /* ---------------------- HEADER ---------------------- */
 header{
   width:100%;padding:12px 0;border-bottom:1px solid var(--border-color);
-  background:#0b0b0b;position:fixed;top:0;left:0;z-index:10;
+  background:var(--bg-header);position:fixed;top:0;left:0;z-index:10;
 }
 .header-container{
   max-width:1200px;margin:auto;display:flex;justify-content:space-between;
   align-items:center;padding:0 20px;
 }
+
+/* Bloc gauche : titre + bouton thème */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
 nav a{
   margin-left:30px;text-decoration:none;color:var(--text-main);
   font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;
@@ -59,9 +75,8 @@ nav a:hover{color:#f5d98c}
 
 /* Bouton thème */
 #theme-toggle {
-  font-size: 20px;
+  font-size: 22px;
   cursor: pointer;
-  margin-left: 20px;
   user-select: none;
   color: var(--text-main);
   transition: 0.3s;
@@ -91,7 +106,7 @@ nav a:hover{color:#f5d98c}
 
 /* ---------------------- FOOTER ---------------------- */
 .site-footer {
-  background: #0b0b0b;
+  background: var(--bg-footer);
   border-top: 1px solid var(--border-color);
   padding: 40px 20px 20px;
   margin-top: 80px;
@@ -214,15 +229,18 @@ nav a:hover{color:#f5d98c}
 
 <header>
   <div class="header-container">
-    <h2 class="gold-text">ChronoBase</h2>
+
+    <div class="header-left">
+      <h2 class="gold-text">ChronoBase</h2>
+      <div id="theme-toggle" onclick="toggleTheme()">🌙</div>
+    </div>
+
     <nav>
       <a onclick="showView('home-view')">Accueil</a>
       <a href="montre.html">Les montres</a>
       <a href="propos.html">À propos</a>
     </nav>
 
-    <!-- Bouton thème -->
-    <div id="theme-toggle" onclick="toggleTheme()">🌙</div>
   </div>
 </header>
 
