@@ -47,7 +47,20 @@ body{
   overflow-x:hidden;
 }
 
-/* ---------------------- HEADER (copié 100% depuis montre.html) ---------------------- */
+.gold-text{
+  background:var(--gold-gradient);
+  -webkit-background-clip:text;
+  color:transparent;
+  animation:shine 6s infinite linear;
+  background-size:200%;
+}
+
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+/* ---------------------- HEADER (identique à montre.html) ---------------------- */
 header{
   width:100%;
   padding:12px 0;
@@ -72,19 +85,6 @@ header{
   display: flex;
   align-items: center;
   gap: 15px;
-}
-
-.gold-text{
-  background:var(--gold-gradient);
-  -webkit-background-clip:text;
-  color:transparent;
-  animation:shine 6s infinite linear;
-  background-size:200%;
-}
-
-@keyframes shine{
-  0%{background-position:0%}
-  100%{background-position:200%}
 }
 
 nav a{
@@ -128,7 +128,7 @@ nav a:hover{color:#f5d98c}
 /* ---------------------- PAGE ---------------------- */
 .container{
   max-width:1200px;
-  margin:140px auto 80px; /* même espace que montre.html */
+  margin:40px auto 80px;
   padding:0 20px;
 }
 
@@ -186,38 +186,103 @@ p{line-height:1.7}
   </div>
 </header>
 
+<!-- TITRE IDENTIQUE À “Toutes les montres” -->
+<h1 class="gold-text" style="text-align:center;margin-top:120px">À propos</h1>
+
 <div class="container">
 
-  <h1 class="gold-text section-title">À propos</h1>
-
+  <!-- Notre vision -->
   <div class="card">
     <h2>Notre vision</h2>
-    <p>L’horlogerie est un univers fascinant...</p>
+    <p>
+      L’horlogerie est un univers fascinant, riche d’histoire, de savoir-faire et d’innovations.
+      Pourtant, il n’existe aujourd’hui aucune base de données réellement complète, centralisée
+      et accessible regroupant l’ensemble des montres produites à travers les décennies.
+    </p>
+    <p>
+      <strong>ChronoBase est né de cette conviction :</strong> offrir à tous une source fiable,
+      exhaustive et organisée sur l’horlogerie mondiale.
+    </p>
   </div>
 
+  <!-- Notre mission -->
   <div class="card">
     <h2>Notre mission</h2>
-    <p>Nous construisons progressivement...</p>
+    <p>
+      Nous construisons progressivement une base de données couvrant des milliers de modèles,
+      de toutes marques et de toutes époques, en commençant par les années 1950.
+    </p>
+
+    <p>Chaque fiche montre inclura :</p>
+    <ul>
+      <li>Nom et références</li>
+      <li>Photographies</li>
+      <li>Année de production</li>
+      <li>Type de mouvement</li>
+      <li>Dimensions, poids, matériaux</li>
+      <li>Prix d’époque et quantités produites (lorsque disponibles)</li>
+      <li>Variantes, éditions spéciales, évolutions</li>
+      <li>Documents promotionnels, catalogues, archives</li>
+      <li>Guides techniques (montage, démontage, entretien) lorsque cela est possible</li>
+    </ul>
+
+    <p>
+      Notre objectif est simple : <strong>rendre l’information horlogère accessible, fiable et utile</strong>,
+      que vous soyez amateur, collectionneur, professionnel ou simple curieux.
+    </p>
   </div>
 
+  <!-- Travail de fond -->
   <div class="card">
-    <h2>Un travail de fond</h2>
-    <p>ChronoBase repose sur un travail minutieux...</p>
+    <h2>Un travail de fond, une passion commune</h2>
+    <p>
+      ChronoBase repose sur un travail minutieux de recherche, de vérification et de mise en forme.
+      Nous collaborons avec horlogers, collectionneurs, experts et passionnés afin de garantir la
+      qualité et la précision des données.
+    </p>
+    <p>
+      Certaines documentations techniques étant rares et précieuses, nous mettons tout en œuvre
+      pour les préserver, les contextualiser et les rendre consultables de manière sécurisée.
+    </p>
   </div>
 
+  <!-- Plateforme protégée -->
   <div class="card">
-    <h2>Une plateforme protégée</h2>
-    <p>Pour protéger le travail réalisé...</p>
+    <h2>Une plateforme protégée et responsable</h2>
+    <p>
+      Pour protéger le travail réalisé et éviter les copies sauvages, chaque contenu est marqué
+      et référencé.
+    </p>
+    <p>
+      Nous développons également un système de certification et de notation des professionnels
+      afin d’aider les utilisateurs à éviter les arnaques et à identifier des interlocuteurs fiables.
+    </p>
   </div>
 
+  <!-- Communauté -->
   <div class="card">
     <h2>Une communauté en construction</h2>
-    <p>ChronoBase évoluera avec le temps...</p>
+    <p>ChronoBase évoluera avec le temps :</p>
+    <ul>
+      <li>Ajout de nouvelles années et de nouveaux modèles</li>
+      <li>Traduction du site en plusieurs langues</li>
+      <li>Mise en avant des contributeurs, donateurs et partenaires</li>
+      <li>Développement d’outils pédagogiques pour apprendre l’horlogerie</li>
+    </ul>
+
+    <p>
+      Nous croyons profondément à la force de la communauté horlogère. Votre soutien, vos retours
+      et vos contributions aideront ChronoBase à devenir un outil incontournable.
+    </p>
   </div>
 
+  <!-- Nous rejoindre -->
   <div class="card">
     <h2>Nous rejoindre</h2>
-    <p>Retrouvez-nous sur nos réseaux sociaux...</p>
+    <p>
+      Retrouvez-nous sur nos réseaux sociaux, suivez l’évolution du projet et participez à la
+      construction de la plus grande base de données horlogère.
+    </p>
   </div>
 
 </div>
