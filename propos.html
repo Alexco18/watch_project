@@ -40,7 +40,6 @@
 body{
   margin:0;
   padding:0;
-  padding-top:80px; /* espace sous le header fixe */
   font-family:'Montserrat',sans-serif;
   background:var(--bg-main);
   color:var(--text-main);
@@ -48,20 +47,7 @@ body{
   overflow-x:hidden;
 }
 
-.gold-text{
-  background:var(--gold-gradient);
-  -webkit-background-clip:text;
-  color:transparent;
-  animation:shine 6s infinite linear;
-  background-size:200%;
-}
-
-@keyframes shine{
-  0%{background-position:0%}
-  100%{background-position:200%}
-}
-
-/* ---------------------- HEADER ---------------------- */
+/* ---------------------- HEADER (copié 100% depuis montre.html) ---------------------- */
 header{
   width:100%;
   padding:12px 0;
@@ -88,15 +74,19 @@ header{
   gap: 15px;
 }
 
-/* TITRE DU HEADER — version correcte et unique */
-header h2 {
-  margin: 0;
-  font-size: 32px;      /* même taille que montre.html */
-  font-weight: 600;     /* compense le body en 300 */
-  line-height: 1.2;     /* hauteur naturelle */
+.gold-text{
+  background:var(--gold-gradient);
+  -webkit-background-clip:text;
+  color:transparent;
+  animation:shine 6s infinite linear;
+  background-size:200%;
 }
 
-/* Liens de navigation */
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
 nav a{
   margin-left:30px;
   text-decoration:none;
@@ -108,7 +98,7 @@ nav a{
 }
 nav a:hover{color:#f5d98c}
 
-/* ---------------------- SWITCH MODE SOMBRE/CLAIR ---------------------- */
+/* Switch thème */
 #theme-switch {
   width: 50px;
   height: 26px;
@@ -138,7 +128,7 @@ nav a:hover{color:#f5d98c}
 /* ---------------------- PAGE ---------------------- */
 .container{
   max-width:1200px;
-  margin:40px auto 80px;
+  margin:140px auto 80px; /* même espace que montre.html */
   padding:0 20px;
 }
 
@@ -146,14 +136,6 @@ nav a:hover{color:#f5d98c}
   font-size:40px;
   text-align:center;
   margin-bottom:40px;
-}
-
-/* On cible seulement les titres dans les cartes */
-.card h2{
-  margin-top:0;
-  font-weight:400;
-  font-size:26px;
-  color:#f5d98c;
 }
 
 .card{
@@ -164,6 +146,13 @@ nav a:hover{color:#f5d98c}
   margin-bottom:40px;
 }
 .card:hover{border-color:rgba(212,175,55,.35)}
+
+.card h2{
+  margin-top:0;
+  font-weight:400;
+  font-size:26px;
+  color:#f5d98c;
+}
 
 ul{
   margin-top:10px;
@@ -183,7 +172,6 @@ p{line-height:1.7}
     <div class="header-left">
       <h2 class="gold-text">ChronoBase</h2>
 
-      <!-- Switch thème -->
       <div id="theme-switch" onclick="toggleTheme()">
         <div class="switch-handle"></div>
       </div>
@@ -202,107 +190,41 @@ p{line-height:1.7}
 
   <h1 class="gold-text section-title">À propos</h1>
 
-  <!-- Notre vision -->
   <div class="card">
     <h2>Notre vision</h2>
-    <p>
-      L’horlogerie est un univers fascinant, riche d’histoire, de savoir-faire et d’innovations.
-      Pourtant, il n’existe aujourd’hui aucune base de données réellement complète, centralisée
-      et accessible regroupant l’ensemble des montres produites à travers les décennies.
-    </p>
-    <p>
-      <strong>ChronoBase est né de cette conviction :</strong> offrir à tous une source fiable,
-      exhaustive et organisée sur l’horlogerie mondiale.
-    </p>
+    <p>L’horlogerie est un univers fascinant...</p>
   </div>
 
-  <!-- Notre mission -->
   <div class="card">
     <h2>Notre mission</h2>
-    <p>
-      Nous construisons progressivement une base de données couvrant des milliers de modèles,
-      de toutes marques et de toutes époques, en commençant par les années 1950.
-    </p>
-
-    <p>Chaque fiche montre inclura :</p>
-    <ul>
-      <li>Nom et références</li>
-      <li>Photographies</li>
-      <li>Année de production</li>
-      <li>Type de mouvement</li>
-      <li>Dimensions, poids, matériaux</li>
-      <li>Prix d’époque et quantités produites (lorsque disponibles)</li>
-      <li>Variantes, éditions spéciales, évolutions</li>
-      <li>Documents promotionnels, catalogues, archives</li>
-      <li>Guides techniques (montage, démontage, entretien) lorsque cela est possible</li>
-    </ul>
-
-    <p>
-      Notre objectif est simple : <strong>rendre l’information horlogère accessible, fiable et utile</strong>,
-      que vous soyez amateur, collectionneur, professionnel ou simple curieux.
-    </p>
+    <p>Nous construisons progressivement...</p>
   </div>
 
-  <!-- Travail de fond -->
   <div class="card">
-    <h2>Un travail de fond, une passion commune</h2>
-    <p>
-      ChronoBase repose sur un travail minutieux de recherche, de vérification et de mise en forme.
-      Nous collaborons avec horlogers, collectionneurs, experts et passionnés afin de garantir la
-      qualité et la précision des données.
-    </p>
-    <p>
-      Certaines documentations techniques étant rares et précieuses, nous mettons tout en œuvre
-      pour les préserver, les contextualiser et les rendre consultables de manière sécurisée.
-    </p>
+    <h2>Un travail de fond</h2>
+    <p>ChronoBase repose sur un travail minutieux...</p>
   </div>
 
-  <!-- Plateforme protégée -->
   <div class="card">
-    <h2>Une plateforme protégée et responsable</h2>
-    <p>
-      Pour protéger le travail réalisé et éviter les copies sauvages, chaque contenu est marqué
-      et référencé.
-    </p>
-    <p>
-      Nous développons également un système de certification et de notation des professionnels
-      afin d’aider les utilisateurs à éviter les arnaques et à identifier des interlocuteurs fiables.
-    </p>
+    <h2>Une plateforme protégée</h2>
+    <p>Pour protéger le travail réalisé...</p>
   </div>
 
-  <!-- Communauté -->
   <div class="card">
     <h2>Une communauté en construction</h2>
-    <p>ChronoBase évoluera avec le temps :</p>
-    <ul>
-      <li>Ajout de nouvelles années et de nouveaux modèles</li>
-      <li>Traduction du site en plusieurs langues</li>
-      <li>Mise en avant des contributeurs, donateurs et partenaires</li>
-      <li>Développement d’outils pédagogiques pour apprendre l’horlogerie</li>
-    </ul>
-
-    <p>
-      Nous croyons profondément à la force de la communauté horlogère. Votre soutien, vos retours
-      et vos contributions aideront ChronoBase à devenir un outil incontournable.
-    </p>
+    <p>ChronoBase évoluera avec le temps...</p>
   </div>
 
-  <!-- Nous rejoindre -->
   <div class="card">
     <h2>Nous rejoindre</h2>
-    <p>
-      Retrouvez-nous sur nos réseaux sociaux, suivez l’évolution du projet et participez à la
-      construction de la plus grande base de données horlogère.
-    </p>
+    <p>Retrouvez-nous sur nos réseaux sociaux...</p>
   </div>
 
 </div>
 
-<!-- ---------------------- SCRIPT THEME ---------------------- -->
 <script>
 function toggleTheme() {
   document.body.classList.toggle("light-theme");
-
   const isLight = document.body.classList.contains("light-theme");
   localStorage.setItem("theme", isLight ? "light" : "dark");
 }
