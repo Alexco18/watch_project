@@ -7,12 +7,41 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-:root { --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951); }
+/* ---------------------- VARIABLES ---------------------- */
+:root {
+  --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951);
 
+  /* Thème sombre */
+  --bg-main: radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
+  --bg-header: #0b0b0b;
+  --bg-card: linear-gradient(180deg,#111,#0c0c0c);
+  --bg-footer: #0b0b0b;
+
+  --text-main: #d4af37;
+  --text-secondary: #c1a96b;
+
+  --border-color: rgba(212,175,55,0.2);
+}
+
+/* Thème clair */
+.light-theme {
+  --bg-main: #ffffff;
+  --bg-header: #ffffff;
+  --bg-card: #ffffff;
+  --bg-footer: #ffffff;
+
+  --text-main: #000000;
+  --text-secondary: #444444;
+
+  --border-color: rgba(0,0,0,0.2);
+}
+
+/* ---------------------- GLOBAL ---------------------- */
 body{
   margin:0;padding:0;font-family:'Montserrat',sans-serif;
-  background:radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
-  color:#d4af37;font-weight:300;overflow-x:hidden;
+  background:var(--bg-main);
+  color:var(--text-main);
+  font-weight:300;overflow-x:hidden;
 }
 
 .gold-text{
@@ -22,26 +51,62 @@ body{
 }
 @keyframes shine{0%{background-position:0%}100%{background-position:200%}}
 
+/* ---------------------- HEADER ---------------------- */
 header{
-  width:100%;padding:12px 0;border-bottom:1px solid rgba(212,175,55,0.2);
-  background:#0b0b0b;position:fixed;top:0;left:0;z-index:10;
+  width:100%;padding:12px 0;border-bottom:1px solid var(--border-color);
+  background:var(--bg-header);position:fixed;top:0;left:0;z-index:10;
 }
 .header-container{
   max-width:1200px;margin:auto;display:flex;justify-content:space-between;
   align-items:center;padding:0 20px;
 }
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
 nav a{
-  margin-left:30px;text-decoration:none;color:#d4af37;
+  margin-left:30px;text-decoration:none;color:var(--text-main);
   font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;
 }
 nav a:hover{color:#f5d98c}
 
-/* Correction : même taille que sur index.html */
-.header-container h2.gold-text {
-  font-size: 28px;
-  font-weight: 400;
+/* ---------------------- SWITCH MODE SOMBRE/CLAIR ---------------------- */
+#theme-switch {
+  width: 50px;
+  height: 26px;
+  background: var(--border-color);
+  border-radius: 20px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  padding: 3px;
 }
 
+.switch-handle {
+  width: 20px;
+  height: 20px;
+  background: var(--text-main);
+  border-radius: 50%;
+  transition: transform 0.3s, background 0.3s;
+}
+
+/* Pastille à droite en mode clair */
+.light-theme #theme-switch .switch-handle {
+  transform: translateX(24px);
+  background: #000;
+}
+
+/* Pastille à gauche en mode sombre */
+#theme-switch .switch-handle {
+  transform: translateX(0);
+}
+
+/* ---------------------- PAGE ---------------------- */
 .container{
   max-width:1200px;margin:140px auto 80px;padding:0 20px;
 }
@@ -51,8 +116,8 @@ nav a:hover{color:#f5d98c}
 }
 
 .card{
-  background:linear-gradient(180deg,#111,#0c0c0c);
-  border:1px solid rgba(212,175,55,0.15);
+  background:var(--bg-card);
+  border:1px solid var(--border-color);
   padding:30px;border-radius:12px;margin-bottom:40px;
 }
 .card:hover{border-color:rgba(212,175,55,.35)}
@@ -76,12 +141,22 @@ p{line-height:1.7}
 
 <header>
   <div class="header-container">
-    <h2 class="gold-text">ChronoBase</h2>
+
+    <div class="header-left">
+      <h2 class="gold-text">ChronoBase</h2>
+
+      <!-- Switch thème -->
+      <div id="theme-switch" onclick="toggleTheme()">
+        <div class="switch-handle"></div>
+      </div>
+    </div>
+
     <nav>
       <a href="index.html">Accueil</a>
-      <a href="index.html#watches-view">Les montres</a>
+      <a href="montre.html">Les montres</a>
       <a href="propos.html">À propos</a>
     </nav>
+
   </div>
 </header>
 
@@ -184,6 +259,23 @@ p{line-height:1.7}
   </div>
 
 </div>
+
+<!-- ---------------------- SCRIPT THEME ---------------------- -->
+<script>
+function toggleTheme() {
+  document.body.classList.toggle("light-theme");
+
+  const isLight = document.body.classList.contains("light-theme");
+  localStorage.setItem("theme", isLight ? "light" : "dark");
+}
+
+(function() {
+  const saved = localStorage.getItem("theme");
+  if (saved === "light") {
+    document.body.classList.add("light-theme");
+  }
+})();
+</script>
 
 </body>
 </html>
