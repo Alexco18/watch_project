@@ -40,7 +40,7 @@
 body{
   margin:0;
   padding:0;
-  padding-top:80px; /* Correction : espace sous le header */
+  padding-top:80px; /* espace sous le header fixe */
   font-family:'Montserrat',sans-serif;
   background:var(--bg-main);
   color:var(--text-main);
@@ -88,6 +88,14 @@ header{
   gap: 15px;
 }
 
+/* Style spécifique pour le titre du header */
+header h2{
+  margin:0;
+  font-weight:500;
+  font-size:24px;
+}
+
+/* Liens de navigation */
 nav a{
   margin-left:30px;
   text-decoration:none;
@@ -139,6 +147,14 @@ nav a:hover{color:#f5d98c}
   margin-bottom:40px;
 }
 
+/* On cible seulement les titres dans les cartes */
+.card h2{
+  margin-top:0;
+  font-weight:400;
+  font-size:26px;
+  color:#f5d98c;
+}
+
 .card{
   background:var(--bg-card);
   border:1px solid var(--border-color);
@@ -147,13 +163,6 @@ nav a:hover{color:#f5d98c}
   margin-bottom:40px;
 }
 .card:hover{border-color:rgba(212,175,55,.35)}
-
-h2{
-  margin-top:0;
-  font-weight:400;
-  font-size:26px;
-  color:#f5d98c;
-}
 
 ul{
   margin-top:10px;
