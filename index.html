@@ -3,16 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <title>ChronoBase</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-:root { --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951); }
+/* ---------------------- VARIABLES ---------------------- */
+:root {
+  --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951);
 
+  /* Thème sombre (par défaut) */
+  --bg-main: radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
+  --bg-card: linear-gradient(180deg,#111,#0c0c0c);
+  --text-main: #d4af37;
+  --text-secondary: #c1a96b;
+  --border-color: rgba(212,175,55,0.2);
+}
+
+/* Thème clair */
+.light-theme {
+  --bg-main: #f7f7f7;
+  --bg-card: #ffffff;
+  --text-main: #444;
+  --text-secondary: #666;
+  --border-color: rgba(0,0,0,0.15);
+}
+
+/* ---------------------- GLOBAL ---------------------- */
 body{
   margin:0;padding:0;font-family:'Montserrat',sans-serif;
-  background:radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
-  color:#d4af37;font-weight:300;overflow-x:hidden;
+  background:var(--bg-main);
+  color:var(--text-main);
+  font-weight:300;overflow-x:hidden;
 }
 
 .gold-text{
@@ -22,8 +42,9 @@ body{
 }
 @keyframes shine{0%{background-position:0%}100%{background-position:200%}}
 
+/* ---------------------- HEADER ---------------------- */
 header{
-  width:100%;padding:12px 0;border-bottom:1px solid rgba(212,175,55,0.2);
+  width:100%;padding:12px 0;border-bottom:1px solid var(--border-color);
   background:#0b0b0b;position:fixed;top:0;left:0;z-index:10;
 }
 .header-container{
@@ -31,41 +52,52 @@ header{
   align-items:center;padding:0 20px;
 }
 nav a{
-  margin-left:30px;text-decoration:none;color:#d4af37;
+  margin-left:30px;text-decoration:none;color:var(--text-main);
   font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;
 }
 nav a:hover{color:#f5d98c}
 
+/* Bouton thème */
+#theme-toggle {
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 20px;
+  user-select: none;
+  color: var(--text-main);
+  transition: 0.3s;
+}
+#theme-toggle:hover { opacity: 0.7; }
+
+/* ---------------------- VUES ---------------------- */
 .view{min-height:100vh;padding-top:120px;display:none;opacity:0;transition:.5s}
 .view.active{display:block;opacity:1}
 
 .hero{text-align:center;padding:0 20px}
 .hero h1{font-size:55px;font-weight:300}
-.hero p{color:#c1a96b;font-size:18px;max-width:600px;margin:20px auto}
+.hero p{color:var(--text-secondary);font-size:18px;max-width:600px;margin:20px auto}
 
+/* ---------------------- SECTIONS ---------------------- */
 .sections{
   max-width:1200px;margin:80px auto;
   display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:30px;padding:0 20px 80px;
 }
 .card{
-  background:linear-gradient(180deg,#111,#0c0c0c);
-  border:1px solid rgba(212,175,55,0.15);
+  background:var(--bg-card);
+  border:1px solid var(--border-color);
   padding:30px;border-radius:12px;
 }
 .card:hover{border-color:rgba(212,175,55,.35)}
 
 /* ---------------------- FOOTER ---------------------- */
-
 .site-footer {
   background: #0b0b0b;
-  border-top: 1px solid rgba(212,175,55,0.2);
+  border-top: 1px solid var(--border-color);
   padding: 40px 20px 20px;
   margin-top: 80px;
-  color: #d4af37;
+  color: var(--text-main);
   font-size: 14px;
 }
-
 .footer-content {
   max-width: 1200px;
   margin: auto;
@@ -73,45 +105,37 @@ nav a:hover{color:#f5d98c}
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 30px;
 }
-
 .footer-section h4 {
   margin-bottom: 10px;
   color: #f5d98c;
   font-size: 15px;
 }
-
 .footer-section a {
   display: block;
-  color: #d4af37;
+  color: var(--text-main);
   text-decoration: none;
   margin: 5px 0;
   font-size: 14px;
   white-space: nowrap;
 }
+.footer-section a:hover { color: #f5d98c; }
 
-.footer-section a:hover {
-  color: #f5d98c;
-}
-
-/* ---- DEUXIÈME LIGNE ---- */
 .footer-legal {
   margin-top: 25px;
   padding-top: 25px;
-  border-top: 1px solid rgba(212,175,55,0.15);
+  border-top: 1px solid var(--border-color);
 }
-
 .footer-bottom {
   text-align: center;
   margin-top: 30px;
   font-size: 13px;
   opacity: 0.7;
 }
-
 .site-version {
   margin-top: 5px;
   font-size: 12px;
   opacity: 0.6;
-  color: #d4af37;
+  color: var(--text-main);
   transition: 0.2s;
 }
 .site-version:hover {
@@ -120,8 +144,7 @@ nav a:hover{color:#f5d98c}
   cursor: pointer;
 }
 
-/* ---------------------- CHATBOT GUIDÉ ---------------------- */
-
+/* ---------------------- CHATBOT ---------------------- */
 #cb-bubble {
   position: fixed;
   bottom: 25px;
@@ -139,7 +162,6 @@ nav a:hover{color:#f5d98c}
   box-shadow: 0 0 15px rgba(212,175,55,0.5);
   z-index: 999;
 }
-
 #cb-window {
   position: fixed;
   bottom: 100px;
@@ -153,7 +175,6 @@ nav a:hover{color:#f5d98c}
   overflow: hidden;
   z-index: 999;
 }
-
 #cb-header {
   background: #111;
   padding: 12px;
@@ -164,22 +185,18 @@ nav a:hover{color:#f5d98c}
   align-items: center;
   border-bottom: 1px solid rgba(212,175,55,0.3);
 }
-
 #cb-close {
   cursor: pointer;
   font-size: 18px;
 }
-
 #cb-content {
   padding: 15px;
   color: #d4af37;
   font-size: 14px;
 }
-
 .cb-btn {
   display: block;
   width: 100%;
-  box-sizing: border-box;
   background: #d4af37;
   color: #000;
   padding: 10px;
@@ -188,13 +205,8 @@ nav a:hover{color:#f5d98c}
   text-align: center;
   cursor: pointer;
   font-weight: 500;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
-.cb-btn:hover {
-  background: #f5d98c;
-}
+.cb-btn:hover { background: #f5d98c; }
 </style>
 </head>
 
@@ -208,6 +220,9 @@ nav a:hover{color:#f5d98c}
       <a href="montre.html">Les montres</a>
       <a href="propos.html">À propos</a>
     </nav>
+
+    <!-- Bouton thème -->
+    <div id="theme-toggle" onclick="toggleTheme()">🌙</div>
   </div>
 </header>
 
@@ -216,7 +231,6 @@ nav a:hover{color:#f5d98c}
   <div class="hero">
     <h1 class="gold-text">La référence mondiale des montres</h1>
     <p>Explorez l’histoire horlogère à travers des modèles mythiques.</p>
-
     <p style="opacity:.8">
       👥 <span id="visit-counter">–</span> passionnés ont déjà visité ChronoBase
     </p>
@@ -241,12 +255,9 @@ nav a:hover{color:#f5d98c}
   </section>
 </section>
 
-<!-- ---------------------- FOOTER ---------------------- -->
-
+<!-- FOOTER -->
 <footer class="site-footer">
-
   <div class="footer-content">
-
     <div class="footer-section">
       <h4>Navigation</h4>
       <a href="index.html">Accueil</a>
@@ -254,55 +265,48 @@ nav a:hover{color:#f5d98c}
       <a href="propos.html">À propos</a>
       <a href="chiffre.html">Chiffres clés</a>
     </div>
-
     <div class="footer-section">
       <h4>Contact</h4>
       <a href="mailto:contact@chronobase.com">Envoyer un email</a>
       <a href="#">Formulaire (à venir)</a>
       <a href="reseaux.html">Nos réseaux sociaux</a>
     </div>
-
     <div class="footer-section">
       <h4>Version</h4>
       <a href="version.html">Historique des versions</a>
       <a href="maj.html">Historique des mises à jour</a>
       <a href="contributeurs.html">Nos contributeurs</a>      
     </div>
-
     <div class="footer-section">
       <h4>Ressources horlogères</h4>
       <a href="horlogers.html">Carte des horlogers</a>
       <a href="evenements.html">Événements & bourses</a>
       <a href="achats.html">Équipements & achats</a>
     </div>
-
   </div>
 
   <div class="footer-content footer-legal">
-
     <div class="footer-section">
       <h4>Légal</h4>
       <a href="mentions.html">Mentions légales</a>
       <a href="cgu.html">Conditions d’utilisation</a>
       <a href="confidentialite.html">Politique de confidentialité</a>
     </div>
-
     <div class="footer-section">
       <h4>Règlements</h4>
       <a href="reglement-site.html">Règlement du site</a>
       <a href="reglement-reseaux.html">Règlement des réseaux sociaux</a>
       <a href="cookies.html">Gestion des cookies</a>
     </div>
-
   </div>
 
   <div class="footer-bottom">
     © 2026 ChronoBase — Tous droits réservés
     <div class="site-version" onclick="window.location='version.html'">v1.0.0</div>
   </div>
-
 </footer>
 
+<!-- ---------------------- SCRIPTS ---------------------- -->
 <script>
 // ---------- VUES ----------
 function showView(id){
@@ -334,12 +338,28 @@ function updateSiteCounter(){
     .then(d=>document.getElementById("visit-counter").textContent=d.value);
 }
 updateSiteCounter();
+
+// ---------- THEME ----------
+function toggleTheme() {
+  document.body.classList.toggle("light-theme");
+
+  const isLight = document.body.classList.contains("light-theme");
+  localStorage.setItem("theme", isLight ? "light" : "dark");
+
+  document.getElementById("theme-toggle").textContent = isLight ? "☀️" : "🌙";
+}
+
+(function() {
+  const saved = localStorage.getItem("theme");
+  if (saved === "light") {
+    document.body.classList.add("light-theme");
+    document.getElementById("theme-toggle").textContent = "☀️";
+  }
+})();
 </script>
 
-<!-- ---------------------- CHATBOT GUIDÉ ---------------------- -->
-
+<!-- ---------------------- CHATBOT ---------------------- -->
 <div id="cb-bubble">💬</div>
-
 <div id="cb-window">
   <div id="cb-header">
     Assistant
@@ -358,7 +378,6 @@ bubble.onclick = () => {
   win.style.display = "flex";
   startChat();
 };
-
 closeBtn.onclick = () => win.style.display = "none";
 
 // --- ÉTAPE 1 : CHOIX DE LANGUE ---
@@ -373,12 +392,10 @@ function startChat() {
 // --- ÉTAPE 2 : CHOIX DE SECTION ---
 function chooseLang(lang) {
   window.cbLang = lang;
-
   const text = {
     fr: "Où souhaitez-vous aller ?",
     en: "Where would you like to go?"
   };
-
   content.innerHTML = `
     <p>${text[lang]}</p>
     <div class="cb-btn" onclick="goSection('home')">Accueil</div>
@@ -391,7 +408,6 @@ function chooseLang(lang) {
 // --- ÉTAPE 3 : BOUTONS DE NAVIGATION ---
 function goSection(section) {
   const lang = window.cbLang;
-
   const labels = {
     fr: {
       home: "Aller à l'accueil",
@@ -406,14 +422,12 @@ function goSection(section) {
       version: "See versions"
     }
   };
-
   const links = {
     home: "index.html",
     watches: "montre.html",
     about: "propos.html",
     version: "version.html"
   };
-
   content.innerHTML = `
     <p>${labels[lang][section]}</p>
     <div class="cb-btn" onclick="window.location='${links[section]}'">➡ Continuer</div>
