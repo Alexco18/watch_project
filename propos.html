@@ -60,7 +60,7 @@ body{
   100%{background-position:200%}
 }
 
-/* ---------------------- HEADER (identique à montre.html) ---------------------- */
+/* ---------------------- HEADER ---------------------- */
 header{
   width:100%;
   padding:12px 0;
@@ -161,9 +161,136 @@ ul{
 }
 
 p{line-height:1.7}
+
+/* ---------------------- FOOTER COMPACT ---------------------- */
+.site-footer {
+  background: var(--bg-footer);
+  border-top: 1px solid var(--border-color);
+  padding: 25px 20px 15px;
+  margin-top: 60px;
+  color: var(--text-main);
+  font-size: 14px;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.footer-section {
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footer-section h4 {
+  margin-bottom: 6px;
+  color: #f5d98c;
+  font-size: 13px;
+}
+
+.footer-section a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.footer-section a:hover { color: #f5d98c; }
+
+.footer-legal {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* ---------------------- CHATBOT ---------------------- */
+#cb-bubble {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: var(--text-main);
+  color: var(--bg-main);
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  transition: 0.2s;
+}
+#cb-bubble:hover { transform: scale(1.1); }
+
+#cb-window {
+  position: fixed;
+  bottom: 95px;
+  right: 25px;
+  width: 200px;
+  height: 260px;
+  background: var(--bg-header);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  display: none;
+  flex-direction: column;
+  z-index: 9999;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+#cb-header {
+  padding: 8px;
+  background: var(--bg-card);
+  color: var(--text-main);
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  border-bottom: 1px solid var(--border-color);
+  user-select: none;
+  cursor: grab;
+}
+#cb-header:active { cursor: grabbing; }
+
+#cb-close {
+  cursor: pointer;
+  user-select: none;
+}
+
+#cb-content {
+  padding: 10px;
+  overflow-y: auto;
+  color: var(--text-main);
+  font-size: 13px;
+}
+
+.cb-btn {
+  background: var(--bg-card);
+  color: var(--text-main);
+  padding: 6px;
+  margin-top: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 12px;
+  border: 1px solid var(--border-color);
+}
+.cb-btn:hover { background: var(--bg-footer); }
 </style>
 </head>
-
 <body>
 
 <header>
@@ -186,7 +313,7 @@ p{line-height:1.7}
   </div>
 </header>
 
-<!-- TITRE IDENTIQUE À “Toutes les montres” -->
+<!-- TITRE -->
 <h1 class="gold-text" style="text-align:center;margin-top:120px">À propos</h1>
 
 <div class="container">
@@ -220,15 +347,14 @@ p{line-height:1.7}
       <li>Année de production</li>
       <li>Type de mouvement</li>
       <li>Dimensions, poids, matériaux</li>
-      <li>Prix d’époque et quantités produites (lorsque disponibles)</li>
+      <li>Prix d’époque et quantités produites</li>
       <li>Variantes, éditions spéciales, évolutions</li>
       <li>Documents promotionnels, catalogues, archives</li>
-      <li>Guides techniques (montage, démontage, entretien) lorsque cela est possible</li>
+      <li>Guides techniques lorsque possible</li>
     </ul>
 
     <p>
-      Notre objectif est simple : <strong>rendre l’information horlogère accessible, fiable et utile</strong>,
-      que vous soyez amateur, collectionneur, professionnel ou simple curieux.
+      Notre objectif est simple : <strong>rendre l’information horlogère accessible, fiable et utile</strong>.
     </p>
   </div>
 
@@ -240,10 +366,6 @@ p{line-height:1.7}
       Nous collaborons avec horlogers, collectionneurs, experts et passionnés afin de garantir la
       qualité et la précision des données.
     </p>
-    <p>
-      Certaines documentations techniques étant rares et précieuses, nous mettons tout en œuvre
-      pour les préserver, les contextualiser et les rendre consultables de manière sécurisée.
-    </p>
   </div>
 
   <!-- Plateforme protégée -->
@@ -253,10 +375,6 @@ p{line-height:1.7}
       Pour protéger le travail réalisé et éviter les copies sauvages, chaque contenu est marqué
       et référencé.
     </p>
-    <p>
-      Nous développons également un système de certification et de notation des professionnels
-      afin d’aider les utilisateurs à éviter les arnaques et à identifier des interlocuteurs fiables.
-    </p>
   </div>
 
   <!-- Communauté -->
@@ -264,42 +382,172 @@ p{line-height:1.7}
     <h2>Une communauté en construction</h2>
     <p>ChronoBase évoluera avec le temps :</p>
     <ul>
-      <li>Ajout de nouvelles années et de nouveaux modèles</li>
-      <li>Traduction du site en plusieurs langues</li>
-      <li>Mise en avant des contributeurs, donateurs et partenaires</li>
-      <li>Développement d’outils pédagogiques pour apprendre l’horlogerie</li>
+      <li>Ajout de nouvelles années et modèles</li>
+      <li>Traduction du site</li>
+      <li>Mise en avant des contributeurs</li>
+      <li>Outils pédagogiques</li>
     </ul>
-
-    <p>
-      Nous croyons profondément à la force de la communauté horlogère. Votre soutien, vos retours
-      et vos contributions aideront ChronoBase à devenir un outil incontournable.
-    </p>
   </div>
 
   <!-- Nous rejoindre -->
   <div class="card">
     <h2>Nous rejoindre</h2>
     <p>
-      Retrouvez-nous sur nos réseaux sociaux, suivez l’évolution du projet et participez à la
-      construction de la plus grande base de données horlogère.
+      Retrouvez-nous sur nos réseaux sociaux et participez à la construction de la plus grande
+      base de données horlogère.
     </p>
   </div>
 
 </div>
 
+<!-- FOOTER COMPACT -->
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>Navigation</h4>
+      <a href="index.html">Accueil</a>
+      <a href="montre.html">Les montres</a>
+      <a href="propos.html">À propos</a>
+      <a href="chiffre.html">Chiffres clés</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <a href="mailto:contact@chronobase.com">Envoyer un email</a>
+      <a href="#">Formulaire (à venir)</a>
+      <a href="reseaux.html">Nos réseaux sociaux</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Version</h4>
+      <a href="version.html">Historique des versions</a>
+      <a href="maj.html">Historique des mises à jour</a>
+      <a href="contributeurs.html">Nos contributeurs</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Ressources</h4>
+      <a href="horlogers.html">Carte des horlogers</a>
+      <a href="evenements.html">Événements</a>
+      <a href="achats.html">Équipements & achats</a>
+    </div>
+  </div>
+
+  <div class="footer-content footer-legal">
+    <div class="footer-section">
+      <h4>Légal</h4>
+      <a href="mentions.html">Mentions légales</a>
+      <a href="cgu.html">Conditions d’utilisation</a>
+      <a href="confidentialite.html">Confidentialité</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Règlements</h4>
+      <a href="reglement-site.html">Règlement du site</a>
+      <a href="reglement-reseaux.html">Règlement réseaux</a>
+      <a href="cookies.html">Cookies</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 ChronoBase — Tous droits réservés
+  </div>
+</footer>
+
+<!-- CHATBOT -->
+<div id="cb-bubble">💬</div>
+
+<div id="cb-window">
+  <div id="cb-header">
+    Assistant
+    <span id="cb-close">✖</span>
+  </div>
+  <div id="cb-content"></div>
+</div>
+
 <script>
+// Thème clair/sombre
 function toggleTheme() {
   document.body.classList.toggle("light-theme");
   const isLight = document.body.classList.contains("light-theme");
   localStorage.setItem("theme", isLight ? "light" : "dark");
 }
-
 (function() {
   const saved = localStorage.getItem("theme");
-  if (saved === "light") {
-    document.body.classList.add("light-theme");
-  }
+  if (saved === "light") document.body.classList.add("light-theme");
 })();
+
+// Chatbot
+const bubble = document.getElementById("cb-bubble");
+const win = document.getElementById("cb-window");
+const closeBtn = document.getElementById("cb-close");
+const content = document.getElementById("cb-content");
+
+bubble.onclick = () => {
+  win.style.display = "flex";
+  startChat();
+};
+closeBtn.onclick = () => win.style.display = "none";
+
+function startChat() {
+  content.innerHTML = `
+    <p>Choisissez votre langue :</p>
+    <div class="cb-btn" onclick="chooseLang('fr')">🇫🇷 Français</div>
+    <div class="cb-btn" onclick="chooseLang('en')">🇬🇧 English</div>
+  `;
+}
+
+function chooseLang(lang) {
+  window.cbLang = lang;
+  const text = {
+    fr: "Où souhaitez-vous aller ?",
+    en: "Where would you like to go?"
+  };
+  content.innerHTML = `
+    <p>${text[lang]}</p>
+    <div class="cb-btn" onclick="goSection('home')">Accueil</div>
+    <div class="cb-btn" onclick="goSection('watches')">Les montres</div>
+    <div class="cb-btn" onclick="goSection('about')">À propos</div>
+    <div class="cb-btn" onclick="goSection('version')">Versions</div>
+  `;
+}
+
+function goSection(section) {
+  const lang = window.cbLang;
+  const links = {
+    home: "index.html",
+    watches: "montre.html",
+    about: "propos.html",
+    version: "version.html"
+  };
+  content.innerHTML = `
+    <p>Redirection…</p>
+    <div class="cb-btn" onclick="window.location='${links[section]}'">Continuer</div>
+  `;
+}
+
+// Drag & drop
+let isDragging = false;
+let offsetX, offsetY;
+
+document.getElementById("cb-header").addEventListener("mousedown", (e) => {
+  isDragging = true;
+  offsetX = e.clientX - win.offsetLeft;
+  offsetY = e.clientY - win.offsetTop;
+});
+
+document.addEventListener("mousemove", (e) => {
+  if (isDragging) {
+    win.style.left = (e.clientX - offsetX) + "px";
+    win.style.top = (e.clientY - offsetY) + "px";
+    win.style.bottom = "auto";
+    win.style.right = "auto";
+  }
+});
+
+document.addEventListener("mouseup", () => {
+  isDragging = false;
+});
 </script>
 
 </body>
