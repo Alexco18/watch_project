@@ -27,7 +27,7 @@
   --bg-main: #ffffff;
   --bg-header: #ffffff;
   --bg-footer: #ffffff;
-  --bg-card: #ffffff;
+  --bg-card: #f7f7f7;
 
   --text-main: #000000;
   --text-secondary: #444444;
@@ -186,13 +186,13 @@ nav a:hover{color:#f5d98c}
   cursor: pointer;
 }
 
-/* ---------------------- CHATBOT (SIMPLE) ---------------------- */
+/* ---------------------- CHATBOT (AMÉLIORÉ) ---------------------- */
 #cb-bubble {
   position: fixed;
   bottom: 25px;
   right: 25px;
-  background: #d4af37;
-  color: black;
+  background: var(--text-main);
+  color: var(--bg-main);
   width: 55px;
   height: 55px;
   border-radius: 50%;
@@ -213,10 +213,10 @@ nav a:hover{color:#f5d98c}
   position: fixed;
   bottom: 100px;
   right: 25px;
-  width: 320px;
-  height: 420px;
-  background: #0b0b0b;
-  border: 1px solid rgba(212,175,55,0.3);
+  width: 260px;
+  height: 340px;
+  background: var(--bg-header);
+  border: 1px solid var(--border-color);
   border-radius: 10px;
   display: none;
   flex-direction: column;
@@ -226,33 +226,33 @@ nav a:hover{color:#f5d98c}
 
 #cb-header {
   padding: 12px;
-  background: #111;
-  color: #d4af37;
+  background: var(--bg-card);
+  color: var(--text-main);
   font-weight: 500;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(212,175,55,0.3);
+  border-bottom: 1px solid var(--border-color);
 }
 
 #cb-content {
   padding: 15px;
   overflow-y: auto;
-  color: white;
+  color: var(--text-main);
 }
 
 .cb-btn {
-  background: #222;
-  color: #d4af37;
+  background: var(--bg-card);
+  color: var(--text-main);
   padding: 10px;
   margin-top: 10px;
   border-radius: 6px;
   cursor: pointer;
   text-align: center;
-  border: 1px solid rgba(212,175,55,0.3);
+  border: 1px solid var(--border-color);
 }
 .cb-btn:hover {
-  background: #333;
+  background: var(--bg-footer);
 }
 </style>
 </head>
@@ -432,8 +432,6 @@ bubble.onclick = () => {
   startChat();
 };
 closeBtn.onclick = () => win.style.display = "none";
-
-document.querySelector("#cb-window").style.background = "#0b0b0b";
 
 function startChat() {
   content.innerHTML = `
