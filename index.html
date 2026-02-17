@@ -60,7 +60,6 @@ header{
   align-items:center;padding:0 20px;
 }
 
-/* Bloc gauche : titre + switch */
 .header-left {
   display: flex;
   align-items: center;
@@ -95,15 +94,9 @@ nav a:hover{color:#f5d98c}
   transition: transform 0.3s, background 0.3s;
 }
 
-/* Pastille à droite en mode clair */
 .light-theme #theme-switch .switch-handle {
   transform: translateX(24px);
   background: #000;
-}
-
-/* Pastille à gauche en mode sombre */
-#theme-switch .switch-handle {
-  transform: translateX(0);
 }
 
 /* ---------------------- VUES ---------------------- */
@@ -192,6 +185,75 @@ nav a:hover{color:#f5d98c}
   color: #f5d98c;
   cursor: pointer;
 }
+
+/* ---------------------- CHATBOT (SIMPLE) ---------------------- */
+#cb-bubble {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #d4af37;
+  color: black;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  transition: 0.2s;
+}
+#cb-bubble:hover {
+  transform: scale(1.1);
+}
+
+#cb-window {
+  position: fixed;
+  bottom: 100px;
+  right: 25px;
+  width: 320px;
+  height: 420px;
+  background: #0b0b0b;
+  border: 1px solid rgba(212,175,55,0.3);
+  border-radius: 10px;
+  display: none;
+  flex-direction: column;
+  z-index: 9999;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+#cb-header {
+  padding: 12px;
+  background: #111;
+  color: #d4af37;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(212,175,55,0.3);
+}
+
+#cb-content {
+  padding: 15px;
+  overflow-y: auto;
+  color: white;
+}
+
+.cb-btn {
+  background: #222;
+  color: #d4af37;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid rgba(212,175,55,0.3);
+}
+.cb-btn:hover {
+  background: #333;
+}
 </style>
 </head>
 
@@ -203,7 +265,6 @@ nav a:hover{color:#f5d98c}
     <div class="header-left">
       <h2 class="gold-text">ChronoBase</h2>
 
-      <!-- Nouveau switch -->
       <div id="theme-switch" onclick="toggleTheme()">
         <div class="switch-handle"></div>
       </div>
@@ -350,10 +411,8 @@ function toggleTheme() {
 
 <!-- ---------------------- CHATBOT ---------------------- -->
 
-<!-- Bulle -->
 <div id="cb-bubble">💬</div>
 
-<!-- Fenêtre -->
 <div id="cb-window">
   <div id="cb-header">
     Assistant
@@ -374,10 +433,8 @@ bubble.onclick = () => {
 };
 closeBtn.onclick = () => win.style.display = "none";
 
-// --- Chatbot toujours sombre ---
 document.querySelector("#cb-window").style.background = "#0b0b0b";
 
-// --- ÉTAPE 1 : CHOIX DE LANGUE ---
 function startChat() {
   content.innerHTML = `
     <p>Choisissez votre langue :</p>
@@ -386,7 +443,6 @@ function startChat() {
   `;
 }
 
-// --- ÉTAPE 2 : CHOIX DE SECTION ---
 function chooseLang(lang) {
   window.cbLang = lang;
   const text = {
@@ -402,7 +458,6 @@ function chooseLang(lang) {
   `;
 }
 
-// --- ÉTAPE 3 : BOUTONS DE NAVIGATION ---
 function goSection(section) {
   const lang = window.cbLang;
   const labels = {
