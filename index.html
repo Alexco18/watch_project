@@ -186,7 +186,7 @@ nav a:hover{color:#f5d98c}
   cursor: pointer;
 }
 
-/* ---------------------- CHATBOT (AMÉLIORÉ) ---------------------- */
+/* ---------------------- CHATBOT (ULTRA-COMPACT) ---------------------- */
 #cb-bubble {
   position: fixed;
   bottom: 25px;
@@ -211,10 +211,10 @@ nav a:hover{color:#f5d98c}
 
 #cb-window {
   position: fixed;
-  bottom: 100px;
+  bottom: 95px;
   right: 25px;
-  width: 260px;
-  height: 340px;
+  width: 200px;   /* ULTRA PETIT */
+  height: 260px;  /* ULTRA PETIT */
   background: var(--bg-header);
   border: 1px solid var(--border-color);
   border-radius: 10px;
@@ -225,30 +225,33 @@ nav a:hover{color:#f5d98c}
 }
 
 #cb-header {
-  padding: 12px;
+  padding: 8px;
   background: var(--bg-card);
   color: var(--text-main);
   font-weight: 500;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 13px;
   border-bottom: 1px solid var(--border-color);
 }
 
 #cb-content {
-  padding: 15px;
+  padding: 10px;
   overflow-y: auto;
   color: var(--text-main);
+  font-size: 13px;
 }
 
 .cb-btn {
   background: var(--bg-card);
   color: var(--text-main);
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 6px;
+  padding: 6px;
+  margin-top: 8px;
+  border-radius: 5px;
   cursor: pointer;
   text-align: center;
+  font-size: 12px;
   border: 1px solid var(--border-color);
 }
 .cb-btn:hover {
