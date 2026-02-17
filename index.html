@@ -120,7 +120,49 @@ nav a:hover{color:#f5d98c}
 }
 .card:hover{border-color:rgba(212,175,55,.35)}
 
-/* ---------------------- FOOTER (AMÉLIORÉ) ---------------------- */
+/* ---------------------- BANNIÈRE D'ANNONCE ---------------------- */
+#announcement {
+  max-width: 900px;
+  margin: 0 auto 25px auto;
+  padding: 12px 18px;
+  border-radius: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  animation: fadeIn 0.4s ease;
+}
+
+#announcement a {
+  color: #f5d98c;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+#announcement a:hover {
+  text-decoration: underline;
+}
+
+#announcement-close {
+  cursor: pointer;
+  font-size: 16px;
+  opacity: 0.7;
+  user-select: none;
+}
+
+#announcement-close:hover {
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------------------- FOOTER ---------------------- */
 .site-footer {
   background: var(--bg-footer);
   border-top: 1px solid var(--border-color);
@@ -269,7 +311,6 @@ nav a:hover{color:#f5d98c}
 }
 </style>
 </head>
-
 <body>
 
 <header>
@@ -294,6 +335,16 @@ nav a:hover{color:#f5d98c}
 
 <!-- ACCUEIL -->
 <section id="home-view" class="view active">
+
+  <!-- BANNIÈRE D'ANNONCE -->
+  <div id="announcement">
+    <span id="announcement-text">
+      🔧 Une mise à jour importante est disponible —
+      <a id="announcement-link" href="maj.html">Voir les détails</a>
+    </span>
+    <span id="announcement-close">✖</span>
+  </div>
+
   <div class="hero">
     <h1 class="gold-text">La référence mondiale des montres</h1>
     <p>Explorez l’histoire horlogère à travers des modèles mythiques.</p>
@@ -522,6 +573,11 @@ document.addEventListener("mousemove", (e) => {
 document.addEventListener("mouseup", () => {
   isDragging = false;
 });
+
+/* ---------------------- ANNOUNCEMENT CLOSE ---------------------- */
+document.getElementById("announcement-close").onclick = () => {
+  document.getElementById("announcement").style.display = "none";
+};
 </script>
 
 </body>
