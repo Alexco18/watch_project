@@ -186,7 +186,7 @@ nav a:hover{color:#f5d98c}
   cursor: pointer;
 }
 
-/* ---------------------- CHATBOT (ULTRA-COMPACT) ---------------------- */
+/* ---------------------- CHATBOT (ULTRA-COMPACT + DRAGGABLE) ---------------------- */
 #cb-bubble {
   position: fixed;
   bottom: 25px;
@@ -213,8 +213,8 @@ nav a:hover{color:#f5d98c}
   position: fixed;
   bottom: 95px;
   right: 25px;
-  width: 200px;   /* ULTRA PETIT */
-  height: 260px;  /* ULTRA PETIT */
+  width: 200px;
+  height: 260px;
   background: var(--bg-header);
   border: 1px solid var(--border-color);
   border-radius: 10px;
@@ -234,6 +234,16 @@ nav a:hover{color:#f5d98c}
   align-items: center;
   font-size: 13px;
   border-bottom: 1px solid var(--border-color);
+  user-select: none;
+  cursor: grab;
+}
+#cb-header:active {
+  cursor: grabbing;
+}
+
+#cb-close {
+  cursor: pointer;
+  user-select: none;
 }
 
 #cb-content {
@@ -487,6 +497,31 @@ function goSection(section) {
     <div class="cb-btn" onclick="startChat()">↩ Retour</div>
   `;
 }
+
+/* ---------------------- DRAG & DROP ---------------------- */
+let isDragging = false;
+let offsetX, offsetY;
+
+const header = document.getElementById("cb-header");
+
+header.addEventListener("mousedown", (e) => {
+  isDragging = true;
+  offsetX = e.clientX - win.offsetLeft;
+  offsetY = e.clientY - win.offsetTop;
+});
+
+document.addEventListener("mousemove", (e) => {
+  if (isDragging) {
+    win.style.left = (e.clientX - offsetX) + "px";
+    win.style.top = (e.clientY - offsetY) + "px";
+    win.style.bottom = "auto";
+    win.style.right = "auto";
+  }
+});
+
+document.addEventListener("mouseup", () => {
+  isDragging = false;
+});
 </script>
 
 </body>
