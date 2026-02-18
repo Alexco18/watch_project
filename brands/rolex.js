@@ -1,18 +1,9 @@
 window.WATCHES.push(
-  {
-    brand: "Rolex",
-    id: "rolex-daytona",
-    name: "Daytona",
-    year: 2016,
-    img: "https://via.placeholder.com/300",
-    lastUpdate: "2026-02-10"
-  },
-  {
-    brand: "Rolex",
-    id: "rolex-submariner",
-    name: "Submariner",
-    year: 1953,
-    img: "https://via.placeholder.com/300",
-    lastUpdate: "2026-02-10"
-  }
+{brand:"Rolex",id:"rolex-land-dweller-2025",name:"Land‑Dweller",year:2025,img:"liens-photos/rolex-pic/land_dweller_2025.avif",description:"Montre sportive hybride pensée pour l’exploration terrestre, combinant robustesse et précision.",specs:[{label:"Boîtier",value:"Acier Oystersteel 42 mm"},{label:"Mouvement",value:"Calibre 3230"},{label:"Étanchéité",value:"200 m"},{label:"Verre",value:"Saphir"}],history:`Nouveauté 2025, la Land‑Dweller s’inspire de l’Explorer et de la Sea‑Dweller pour offrir une montre d’aventure polyvalente et résistante.`,price:"9500 €",notes:`Infos basées sur les standards Rolex 2025.`,bibliography:[{label:"Site officiel Rolex",url:"https://www.rolex.com"}]},
+{brand:"Rolex",id:"rolex-oyster-perpetual-2025",name:"Oyster Perpetual",year:2025,img:"liens-photos/rolex-pic/oyster_perpetual_2025.avif",description:"Montre Rolex classique et épurée, symbole de précision et de simplicité.",specs:[{label:"Boîtier",value:"Acier Oystersteel 36 mm"},{label:"Mouvement",value:"Calibre 3230"},{label:"Étanchéité",value:"100 m"},{label:"Verre",value:"Saphir"}],history:`La collection Oyster Perpetual 2025 poursuit la tradition Rolex avec des cadrans colorés et un design intemporel.`,price:"6500 €",notes:`Infos basées sur les standards Rolex 2025.`,bibliography:[{label:"Site officiel Rolex",url:"https://www.rolex.com"}]},
+{brand:"Rolex",id:"rolex-gmt-master-ii-sprite-2025",name:"GMT‑Master II Sprite",year:2025,img:"liens-photos/rolex-pic/gmt_sprite_2025.avif",description:"Version à couronne gauche de la GMT‑Master II, lunette verte et noire distinctive.",specs:[{label:"Boîtier",value:"Acier Oystersteel 40 mm"},{label:"Mouvement",value:"Calibre 3285 GMT"},{label:"Étanchéité",value:"100 m"},{label:"Verre",value:"Saphir"}],history:`La GMT‑Master II Sprite 2025 conserve son design asymétrique unique et son identité colorimétrique verte/noire.`,price:"11000 €",notes:`Infos basées sur les standards Rolex 2025.`,bibliography:[{label:"Site officiel Rolex",url:"https://www.rolex.com"}]},
+{brand:"Rolex",id:"rolex-daytona-2025",name:"Cosmograph Daytona",year:2025,img:"liens-photos/rolex-pic/daytona_2025.avif",description:"Chronographe iconique de Rolex, symbole de performance et de prestige.",specs:[{label:"Boîtier",value:"Acier Oystersteel 40 mm"},{label:"Mouvement",value:"Calibre 4131"},{label:"Étanchéité",value:"100 m"},{label:"Verre",value:"Saphir"}],history:`La Daytona 2025 poursuit l’évolution du modèle avec un mouvement amélioré et des finitions plus raffinées.`,price:"15000 €",notes:`Infos basées sur les standards Rolex 2025.`,bibliography:[{label:"Site officiel Rolex",url:"https://www.rolex.com"}]},
+{brand:"Rolex",id:"rolex-submariner-2025",name:"Submariner",year:2025,img:"liens-photos/rolex-pic/submariner_2025.avif",description:"Plongeuse emblématique de Rolex, référence absolue en robustesse et lisibilité.",specs:[{label:"Boîtier",value:"Acier Oystersteel 41 mm"},{label:"Mouvement",value:"Calibre 3235"},{label:"Étanchéité",value:"300 m"},{label:"Verre",value:"Saphir"}],history:`La Submariner 2025 reste fidèle à son héritage tout en intégrant les dernières améliorations techniques Rolex.`,price:"9800 €",notes:`Infos basées sur les standards Rolex 2025.`,bibliography:[{label:"Site officiel Rolex",url:"https://www.rolex.com"}]},
+{brand:"Rolex",id:"rolex-datejust-2025",name:"Datejust",year:2025,img:"liens-photos/rolex-pic/datejust_2025.avif",description:"Montre élégante et polyvalente, dotée de la date à 3 h et du style Rolex intemporel.",specs:[{label:"Boîtier",value:"Acier Oystersteel 36 mm"},{label:"Mouvement",value:"Calibre 3235"},{label:"Étanchéité",value:"100 m"},{label:"Verre",value:"Saphir cyclope"}],history:`La Datejust 2025 perpétue l’esthétique classique de Rolex avec de nouveaux cadrans et une précision améliorée.`,price:"8200 €",notes:`Infos basées sur les standards Rolex 2025.`,bibliography:[{label:"Site officiel Rolex",url:"https://www.rolex.com"}]},
+{brand:"Rolex",id:"rolex-day-date-2025",name:"Day‑Date",year:2025,img:"liens-photos/rolex-pic/day_date_2025.avif",description:"Montre prestigieuse en métaux précieux, affichant jour et date en toutes lettres.",specs:[{label:"Boîtier",value:"Or 18 ct 40 mm"},{label:"Mouvement",value:"Calibre 3255"},{label:"Étanchéité",value:"100 m"},{label:"Verre",value:"Saphir"}],history:`La Day‑Date 2025 reste la montre présidentielle par excellence, symbole de luxe et de statut.`,price:"35000 €",notes:`Infos basées sur les standards Rolex 2025.`,bibliography:[{label:"Site officiel Rolex",url:"https://www.rolex.com"}]}
 );
