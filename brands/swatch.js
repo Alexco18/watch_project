@@ -39,4 +39,33 @@ Toutes les informations proviennent de sources fiables : communiqués Swatch Gro
   ],
 
   bibliography_note: "La bibliographie complète est disponible dans le PDF téléchargeable en bas de page."
+},
+{
+  brand: "Swatch",
+  id: "swatch-chasing-peaks-2025",
+  name: "Swatch – Chasing Peaks",
+  year: 2025,
+  img: "liens-photos/swatch-pic/chasing_peaks_2025.avif",
+  description: "Une montre sportive et colorée pensée pour l’aventure, inspirée des activités outdoor et de l’esprit montagne.",
+  specs: [
+    { label: "Boîtier", value: "Bioceramic 41 mm" },
+    { label: "Mouvement", value: "Quartz" },
+    { label: "Étanchéité", value: "30 m" },
+    { label: "Verre", value: "Plastique renforcé" }
+  ],
+  history: `
+La Swatch Chasing Peaks fait partie des nouveautés 2025 de la marque suisse.
+Elle s’inscrit dans la lignée des montres sportives et légères de Swatch, pensées pour accompagner les activités outdoor : randonnée, trail, exploration.
+Avec son design coloré et son boîtier en biocéramique, elle reprend les codes modernes de Swatch tout en mettant l’accent sur la robustesse et la légèreté.
+Cette montre vise un public jeune, actif et amateur d’aventure, fidèle à l’esprit fun et accessible de la marque.
+`,
+  price: "100 €",
+  notes: `
+Les informations proviennent des communiqués Swatch 2025, des fiches techniques officielles et des présentations presse publiées début 2025.
+`,
+  bibliography: [
+    { label: "Site officiel Swatch", url: "https://www.swatch.com" },
+    { label: "Communiqué nouveautés Swatch 2025", url: "https://www.swatch.com/fr-fr/news" }
+  ],
+  bibliography_note: "La bibliographie complète est disponible dans le PDF téléchargeable en bas de page."
 });
