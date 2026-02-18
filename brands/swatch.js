@@ -45,7 +45,7 @@ Toutes les informations proviennent de sources fiables : communiqués Swatch Gro
   id: "swatch-chasing-peaks-2025",
   name: "Swatch – Chasing Peaks",
   year: 2025,
-  img: "liens-photos/swatch-pic/chasing_peaks_2025.avif",
+  img: "liens-photos/swatch-pic/swatch_chasing_peaks.png",
   description: "Une montre sportive et colorée pensée pour l’aventure, inspirée des activités outdoor et de l’esprit montagne.",
   specs: [
     { label: "Boîtier", value: "Bioceramic 41 mm" },
