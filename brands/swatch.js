@@ -41,7 +41,7 @@ Toutes les informations proviennent de sources fiables : communiqués Swatch Gro
   bibliography_note: "La bibliographie complète est disponible dans le PDF téléchargeable en bas de page."
 },
 {
-  brand: "Swatch",
+  brand: "Swatch\n",
   id: "swatch-chasing-peaks-2025",
   name: "Swatch – Chasing Peaks",
   year: 2025,
