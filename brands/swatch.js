@@ -41,9 +41,9 @@ Toutes les informations proviennent de sources fiables : communiqués Swatch Gro
   bibliography_note: "La bibliographie complète est disponible dans le PDF téléchargeable en bas de page."
 },
 {
-  brand: "Swatch\n",
+  brand: "Swatch",
   id: "swatch-chasing-peaks-2025",
-  name: "Swatch – Chasing Peaks",
+  name: "Chasing Peaks",
   year: 2025,
   img: "liens-photos/swatch-pic/swatch_chasing_peaks.png",
   description: "Une montre sportive et colorée pensée pour l’aventure, inspirée des activités outdoor et de l’esprit montagne.",
