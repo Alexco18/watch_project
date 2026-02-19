@@ -154,11 +154,10 @@ select{
     <option value="brand-za">Marque : Z → A</option>
   </select>
   <select id="limit-filter">
-    <option value="10">Afficher 10</option>
-    <option value="25">Afficher 25</option>
-    <option value="50">Afficher 50</option>
-    <option value="all" selected>Tout afficher</option>
-  </select>
+  <option value="10">Afficher 10</option>
+  <option value="25" selected>Afficher 25</option>
+  <option value="50">Afficher 50</option>
+</select>
 </div>
 <div class="watch-grid" id="watch-grid"></div>
 <!-- 1. Créer le tableau global -->
@@ -195,7 +194,7 @@ function applyFilters(){
   let list = [...window.WATCHES];
   const brand = document.getElementById("brand-filter").value;
   const sort = document.getElementById("sort-filter").value;
-  const limit = document.getElementById("limit-filter").value; // Récupère la limite
+  const limit = parseInt(document.getElementById("limit-filter").value); // Toujours un nombre maintenant
   // 1. Filtrage par marque
   if(brand !== "all") list = filterByBrand(brand, list);
   // 2. Tri
@@ -203,12 +202,10 @@ function applyFilters(){
   if(sort === "year-desc") list = sortByYearDesc(list);
   if(sort === "brand-az") list = sortByBrandAZ(list);
   if(sort === "brand-za") list = sortByBrandZA(list);
-  // 3. Limitation du nombre de cartes (le "Slice")
-  if(limit !== "all") {
-    const quantity = parseInt(limit);
-    list = list.slice(0, quantity);
-  }
-  displayWatches(list);
+  // 3. Limitation stricte
+  // On ne garde que les X premiers éléments
+  const limitedList = list.slice(0, limit);
+  displayWatches(limitedList);
 }
 init();
 </script>
@@ -225,6 +222,6 @@ function toggleTheme() {
     document.body.classList.add("light-theme");
   }
 })();
-</script>
+</script> 
 </body>
 </html>
