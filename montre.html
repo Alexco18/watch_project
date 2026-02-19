@@ -253,9 +253,9 @@ function toggleTheme() {
   }
 })();
 </script> 
+<button id="backToTop" title="Retour en haut">↑</button>
 <script>
 const backToTopBtn = document.getElementById("backToTop");
-
 // Détecte le défilement de la page
 window.onscroll = function() {
   // Affiche le bouton si on descend de plus de 300px
@@ -265,7 +265,6 @@ window.onscroll = function() {
     backToTopBtn.style.display = "none";
   }
 };
-
 // Action au clic : remonter de manière fluide
 backToTopBtn.onclick = function() {
   window.scrollTo({
@@ -274,7 +273,5 @@ backToTopBtn.onclick = function() {
   });
 };
 </script>
-<button id="backToTop" title="Retour en haut">↑</button>
-  
 </body>
 </html>
