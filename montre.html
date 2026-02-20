@@ -93,6 +93,33 @@ select{
   color:var(--text-main);
   border:1px solid var(--border-color);
 }
+/**/
+#search-container {
+  max-width: 1200px;
+  margin: 20px auto 0;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+}
+#search-input {
+  width: 100%;
+  max-width: 600px;
+  padding: 12px 20px;
+  border-radius: 25px;
+  background: var(--bg-card);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+#search-input:focus {
+  border-color: #f5d98c;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+}  
+  /**/
 /* ---------------------- GRILLE DES MONTRES ---------------------- */
 .watch-grid{
   max-width:1200px;margin:auto;
@@ -172,10 +199,16 @@ select{
   </div>
 </header>
 <h1 class="gold-text" style="text-align:center;margin-top:120px">Toutes les montres</h1>
-<div id="filters">
+
+  <div id="search-container">
+  <input type="text" id="search-input" placeholder="Rechercher un modèle, une marque (ex: Himalaya, Submariner...)" autocomplete="off">
+</div>
+  <div id="filters">
   <select id="brand-filter">
     <option value="all">Toutes les marques</option>
   </select>
+
+    
   <select id="sort-filter">
     <option value="none">Tri : Aucun</option>
     <option value="year-asc">Année : plus ancienne → plus récente</option>
@@ -220,25 +253,38 @@ function init(){
 document.getElementById("brand-filter").addEventListener("change", applyFilters);
 document.getElementById("sort-filter").addEventListener("change", applyFilters);
 document.getElementById("limit-filter").addEventListener("change", applyFilters);
+document.getElementById("search-input").addEventListener("input", applyFilters); /*new*/
+
 function applyFilters(){
   let list = [...window.WATCHES];
   const brand = document.getElementById("brand-filter").value;
   const sort = document.getElementById("sort-filter").value;
-  const limit = parseInt(document.getElementById("limit-filter").value); // Toujours un nombre maintenant
-  // 1. Filtrage par marque
+  const limit = parseInt(document.getElementById("limit-filter").value);
+  const searchQuery = document.getElementById("search-input").value.toLowerCase();
+  // 1. Filtrage par recherche textuelle (Dynamique)
+  if(searchQuery !== "") {
+    list = list.filter(watch => {
+      // On cherche dans le nom de la montre et la marque
+      // Adapte 'watch.name' ou 'watch.model' selon tes fichiers .js
+      const name = watch.name ? watch.name.toLowerCase() : "";
+      const brandName = watch.brand ? watch.brand.toLowerCase() : "";
+      return name.includes(searchQuery) || brandName.includes(searchQuery);
+    });
+  }
+  // 2. Filtrage par marque (Dropdown)
   if(brand !== "all") list = filterByBrand(brand, list);
-  // 2. Tri
+  // 3. Tri
   if(sort === "year-asc") list = sortByYearAsc(list);
   if(sort === "year-desc") list = sortByYearDesc(list);
   if(sort === "brand-az") list = sortByBrandAZ(list);
   if(sort === "brand-za") list = sortByBrandZA(list);
-  // 3. Limitation stricte
-  // On ne garde que les X premiers éléments
+  // 4. Limitation
   const limitedList = list.slice(0, limit);
   displayWatches(limitedList);
 }
 init();
 </script>
+  
 <!-- ---------------------- SCRIPT THEME ---------------------- -->
 <script>
 function toggleTheme() {
