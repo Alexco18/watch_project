@@ -174,13 +174,12 @@ nav a:hover{color:#f5d98c}
   letter-spacing: 1px;
 }
 
-ul{
-  margin-top:10px;
-  padding-left:20px;
-  line-height:1.7;
+/* Animation pour le compteur */
+@keyframes countIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
-p{line-height:1.7}
+.stat-number { animation: countIn 1s ease-out; }
 
 /* ---------------------- FOOTER COMPACT ---------------------- */
 .site-footer {
@@ -353,12 +352,12 @@ p{line-height:1.7}
     <p>Nous indexons en permanence de nouvelles références pour devenir la ressource la plus complète du web.</p>
     <div class="stat-grid">
       <div class="stat-item">
-        <span class="stat-number">150+</span>
-        <span class="stat-label">Marques de montres</span>
+        <span class="stat-number" id="brand-count">--</span>
+        <span class="stat-label">Marques indexées</span>
       </div>
       <div class="stat-item">
-        <span class="stat-number">12 400+</span>
-        <span class="stat-label">Montres totales</span>
+        <span class="stat-number" id="total-watches-counter">0</span>
+        <span class="stat-label">Montres en ligne</span>
       </div>
       <div class="stat-item">
         <span class="stat-number">45 000+</span>
@@ -366,7 +365,7 @@ p{line-height:1.7}
       </div>
     </div>
     <p style="margin-top: 20px; font-style: italic; font-size: 0.9em;">
-      Note : Pour garantir la fluidité de navigation, une partie de nos archives (notices techniques, catalogues d'époque) reste disponible uniquement sur demande par email.
+      Note : Le compteur ci-dessus est mis à jour automatiquement en fonction des modèles actuellement disponibles dans notre catalogue interactif.
     </p>
   </div>
 
@@ -454,8 +453,39 @@ p{line-height:1.7}
   <div id="cb-content"></div>
 </div>
 
+<script>window.WATCHES = [];</script>
+<script src="brands/lip.js"></script>
+<script src="brands/rolex.js"></script>
+<script src="brands/swatch.js"></script>
+<script src="brands/omega.js"></script>
+<script src="brands/yema.js"></script>
+<script src="brands/tissot.js"></script>
+<script src="brands/orient.js"></script>
+<script src="brands/longines.js"></script>
+<script src="brands/iwc.js"></script>
+<script src="brands/breitling.js"></script>
+
 <script>
-// Thème clair/sombre
+// --- LOGIQUE DU COMPTEUR DYNAMIQUE ---
+function updateStats() {
+    const total = window.WATCHES.length;
+    const counterElement = document.getElementById('total-watches-counter');
+    const brandElement = document.getElementById('brand-count');
+
+    // 1. Mise à jour du nombre de montres
+    counterElement.innerText = total.toLocaleString(); // Formate avec des espaces (ex: 1 250)
+
+    // 2. Mise à jour du nombre de marques (basé sur les noms uniques)
+    const uniqueBrands = [...new Set(window.WATCHES.map(w => w.brand))];
+    brandElement.innerText = uniqueBrands.length;
+}
+
+// Initialisation au chargement
+window.onload = () => {
+    updateStats();
+};
+
+// --- LOGIQUE THÈME & CHATBOT (Tes scripts d'origine) ---
 function toggleTheme() {
   document.body.classList.toggle("light-theme");
   const isLight = document.body.classList.contains("light-theme");
@@ -466,16 +496,12 @@ function toggleTheme() {
   if (saved === "light") document.body.classList.add("light-theme");
 })();
 
-// Chatbot
 const bubble = document.getElementById("cb-bubble");
 const win = document.getElementById("cb-window");
 const closeBtn = document.getElementById("cb-close");
 const content = document.getElementById("cb-content");
 
-bubble.onclick = () => {
-  win.style.display = "flex";
-  startChat();
-};
+bubble.onclick = () => { win.style.display = "flex"; startChat(); };
 closeBtn.onclick = () => win.style.display = "none";
 
 function startChat() {
@@ -488,43 +514,28 @@ function startChat() {
 
 function chooseLang(lang) {
   window.cbLang = lang;
-  const text = {
-    fr: "Où souhaitez-vous aller ?",
-    en: "Where would you like to go?"
-  };
+  const text = { fr: "Où souhaitez-vous aller ?", en: "Where would you like to go?" };
   content.innerHTML = `
     <p>${text[lang]}</p>
     <div class="cb-btn" onclick="goSection('home')">Accueil</div>
     <div class="cb-btn" onclick="goSection('watches')">Les montres</div>
     <div class="cb-btn" onclick="goSection('about')">À propos</div>
-    <div class="cb-btn" onclick="goSection('version')">Versions</div>
   `;
 }
 
 function goSection(section) {
-  const lang = window.cbLang;
-  const links = {
-    home: "index.html",
-    watches: "montre.html",
-    about: "propos.html",
-    version: "version.html"
-  };
-  content.innerHTML = `
-    <p>Redirection…</p>
-    <div class="cb-btn" onclick="window.location='${links[section]}'">Continuer</div>
-  `;
+  const links = { home: "index.html", watches: "montre.html", about: "propos.html" };
+  window.location = links[section];
 }
 
-// Drag & drop
+// Drag & drop du chatbot
 let isDragging = false;
 let offsetX, offsetY;
-
 document.getElementById("cb-header").addEventListener("mousedown", (e) => {
   isDragging = true;
   offsetX = e.clientX - win.offsetLeft;
   offsetY = e.clientY - win.offsetTop;
 });
-
 document.addEventListener("mousemove", (e) => {
   if (isDragging) {
     win.style.left = (e.clientX - offsetX) + "px";
@@ -533,10 +544,7 @@ document.addEventListener("mousemove", (e) => {
     win.style.right = "auto";
   }
 });
-
-document.addEventListener("mouseup", () => {
-  isDragging = false;
-});
+document.addEventListener("mouseup", () => { isDragging = false; });
 </script>
 
 </body>
