@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Achats & Équipements – ChronoBase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ---------------------- VARIABLES (Identiques) ---------------------- */
+        :root {
+            --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951);
+            --bg-main: radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
+            --bg-header: #0b0b0b;
+            --bg-card: linear-gradient(180deg,#111,#0c0c0c);
+            --bg-footer: #0b0b0b;
+            --text-main: #d4af37;
+            --text-secondary: #c1a96b;
+            --border-color: rgba(212,175,55,0.2);
+        }
+
+        .light-theme {
+            --bg-main: #ffffff;
+            --bg-header: #ffffff;
+            --bg-card: #f9f9f9;
+            --bg-footer: #ffffff;
+            --text-main: #000000;
+            --text-secondary: #444444;
+            --border-color: rgba(0,0,0,0.2);
+        }
+
+        body {
+            margin:0; padding:0;
+            font-family:'Montserrat',sans-serif;
+            background:var(--bg-main);
+            color:var(--text-main);
+            font-weight:300;
+            overflow-x: hidden;
+        }
+
+        .gold-text {
+            background:var(--gold-gradient);
+            -webkit-background-clip:text;
+            color:transparent;
+            animation:shine 6s infinite linear;
+            background-size:200%;
+        }
+        @keyframes shine{ 0%{background-position:0%} 100%{background-position:200%} }
+
+        /* ---------------------- HEADER & FOOTER (Identiques) ---------------------- */
+        header{ width:100%; padding:12px 0; border-bottom:1px solid var(--border-color); background:var(--bg-header); position:fixed; top:0; left:0; z-index:1001; }
+        .header-container{ max-width:1200px; margin:auto; display:flex; justify-content:space-between; align-items:center; padding:0 20px; }
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        nav a{ margin-left:30px; text-decoration:none; color:var(--text-main); font-size:14px; letter-spacing:1px; text-transform:uppercase; }
+        nav a:hover{color:#f5d98c}
+        #theme-switch { width: 50px; height: 26px; background: var(--border-color); border-radius: 20px; position: relative; cursor: pointer; display: flex; align-items: center; padding: 3px; }
+        .switch-handle { width: 20px; height: 20px; background: var(--text-main); border-radius: 50%; transition: transform 0.3s; }
+        .light-theme #theme-switch .switch-handle { transform: translateX(24px); background: #000; }
+
+        /* ---------------------- SPECIFIC CONTENT ---------------------- */
+        .container { max-width:1200px; margin:120px auto 80px; padding:0 20px; box-sizing: border-box; }
+        
+        .page-description { text-align: center; max-width: 900px; margin: 0 auto 40px; line-height: 1.6; color: var(--text-secondary); }
+
+        /* Section QCM / Demande */
+        .request-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .qcm-container {
+            display: none; /* Caché par défaut */
+            margin-top: 20px;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        .qcm-step { margin-bottom: 20px; }
+        .qcm-step label { display: block; margin-bottom: 10px; font-weight: 500; }
+        .qcm-step input, .qcm-step select, .qcm-step textarea {
+            width: 100%; padding: 10px; background: rgba(0,0,0,0.1); 
+            border: 1px solid var(--border-color); color: var(--text-main); border-radius: 5px;
+        }
+
+        /* Section Liens Externes */
+        .filter-nav { display: flex; gap: 15px; margin-bottom: 20px; justify-content: center; }
+        .filter-btn {
+            background: transparent; border: 1px solid var(--border-color);
+            color: var(--text-main); padding: 8px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s;
+        }
+        .filter-btn.active { background: var(--gold-gradient); color: #000; }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .link-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 8px;
+            transition: 0.3s;
+            position: relative;
+        }
+        .link-card:hover { transform: translateY(-5px); border-color: var(--text-main); }
+        .platform-tag {
+            position: absolute; top: 10px; right: 10px;
+            font-size: 10px; font-weight: bold; text-transform: uppercase;
+            padding: 2px 8px; border-radius: 4px; background: rgba(212,175,55,0.2);
+        }
+
+        /* Section Annonces Utilisateurs (Cartes) */
+        .user-requests-title { margin-bottom: 25px; border-left: 3px solid var(--text-main); padding-left: 15px; }
+        
+        .requests-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .user-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .user-card .status { font-size: 11px; color: #4CAF50; font-weight: bold; }
+        .user-card .type { font-size: 12px; opacity: 0.7; }
+        .user-card h3 { margin: 0; font-size: 18px; color: #f5d98c; }
+        .user-card p { font-size: 14px; margin: 0; line-height: 1.4; color: var(--text-secondary); }
+
+        .btn-contact-user {
+            margin-top: 10px;
+            background: transparent;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+        .btn-contact-user:hover { background: var(--text-main); color: #000; }
+
+        .update-notice {
+            text-align: center; font-size: 12px; opacity: 0.6; margin-bottom: 20px; font-style: italic;
+        }
+
+        /* FOOTER (Identique) */
+        .site-footer { background: var(--bg-footer); border-top: 1px solid var(--border-color); padding: 25px 20px 15px; margin-top: 60px; color: var(--text-main); font-size: 14px; }
+        .footer-content { max-width: 1200px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; }
+        .footer-section { min-height: auto; display: flex; flex-direction: column; gap: 4px; }
+        .footer-section h4 { margin-bottom: 6px; color: #f5d98c; font-size: 13px; }
+        .footer-section a { color: var(--text-main); text-decoration: none; font-size: 12px; }
+        .footer-section a:hover { color: #f5d98c; }
+        .footer-legal { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-color); }
+        .footer-bottom { text-align: center; margin-top: 15px; font-size: 12px; opacity: 0.7; }
+        #cb-bubble { position: fixed; bottom: 25px; right: 25px; background: var(--text-main); color: var(--bg-main); width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 26px; cursor: pointer; z-index: 9999; }
+        
+        .btn-suggest {
+            background: var(--gold-gradient); border: none; color: #000; padding: 15px 30px; border-radius: 8px; font-weight: 600; cursor: pointer; font-family: 'Montserrat'; transition: transform 0.2s; text-decoration: none; display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+    <div class="header-left">
+      <h2 class="gold-text">ChronoBase</h2>
+      <div id="theme-switch" onclick="toggleTheme()">
+        <div class="switch-handle"></div>
+      </div>
+    </div>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="montre.html">Les montres</a>
+      <a href="ressources.html">Ressources</a>
+      <a href="propos.html">À propos</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+    <h1 class="gold-text" style="text-align:center; font-size: 40px; margin-bottom: 15px;">Achats & Équipements</h1>
+    
+    <div class="page-description">
+        Bienvenue dans l'espace transactionnel de ChronoBase. Que vous cherchiez une pièce d'horlogerie rare, un outil spécifique ou que vous souhaitiez proposer un lien de vente vérifié, cette plateforme centralise les demandes de la communauté. <strong>La sécurité est notre priorité :</strong> chaque lien est modéré et chaque mise en relation est supervisée par notre équipe.
+    </div>
+
+    <div class="request-section">
+        <button class="btn-suggest" onclick="toggleQCM()">+ Faire une demande d'achat / recherche</button>
+        
+        <div id="qcm-form" class="qcm-container">
+            <h3 class="gold-text">Détails de votre recherche</h3>
+            <div class="qcm-step">
+                <label>Identité :</label>
+                <input type="text" id="qcm-name" placeholder="Nom, Prénom ou Pseudo">
+                <div style="margin-top:10px; font-size:12px;">
+                    <input type="checkbox" id="qcm-anon" style="width:auto;"> Rester anonyme sur le site (Seule l'équipe connaîtra votre identité)
+                </div>
+            </div>
+            <div class="qcm-step">
+                <label>Que recherchez-vous ?</label>
+                <select id="qcm-type">
+                    <option value="montre">Une montre complète</option>
+                    <option value="piece">Une pièce détachée (cadran, aiguilles, mouvement...)</option>
+                    <option value="outil">Outillage d'horloger</option>
+                    <option value="autre">Autre</option>
+                </select>
+            </div>
+            <div class="qcm-step">
+                <label>Description précise :</label>
+                <textarea id="qcm-desc" rows="3" placeholder="Modèle, année, état souhaité..."></textarea>
+            </div>
+            <div class="qcm-step">
+                <input type="checkbox" id="qcm-public" style="width:auto;" checked> J'accepte que ma demande soit partagée publiquement sur ChronoBase.
+            </div>
+            <button class="btn-suggest" style="width:100%;" onclick="sendRequestMail()">Générer le mail de demande</button>
+        </div>
+    </div>
+
+    <div class="update-notice">Mise à jour de la liste : Chaque Mercredi et Samedi.</div>
+
+    <h2 class="gold-text user-requests-title">Boutiques & Ventes Flash (Vérifiées)</h2>
+    <div class="filter-nav">
+        <button class="filter-btn active" onclick="filterLinks('all')">Tous</button>
+        <button class="filter-btn" onclick="filterLinks('vinted')">Vinted</button>
+        <button class="filter-btn" onclick="filterLinks('leboncoin')">Leboncoin</button>
+        <button class="filter-btn" onclick="filterLinks('ebay')">eBay</button>
+    </div>
+
+    <div class="links-grid" id="links-grid">
+        <div class="link-card" data-platform="vinted">
+            <span class="platform-tag">Vinted</span>
+            <h4 style="margin:0 0 10px 0;">Lot d'aiguilles Oméga</h4>
+            <p style="font-size:12px; opacity:0.8;">Vendeur: JeanHorlo92</p>
+            <a href="#" class="btn-contact-user" style="display:block; margin-top:10px;">Voir l'annonce</a>
+        </div>
+        </div>
+
+    <h2 class="gold-text user-requests-title">Demandes de la Communauté</h2>
+    <div class="requests-container" id="user-requests">
+        </div>
+</div>
+
+<footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Navigation</h4>
+        <a href="index.html">Accueil</a>
+        <a href="montre.html">Les montres</a>
+        <a href="propos.html">À propos</a>
+        <a href="chiffre.html">Chiffres clés</a>
+      </div>
+      <div class="footer-section">
+        <h4>Contact</h4>
+        <a href="mailto:contact@chronobase.com">Envoyer un email</a>
+        <a href="#">Formulaire (à venir)</a>
+        <a href="reseaux.html">Nos réseaux sociaux</a>
+      </div>
+      <div class="footer-section">
+        <h4>Version</h4>
+        <a href="version.html">Historique des versions</a>
+        <a href="maj.html">Historique des mises à jour</a>
+        <a href="contributeurs.html">Nos contributeurs</a>
+      </div>
+      <div class="footer-section">
+        <h4>Ressources</h4>
+        <a href="horlogers.html">Carte des horlogers</a>
+        <a href="evenements.html">Événements</a>
+        <a href="achats.html">Équipements & achats</a>
+      </div>
+    </div>
+    <div class="footer-content footer-legal">
+      <div class="footer-section">
+        <h4>Légal</h4>
+        <a href="mentions.html">Mentions légales</a>
+        <a href="cgu.html">Conditions d’utilisation</a>
+        <a href="confidentialite.html">Confidentialité</a>
+      </div>
+      <div class="footer-section">
+        <h4>Règlements</h4>
+        <a href="reglement-site.html">Règlement du site</a>
+        <a href="reglement-reseaux.html">Règlement réseaux</a>
+        <a href="cookies.html">Cookies</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 ChronoBase — Tous droits réservés</div>
+</footer>
+
+<div id="cb-bubble">💬</div>
+
+<script>
+// DATA EXEMPLES (Seront remplis manuellement comme demandé)
+const communityRequests = [
+    { id: 101, user: "Marc H.", type: "Montre", title: "Recherche Seiko SKX007", desc: "Cherche exemplaire d'origine, même avec révision à prévoir. Budget max 300€.", date: "21/02/2026" },
+    { id: 102, user: "Anonyme", type: "Pièce", title: "Couronne pour LIP T18", desc: "Pièce d'époque recherchée pour restauration. État correct accepté.", date: "22/02/2026" },
+    { id: 103, user: "Lucas_Watch", type: "Outil", title: "Bergeon 6767-F", desc: "Cherche outil de pose de barrettes occasion bon état.", date: "23/02/2026" }
+];
+
+function toggleTheme() {
+    document.body.classList.toggle("light-theme");
+    localStorage.setItem("theme", document.body.classList.contains("light-theme") ? "light" : "dark");
+}
+
+function toggleQCM() {
+    const qcm = document.getElementById('qcm-form');
+    qcm.style.display = qcm.style.display === 'block' ? 'none' : 'block';
+}
+
+function filterLinks(platform) {
+    const cards = document.querySelectorAll('.link-card');
+    const btns = document.querySelectorAll('.filter-btn');
+    
+    btns.forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+
+    cards.forEach(card => {
+        if(platform === 'all' || card.dataset.platform === platform) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+function sendRequestMail() {
+    const name = document.getElementById('qcm-name').value;
+    const type = document.getElementById('qcm-type').value;
+    const desc = document.getElementById('qcm-desc').value;
+    const anon = document.getElementById('qcm-anon').checked ? "OUI" : "NON";
+    const pub = document.getElementById('qcm-public').checked ? "OUI" : "NON";
+
+    const subject = `Demande d'achat - ${type} - ${name}`;
+    const body = `Nom/Pseudo: ${name}%0D%0AAnonyme: ${anon}%0D%0APublic: ${pub}%0D%0AType: ${type}%0D%0ADescription: ${desc}`;
+    
+    window.location.href = `mailto:contact@chronobase.com?subject=${subject}&body=${body}`;
+}
+
+function renderRequests() {
+    const container = document.getElementById('user-requests');
+    container.innerHTML = communityRequests.map(req => `
+        <div class="user-card">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <span class="type">${req.type}</span>
+                <span class="status">● Vérifié</span>
+            </div>
+            <h3>${req.title}</h3>
+            <p>${req.desc}</p>
+            <div style="font-size:11px; opacity:0.6; margin-top:auto;">
+                Posté par ${req.user} le ${req.date}
+            </div>
+            <a href="mailto:contact@chronobase.com?subject=Contact pour annonce ${req.id}" class="btn-contact-user">Contacter via ChronoBase</a>
+        </div>
+    `).join('');
+}
+
+window.onload = () => {
+    renderRequests();
+    if (localStorage.getItem("theme") === "light") document.body.classList.add("light-theme");
+};
+</script>
+</body>
+</html>
