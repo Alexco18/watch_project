@@ -119,26 +119,59 @@ nav a:hover{color:#f5d98c}
 
 strong { color: #f5d98c; font-weight: 500; }
 
-/* ---------------------- FOOTER ---------------------- */
+/* ---------------------- FOOTER COMPACT (Mis à jour) ---------------------- */
 .site-footer {
   background: var(--bg-footer);
   border-top: 1px solid var(--border-color);
-  padding: 40px 20px 20px;
+  padding: 25px 20px 15px;
   margin-top: 60px;
   color: var(--text-main);
+  font-size: 14px;
 }
 
 .footer-content {
-  max-width: 1200px; margin: auto;
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
 }
 
-.footer-section h4 { color: #f5d98c; font-size: 14px; margin-bottom: 15px; text-transform: uppercase; }
-.footer-section a { color: var(--text-main); text-decoration: none; font-size: 13px; display: block; margin-bottom: 8px; }
+.footer-section {
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footer-section h4 {
+  margin-bottom: 6px;
+  color: #f5d98c;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.footer-section a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 12px;
+  display: block;
+}
+
 .footer-section a:hover { color: #f5d98c; }
 
-.footer-legal { margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-color); }
-.footer-bottom { text-align: center; margin-top: 20px; font-size: 12px; opacity: 0.6; }
+.footer-legal {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 12px;
+  opacity: 0.7;
+}
 
 /* ---------------------- CHATBOT ---------------------- */
 #cb-bubble {
@@ -193,66 +226,9 @@ strong { color: #f5d98c; font-weight: 500; }
   <p class="intro-text">Règlement Général d'Utilisation de la plateforme ChronoBase</p>
 
   <div class="card">
-    <p>Bienvenue sur notre plateforme dédiée à l'horlogerie. Le présent règlement définit les conditions de participation, de communication et d'utilisation des services du site. L’utilisation du site implique l’acceptation pleine et entière de ces règles.</p>
+    <p>Bienvenue sur notre plateforme dédiée à l'horlogerie...</p>
   </div>
-
-  <div class="card article-content">
-    <h2>Article 1 : Communication et Déontologie</h2>
-    <p>La communication avec l'équipe de modération s'effectue via les formulaires du site, par e-mail ou via nos réseaux sociaux officiels.</p>
-    <ul>
-      <li><strong>Respect et Courtoisie :</strong> Tout échange doit rester poli. La vulgarité, l'agressivité ou le manque de respect ne seront pas tolérés.</li>
-      <li><strong>Pertinence :</strong> Les messages doivent concerner l'horlogerie ou le fonctionnement du site. L'envoi de publicités non sollicitées (spam) ou de fausses informations est strictement interdit.</li>
-    </ul>
   </div>
-
-  <div class="card article-content">
-    <h2>Article 2 : Protection du Contenu et Propriété Intellectuelle</h2>
-    <p>Le contenu diffusé sur le site est protégé par des droits de propriété intellectuelle et des brevets déposés.</p>
-    <ul>
-      <li><strong>Sécurisation :</strong> Les documents PDF transmis comportent une signature numérique et un filigrane afin d'empêcher toute modification.</li>
-      <li><strong>Partage autorisé :</strong> Vous pouvez partager nos documents sans altérer le contenu, sans retirer notre logo et en citant explicitement la source.</li>
-      <li><strong>Sanctions :</strong> Toute tentative de plagiat ou de retrait de filigrane pourra donner lieu à des poursuites judiciaires.</li>
-    </ul>
-  </div>
-
-  <div class="card article-content">
-    <h2>Article 3 : Traitement des Retours Utilisateurs</h2>
-    <ul>
-      <li><strong>Procédure :</strong> Tout retour (erreur, avis) doit être constructif et soumis via l'onglet "Espace Contribution".</li>
-      <li><strong>Engagement :</strong> Réponse garantie sous 48 heures pour tout message utile. Les messages discourtois resteront sans suite.</li>
-    </ul>
-  </div>
-
-  <div class="card article-content">
-    <h2>Article 4 : Événements, Bourses et Cartographie</h2>
-    <ul>
-      <li><strong>Vérification :</strong> Chaque professionnel ou événement est rigoureusement sélectionné pour sa pertinence horlogère.</li>
-      <li><strong>Responsabilité :</strong> Les informations sont indicatives. Nous ne sommes pas responsables des incidents lors d'événements tiers.</li>
-      <li><strong>Modération :</strong> Nous nous réservons le droit de retirer un lieu en cas de retours négatifs avérés.</li>
-    </ul>
-  </div>
-
-  <div class="card article-content">
-    <h2>Article 5 : Équipements, Achats et Publicité</h2>
-    <p>La page "Équipements & Achats" répertorie uniquement des partenaires de confiance. Nous refusons systématiquement les pratiques de type "putaclic" ou hors thématique.</p>
-  </div>
-
-  <div class="card article-content">
-    <h2>Article 6 : Système de Contribution et Classement</h2>
-    <ul>
-      <li><strong>Points :</strong> Accordés pour les signalements d'erreurs ou propositions de partenariats.</li>
-      <li><strong>Confidentialité :</strong> Choix entre pseudonyme, anonymat complet ou retrait du classement public. Vos e-mails restent strictement confidentiels.</li>
-    </ul>
-  </div>
-
-  <div class="card article-content">
-    <h2>Article 7 & 8 : Newsletter, Rappels et Sanctions</h2>
-    <ul>
-      <li><strong>Newsletter :</strong> Diffusion bimensuelle avec accès aux archives sur demande.</li>
-      <li><strong>Liste Noire :</strong> Le non-respect répété des règles entraîne une inscription sur liste noire, suspendant définitivement toute interaction sur le site.</li>
-    </ul>
-  </div>
-</div>
 
 <footer class="site-footer">
   <div class="footer-content">
@@ -260,33 +236,54 @@ strong { color: #f5d98c; font-weight: 500; }
       <h4>Navigation</h4>
       <a href="index.html">Accueil</a>
       <a href="montre.html">Les montres</a>
+      <a href="propos.html">À propos</a>
       <a href="chiffre.html">Chiffres clés</a>
     </div>
+
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <a href="mailto:contact@chronobase.com">Envoyer un email</a>
+      <a href="#">Formulaire (à venir)</a>
+      <a href="reseaux.html">Nos réseaux sociaux</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Version</h4>
+      <a href="version.html">Historique des versions</a>
+      <a href="maj.html">Historique des mises à jour</a>
+      <a href="contributeurs.html">Nos contributeurs</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Ressources</h4>
+      <a href="horlogers.html">Carte des horlogers</a>
+      <a href="evenements.html">Événements</a>
+      <a href="achats.html">Équipements & achats</a>
+    </div>
+  </div>
+
+  <div class="footer-content footer-legal">
     <div class="footer-section">
       <h4>Légal</h4>
       <a href="mentions.html">Mentions légales</a>
-      <a href="reglement-site.html">Règlement du site</a>
+      <a href="cgu.html">Conditions d’utilisation</a>
       <a href="confidentialite.html">Confidentialité</a>
     </div>
+
     <div class="footer-section">
-      <h4>Contact</h4>
-      <a href="mailto:contact@chronobase.com">Email</a>
-      <a href="reseaux.html">Réseaux sociaux</a>
+      <h4>Règlements</h4>
+      <a href="reglement-site.html">Règlement du site</a>
+      <a href="reglement-reseaux.html">Règlement réseaux</a>
+      <a href="cookies.html">Cookies</a>
     </div>
   </div>
+
   <div class="footer-bottom">
     © 2026 ChronoBase — Tous droits réservés
   </div>
 </footer>
 
-<div id="cb-bubble">💬</div>
-<div id="cb-window">
-  <div id="cb-header">Assistant <span id="cb-close" style="cursor:pointer">✖</span></div>
-  <div id="cb-content"></div>
-</div>
-
 <script>
-// --- THEME ---
 function toggleTheme() {
   document.body.classList.toggle("light-theme");
   localStorage.setItem("theme", document.body.classList.contains("light-theme") ? "light" : "dark");
@@ -295,7 +292,7 @@ function toggleTheme() {
   if (localStorage.getItem("theme") === "light") document.body.classList.add("light-theme");
 })();
 
-// --- CHATBOT ---
+// Chatbot logic ...
 const bubble = document.getElementById("cb-bubble");
 const win = document.getElementById("cb-window");
 const content = document.getElementById("cb-content");
@@ -309,7 +306,7 @@ function startChat() {
   <div class="cb-btn" onclick="window.location='mailto:contact@chronobase.com'">Contacter un modérateur</div>`;
 }
 
-// Drag & Drop
+// Drag & Drop logic ...
 let isDragging = false, ox, oy;
 document.getElementById("cb-header").onmousedown = (e) => {
   isDragging = true; ox = e.clientX - win.offsetLeft; oy = e.clientY - win.offsetTop;
