@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Ressources – ChronoBase</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ---------------------- VARIABLES ---------------------- */
+:root {
+  --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951);
+  --bg-main: radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
+  --bg-header: #0b0b0b;
+  --bg-card: linear-gradient(180deg,#111,#0c0c0c);
+  --bg-footer: #0b0b0b;
+  --text-main: #d4af37;
+  --text-secondary: #c1a96b;
+  --border-color: rgba(212,175,55,0.2);
+}
+
+.light-theme {
+  --bg-main: #ffffff;
+  --bg-header: #ffffff;
+  --bg-card: #ffffff;
+  --bg-footer: #ffffff;
+  --text-main: #000000;
+  --text-secondary: #444444;
+  --border-color: rgba(0,0,0,0.2);
+}
+
+/* ---------------------- GLOBAL ---------------------- */
+body{
+  margin:0; padding:0;
+  font-family:'Montserrat',sans-serif;
+  background:var(--bg-main);
+  color:var(--text-main);
+  font-weight:300;
+  overflow-x:hidden;
+}
+
+.gold-text{
+  background:var(--gold-gradient);
+  -webkit-background-clip:text;
+  color:transparent;
+  animation:shine 6s infinite linear;
+  background-size:200%;
+}
+
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+/* ---------------------- HEADER ---------------------- */
+header{
+  width:100%; padding:12px 0;
+  border-bottom:1px solid var(--border-color);
+  background:var(--bg-header);
+  position:fixed; top:0; left:0; z-index:10;
+}
+
+.header-container{
+  max-width:1200px; margin:auto;
+  display:flex; justify-content:space-between; align-items:center; padding:0 20px;
+}
+
+.header-left { display: flex; align-items: center; gap: 15px; }
+
+nav a{
+  margin-left:30px; text-decoration:none;
+  color:var(--text-main); font-size:14px;
+  letter-spacing:1px; text-transform:uppercase;
+}
+nav a:hover{color:#f5d98c}
+
+#theme-switch {
+  width: 50px; height: 26px; background: var(--border-color);
+  border-radius: 20px; position: relative; cursor: pointer;
+  display: flex; align-items: center; padding: 3px;
+}
+
+.switch-handle {
+  width: 20px; height: 20px; background: var(--text-main);
+  border-radius: 50%; transition: transform 0.3s;
+}
+
+.light-theme #theme-switch .switch-handle { transform: translateX(24px); background: #000; }
+
+/* ---------------------- PAGE CONTENT ---------------------- */
+.container{
+  max-width:1000px;
+  margin:120px auto 80px;
+  padding:0 20px;
+}
+
+.intro-text {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.resource-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.resource-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.resource-card:hover {
+    border-color: rgba(212,175,55,0.5);
+    transform: translateY(-2px);
+}
+
+.resource-info {
+    max-width: 70%;
+}
+
+.resource-info h2 {
+    margin: 0 0 10px 0;
+    color: #f5d98c;
+    font-weight: 400;
+}
+
+.resource-info p {
+    margin: 0;
+    font-size: 15px;
+    opacity: 0.9;
+}
+
+.resource-btn {
+    text-decoration: none;
+    padding: 12px 25px;
+    border: 1px solid var(--text-main);
+    color: var(--text-main);
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 1px;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.resource-btn:hover {
+    background: var(--text-main);
+    color: #000;
+}
+
+/* ---------------------- FOOTER & CHATBOT (Identiques) ---------------------- */
+.site-footer {
+  background: var(--bg-footer);
+  border-top: 1px solid var(--border-color);
+  padding: 25px 20px 15px; margin-top: 60px;
+  color: var(--text-main); font-size: 14px;
+}
+.footer-content {
+  max-width: 1200px; margin: auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px;
+}
+.footer-section { display: flex; flex-direction: column; gap: 4px; }
+.footer-section h4 { margin-bottom: 6px; color: #f5d98c; font-size: 13px; }
+.footer-section a { color: var(--text-main); text-decoration: none; font-size: 12px; }
+.footer-legal { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-color); }
+.footer-bottom { text-align: center; margin-top: 15px; font-size: 12px; opacity: 0.7; }
+
+#cb-bubble { position: fixed; bottom: 25px; right: 25px; background: var(--text-main); color: var(--bg-main); width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 26px; cursor: pointer; z-index: 9999; box-shadow: 0 0 10px rgba(0,0,0,0.4); }
+#cb-window { position: fixed; bottom: 95px; right: 25px; width: 200px; height: 260px; background: var(--bg-header); border: 1px solid var(--border-color); border-radius: 10px; display: none; flex-direction: column; z-index: 9999; }
+#cb-header { padding: 8px; background: var(--bg-card); color: var(--text-main); display: flex; justify-content: space-between; font-size: 13px; border-bottom: 1px solid var(--border-color); cursor: grab; }
+#cb-content { padding: 10px; overflow-y: auto; font-size: 13px; }
+.cb-btn { background: var(--bg-card); color: var(--text-main); padding: 6px; margin-top: 8px; border-radius: 5px; cursor: pointer; text-align: center; font-size: 12px; border: 1px solid var(--border-color); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+    <div class="header-left">
+      <h2 class="gold-text">ChronoBase</h2>
+      <div id="theme-switch" onclick="toggleTheme()">
+        <div class="switch-handle"></div>
+      </div>
+    </div>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="montre.html">Les montres</a>
+      <a href="ressources.html" style="border-bottom: 1px solid #f5d98c;">Ressources</a>
+      <a href="propos.html">À propos</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <h1 class="gold-text" style="text-align:center; font-size: 40px; margin-bottom: 20px;">Ressources</h1>
+  
+  <div class="intro-text">
+      <p>Bienvenue dans l'espace Ressources de ChronoBase. Cet univers est dédié aux outils pratiques pour les passionnés : localisez des experts, restez informés des grands rendez-vous et trouvez le matériel nécessaire à votre passion.</p>
+  </div>
+
+  <div class="resource-grid">
+      
+      <div class="resource-card">
+          <div class="resource-info">
+              <h2>Carte des horlogers</h2>
+              <p>Trouvez un artisan qualifié près de chez vous pour l'entretien et la réparation de vos garde-temps.</p>
+          </div>
+          <a href="horloger.html" class="resource-btn">Explorer la carte</a>
+      </div>
+
+      <div class="resource-card">
+          <div class="resource-info">
+              <h2>Événements & Bourses</h2>
+              <p>Le calendrier complet des salons horlogers, ventes aux enchères et bourses d'échange internationales.</p>
+          </div>
+          <a href="evenements.html" class="resource-btn">Voir l'agenda</a>
+      </div>
+
+      <div class="resource-card">
+          <div class="resource-info">
+              <h2>Équipements & Achats</h2>
+              <p>Sélection d'outillage, de marmottes de transport et accessoires indispensables pour tout collectionneur.</p>
+          </div>
+          <a href="achats.html" class="resource-btn">Consulter le catalogue</a>
+      </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>Navigation</h4>
+      <a href="index.html">Accueil</a>
+      <a href="montre.html">Les montres</a>
+      <a href="propos.html">À propos</a>
+      <a href="chiffre.html">Chiffres clés</a>
+    </div>
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <a href="mailto:contact@chronobase.com">Envoyer un email</a>
+      <a href="reseaux.html">Nos réseaux sociaux</a>
+    </div>
+    <div class="footer-section">
+      <h4>Ressources</h4>
+      <a href="horloger.html">Carte des horlogers</a>
+      <a href="evenements.html">Événements</a>
+      <a href="achats.html">Équipements & achats</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 ChronoBase — Tous droits réservés
+  </div>
+</footer>
+
+<div id="cb-bubble">💬</div>
+<div id="cb-window">
+  <div id="cb-header">Assistant <span id="cb-close">✖</span></div>
+  <div id="cb-content"></div>
+</div>
+
+<script>
+function toggleTheme() {
+  document.body.classList.toggle("light-theme");
+  localStorage.setItem("theme", document.body.classList.contains("light-theme") ? "light" : "dark");
+}
+(function() {
+  if (localStorage.getItem("theme") === "light") document.body.classList.add("light-theme");
+})();
+
+const bubble = document.getElementById("cb-bubble");
+const win = document.getElementById("cb-window");
+const closeBtn = document.getElementById("cb-close");
+const content = document.getElementById("cb-content");
+
+bubble.onclick = () => { win.style.display = "flex"; startChat(); };
+closeBtn.onclick = () => win.style.display = "none";
+
+function startChat() {
+  content.innerHTML = `<p>Où souhaitez-vous aller ?</p>
+    <div class="cb-btn" onclick="window.location='index.html'">Accueil</div>
+    <div class="cb-btn" onclick="window.location='horloger.html'">Carte des horlogers</div>
+    <div class="cb-btn" onclick="window.location='evenements.html'">Événements</div>`;
+}
+</script>
+
+</body>
+</html>
