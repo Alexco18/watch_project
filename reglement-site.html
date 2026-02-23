@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Règlement du site – ChronoBase</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ---------------------- VARIABLES ---------------------- */
+:root {
+  --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951);
+  --bg-main: radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
+  --bg-header: #0b0b0b;
+  --bg-card: linear-gradient(180deg,#111,#0c0c0c);
+  --bg-footer: #0b0b0b;
+  --text-main: #d4af37;
+  --text-secondary: #c1a96b;
+  --border-color: rgba(212,175,55,0.2);
+}
+
+.light-theme {
+  --bg-main: #ffffff;
+  --bg-header: #ffffff;
+  --bg-card: #ffffff;
+  --bg-footer: #ffffff;
+  --text-main: #000000;
+  --text-secondary: #444444;
+  --border-color: rgba(0,0,0,0.2);
+}
+
+/* ---------------------- GLOBAL ---------------------- */
+body{
+  margin:0; padding:0;
+  font-family:'Montserrat',sans-serif;
+  background:var(--bg-main);
+  color:var(--text-main);
+  font-weight:300;
+  overflow-x:hidden;
+  line-height: 1.6;
+}
+
+.gold-text{
+  background:var(--gold-gradient);
+  -webkit-background-clip:text;
+  color:transparent;
+  animation:shine 6s infinite linear;
+  background-size:200%;
+}
+
+@keyframes shine{ 0%{background-position:0%} 100%{background-position:200%} }
+
+/* ---------------------- HEADER ---------------------- */
+header{
+  width:100%; padding:12px 0;
+  border-bottom:1px solid var(--border-color);
+  background:var(--bg-header);
+  position:fixed; top:0; left:0; z-index:10;
+}
+
+.header-container{
+  max-width:1200px; margin:auto;
+  display:flex; justify-content:space-between; align-items:center; padding:0 20px;
+}
+
+.header-left { display: flex; align-items: center; gap: 15px; }
+
+nav a{
+  margin-left:30px; text-decoration:none;
+  color:var(--text-main); font-size:14px;
+  letter-spacing:1px; text-transform:uppercase;
+}
+nav a:hover{color:#f5d98c}
+
+#theme-switch {
+  width: 50px; height: 26px; background: var(--border-color);
+  border-radius: 20px; position: relative; cursor: pointer;
+  display: flex; align-items: center; padding: 3px;
+}
+
+.switch-handle {
+  width: 20px; height: 20px; background: var(--text-main);
+  border-radius: 50%; transition: transform 0.3s;
+}
+
+.light-theme #theme-switch .switch-handle { transform: translateX(24px); background: #000; }
+
+/* ---------------------- CONTENT ---------------------- */
+.container{ max-width:1000px; margin:120px auto 80px; padding:0 20px; }
+
+.intro-text {
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--text-secondary);
+    font-size: 1.1em;
+}
+
+.card{
+  background:var(--bg-card);
+  border:1px solid var(--border-color);
+  padding:35px;
+  border-radius:12px;
+  margin-bottom:30px;
+  transition: border-color 0.3s;
+}
+.card:hover{border-color:rgba(212,175,55,.4)}
+
+.card h2 {
+  margin-top:0; font-weight:400; font-size:22px;
+  color:#f5d98c; border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px; margin-bottom: 20px;
+}
+
+.card h3 { font-size: 18px; color: #f5d98c; margin-top: 20px; font-weight: 400; }
+
+.article-content ul { list-style: none; padding-left: 0; }
+.article-content ul li { margin-bottom: 12px; position: relative; padding-left: 20px; }
+.article-content ul li::before { content: "•"; position: absolute; left: 0; color: #f5d98c; }
+
+strong { color: #f5d98c; font-weight: 500; }
+
+/* ---------------------- FOOTER ---------------------- */
+.site-footer {
+  background: var(--bg-footer);
+  border-top: 1px solid var(--border-color);
+  padding: 40px 20px 20px;
+  margin-top: 60px;
+  color: var(--text-main);
+}
+
+.footer-content {
+  max-width: 1200px; margin: auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;
+}
+
+.footer-section h4 { color: #f5d98c; font-size: 14px; margin-bottom: 15px; text-transform: uppercase; }
+.footer-section a { color: var(--text-main); text-decoration: none; font-size: 13px; display: block; margin-bottom: 8px; }
+.footer-section a:hover { color: #f5d98c; }
+
+.footer-legal { margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-color); }
+.footer-bottom { text-align: center; margin-top: 20px; font-size: 12px; opacity: 0.6; }
+
+/* ---------------------- CHATBOT ---------------------- */
+#cb-bubble {
+  position: fixed; bottom: 25px; right: 25px;
+  background: var(--text-main); color: var(--bg-main);
+  width: 55px; height: 55px; border-radius: 50%;
+  display: flex; justify-content: center; align-items: center;
+  font-size: 26px; cursor: pointer; z-index: 9999;
+}
+
+#cb-window {
+  position: fixed; bottom: 95px; right: 25px;
+  width: 220px; height: 300px; background: var(--bg-header);
+  border: 1px solid var(--border-color); border-radius: 10px;
+  display: none; flex-direction: column; z-index: 9999;
+}
+
+#cb-header {
+  padding: 10px; background: var(--bg-card);
+  display: flex; justify-content: space-between; font-size: 13px;
+  border-bottom: 1px solid var(--border-color); cursor: grab;
+}
+
+#cb-content { padding: 15px; overflow-y: auto; font-size: 13px; }
+.cb-btn {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  padding: 8px; margin-top: 10px; border-radius: 5px;
+  cursor: pointer; text-align: center; font-size: 12px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+    <div class="header-left">
+      <h2 class="gold-text">ChronoBase</h2>
+      <div id="theme-switch" onclick="toggleTheme()">
+        <div class="switch-handle"></div>
+      </div>
+    </div>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="montre.html">Les montres</a>
+      <a href="propos.html">À propos</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <h1 class="gold-text" style="text-align:center; margin-bottom: 10px;">Règlement du site</h1>
+  <p class="intro-text">Règlement Général d'Utilisation de la plateforme ChronoBase</p>
+
+  <div class="card">
+    <p>Bienvenue sur notre plateforme dédiée à l'horlogerie. Le présent règlement définit les conditions de participation, de communication et d'utilisation des services du site. L’utilisation du site implique l’acceptation pleine et entière de ces règles.</p>
+  </div>
+
+  <div class="card article-content">
+    <h2>Article 1 : Communication et Déontologie</h2>
+    <p>La communication avec l'équipe de modération s'effectue via les formulaires du site, par e-mail ou via nos réseaux sociaux officiels.</p>
+    <ul>
+      <li><strong>Respect et Courtoisie :</strong> Tout échange doit rester poli. La vulgarité, l'agressivité ou le manque de respect ne seront pas tolérés.</li>
+      <li><strong>Pertinence :</strong> Les messages doivent concerner l'horlogerie ou le fonctionnement du site. L'envoi de publicités non sollicitées (spam) ou de fausses informations est strictement interdit.</li>
+    </ul>
+  </div>
+
+  <div class="card article-content">
+    <h2>Article 2 : Protection du Contenu et Propriété Intellectuelle</h2>
+    <p>Le contenu diffusé sur le site est protégé par des droits de propriété intellectuelle et des brevets déposés.</p>
+    <ul>
+      <li><strong>Sécurisation :</strong> Les documents PDF transmis comportent une signature numérique et un filigrane afin d'empêcher toute modification.</li>
+      <li><strong>Partage autorisé :</strong> Vous pouvez partager nos documents sans altérer le contenu, sans retirer notre logo et en citant explicitement la source.</li>
+      <li><strong>Sanctions :</strong> Toute tentative de plagiat ou de retrait de filigrane pourra donner lieu à des poursuites judiciaires.</li>
+    </ul>
+  </div>
+
+  <div class="card article-content">
+    <h2>Article 3 : Traitement des Retours Utilisateurs</h2>
+    <ul>
+      <li><strong>Procédure :</strong> Tout retour (erreur, avis) doit être constructif et soumis via l'onglet "Espace Contribution".</li>
+      <li><strong>Engagement :</strong> Réponse garantie sous 48 heures pour tout message utile. Les messages discourtois resteront sans suite.</li>
+    </ul>
+  </div>
+
+  <div class="card article-content">
+    <h2>Article 4 : Événements, Bourses et Cartographie</h2>
+    <ul>
+      <li><strong>Vérification :</strong> Chaque professionnel ou événement est rigoureusement sélectionné pour sa pertinence horlogère.</li>
+      <li><strong>Responsabilité :</strong> Les informations sont indicatives. Nous ne sommes pas responsables des incidents lors d'événements tiers.</li>
+      <li><strong>Modération :</strong> Nous nous réservons le droit de retirer un lieu en cas de retours négatifs avérés.</li>
+    </ul>
+  </div>
+
+  <div class="card article-content">
+    <h2>Article 5 : Équipements, Achats et Publicité</h2>
+    <p>La page "Équipements & Achats" répertorie uniquement des partenaires de confiance. Nous refusons systématiquement les pratiques de type "putaclic" ou hors thématique.</p>
+  </div>
+
+  <div class="card article-content">
+    <h2>Article 6 : Système de Contribution et Classement</h2>
+    <ul>
+      <li><strong>Points :</strong> Accordés pour les signalements d'erreurs ou propositions de partenariats.</li>
+      <li><strong>Confidentialité :</strong> Choix entre pseudonyme, anonymat complet ou retrait du classement public. Vos e-mails restent strictement confidentiels.</li>
+    </ul>
+  </div>
+
+  <div class="card article-content">
+    <h2>Article 7 & 8 : Newsletter, Rappels et Sanctions</h2>
+    <ul>
+      <li><strong>Newsletter :</strong> Diffusion bimensuelle avec accès aux archives sur demande.</li>
+      <li><strong>Liste Noire :</strong> Le non-respect répété des règles entraîne une inscription sur liste noire, suspendant définitivement toute interaction sur le site.</li>
+    </ul>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>Navigation</h4>
+      <a href="index.html">Accueil</a>
+      <a href="montre.html">Les montres</a>
+      <a href="chiffre.html">Chiffres clés</a>
+    </div>
+    <div class="footer-section">
+      <h4>Légal</h4>
+      <a href="mentions.html">Mentions légales</a>
+      <a href="reglement-site.html">Règlement du site</a>
+      <a href="confidentialite.html">Confidentialité</a>
+    </div>
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <a href="mailto:contact@chronobase.com">Email</a>
+      <a href="reseaux.html">Réseaux sociaux</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 ChronoBase — Tous droits réservés
+  </div>
+</footer>
+
+<div id="cb-bubble">💬</div>
+<div id="cb-window">
+  <div id="cb-header">Assistant <span id="cb-close" style="cursor:pointer">✖</span></div>
+  <div id="cb-content"></div>
+</div>
+
+<script>
+// --- THEME ---
+function toggleTheme() {
+  document.body.classList.toggle("light-theme");
+  localStorage.setItem("theme", document.body.classList.contains("light-theme") ? "light" : "dark");
+}
+(function() {
+  if (localStorage.getItem("theme") === "light") document.body.classList.add("light-theme");
+})();
+
+// --- CHATBOT ---
+const bubble = document.getElementById("cb-bubble");
+const win = document.getElementById("cb-window");
+const content = document.getElementById("cb-content");
+
+bubble.onclick = () => { win.style.display = "flex"; startChat(); };
+document.getElementById("cb-close").onclick = () => win.style.display = "none";
+
+function startChat() {
+  content.innerHTML = `<p>Besoin d'aide sur le règlement ?</p>
+  <div class="cb-btn" onclick="win.style.display='none'">J'ai compris</div>
+  <div class="cb-btn" onclick="window.location='mailto:contact@chronobase.com'">Contacter un modérateur</div>`;
+}
+
+// Drag & Drop
+let isDragging = false, ox, oy;
+document.getElementById("cb-header").onmousedown = (e) => {
+  isDragging = true; ox = e.clientX - win.offsetLeft; oy = e.clientY - win.offsetTop;
+};
+document.onmousemove = (e) => {
+  if (isDragging) {
+    win.style.left = (e.clientX - ox) + "px"; win.style.top = (e.clientY - oy) + "px";
+    win.style.bottom = "auto"; win.style.right = "auto";
+  }
+};
+document.onmouseup = () => isDragging = false;
+</script>
+
+</body>
+</html>
