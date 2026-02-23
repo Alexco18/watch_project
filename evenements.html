@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
 <style>
-/* ---------------------- VARIABLES (Identiques) ---------------------- */
+/* ---------------------- VARIABLES ---------------------- */
 :root {
   --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951);
   --bg-main: radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
@@ -69,6 +69,7 @@ nav a{
   color:var(--text-main); font-size:14px;
   letter-spacing:1px; text-transform:uppercase;
 }
+nav a:hover{color:#f5d98c}
 
 #theme-switch {
   width: 50px; height: 26px; background: var(--border-color);
@@ -89,7 +90,6 @@ nav a{
   padding:0 20px;
 }
 
-/* Barre de recherche */
 .search-container {
     margin-bottom: 20px;
     width: 100%;
@@ -105,7 +105,6 @@ nav a{
     font-family: 'Montserrat';
 }
 
-/* Layout Map + List */
 .main-layout {
     display: flex;
     gap: 20px;
@@ -137,7 +136,7 @@ nav a{
     border: 1px solid var(--border-color);
 }
 
-/* Calendrier */
+/* ---------------------- CALENDRIER ---------------------- */
 .calendar-section {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -151,6 +150,23 @@ nav a{
     align-items: center;
     margin-bottom: 20px;
 }
+
+.calendar-nav-btns {
+    display: flex;
+    gap: 10px;
+}
+
+.calendar-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: 'Montserrat';
+    transition: 0.3s;
+}
+.calendar-btn:hover { background: var(--border-color); color: #f5d98c; }
 
 .calendar-grid {
     display: grid;
@@ -175,23 +191,62 @@ nav a{
     border-radius: 3px;
     margin-top: 2px;
     display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-/* ---------------------- FOOTER ---------------------- */
+/* ---------------------- FOOTER (Importé de propos.html) ---------------------- */
 .site-footer {
   background: var(--bg-footer);
   border-top: 1px solid var(--border-color);
-  padding: 25px 20px 15px; margin-top: 60px;
-  color: var(--text-main); font-size: 14px;
+  padding: 25px 20px 15px;
+  margin-top: 60px;
+  color: var(--text-main);
+  font-size: 14px;
 }
+
 .footer-content {
-  max-width: 1200px; margin: auto;
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px;
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
 }
-.footer-section { display: flex; flex-direction: column; gap: 4px; }
-.footer-section h4 { margin-bottom: 6px; color: #f5d98c; font-size: 13px; }
-.footer-section a { color: var(--text-main); text-decoration: none; font-size: 12px; }
-.footer-bottom { text-align: center; margin-top: 15px; font-size: 12px; opacity: 0.7; }
+
+.footer-section {
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footer-section h4 {
+  margin-bottom: 6px;
+  color: #f5d98c;
+  font-size: 13px;
+}
+
+.footer-section a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.footer-section a:hover { color: #f5d98c; }
+
+.footer-legal {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 12px;
+  opacity: 0.7;
+}
 
 /* Bot */
 #cb-bubble { position: fixed; bottom: 25px; right: 25px; background: var(--text-main); color: var(--bg-main); width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 26px; cursor: pointer; z-index: 9999; }
@@ -224,19 +279,20 @@ nav a{
   </div>
 
   <div class="main-layout">
-      <div class="event-list" id="event-list">
-          </div>
+      <div class="event-list" id="event-list"></div>
       <div id="map"></div>
   </div>
 
   <div class="calendar-section">
       <div class="calendar-header">
-          <button class="resource-btn" onclick="prevMonth()" style="padding: 5px 15px;"><</button>
-          <h2 id="month-display" class="gold-text">Mars 2026</h2>
-          <button class="resource-btn" onclick="nextMonth()" style="padding: 5px 15px;">></button>
-      </div>
-      <div class="calendar-grid" id="calendar-grid">
+          <div class="calendar-nav-btns">
+            <button class="calendar-btn" onclick="prevMonth()"><</button>
+            <button class="calendar-btn" onclick="goToToday()">Aujourd'hui</button>
+            <button class="calendar-btn" onclick="nextMonth()">></button>
           </div>
+          <h2 id="month-display" class="gold-text">Mars 2026</h2>
+          <div style="width: 150px;"></div> </div>
+      <div class="calendar-grid" id="calendar-grid"></div>
   </div>
 </div>
 
@@ -247,25 +303,57 @@ nav a{
       <a href="index.html">Accueil</a>
       <a href="montre.html">Les montres</a>
       <a href="propos.html">À propos</a>
+      <a href="chiffre.html">Chiffres clés</a>
     </div>
+
     <div class="footer-section">
       <h4>Contact</h4>
       <a href="mailto:contact@chronobase.com">Envoyer un email</a>
+      <a href="#">Formulaire (à venir)</a>
+      <a href="reseaux.html">Nos réseaux sociaux</a>
     </div>
+
+    <div class="footer-section">
+      <h4>Version</h4>
+      <a href="version.html">Historique des versions</a>
+      <a href="maj.html">Historique des mises à jour</a>
+      <a href="contributeurs.html">Nos contributeurs</a>
+    </div>
+
     <div class="footer-section">
       <h4>Ressources</h4>
-      <a href="horloger.html">Carte des horlogers</a>
+      <a href="horlogers.html">Carte des horlogers</a>
       <a href="evenements.html">Événements</a>
+      <a href="achats.html">Équipements & achats</a>
     </div>
   </div>
-  <div class="footer-bottom">© 2026 ChronoBase — Tous droits réservés</div>
+
+  <div class="footer-content footer-legal">
+    <div class="footer-section">
+      <h4>Légal</h4>
+      <a href="mentions.html">Mentions légales</a>
+      <a href="cgu.html">Conditions d’utilisation</a>
+      <a href="confidentialite.html">Confidentialité</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Règlements</h4>
+      <a href="reglement-site.html">Règlement du site</a>
+      <a href="reglement-reseaux.html">Règlement réseaux</a>
+      <a href="cookies.html">Cookies</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 ChronoBase — Tous droits réservés
+  </div>
 </footer>
 
 <div id="cb-bubble">💬</div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-// Données de test
+// Données
 const events = [
     { id: 1, name: "Watches & Wonders", city: "Genève", lat: 46.2044, lng: 6.1432, date: "2026-04-09" },
     { id: 2, name: "Bourse Horlogère", city: "Lille", lat: 50.6292, lng: 3.0573, date: "2026-03-15" },
@@ -273,8 +361,10 @@ const events = [
     { id: 4, name: "Dubai Watch Week", city: "Dubai", lat: 25.2048, lng: 55.2708, date: "2026-11-15" }
 ];
 
-let currentMonth = 2; // Mars (0-indexed)
-let currentYear = 2026;
+// État initial Calendrier (Date du jour)
+const today = new Date();
+let currentMonth = today.getMonth();
+let currentYear = today.getFullYear();
 
 // Initialisation Carte
 const map = L.map('map').setView([46.5, 2.5], 5);
@@ -282,6 +372,21 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').add
 
 const markers = {};
 
+// --- SYNCHRONISATION THÈME ---
+(function() {
+  const saved = localStorage.getItem("theme");
+  if (saved === "light") {
+    document.body.classList.add("light-theme");
+  }
+})();
+
+function toggleTheme() {
+  document.body.classList.toggle("light-theme");
+  const isLight = document.body.classList.contains("light-theme");
+  localStorage.setItem("theme", isLight ? "light" : "dark");
+}
+
+// --- LOGIQUE APP ---
 function initApp() {
     renderList(events);
     renderCalendar();
@@ -316,7 +421,7 @@ function filterEvents() {
     renderList(filtered);
 }
 
-// Logique Calendrier
+// --- LOGIQUE CALENDRIER ---
 function renderCalendar() {
     const grid = document.getElementById('calendar-grid');
     const display = document.getElementById('month-display');
@@ -333,23 +438,37 @@ function renderCalendar() {
         
         const dayEl = document.createElement('div');
         dayEl.className = 'calendar-day';
+        
+        // Surligner aujourd'hui
+        if(i === today.getDate() && currentMonth === today.getMonth() && currentYear === today.getFullYear()) {
+            dayEl.style.borderColor = "#f5d98c";
+            dayEl.style.background = "rgba(212,175,55,0.05)";
+        }
+
         dayEl.innerHTML = `<span class="day-number">${i}</span>`;
-        
         dayEvents.forEach(e => {
-            dayEl.innerHTML += `<span class="event-dot">${e.name}</span>`;
+            dayEl.innerHTML += `<span class="event-dot" title="${e.name}">${e.name}</span>`;
         });
-        
         grid.appendChild(dayEl);
     }
 }
 
-function prevMonth() { currentMonth--; if(currentMonth < 0){ currentMonth=11; currentYear--; } renderCalendar(); }
-function nextMonth() { currentMonth++; if(currentMonth > 11){ currentMonth=0; currentYear++; } renderCalendar(); }
+function prevMonth() { 
+    currentMonth--; 
+    if(currentMonth < 0){ currentMonth=11; currentYear--; } 
+    renderCalendar(); 
+}
 
-function toggleTheme() {
-  document.body.classList.toggle("light-theme");
-  const isLight = document.body.classList.contains("light-theme");
-  localStorage.setItem("theme", isLight ? "light" : "dark");
+function nextMonth() { 
+    currentMonth++; 
+    if(currentMonth > 11){ currentMonth=0; currentYear++; } 
+    renderCalendar(); 
+}
+
+function goToToday() {
+    currentMonth = today.getMonth();
+    currentYear = today.getFullYear();
+    renderCalendar();
 }
 
 window.onload = initApp;
