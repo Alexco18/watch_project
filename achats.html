@@ -34,6 +34,7 @@
             color:var(--text-main);
             font-weight:300;
             overflow-x: hidden;
+            transition: background 0.3s, color 0.3s;
         }
 
         .gold-text {
@@ -51,6 +52,7 @@
         .header-left { display: flex; align-items: center; gap: 15px; }
         nav a{ margin-left:30px; text-decoration:none; color:var(--text-main); font-size:14px; letter-spacing:1px; text-transform:uppercase; }
         nav a:hover{color:#f5d98c}
+        
         #theme-switch { width: 50px; height: 26px; background: var(--border-color); border-radius: 20px; position: relative; cursor: pointer; display: flex; align-items: center; padding: 3px; }
         .switch-handle { width: 20px; height: 20px; background: var(--text-main); border-radius: 50%; transition: transform 0.3s; }
         .light-theme #theme-switch .switch-handle { transform: translateX(24px); background: #000; }
@@ -157,7 +159,7 @@
         .update-notice { text-align: center; font-size: 12px; opacity: 0.6; margin-bottom: 20px; font-style: italic; }
         .btn-suggest { background: var(--gold-gradient); border: none; color: #000; padding: 15px 30px; border-radius: 8px; font-weight: 600; cursor: pointer; font-family: 'Montserrat'; transition: transform 0.2s; text-decoration: none; display: inline-block; }
 
-        /* ---------------------- FOOTER (Identique à propos.html) ---------------------- */
+        /* ---------------------- FOOTER ---------------------- */
         .site-footer {
             background: var(--bg-footer);
             border-top: 1px solid var(--border-color);
@@ -166,7 +168,6 @@
             color: var(--text-main);
             font-size: 14px;
         }
-
         .footer-content {
             max-width: 1200px;
             margin: auto;
@@ -174,40 +175,17 @@
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 25px;
         }
-
         .footer-section {
             min-height: auto;
             display: flex;
             flex-direction: column;
             gap: 4px;
         }
-
-        .footer-section h4 {
-            margin-bottom: 6px;
-            color: #f5d98c;
-            font-size: 13px;
-        }
-
-        .footer-section a {
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 12px;
-        }
-
+        .footer-section h4 { margin-bottom: 6px; color: #f5d98c; font-size: 13px; }
+        .footer-section a { color: var(--text-main); text-decoration: none; font-size: 12px; }
         .footer-section a:hover { color: #f5d98c; }
-
-        .footer-legal {
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 12px;
-            opacity: 0.7;
-        }
+        .footer-legal { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-color); }
+        .footer-bottom { text-align: center; margin-top: 15px; font-size: 12px; opacity: 0.7; }
 
         /* ---------------------- CHATBOT ---------------------- */
         #cb-bubble { 
@@ -310,8 +288,7 @@
         <input type="text" id="search-requests" class="search-bar" placeholder="Chercher ce que vous pouvez vendre ou donner..." onkeyup="searchRequests()">
     </div>
 
-    <div class="requests-container" id="user-requests">
-        </div>
+    <div class="requests-container" id="user-requests"></div>
 
     <div class="review-section">
         <h2 class="gold-text" style="text-align:center;">Votre avis nous intéresse</h2>
@@ -343,21 +320,18 @@
       <a href="propos.html">À propos</a>
       <a href="chiffre.html">Chiffres clés</a>
     </div>
-
     <div class="footer-section">
       <h4>Contact</h4>
       <a href="mailto:contact@chronobase.com">Envoyer un email</a>
       <a href="#">Formulaire (à venir)</a>
       <a href="reseaux.html">Nos réseaux sociaux</a>
     </div>
-
     <div class="footer-section">
       <h4>Version</h4>
       <a href="version.html">Historique des versions</a>
       <a href="maj.html">Historique des mises à jour</a>
       <a href="contributeurs.html">Nos contributeurs</a>
     </div>
-
     <div class="footer-section">
       <h4>Ressources</h4>
       <a href="horlogers.html">Carte des horlogers</a>
@@ -365,7 +339,6 @@
       <a href="achats.html">Équipements & achats</a>
     </div>
   </div>
-
   <div class="footer-content footer-legal">
     <div class="footer-section">
       <h4>Légal</h4>
@@ -373,7 +346,6 @@
       <a href="cgu.html">Conditions d’utilisation</a>
       <a href="confidentialite.html">Confidentialité</a>
     </div>
-
     <div class="footer-section">
       <h4>Règlements</h4>
       <a href="reglement-site.html">Règlement du site</a>
@@ -381,7 +353,6 @@
       <a href="cookies.html">Cookies</a>
     </div>
   </div>
-
   <div class="footer-bottom">
     © 2026 ChronoBase — Tous droits réservés
   </div>
@@ -390,7 +361,26 @@
 <div id="cb-bubble">💬</div>
 
 <script>
-// DATA EXEMPLES
+// --- LOGIQUE THÈME (CORRIGÉE) ---
+function applySavedTheme() {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "light") {
+        document.body.classList.add("light-theme");
+    } else {
+        document.body.classList.remove("light-theme");
+    }
+}
+
+function toggleTheme() {
+    document.body.classList.toggle("light-theme");
+    const isLight = document.body.classList.contains("light-theme");
+    localStorage.setItem("theme", isLight ? "light" : "dark");
+}
+
+// Appliquer au chargement
+applySavedTheme();
+
+// --- DATA EXEMPLES ---
 const communityRequests = [
     { id: 101, user: "Marc H.", type: "Montre", title: "Recherche Seiko SKX007", desc: "Cherche exemplaire d'origine. Budget 300€.", date: "21/02/2026" },
     { id: 102, user: "Anonyme", type: "Pièce", title: "Couronne pour LIP T18", desc: "Pièce d'époque recherchée pour restauration.", date: "22/02/2026" },
@@ -399,6 +389,7 @@ const communityRequests = [
 
 function initRequests() {
     const container = document.getElementById('user-requests');
+    if(!container) return;
     communityRequests.forEach(req => {
         container.innerHTML += `
             <div class="user-card">
@@ -414,11 +405,6 @@ function initRequests() {
 initRequests();
 
 let currentNote = 0;
-
-function toggleTheme() {
-    document.body.classList.toggle("light-theme");
-    localStorage.setItem("theme", document.body.classList.contains("light-theme") ? "light" : "dark");
-}
 
 function toggleQCM() {
     const qcm = document.getElementById('qcm-form');
