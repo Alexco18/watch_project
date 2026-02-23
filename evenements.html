@@ -96,76 +96,75 @@ nav a:hover{color:#f5d98c}
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    background: var(--bg-card);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
 }
 
 .search-bar-wrapper {
     display: flex;
     gap: 15px;
     width: 100%;
-    align-items: center;
 }
 
 #event-search {
     flex: 1;
-    padding: 12px;
-    background: var(--bg-card);
+    padding: 15px;
+    background: rgba(0,0,0,0.2);
     border: 1px solid var(--border-color);
     color: var(--text-main);
     border-radius: 8px;
     font-family: 'Montserrat';
 }
 
+/* Filtre de rayon */
 .radius-filter {
     display: flex;
     align-items: center;
-    gap: 10px;
-    background: var(--bg-card);
-    padding: 5px 15px;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    min-width: 200px;
+    gap: 20px;
+    font-size: 14px;
 }
-
-.radius-filter input[type=range] {
+input[type=range] {
     flex: 1;
     cursor: pointer;
+    accent-color: #d4af37;
 }
 
 .btn-suggest {
     background: var(--gold-gradient);
     border: none;
     color: #000;
-    padding: 12px 20px;
+    padding: 0 20px;
     border-radius: 8px;
     font-weight: 500;
     cursor: pointer;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
+    font-family: 'Montserrat';
+    transition: transform 0.2s;
     white-space: nowrap;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
 }
 
 .main-layout {
     display: flex;
     gap: 20px;
-    height: 500px; /* Hauteur fixe comme demandé */
+    height: 500px;
     margin-bottom: 40px;
 }
 
 .event-list {
     flex: 1;
-    height: 100%; /* S'aligne sur la hauteur du parent (500px) */
-    overflow-y: auto; /* Système pour baisser de haut en bas */
+    overflow-y: auto;
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    padding: 10px;
+    /* Personnalisation de la scrollbar */
 }
-
-/* Personnalisation de la barre de défilement pour le style */
 .event-list::-webkit-scrollbar { width: 6px; }
-.event-list::-webkit-scrollbar-thumb { background: var(--text-main); border-radius: 10px; }
+.event-list::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
 
 .event-item {
     padding: 15px;
@@ -177,7 +176,6 @@ nav a:hover{color:#f5d98c}
 
 #map {
     flex: 2;
-    height: 100%;
     border-radius: 8px;
     border: 1px solid var(--border-color);
     z-index: 1;
@@ -198,6 +196,8 @@ nav a:hover{color:#f5d98c}
     margin-bottom: 20px;
 }
 
+.calendar-nav-btns { display: flex; gap: 10px; }
+
 .calendar-btn {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -205,6 +205,7 @@ nav a:hover{color:#f5d98c}
     padding: 8px 15px;
     cursor: pointer;
     border-radius: 5px;
+    font-family: 'Montserrat';
 }
 
 .calendar-grid {
@@ -215,12 +216,28 @@ nav a:hover{color:#f5d98c}
 }
 
 .calendar-day {
-    padding: 10px 5px;
+    padding: 15px 5px;
     border: 1px solid var(--border-color);
     min-height: 80px;
 }
 
-/* ---------------------- FOOTER (COPIE DE PROPOS.HTML) ---------------------- */
+.day-number { font-weight: 500; margin-bottom: 5px; display: block; }
+
+.event-dot {
+    font-size: 10px;
+    background: var(--text-main);
+    color: #000;
+    padding: 2px 4px;
+    border-radius: 3px;
+    margin: 2px 2px;
+    display: block;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ---------------------- FOOTER (COPIE PROPOS.HTML) ---------------------- */
 .site-footer {
   background: var(--bg-footer);
   border-top: 1px solid var(--border-color);
@@ -300,16 +317,11 @@ nav a:hover{color:#f5d98c}
   <div class="search-controls">
       <div class="search-bar-wrapper">
           <input type="text" id="event-search" placeholder="Rechercher une ville ou un salon..." onkeyup="filterEvents()">
-          
-          <div class="radius-filter">
-              <label style="font-size: 12px;">Rayon :</label>
-              <input type="range" id="radius-range" min="5" max="200" value="50" oninput="updateRadiusText(this.value); filterEvents();">
-              <span id="radius-value" style="font-size: 12px; min-width: 45px;">50 km</span>
-          </div>
-
-          <a href="mailto:contact@chronobase.com?subject=Suggestion..." class="btn-suggest">
-            + Suggérer
-          </a>
+          <a href="mailto:contact@chronobase.com?subject=Suggestion d'événement" class="btn-suggest">+ Suggérer</a>
+      </div>
+      <div class="radius-filter">
+          <span>Rayon : <strong id="radius-val">50</strong> km</span>
+          <input type="range" id="radius-range" min="10" max="500" value="50" oninput="updateRadius(this.value)">
       </div>
   </div>
 
@@ -326,7 +338,7 @@ nav a:hover{color:#f5d98c}
             <button class="calendar-btn" onclick="nextMonth()">></button>
           </div>
           <h2 id="month-display" class="gold-text">Mars 2026</h2>
-          <div style="width: 150px; text-align: right; font-size: 11px; opacity: 0.6;">Cliquez sur l'agenda.</div> 
+          <div style="width: 150px; text-align: right; font-size: 11px; opacity: 0.6;">Cliquez sur un événement pour l'ajouter.</div> 
       </div>
       <div class="calendar-grid" id="calendar-grid"></div>
   </div>
@@ -389,35 +401,34 @@ nav a:hover{color:#f5d98c}
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-// Données exemples
 const events = [
     { id: 1, name: "Watches & Wonders", city: "Genève", lat: 46.2044, lng: 6.1432, date: "2026-04-09" },
     { id: 2, name: "Bourse Horlogère", city: "Lille", lat: 50.6292, lng: 3.0573, date: "2026-03-15" },
     { id: 3, name: "Salon du Vintage", city: "Paris", lat: 48.8566, lng: 2.3522, date: "2026-03-22" },
     { id: 4, name: "Dubai Watch Week", city: "Dubai", lat: 25.2048, lng: 55.2708, date: "2026-11-15" },
-    { id: 5, name: "Antiquorum Bourges", city: "Bourges", lat: 47.081, lng: 2.398, date: "2026-05-10" }
+    { id: 5, name: "Antiquorum", city: "Genève", lat: 46.2, lng: 6.1, date: "2026-05-10" }
 ];
 
-let map, markers = {};
+let currentMonth = new Date().getMonth();
+let currentYear = new Date().getFullYear();
+let searchMarker = null; // Pour la recherche de ville
 
-function initApp() {
-    map = L.map('map').setView([46.5, 2.5], 5);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
-    
-    events.forEach(ev => {
-        const marker = L.marker([ev.lat, ev.lng]).addTo(map).bindPopup(`<b>${ev.name}</b>`);
-        markers[ev.id] = marker;
-    });
-    
-    renderList(events);
-    renderCalendar();
+const map = L.map('map').setView([46.5, 2.5], 5);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
+
+const markers = {};
+
+function toggleTheme() {
+  document.body.classList.toggle("light-theme");
+  localStorage.setItem("theme", document.body.classList.contains("light-theme") ? "light" : "dark");
 }
 
-function updateRadiusText(val) {
-    document.getElementById('radius-value').innerText = val + " km";
+function updateRadius(val) {
+    document.getElementById('radius-val').innerText = val;
+    filterEvents();
 }
 
-// Fonction de calcul de distance (Haversine)
+// Fonction pour calculer la distance entre deux points (Haversine)
 function getDistance(lat1, lon1, lat2, lon2) {
     const R = 6371; 
     const dLat = (lat2-lat1) * Math.PI / 180;
@@ -427,25 +438,26 @@ function getDistance(lat1, lon1, lat2, lon2) {
     return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 }
 
-function filterEvents() {
-    const searchVal = document.getElementById('event-search').value.toLowerCase();
+async function filterEvents() {
+    const query = document.getElementById('event-search').value.toLowerCase();
     const radius = document.getElementById('radius-range').value;
-    
-    // Pour cet exemple, on simule que Bourges est le centre si tapé
-    let centerLat = null, centerLng = null;
-    if(searchVal.includes("bourges")) { centerLat = 47.081; centerLng = 2.398; }
-    if(searchVal.includes("paris")) { centerLat = 48.856; centerLng = 2.352; }
+    let filtered = events;
 
-    const filtered = events.filter(ev => {
-        const matchText = ev.name.toLowerCase().includes(searchVal) || ev.city.toLowerCase().includes(searchVal);
+    // Si on cherche une ville spécifique, on simule une géolocalisation de cette ville
+    if(query.length > 2) {
+        // Pour l'exemple, on cherche si le nom correspond à une ville connue dans nos datas
+        const cityMatch = events.find(e => e.city.toLowerCase().includes(query));
         
-        if (centerLat && centerLng) {
-            const dist = getDistance(centerLat, centerLng, ev.lat, ev.lng);
-            return dist <= radius;
+        if(cityMatch) {
+            filtered = events.filter(ev => {
+                const dist = getDistance(cityMatch.lat, cityMatch.lng, ev.lat, ev.lng);
+                return dist <= radius;
+            });
+        } else {
+            // Filtre textuel classique si pas de correspondance géographique
+            filtered = events.filter(ev => ev.name.toLowerCase().includes(query) || ev.city.toLowerCase().includes(query));
         }
-        return matchText;
-    });
-    
+    }
     renderList(filtered);
 }
 
@@ -460,18 +472,45 @@ function renderList(data) {
 }
 
 function focusEvent(id, lat, lng) {
-    map.setView([lat, lng], 12);
+    map.setView([lat, lng], 10);
     markers[id].openPopup();
 }
 
-// Logique Thème & Calendrier (Inchangée mais conservée)
-function toggleTheme() {
-    document.body.classList.toggle("light-theme");
+function renderCalendar() {
+    const grid = document.getElementById('calendar-grid');
+    const display = document.getElementById('month-display');
+    const date = new Date(currentYear, currentMonth, 1);
+    display.innerText = date.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
+    grid.innerHTML = '';
+    const days = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+    for (let i = 1; i <= days; i++) {
+        const fullDate = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+        const dayEvs = events.filter(e => e.date === fullDate);
+        const dayEl = document.createElement('div');
+        dayEl.className = 'calendar-day';
+        dayEl.innerHTML = `<span class="day-number">${i}</span>`;
+        dayEvs.forEach(e => {
+            dayEl.innerHTML += `<span class="event-dot" onclick="addToCalendar(${e.id})">📅 ${e.name}</span>`;
+        });
+        grid.appendChild(dayEl);
+    }
 }
 
-window.onload = initApp;
+function initApp() {
+    renderList(events);
+    renderCalendar();
+    events.forEach(ev => {
+        markers[ev.id] = L.marker([ev.lat, ev.lng]).addTo(map).bindPopup(`<b>${ev.name}</b><br>${ev.city}`);
+    });
+    if (localStorage.getItem("theme") === "light") document.body.classList.add("light-theme");
+}
 
-// ... Reste des fonctions calendar (renderCalendar, etc.) à copier de votre code original
+function prevMonth() { currentMonth--; if(currentMonth<0){currentMonth=11;currentYear--;} renderCalendar(); }
+function nextMonth() { currentMonth++; if(currentMonth>11){currentMonth=0;currentYear++;} renderCalendar(); }
+function goToToday() { currentMonth = new Date().getMonth(); currentYear = new Date().getFullYear(); renderCalendar(); }
+
+window.onload = initApp;
 </script>
 </body>
 </html>
