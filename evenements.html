@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Événements – ChronoBase</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<style>
+/* ---------------------- VARIABLES (Identiques) ---------------------- */
+:root {
+  --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951);
+  --bg-main: radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
+  --bg-header: #0b0b0b;
+  --bg-card: linear-gradient(180deg,#111,#0c0c0c);
+  --bg-footer: #0b0b0b;
+  --text-main: #d4af37;
+  --text-secondary: #c1a96b;
+  --border-color: rgba(212,175,55,0.2);
+}
+
+.light-theme {
+  --bg-main: #ffffff;
+  --bg-header: #ffffff;
+  --bg-card: #f9f9f9;
+  --bg-footer: #ffffff;
+  --text-main: #000000;
+  --text-secondary: #444444;
+  --border-color: rgba(0,0,0,0.2);
+}
+
+/* ---------------------- GLOBAL ---------------------- */
+body{
+  margin:0; padding:0;
+  font-family:'Montserrat',sans-serif;
+  background:var(--bg-main);
+  color:var(--text-main);
+  font-weight:300;
+}
+
+.gold-text{
+  background:var(--gold-gradient);
+  -webkit-background-clip:text;
+  color:transparent;
+  animation:shine 6s infinite linear;
+  background-size:200%;
+}
+
+@keyframes shine{ 0%{background-position:0%} 100%{background-position:200%} }
+
+/* ---------------------- HEADER ---------------------- */
+header{
+  width:100%; padding:12px 0;
+  border-bottom:1px solid var(--border-color);
+  background:var(--bg-header);
+  position:fixed; top:0; left:0; z-index:1000;
+}
+
+.header-container{
+  max-width:1200px; margin:auto;
+  display:flex; justify-content:space-between; align-items:center; padding:0 20px;
+}
+
+.header-left { display: flex; align-items: center; gap: 15px; }
+
+nav a{
+  margin-left:30px; text-decoration:none;
+  color:var(--text-main); font-size:14px;
+  letter-spacing:1px; text-transform:uppercase;
+}
+
+#theme-switch {
+  width: 50px; height: 26px; background: var(--border-color);
+  border-radius: 20px; position: relative; cursor: pointer;
+  display: flex; align-items: center; padding: 3px;
+}
+
+.switch-handle {
+  width: 20px; height: 20px; background: var(--text-main);
+  border-radius: 50%; transition: transform 0.3s;
+}
+.light-theme #theme-switch .switch-handle { transform: translateX(24px); background: #000; }
+
+/* ---------------------- PAGE CONTENT ---------------------- */
+.container{
+  max-width:1200px;
+  margin:120px auto 80px;
+  padding:0 20px;
+}
+
+/* Barre de recherche */
+.search-container {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+#event-search {
+    width: 100%;
+    padding: 15px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    border-radius: 8px;
+    font-family: 'Montserrat';
+}
+
+/* Layout Map + List */
+.main-layout {
+    display: flex;
+    gap: 20px;
+    height: 500px;
+    margin-bottom: 40px;
+}
+
+.event-list {
+    flex: 1;
+    overflow-y: auto;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.event-item {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.event-item:hover { background: rgba(212,175,55,0.1); }
+
+#map {
+    flex: 2;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+/* Calendrier */
+.calendar-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    text-align: center;
+}
+
+.calendar-day {
+    padding: 15px 5px;
+    border: 1px solid var(--border-color);
+    min-height: 80px;
+    position: relative;
+}
+
+.day-number { font-weight: 500; margin-bottom: 5px; display: block; }
+.event-dot {
+    font-size: 10px;
+    background: var(--text-main);
+    color: #000;
+    padding: 2px 4px;
+    border-radius: 3px;
+    margin-top: 2px;
+    display: block;
+}
+
+/* ---------------------- FOOTER ---------------------- */
+.site-footer {
+  background: var(--bg-footer);
+  border-top: 1px solid var(--border-color);
+  padding: 25px 20px 15px; margin-top: 60px;
+  color: var(--text-main); font-size: 14px;
+}
+.footer-content {
+  max-width: 1200px; margin: auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px;
+}
+.footer-section { display: flex; flex-direction: column; gap: 4px; }
+.footer-section h4 { margin-bottom: 6px; color: #f5d98c; font-size: 13px; }
+.footer-section a { color: var(--text-main); text-decoration: none; font-size: 12px; }
+.footer-bottom { text-align: center; margin-top: 15px; font-size: 12px; opacity: 0.7; }
+
+/* Bot */
+#cb-bubble { position: fixed; bottom: 25px; right: 25px; background: var(--text-main); color: var(--bg-main); width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 26px; cursor: pointer; z-index: 9999; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+    <div class="header-left">
+      <h2 class="gold-text">ChronoBase</h2>
+      <div id="theme-switch" onclick="toggleTheme()">
+        <div class="switch-handle"></div>
+      </div>
+    </div>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="montre.html">Les montres</a>
+      <a href="ressources.html">Ressources</a>
+      <a href="propos.html">À propos</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <h1 class="gold-text" style="text-align:center; font-size: 40px; margin-bottom: 40px;">Événements Horlogers</h1>
+
+  <div class="search-container">
+      <input type="text" id="event-search" placeholder="Rechercher un salon, une ville, une date..." onkeyup="filterEvents()">
+  </div>
+
+  <div class="main-layout">
+      <div class="event-list" id="event-list">
+          </div>
+      <div id="map"></div>
+  </div>
+
+  <div class="calendar-section">
+      <div class="calendar-header">
+          <button class="resource-btn" onclick="prevMonth()" style="padding: 5px 15px;"><</button>
+          <h2 id="month-display" class="gold-text">Mars 2026</h2>
+          <button class="resource-btn" onclick="nextMonth()" style="padding: 5px 15px;">></button>
+      </div>
+      <div class="calendar-grid" id="calendar-grid">
+          </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>Navigation</h4>
+      <a href="index.html">Accueil</a>
+      <a href="montre.html">Les montres</a>
+      <a href="propos.html">À propos</a>
+    </div>
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <a href="mailto:contact@chronobase.com">Envoyer un email</a>
+    </div>
+    <div class="footer-section">
+      <h4>Ressources</h4>
+      <a href="horloger.html">Carte des horlogers</a>
+      <a href="evenements.html">Événements</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 ChronoBase — Tous droits réservés</div>
+</footer>
+
+<div id="cb-bubble">💬</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// Données de test
+const events = [
+    { id: 1, name: "Watches & Wonders", city: "Genève", lat: 46.2044, lng: 6.1432, date: "2026-04-09" },
+    { id: 2, name: "Bourse Horlogère", city: "Lille", lat: 50.6292, lng: 3.0573, date: "2026-03-15" },
+    { id: 3, name: "Salon du Vintage", city: "Paris", lat: 48.8566, lng: 2.3522, date: "2026-03-22" },
+    { id: 4, name: "Dubai Watch Week", city: "Dubai", lat: 25.2048, lng: 55.2708, date: "2026-11-15" }
+];
+
+let currentMonth = 2; // Mars (0-indexed)
+let currentYear = 2026;
+
+// Initialisation Carte
+const map = L.map('map').setView([46.5, 2.5], 5);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
+
+const markers = {};
+
+function initApp() {
+    renderList(events);
+    renderCalendar();
+    
+    events.forEach(ev => {
+        const marker = L.marker([ev.lat, ev.lng]).addTo(map)
+            .bindPopup(`<b>${ev.name}</b><br>${ev.city}<br>${ev.date}`);
+        markers[ev.id] = marker;
+    });
+}
+
+function renderList(data) {
+    const list = document.getElementById('event-list');
+    list.innerHTML = data.map(ev => `
+        <div class="event-item" onclick="focusEvent(${ev.id}, ${ev.lat}, ${ev.lng})">
+            <div style="color:#f5d98c; font-weight:500;">${ev.name}</div>
+            <div style="font-size:12px; opacity:0.8;">${ev.city} — ${ev.date}</div>
+        </div>
+    `).join('');
+}
+
+function focusEvent(id, lat, lng) {
+    map.setView([lat, lng], 12);
+    markers[id].openPopup();
+}
+
+function filterEvents() {
+    const val = document.getElementById('event-search').value.toLowerCase();
+    const filtered = events.filter(ev => 
+        ev.name.toLowerCase().includes(val) || ev.city.toLowerCase().includes(val)
+    );
+    renderList(filtered);
+}
+
+// Logique Calendrier
+function renderCalendar() {
+    const grid = document.getElementById('calendar-grid');
+    const display = document.getElementById('month-display');
+    const date = new Date(currentYear, currentMonth, 1);
+    const monthName = date.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
+    display.innerText = monthName.charAt(0).toUpperCase() + monthName.slice(1);
+
+    grid.innerHTML = '';
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+    for (let i = 1; i <= daysInMonth; i++) {
+        const fullDate = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+        const dayEvents = events.filter(e => e.date === fullDate);
+        
+        const dayEl = document.createElement('div');
+        dayEl.className = 'calendar-day';
+        dayEl.innerHTML = `<span class="day-number">${i}</span>`;
+        
+        dayEvents.forEach(e => {
+            dayEl.innerHTML += `<span class="event-dot">${e.name}</span>`;
+        });
+        
+        grid.appendChild(dayEl);
+    }
+}
+
+function prevMonth() { currentMonth--; if(currentMonth < 0){ currentMonth=11; currentYear--; } renderCalendar(); }
+function nextMonth() { currentMonth++; if(currentMonth > 11){ currentMonth=0; currentYear++; } renderCalendar(); }
+
+function toggleTheme() {
+  document.body.classList.toggle("light-theme");
+  const isLight = document.body.classList.contains("light-theme");
+  localStorage.setItem("theme", isLight ? "light" : "dark");
+}
+
+window.onload = initApp;
+</script>
+</body>
+</html>
