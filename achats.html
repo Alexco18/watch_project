@@ -5,7 +5,7 @@
     <title>Achats & Équipements – ChronoBase</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* ---------------------- VARIABLES (Identiques) ---------------------- */
+        /* ---------------------- VARIABLES ---------------------- */
         :root {
             --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951);
             --bg-main: radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
@@ -45,7 +45,7 @@
         }
         @keyframes shine{ 0%{background-position:0%} 100%{background-position:200%} }
 
-        /* ---------------------- HEADER & FOOTER (Identiques) ---------------------- */
+        /* ---------------------- HEADER ---------------------- */
         header{ width:100%; padding:12px 0; border-bottom:1px solid var(--border-color); background:var(--bg-header); position:fixed; top:0; left:0; z-index:1001; }
         .header-container{ max-width:1200px; margin:auto; display:flex; justify-content:space-between; align-items:center; padding:0 20px; }
         .header-left { display: flex; align-items: center; gap: 15px; }
@@ -59,7 +59,6 @@
         .container { max-width:1200px; margin:120px auto 40px; padding:0 20px; box-sizing: border-box; }
         .page-description { text-align: center; max-width: 900px; margin: 0 auto 40px; line-height: 1.6; color: var(--text-secondary); }
 
-        /* NOUVEAU: Barres de recherche */
         .search-wrapper { margin-bottom: 25px; position: relative; max-width: 500px; margin-left: auto; margin-right: auto; }
         .search-bar {
             width: 100%; padding: 12px 20px; border-radius: 25px; 
@@ -69,7 +68,6 @@
         }
         .search-bar:focus { border-color: var(--text-main); box-shadow: 0 0 10px rgba(212,175,55,0.1); }
 
-        /* Section QCM / Demande */
         .request-section {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -98,7 +96,6 @@
             box-sizing: border-box;
         }
 
-        /* Section Liens Externes */
         .filter-nav { display: flex; gap: 10px; margin-bottom: 20px; justify-content: center; flex-wrap: wrap; }
         .filter-btn {
             background: transparent; border: 1px solid var(--border-color);
@@ -123,7 +120,6 @@
             text-transform: uppercase; padding: 2px 8px; border-radius: 4px; background: rgba(212,175,55,0.2);
         }
 
-        /* Section Annonces Utilisateurs */
         .user-requests-title { margin-bottom: 25px; border-left: 3px solid var(--text-main); padding-left: 15px; }
         .requests-container {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 25px;
@@ -145,7 +141,6 @@
         }
         .btn-contact-user:hover { background: var(--text-main); color: #000; }
 
-        /* NOUVEAU: Section Avis */
         .review-section {
             background: var(--bg-card); border: 1px solid var(--border-color);
             padding: 40px 20px; border-radius: 12px; margin: 60px auto; max-width: 800px;
@@ -160,18 +155,67 @@
         }
 
         .update-notice { text-align: center; font-size: 12px; opacity: 0.6; margin-bottom: 20px; font-style: italic; }
-
-        /* FOOTER (Identique) */
-        .site-footer { background: var(--bg-footer); border-top: 1px solid var(--border-color); padding: 25px 20px 15px; margin-top: 60px; color: var(--text-main); font-size: 14px; }
-        .footer-content { max-width: 1200px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; }
-        .footer-section { min-height: auto; display: flex; flex-direction: column; gap: 4px; }
-        .footer-section h4 { margin-bottom: 6px; color: #f5d98c; font-size: 13px; }
-        .footer-section a { color: var(--text-main); text-decoration: none; font-size: 12px; }
-        .footer-section a:hover { color: #f5d98c; }
-        .footer-legal { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-color); }
-        .footer-bottom { text-align: center; margin-top: 15px; font-size: 12px; opacity: 0.7; }
-        #cb-bubble { position: fixed; bottom: 25px; right: 25px; background: var(--text-main); color: var(--bg-main); width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 26px; cursor: pointer; z-index: 9999; }
         .btn-suggest { background: var(--gold-gradient); border: none; color: #000; padding: 15px 30px; border-radius: 8px; font-weight: 600; cursor: pointer; font-family: 'Montserrat'; transition: transform 0.2s; text-decoration: none; display: inline-block; }
+
+        /* ---------------------- FOOTER (Identique à propos.html) ---------------------- */
+        .site-footer {
+            background: var(--bg-footer);
+            border-top: 1px solid var(--border-color);
+            padding: 25px 20px 15px;
+            margin-top: 60px;
+            color: var(--text-main);
+            font-size: 14px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .footer-section {
+            min-height: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 6px;
+            color: #f5d98c;
+            font-size: 13px;
+        }
+
+        .footer-section a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .footer-section a:hover { color: #f5d98c; }
+
+        .footer-legal {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        /* ---------------------- CHATBOT ---------------------- */
+        #cb-bubble { 
+            position: fixed; bottom: 25px; right: 25px; background: var(--text-main); 
+            color: var(--bg-main); width: 55px; height: 55px; border-radius: 50%; 
+            display: flex; justify-content: center; align-items: center; 
+            font-size: 26px; cursor: pointer; z-index: 9999; 
+        }
     </style>
 </head>
 <body>
@@ -291,39 +335,83 @@
 </div>
 
 <footer class="site-footer">
-    <div class="footer-content">
-      <div class="footer-section">
-        <h4>Navigation</h4>
-        <a href="index.html">Accueil</a><a href="montre.html">Les montres</a><a href="propos.html">À propos</a><a href="chiffre.html">Chiffres clés</a>
-      </div>
-      <div class="footer-section">
-        <h4>Contact</h4>
-        <a href="mailto:contact@chronobase.com">Envoyer un email</a><a href="reseaux.html">Nos réseaux</a>
-      </div>
-      <div class="footer-section">
-        <h4>Version</h4>
-        <a href="maj.html">Mises à jour</a><a href="contributeurs.html">Contributeurs</a>
-      </div>
-      <div class="footer-section">
-        <h4>Ressources</h4>
-        <a href="horlogers.html">Carte</a><a href="achats.html">Équipements</a>
-      </div>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>Navigation</h4>
+      <a href="index.html">Accueil</a>
+      <a href="montre.html">Les montres</a>
+      <a href="propos.html">À propos</a>
+      <a href="chiffre.html">Chiffres clés</a>
     </div>
-    <div class="footer-bottom">© 2026 ChronoBase — Tous droits réservés</div>
+
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <a href="mailto:contact@chronobase.com">Envoyer un email</a>
+      <a href="#">Formulaire (à venir)</a>
+      <a href="reseaux.html">Nos réseaux sociaux</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Version</h4>
+      <a href="version.html">Historique des versions</a>
+      <a href="maj.html">Historique des mises à jour</a>
+      <a href="contributeurs.html">Nos contributeurs</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Ressources</h4>
+      <a href="horlogers.html">Carte des horlogers</a>
+      <a href="evenements.html">Événements</a>
+      <a href="achats.html">Équipements & achats</a>
+    </div>
+  </div>
+
+  <div class="footer-content footer-legal">
+    <div class="footer-section">
+      <h4>Légal</h4>
+      <a href="mentions.html">Mentions légales</a>
+      <a href="cgu.html">Conditions d’utilisation</a>
+      <a href="confidentialite.html">Confidentialité</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Règlements</h4>
+      <a href="reglement-site.html">Règlement du site</a>
+      <a href="reglement-reseaux.html">Règlement réseaux</a>
+      <a href="cookies.html">Cookies</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 ChronoBase — Tous droits réservés
+  </div>
 </footer>
 
 <div id="cb-bubble">💬</div>
 
 <script>
-// DATA EXEMPLES ENRICHIS
+// DATA EXEMPLES
 const communityRequests = [
     { id: 101, user: "Marc H.", type: "Montre", title: "Recherche Seiko SKX007", desc: "Cherche exemplaire d'origine. Budget 300€.", date: "21/02/2026" },
     { id: 102, user: "Anonyme", type: "Pièce", title: "Couronne pour LIP T18", desc: "Pièce d'époque recherchée pour restauration.", date: "22/02/2026" },
-    { id: 103, user: "Lucas_Watch", type: "Outil", title: "Bergeon 6767-F", desc: "Cherche outil pose barrettes occasion.", date: "23/02/2026" },
-    { id: 104, user: "Sophie D.", type: "Montre", title: "Recherche Cartier Tank", desc: "Modèle Must, quartz ou mécanique.", date: "23/02/2026" },
-    { id: 105, user: "Pierre88", type: "Pièce", title: "Mouvement ETA 2824-2", desc: "Cherche mouvement fonctionnel pour projet.", date: "24/02/2026" },
-    { id: 106, user: "FanHorlo", type: "Outil", title: "Porte-mouvement", desc: "Donne ou cherche petit prix pour débutant.", date: "24/02/2026" }
+    { id: 103, user: "Lucas_Watch", type: "Outil", title: "Bergeon 6767-F", desc: "Cherche outil pose barrettes occasion.", date: "23/02/2026" }
 ];
+
+function initRequests() {
+    const container = document.getElementById('user-requests');
+    communityRequests.forEach(req => {
+        container.innerHTML += `
+            <div class="user-card">
+                <div class="type">${req.type} | Posté le ${req.date}</div>
+                <h3>${req.title}</h3>
+                <p>${req.desc}</p>
+                <div style="font-size:12px; margin-top:5px;">Auteur: ${req.user}</div>
+                <a href="mailto:contact@chronobase.com?subject=Contact%20Annonce%20${req.id}" class="btn-contact-user">Contacter l'auteur</a>
+            </div>
+        `;
+    });
+}
+initRequests();
 
 let currentNote = 0;
 
@@ -337,7 +425,6 @@ function toggleQCM() {
     qcm.style.display = qcm.style.display === 'block' ? 'none' : 'block';
 }
 
-// RECHERCHE BOUTIQUES
 function searchShops() {
     let input = document.getElementById('search-shops').value.toLowerCase();
     let cards = document.querySelectorAll('.link-card');
@@ -347,7 +434,6 @@ function searchShops() {
     });
 }
 
-// RECHERCHE COMMUNAUTÉ
 function searchRequests() {
     let input = document.getElementById('search-requests').value.toLowerCase();
     let cards = document.querySelectorAll('.user-card');
@@ -366,7 +452,6 @@ function filterLinks(platform, btn) {
     });
 }
 
-// SYSTÈME DE NOTATION
 function setNote(n) {
     currentNote = n;
     const stars = document.querySelectorAll('.star');
@@ -377,42 +462,18 @@ function setNote(n) {
 
 function sendReviewMail() {
     const name = document.getElementById('review-name').value;
-    const email = document.getElementById('review-email').value;
-    const msg = document.getElementById('review-text').value;
     if(!currentNote || !name) { alert("Merci de donner une note et votre nom."); return; }
-    
-    const subject = `AVIS CLIENT - ${currentNote}/5 - ${name}`;
-    const body = `Note: ${currentNote}/5%0D%0ANom: ${name}%0D%0AEmail: ${email}%0D%0ACommentaire: ${msg}`;
-    window.location.href = `mailto:contact@chronobase.com?subject=${subject}&body=${body}`;
+    alert("Merci pour votre avis ! (Simulation d'envoi)");
 }
 
 function sendRequestMail() {
     const name = document.getElementById('qcm-name').value;
     const type = document.getElementById('qcm-type').value;
     const desc = document.getElementById('qcm-desc').value;
-    window.location.href = `mailto:contact@chronobase.com?subject=Demande ${type}&body=Nom: ${name}%0D%0AType: ${type}%0D%0ADescription: ${desc}`;
+    if(!name || !desc) { alert("Veuillez remplir les champs."); return; }
+    window.location.href = `mailto:contact@chronobase.com?subject=Demande ${type} - ${name}&body=${desc}`;
 }
-
-function renderRequests() {
-    const container = document.getElementById('user-requests');
-    container.innerHTML = communityRequests.map(req => `
-        <div class="user-card">
-            <div style="display:flex; justify-content:space-between;">
-                <span class="type">${req.type}</span>
-                <span class="status">● Vérifié</span>
-            </div>
-            <h3>${req.title}</h3>
-            <p>${req.desc}</p>
-            <div style="font-size:11px; opacity:0.6; margin-top:auto;">Posté par ${req.user} le ${req.date}</div>
-            <a href="mailto:contact@chronobase.com?subject=Contact ${req.id}" class="btn-contact-user">Contacter via ChronoBase</a>
-        </div>
-    `).join('');
-}
-
-window.onload = () => {
-    renderRequests();
-    if (localStorage.getItem("theme") === "light") document.body.classList.add("light-theme");
-};
 </script>
+
 </body>
 </html>
