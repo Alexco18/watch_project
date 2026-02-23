@@ -157,23 +157,59 @@ nav a:hover{color:#f5d98c}
     color: #000;
 }
 
-/* ---------------------- FOOTER & CHATBOT (Identiques) ---------------------- */
+/* ---------------------- FOOTER COMPACT (SYNC PROPOS.HTML) ---------------------- */
 .site-footer {
   background: var(--bg-footer);
   border-top: 1px solid var(--border-color);
-  padding: 25px 20px 15px; margin-top: 60px;
-  color: var(--text-main); font-size: 14px;
+  padding: 25px 20px 15px;
+  margin-top: 60px;
+  color: var(--text-main);
+  font-size: 14px;
 }
-.footer-content {
-  max-width: 1200px; margin: auto;
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px;
-}
-.footer-section { display: flex; flex-direction: column; gap: 4px; }
-.footer-section h4 { margin-bottom: 6px; color: #f5d98c; font-size: 13px; }
-.footer-section a { color: var(--text-main); text-decoration: none; font-size: 12px; }
-.footer-legal { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-color); }
-.footer-bottom { text-align: center; margin-top: 15px; font-size: 12px; opacity: 0.7; }
 
+.footer-content {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.footer-section {
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footer-section h4 {
+  margin-bottom: 6px;
+  color: #f5d98c;
+  font-size: 13px;
+}
+
+.footer-section a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.footer-section a:hover { color: #f5d98c; }
+
+.footer-legal {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* ---------------------- CHATBOT ---------------------- */
 #cb-bubble { position: fixed; bottom: 25px; right: 25px; background: var(--text-main); color: var(--bg-main); width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 26px; cursor: pointer; z-index: 9999; box-shadow: 0 0 10px rgba(0,0,0,0.4); }
 #cb-window { position: fixed; bottom: 95px; right: 25px; width: 200px; height: 260px; background: var(--bg-header); border: 1px solid var(--border-color); border-radius: 10px; display: none; flex-direction: column; z-index: 9999; }
 #cb-header { padding: 8px; background: var(--bg-card); color: var(--text-main); display: flex; justify-content: space-between; font-size: 13px; border-bottom: 1px solid var(--border-color); cursor: grab; }
@@ -214,7 +250,7 @@ nav a:hover{color:#f5d98c}
               <h2>Carte des horlogers</h2>
               <p>Trouvez un artisan qualifié près de chez vous pour l'entretien et la réparation de vos garde-temps.</p>
           </div>
-          <a href="horloger.html" class="resource-btn">Explorer la carte</a>
+          <a href="horlogers.html" class="resource-btn">Explorer la carte</a>
       </div>
 
       <div class="resource-card">
@@ -245,18 +281,45 @@ nav a:hover{color:#f5d98c}
       <a href="propos.html">À propos</a>
       <a href="chiffre.html">Chiffres clés</a>
     </div>
+
     <div class="footer-section">
       <h4>Contact</h4>
       <a href="mailto:contact@chronobase.com">Envoyer un email</a>
+      <a href="#">Formulaire (à venir)</a>
       <a href="reseaux.html">Nos réseaux sociaux</a>
     </div>
+
+    <div class="footer-section">
+      <h4>Version</h4>
+      <a href="version.html">Historique des versions</a>
+      <a href="maj.html">Historique des mises à jour</a>
+      <a href="contributeurs.html">Nos contributeurs</a>
+    </div>
+
     <div class="footer-section">
       <h4>Ressources</h4>
-      <a href="horloger.html">Carte des horlogers</a>
+      <a href="horlogers.html">Carte des horlogers</a>
       <a href="evenements.html">Événements</a>
       <a href="achats.html">Équipements & achats</a>
     </div>
   </div>
+
+  <div class="footer-content footer-legal">
+    <div class="footer-section">
+      <h4>Légal</h4>
+      <a href="mentions.html">Mentions légales</a>
+      <a href="cgu.html">Conditions d’utilisation</a>
+      <a href="confidentialite.html">Confidentialité</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Règlements</h4>
+      <a href="reglement-site.html">Règlement du site</a>
+      <a href="reglement-reseaux.html">Règlement réseaux</a>
+      <a href="cookies.html">Cookies</a>
+    </div>
+  </div>
+
   <div class="footer-bottom">
     © 2026 ChronoBase — Tous droits réservés
   </div>
@@ -288,7 +351,7 @@ closeBtn.onclick = () => win.style.display = "none";
 function startChat() {
   content.innerHTML = `<p>Où souhaitez-vous aller ?</p>
     <div class="cb-btn" onclick="window.location='index.html'">Accueil</div>
-    <div class="cb-btn" onclick="window.location='horloger.html'">Carte des horlogers</div>
+    <div class="cb-btn" onclick="window.location='horlogers.html'">Carte des horlogers</div>
     <div class="cb-btn" onclick="window.location='evenements.html'">Événements</div>`;
 }
 </script>
