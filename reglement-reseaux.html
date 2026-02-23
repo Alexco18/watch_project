@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Règlement Réseaux – ChronoBase</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ---------------------- VARIABLES (Conservées) ---------------------- */
+:root {
+  --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951);
+  --bg-main: radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
+  --bg-header: #0b0b0b;
+  --bg-card: linear-gradient(180deg,#111,#0c0c0c);
+  --bg-footer: #0b0b0b;
+  --text-main: #d4af37;
+  --text-secondary: #c1a96b;
+  --border-color: rgba(212,175,55,0.2);
+}
+
+.light-theme {
+  --bg-main: #ffffff;
+  --bg-header: #ffffff;
+  --bg-card: #ffffff;
+  --bg-footer: #ffffff;
+  --text-main: #000000;
+  --text-secondary: #444444;
+  --border-color: rgba(0,0,0,0.2);
+}
+
+/* ---------------------- GLOBAL ---------------------- */
+body{
+  margin:0; padding:0;
+  font-family:'Montserrat',sans-serif;
+  background:var(--bg-main);
+  color:var(--text-main);
+  font-weight:300;
+  overflow-x:hidden;
+  line-height: 1.6;
+}
+
+.gold-text{
+  background:var(--gold-gradient);
+  -webkit-background-clip:text;
+  color:transparent;
+  animation:shine 6s infinite linear;
+  background-size:200%;
+}
+
+@keyframes shine{ 0%{background-position:0%} 100%{background-position:200%} }
+
+/* ---------------------- HEADER ---------------------- */
+header{
+  width:100%; padding:12px 0;
+  border-bottom:1px solid var(--border-color);
+  background:var(--bg-header);
+  position:fixed; top:0; left:0; z-index:10;
+}
+
+.header-container{
+  max-width:1200px; margin:auto;
+  display:flex; justify-content:space-between; align-items:center; padding:0 20px;
+}
+
+.header-left { display: flex; align-items: center; gap: 15px; }
+
+nav a{
+  margin-left:30px; text-decoration:none;
+  color:var(--text-main); font-size:14px;
+  letter-spacing:1px; text-transform:uppercase;
+}
+nav a:hover{color:#f5d98c}
+
+#theme-switch {
+  width: 50px; height: 26px; background: var(--border-color);
+  border-radius: 20px; position: relative; cursor: pointer;
+  display: flex; align-items: center; padding: 3px;
+}
+
+.switch-handle {
+  width: 20px; height: 20px; background: var(--text-main);
+  border-radius: 50%; transition: transform 0.3s;
+}
+
+.light-theme #theme-switch .switch-handle { transform: translateX(24px); background: #000; }
+
+/* ---------------------- CONTENT (Adapté) ---------------------- */
+.container{ max-width:1000px; margin:120px auto 80px; padding:0 20px; min-height: 50vh;}
+
+.intro-text {
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--text-secondary);
+    font-size: 1.1em;
+}
+
+.card{
+  background:var(--bg-card);
+  border:1px solid var(--border-color);
+  padding:50px 35px;
+  border-radius:12px;
+  margin-bottom:30px;
+  text-align: center;
+  transition: border-color 0.3s;
+}
+
+.work-icon {
+    font-size: 50px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+/* ---------------------- FOOTER ---------------------- */
+.site-footer {
+  background: var(--bg-footer);
+  border-top: 1px solid var(--border-color);
+  padding: 25px 20px 15px;
+  margin-top: 60px;
+  color: var(--text-main);
+  font-size: 14px;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footer-section h4 {
+  margin-bottom: 6px;
+  color: #f5d98c;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.footer-section a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 12px;
+  display: block;
+}
+
+.footer-section a:hover { color: #f5d98c; }
+
+.footer-legal {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 12px;
+  opacity: 0.7;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+    <div class="header-left">
+      <h2 class="gold-text">ChronoBase</h2>
+      <div id="theme-switch" onclick="toggleTheme()">
+        <div class="switch-handle"></div>
+      </div>
+    </div>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="montre.html">Les montres</a>
+      <a href="propos.html">À propos</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <h1 class="gold-text" style="text-align:center; margin-bottom: 10px;">Règlement Réseaux</h1>
+  <p class="intro-text">Charte de bonne conduite sur nos espaces communautaires</p>
+
+  <div class="card">
+    <span class="work-icon">⚙️</span>
+    <h2 style="color:#f5d98c; font-weight: 400;">Section en cours d'ajustement</h2>
+    <p style="color: var(--text-secondary); max-width: 600px; margin: 20px auto;">
+        Afin de vous garantir une expérience communautaire optimale et sécurisée, nos équipes finalisent actuellement la rédaction du règlement relatif aux réseaux sociaux.
+    </p>
+    <p style="font-weight: 500;">
+        Cette page sera opérationnelle <span class="gold-text">ASAP</span>.
+    </p>
+    <div style="margin-top: 30px;">
+        <a href="index.html" style="color: #f5d98c; text-decoration: none; font-size: 0.9em; border: 1px solid var(--border-color); padding: 10px 20px; border-radius: 5px;">Retour à l'accueil</a>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>Navigation</h4>
+      <a href="index.html">Accueil</a>
+      <a href="montre.html">Les montres</a>
+      <a href="propos.html">À propos</a>
+      <a href="chiffre.html">Chiffres clés</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <a href="mailto:contact@chronobase.com">Envoyer un email</a>
+      <a href="#">Formulaire (à venir)</a>
+      <a href="reseaux.html">Nos réseaux sociaux</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Version</h4>
+      <a href="version.html">Historique des versions</a>
+      <a href="maj.html">Historique des mises à jour</a>
+      <a href="contributeurs.html">Nos contributeurs</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Ressources</h4>
+      <a href="horlogers.html">Carte des horlogers</a>
+      <a href="evenements.html">Événements</a>
+      <a href="achats.html">Équipements & achats</a>
+    </div>
+  </div>
+
+  <div class="footer-content footer-legal">
+    <div class="footer-section">
+      <h4>Légal</h4>
+      <a href="mentions.html">Mentions légales</a>
+      <a href="cgu.html">Conditions d’utilisation</a>
+      <a href="confidentialite.html">Confidentialité</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Règlements</h4>
+      <a href="reglement-site.html">Règlement du site</a>
+      <a href="reglement-reseaux.html">Règlement réseaux</a>
+      <a href="cookies.html">Cookies</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 ChronoBase — Tous droits réservés
+  </div>
+</footer>
+
+<script>
+function toggleTheme() {
+  document.body.classList.toggle("light-theme");
+  localStorage.setItem("theme", document.body.classList.contains("light-theme") ? "light" : "dark");
+}
+(function() {
+  if (localStorage.getItem("theme") === "light") document.body.classList.add("light-theme");
+})();
+</script>
+
+</body>
+</html>
