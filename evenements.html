@@ -92,6 +92,15 @@ nav a:hover{color:#f5d98c}
   box-sizing: border-box;
 }
 
+/* Nouveau style pour la description */
+.page-description {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
 .search-controls {
     display: flex;
     flex-direction: column;
@@ -110,7 +119,7 @@ nav a:hover{color:#f5d98c}
 }
 
 #event-search {
-    flex: 1;
+    flex: 1; /* S'étirera pour prendre la place restante après le bouton */
     padding: 15px;
     background: rgba(0,0,0,0.2);
     border: 1px solid var(--border-color);
@@ -136,9 +145,9 @@ input[type=range] {
     background: var(--gold-gradient);
     border: none;
     color: #000;
-    padding: 0 20px;
+    padding: 0 25px;
     border-radius: 8px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     font-family: 'Montserrat';
     transition: transform 0.2s;
@@ -147,6 +156,7 @@ input[type=range] {
     display: flex;
     align-items: center;
 }
+.btn-suggest:hover { transform: scale(1.02); }
 
 .main-layout {
     display: flex;
@@ -161,7 +171,6 @@ input[type=range] {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    /* Personnalisation de la scrollbar */
 }
 .event-list::-webkit-scrollbar { width: 6px; }
 .event-list::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
@@ -237,7 +246,7 @@ input[type=range] {
     white-space: nowrap;
 }
 
-/* ---------------------- FOOTER (COPIE PROPOS.HTML) ---------------------- */
+/* ---------------------- FOOTER ---------------------- */
 .site-footer {
   background: var(--bg-footer);
   border-top: 1px solid var(--border-color);
@@ -312,12 +321,16 @@ input[type=range] {
 </header>
 
 <div class="container">
-  <h1 class="gold-text" style="text-align:center; font-size: 40px; margin-bottom: 40px;">Événements Horlogers</h1>
+  <h1 class="gold-text" style="text-align:center; font-size: 40px; margin-bottom: 15px;">Événements Horlogers</h1>
+  
+  <div class="page-description">
+      Cette page vous permet de trouver un événement horloger près de chez vous. Tous les événements proposés sont <strong>traités et vérifiés par notre équipe</strong> afin de garantir des données fiables et une expérience de qualité. Ils doivent impérativement avoir un lien avec l'horlogerie (les brocantes sont incluses car elles permettent de dénicher des pièces uniques). Vous pouvez également suggérer des événements par mail ou ajouter les dates directement dans votre calendrier.
+  </div>
 
   <div class="search-controls">
       <div class="search-bar-wrapper">
           <input type="text" id="event-search" placeholder="Rechercher une ville ou un salon..." onkeyup="filterEvents()">
-          <a href="mailto:contact@chronobase.com?subject=Suggestion d'événement" class="btn-suggest">+ Suggérer</a>
+          <a href="mailto:contact@chronobase.com?subject=Suggestion d'événement" class="btn-suggest">+ Suggérer un événement</a>
       </div>
       <div class="radius-filter">
           <span>Rayon : <strong id="radius-val">50</strong> km</span>
@@ -411,7 +424,7 @@ const events = [
 
 let currentMonth = new Date().getMonth();
 let currentYear = new Date().getFullYear();
-let searchMarker = null; // Pour la recherche de ville
+let searchMarker = null;
 
 const map = L.map('map').setView([46.5, 2.5], 5);
 L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
@@ -428,7 +441,6 @@ function updateRadius(val) {
     filterEvents();
 }
 
-// Fonction pour calculer la distance entre deux points (Haversine)
 function getDistance(lat1, lon1, lat2, lon2) {
     const R = 6371; 
     const dLat = (lat2-lat1) * Math.PI / 180;
@@ -443,9 +455,7 @@ async function filterEvents() {
     const radius = document.getElementById('radius-range').value;
     let filtered = events;
 
-    // Si on cherche une ville spécifique, on simule une géolocalisation de cette ville
     if(query.length > 2) {
-        // Pour l'exemple, on cherche si le nom correspond à une ville connue dans nos datas
         const cityMatch = events.find(e => e.city.toLowerCase().includes(query));
         
         if(cityMatch) {
@@ -454,7 +464,6 @@ async function filterEvents() {
                 return dist <= radius;
             });
         } else {
-            // Filtre textuel classique si pas de correspondance géographique
             filtered = events.filter(ev => ev.name.toLowerCase().includes(query) || ev.city.toLowerCase().includes(query));
         }
     }
@@ -491,7 +500,7 @@ function renderCalendar() {
         dayEl.className = 'calendar-day';
         dayEl.innerHTML = `<span class="day-number">${i}</span>`;
         dayEvs.forEach(e => {
-            dayEl.innerHTML += `<span class="event-dot" onclick="addToCalendar(${e.id})">📅 ${e.name}</span>`;
+            dayEl.innerHTML += `<span class="event-dot">📅 ${e.name}</span>`;
         });
         grid.appendChild(dayEl);
     }
