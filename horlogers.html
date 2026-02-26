@@ -19,6 +19,7 @@
   --text-secondary: #c1a96b;
   --border-color: rgba(212,175,55,0.2);
   --purple-certified: #8a2be2;
+  --rating-bg: rgba(255, 255, 255, 0.05); /* Fond badge mode nuit */
 }
 
 .light-theme {
@@ -28,7 +29,8 @@
   --bg-footer: #ffffff;
   --text-main: #000000;
   --text-secondary: #444444;
-  --border-color: rgba(0,0,0,0.2);
+  --border-color: rgba(0,0,0,0.1);
+  --rating-bg: rgba(0, 0, 0, 0.05); /* Fond badge mode jour */
 }
 
 /* ---------------------- GLOBAL ---------------------- */
@@ -102,7 +104,7 @@ nav a:hover{color:#f5d98c}
 #search-input {
     flex: 1;
     padding: 15px;
-    background: rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.1);
     border: 1px solid var(--border-color);
     color: var(--text-main);
     border-radius: 8px;
@@ -137,17 +139,48 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
 .btn-action:hover { transform: scale(1.02); }
 
 /* ---------------------- LAYOUT & CARDS ---------------------- */
-.main-layout { display: flex; gap: 20px; height: 500px; margin-bottom: 60px; }
+.main-layout { 
+    display: flex; 
+    gap: 20px; 
+    height: 550px; /* Hauteur fixe pour aligner liste et carte */
+    margin-bottom: 60px; 
+}
 
-.list-container {
+.list-wrapper {
     flex: 1;
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: 8px;
+    overflow: hidden;
 }
-.list-container::-webkit-scrollbar { width: 6px; }
-.list-container::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
+
+.list-container {
+    flex: 1;
+    overflow-y: hidden; /* Géré par la pagination maintenant */
+}
+
+/* PAGINATION STYLE */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 15px;
+    border-top: 1px solid var(--border-color);
+    font-size: 13px;
+}
+.pg-btn {
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    transition: 0.2s;
+    user-select: none;
+}
+.pg-btn:hover { background: var(--border-color); }
+.pg-btn.active { background: var(--text-main); color: #000; font-weight: bold; }
 
 #map { flex: 2; border-radius: 8px; border: 1px solid var(--border-color); z-index: 1; }
 
@@ -157,7 +190,7 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
     cursor: pointer;
     transition: 0.3s;
 }
-.card-item:hover { background: rgba(212,175,55,0.1); }
+.card-item:hover { background: rgba(212,175,55,0.05); }
 
 .badge-purple {
     background: var(--purple-certified);
@@ -168,9 +201,21 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
     margin-left: 10px;
 }
 
-.rating-box { font-size: 12px; margin-top: 5px; }
-.community-note { color: #f5d98c; }
-.audit-note { color: var(--purple-certified); font-weight: 600; }
+/* NOUVEAU STYLE NOTATION */
+.rating-badge {
+    display: inline-block;
+    background: var(--rating-bg);
+    padding: 4px 10px;
+    border-radius: 6px; /* Congés */
+    margin-top: 8px;
+    border: 1px solid var(--border-color);
+}
+.community-note { 
+    color: #d4af37; /* Couleur constante dorée */
+    font-weight: 600;
+    font-size: 12px;
+}
+.audit-note { color: var(--purple-certified); font-weight: 600; font-size: 11px; margin-top: 4px; display: block;}
 
 /* ---------------------- BESOINS SECTION ---------------------- */
 .section-header {
@@ -181,7 +226,6 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 15px;
 }
-
 .deadline { color: #ff4d4d; font-size: 11px; font-weight: 600; }
 
 /* ---------------------- MODAL ---------------------- */
@@ -243,10 +287,10 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
       </div>
     </div>
     <nav>
-      <a href="index.html">Accueil</a>
-      <a href="montre.html">Les montres</a>
-      <a href="horlogers.html" style="border-bottom: 2px solid var(--text-main)">Horlogers</a>
-      <a href="propos.html">À propos</a>
+      <a href="#">Accueil</a>
+      <a href="#">Les montres</a>
+      <a href="#" style="border-bottom: 2px solid var(--text-main)">Horlogers</a>
+      <a href="#">À propos</a>
     </nav>
   </div>
 </header>
@@ -255,7 +299,7 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
     <h1 class="gold-text" style="text-align:center; font-size: 40px; margin-bottom: 15px;">Réseau des Horlogers</h1>
     
     <div class="page-description">
-        Trouvez un expert qualifié pour l'entretien de votre garde-temps ou répondez aux appels d'offres en cours. Les membres certifiés <strong>Audit ChronoBase</strong> garantissent un niveau de service optimal, vérifié par nos experts.
+        Trouvez un expert qualifié pour l'entretien de votre garde-temps. Les membres certifiés <strong>Audit ChronoBase</strong> garantissent un niveau de service optimal.
     </div>
 
     <div class="search-controls">
@@ -270,7 +314,10 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
     </div>
 
     <div class="main-layout">
-        <div class="list-container" id="horloger-list"></div>
+        <div class="list-wrapper">
+            <div class="list-container" id="horloger-list"></div>
+            <div class="pagination" id="pagination-controls"></div>
+        </div>
         <div id="map"></div>
     </div>
 
@@ -279,12 +326,7 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
         <button class="btn-action" onclick="openForm('besoin')">Publier un besoin</button>
     </div>
     
-    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 25px; max-width: 800px;">
-        Les horlogers certifiés peuvent répondre directement à ces demandes. Nous assurons la mise en relation et le suivi de la prestation pour garantir votre satisfaction.
-    </p>
-
-    <div id="besoins-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px;">
-        </div>
+    <div id="besoins-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px;"></div>
 </div>
 
 <div class="modal-overlay" id="overlay" onclick="closeModal()"></div>
@@ -294,146 +336,114 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
 </div>
 
 <footer class="site-footer">
-  <div class="footer-content">
-    <div class="footer-section">
-      <h4>Navigation</h4>
-      <a href="index.html">Accueil</a>
-      <a href="montre.html">Les montres</a>
-      <a href="propos.html">À propos</a>
-      <a href="chiffre.html">Chiffres clés</a>
-    </div>
-    <div class="footer-section">
-      <h4>Contact</h4>
-      <a href="mailto:contact@chronobase.com">Envoyer un email</a>
-      <a href="mailto:audit@chronobase.com">Demander un Audit</a>
-      <a href="reseaux.html">Nos réseaux sociaux</a>
-    </div>
-    <div class="footer-section">
-      <h4>Version</h4>
-      <a href="version.html">Historique des versions</a>
-      <a href="maj.html">Historique des mises à jour</a>
-      <a href="contributeurs.html">Nos contributeurs</a>
-    </div>
-    <div class="footer-section">
-      <h4>Ressources</h4>
-      <a href="horlogers.html">Carte des horlogers</a>
-      <a href="evenements.html">Événements</a>
-      <a href="achats.html">Équipements & achats</a>
-    </div>
-  </div>
-  <div class="footer-content footer-legal">
-    <div class="footer-section">
-      <h4>Légal</h4>
-      <a href="mentions.html">Mentions légales</a>
-      <a href="cgu.html">Conditions d’utilisation</a>
-      <a href="confidentialite.html">Confidentialité</a>
-    </div>
-    <div class="footer-section">
-      <h4>Règlements</h4>
-      <a href="reglement-site.html">Règlement du site</a>
-      <a href="reglement-reseaux.html">Règlement réseaux</a>
-      <a href="cookies.html">Cookies</a>
-    </div>
-  </div>
-  <div class="footer-bottom">© 2026 ChronoBase — Tous droits réservés</div>
+    <div class="footer-bottom">© 2026 ChronoBase — Tous droits réservés</div>
 </footer>
 
 <div id="cb-bubble">💬</div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-// --- DONNÉES ---
-const horlogers = [
+// --- DONNÉES (Simulées avec plus d'entrées pour tester la pagination) ---
+const allHorlogers = [
     { id: 1, nom: "Atelier du Temps", ville: "Arras", lat: 50.291, lng: 2.777, noteComm: 4.8, audit: true, spec: "Mécanique, Vintage", expertise: "15 ans" },
-    { id: 2, nom: "Horlogerie Durand", ville: "Lille", lat: 50.629, lng: 3.057, noteComm: 4.2, audit: false, spec: "Quartz, Luxe", expertise: "8 ans" }
+    { id: 2, nom: "Horlogerie Durand", ville: "Lille", lat: 50.629, lng: 3.057, noteComm: 4.2, audit: false, spec: "Quartz, Luxe", expertise: "8 ans" },
+    { id: 3, nom: "La Main d'Or", ville: "Lille", lat: 50.635, lng: 3.060, noteComm: 4.9, audit: true, spec: "Haute Horlogerie", expertise: "25 ans" },
+    { id: 4, nom: "Chrono Nord", ville: "Douai", lat: 50.366, lng: 3.078, noteComm: 3.9, audit: false, spec: "Réparations", expertise: "5 ans" },
+    { id: 5, nom: "Atelier 24", ville: "Arras", lat: 50.280, lng: 2.780, noteComm: 4.5, audit: true, spec: "Rolex, Omega", expertise: "12 ans" },
+    { id: 6, nom: "Le Ressort", ville: "Lille", lat: 50.620, lng: 3.040, noteComm: 4.1, audit: false, spec: "Vintage", expertise: "10 ans" }
 ];
 
 const besoins = [
-    { id: 101, client: "Jean P.", montre: "Omega Seamaster", ville: "Béthune", lat: 50.533, lng: 2.633, pb: "Révision complète", deadline: "2026-03-30", colis: true, radius: 20 }
+    { id: 101, client: "Jean P.", montre: "Omega Seamaster", ville: "Béthune", lat: 50.533, lng: 2.633, pb: "Révision complète", deadline: "2026-03-30", colis: true }
 ];
 
-// --- INITIALISATION ---
-let map = L.map('map').setView([50.4, 2.8], 9);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
-let markers = [];
+// --- PAGINATION LOGIQUE ---
+let currentPage = 1;
+const itemsPerPage = 4; // Ajusté pour tenir dans la hauteur de la carte sans scroll
 
-function init() {
-    renderHorlogers(horlogers);
-    renderBesoins(besoins);
-    updateMarkers();
-    if (localStorage.getItem("theme") === "light") document.body.classList.add("light-theme");
-}
-
-function renderHorlogers(data) {
+function renderHorlogers(page) {
     const container = document.getElementById('horloger-list');
-    container.innerHTML = data.map(h => `
+    const start = (page - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const paginatedItems = allHorlogers.slice(start, end);
+
+    container.innerHTML = paginatedItems.map(h => `
         <div class="card-item" onclick="showDetails('horloger', ${h.id})">
-            <div style="font-weight:600; color:var(--text-main);">${h.nom} ${h.audit ? '<span class="badge-purple">CERTIFIÉ AUDIT</span>' : ''}</div>
+            <div style="font-weight:600; color:var(--text-main);">${h.nom} ${h.audit ? '<span class="badge-purple">CERTIFIÉ</span>' : ''}</div>
             <div style="font-size:12px; opacity:0.8; margin-top:4px;">${h.ville} • ${h.spec}</div>
-            <div class="rating-box">
-                <span class="community-note">★ ${h.noteComm}/5</span>
-                ${h.audit ? '<br><span class="audit-note">✓ Validé par ChronoBase</span>' : ''}
+            
+            <div class="rating-badge">
+                <span class="community-note">★ ${h.noteComm} / 5</span>
+                ${h.audit ? '<span class="audit-note">✓ Validé par ChronoBase</span>' : ''}
             </div>
         </div>
     `).join('');
+
+    renderPagination();
+}
+
+function renderPagination() {
+    const totalPages = Math.ceil(allHorlogers.length / itemsPerPage);
+    const nav = document.getElementById('pagination-controls');
+    
+    let html = '';
+    
+    // Bouton Précédent [<<]
+    html += `<span class="pg-btn" onclick="changePage(${currentPage - 1})">«</span>`;
+
+    // Pages (Logique simplifiée : montre la page actuelle, la première et la dernière si bcp de pages)
+    for (let i = 1; i <= totalPages; i++) {
+        if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+            html += `<span class="pg-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</span>`;
+        } else if (i === currentPage - 2 || i === currentPage + 2) {
+            html += `<span>...</span>`;
+        }
+    }
+
+    // Bouton Suivant [>>]
+    html += `<span class="pg-btn" onclick="changePage(${currentPage + 1})">»</span>`;
+    
+    nav.innerHTML = html;
+}
+
+function changePage(p) {
+    const totalPages = Math.ceil(allHorlogers.length / itemsPerPage);
+    if (p < 1 || p > totalPages) return;
+    currentPage = p;
+    renderHorlogers(currentPage);
+}
+
+// --- AUTRES FONCTIONS ---
+let map = L.map('map').setView([50.4, 2.8], 9);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
+
+function init() {
+    renderHorlogers(1);
+    renderBesoins(besoins);
+    allHorlogers.forEach(h => {
+        L.marker([h.lat, h.lng]).addTo(map).bindPopup(`<b>${h.nom}</b>`);
+    });
+    if (localStorage.getItem("theme") === "light") document.body.classList.add("light-theme");
 }
 
 function renderBesoins(data) {
     const container = document.getElementById('besoins-grid');
     container.innerHTML = data.map(b => `
         <div class="card-item" style="background:var(--bg-card); border-radius:12px; border:1px solid var(--border-color); cursor:default;">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                <span style="font-weight:600; font-size:16px;">${b.montre}</span>
-                <span class="deadline">Échéance : ${b.deadline}</span>
+            <div style="display:flex; justify-content:space-between;">
+                <span style="font-weight:600;">${b.montre}</span>
+                <span class="deadline">${b.deadline}</span>
             </div>
-            <div style="font-size:13px; margin: 12px 0; min-height:40px; color:var(--text-secondary);">${b.pb}</div>
-            <div style="font-size:11px; opacity:0.7; margin-bottom:15px;">📍 ${b.ville} • ${b.colis ? '📦 Envoi possible' : '🤝 Remise en main propre'}</div>
-            <button class="btn-action" style="width:100%; font-size:12px;" onclick="repondreAppel(${b.id})">Répondre à l'offre</button>
+            <div style="font-size:13px; margin: 12px 0; color:var(--text-secondary);">${b.pb}</div>
+            <button class="btn-action" style="width:100%; font-size:12px;">Répondre</button>
         </div>
     `).join('');
 }
 
-function updateMarkers() {
-    markers.forEach(m => map.removeLayer(m));
-    markers = [];
-    horlogers.forEach(h => {
-        let m = L.marker([h.lat, h.lng]).addTo(map).bindPopup(`<b>${h.nom}</b><br>${h.ville}`);
-        markers.push(m);
-    });
-}
-
-function openForm(type) {
-    let subject = type === 'horloger' ? "Demande d'ajout Horloger" : "Nouveau besoin client";
-    let body = type === 'horloger' ? 
-        "Nom/Entreprise:\nLocalisation:\nSpécialité:\nExpertise:" : 
-        "Marque de la montre:\nProblème:\nVille:";
-    window.location.href = `mailto:contact@chronobase.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-}
-
-function repondreAppel(id) {
-    const b = besoins.find(x => x.id === id);
-    window.location.href = `mailto:contact@chronobase.com?subject=Réponse Offre ${id}&body=Je souhaite postuler pour la montre ${b.montre}.`;
-}
-
 function showDetails(type, id) {
-    const h = horlogers.find(x => x.id === id);
+    const h = allHorlogers.find(x => x.id === id);
     const content = document.getElementById('modal-content');
-    content.innerHTML = `
-        <h2 class="gold-text" style="margin-top:0">${h.nom}</h2>
-        <div style="color:var(--text-secondary); line-height:1.6;">
-            <p><b>📍 Ville :</b> ${h.ville}</p>
-            <p><b>🛠 Expertise :</b> ${h.expertise}</p>
-            <p><b>🔍 Spécialités :</b> ${h.spec}</p>
-            <p><b>📜 Audit :</b> ${h.audit ? 'Certifié - Critères respectés : Outillage, propreté, traçabilité.' : 'Non audité pour le moment.'}</p>
-        </div>
-        <div style="background:rgba(212,175,55,0.05); padding:15px; border-radius:10px; margin:20px 0; border:1px solid var(--border-color);">
-            <b style="color:var(--text-main);">Dernier avis client :</b><br>
-            <i style="font-size:13px;">"Travail impeccable sur ma pièce vintage. Je recommande."</i>
-        </div>
-        <div style="text-align:center;">
-            <div style="width:80px; height:80px; background:white; margin:10px auto; display:flex; align-items:center; justify-content:center; color:black; font-size:10px; font-weight:bold;">QR CODE</div>
-        </div>
-    `;
+    content.innerHTML = `<h2 class="gold-text">${h.nom}</h2><p>${h.spec}</p><p>Expertise: ${h.expertise}</p>`;
     document.getElementById('modal').style.display = 'block';
     document.getElementById('overlay').style.display = 'block';
 }
