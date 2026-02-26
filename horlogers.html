@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
 <style>
-/* ---------------------- VARIABLES (Identiques) ---------------------- */
+/* ---------------------- VARIABLES ---------------------- */
 :root {
   --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951);
   --bg-main: radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
@@ -50,7 +50,7 @@ body{
 }
 @keyframes shine{ 0%{background-position:0%} 100%{background-position:200%} }
 
-/* ---------------------- HEADER & FOOTER ---------------------- */
+/* ---------------------- HEADER ---------------------- */
 header{
   width:100%; padding:12px 0;
   border-bottom:1px solid var(--border-color);
@@ -61,26 +61,83 @@ header{
   max-width:1200px; margin:auto;
   display:flex; justify-content:space-between; align-items:center; padding:0 20px;
 }
-nav a{ margin-left:30px; text-decoration:none; color:var(--text-main); font-size:14px; text-transform:uppercase; }
+.header-left { display: flex; align-items: center; gap: 15px; }
+
+nav a{ margin-left:30px; text-decoration:none; color:var(--text-main); font-size:14px; text-transform:uppercase; letter-spacing:1px; }
 nav a:hover{color:#f5d98c}
 
 #theme-switch { width: 50px; height: 26px; background: var(--border-color); border-radius: 20px; position: relative; cursor: pointer; display: flex; align-items: center; padding: 3px; }
 .switch-handle { width: 20px; height: 20px; background: var(--text-main); border-radius: 50%; transition: transform 0.3s; }
 .light-theme #theme-switch .switch-handle { transform: translateX(24px); background: #000; }
 
-/* ---------------------- CONTENT LAYOUT ---------------------- */
+/* ---------------------- PAGE CONTENT ---------------------- */
 .container{ max-width:1200px; margin:120px auto 80px; padding:0 20px; box-sizing: border-box; }
 
-.section-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 50px;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 10px;
+.page-description {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+    color: var(--text-secondary);
 }
 
-.main-layout { display: flex; gap: 20px; height: 600px; margin-bottom: 40px; }
+/* ---------------------- SEARCH CONTROLS ---------------------- */
+.search-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+    background: var(--bg-card);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.search-bar-wrapper {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+}
+
+#search-input {
+    flex: 1;
+    padding: 15px;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    border-radius: 8px;
+    font-family: 'Montserrat';
+}
+
+.radius-filter {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 14px;
+}
+input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
+
+.btn-action {
+    background: var(--gold-gradient);
+    border: none;
+    color: #000;
+    padding: 0 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Montserrat';
+    transition: transform 0.2s;
+    white-space: nowrap;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 45px;
+}
+.btn-action:hover { transform: scale(1.02); }
+
+/* ---------------------- LAYOUT & CARDS ---------------------- */
+.main-layout { display: flex; gap: 20px; height: 500px; margin-bottom: 60px; }
 
 .list-container {
     flex: 1;
@@ -89,18 +146,18 @@ nav a:hover{color:#f5d98c}
     border: 1px solid var(--border-color);
     border-radius: 8px;
 }
+.list-container::-webkit-scrollbar { width: 6px; }
+.list-container::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
 
-#map { flex: 1.5; border-radius: 8px; border: 1px solid var(--border-color); z-index: 1; }
+#map { flex: 2; border-radius: 8px; border: 1px solid var(--border-color); z-index: 1; }
 
-/* ---------------------- CARDS ---------------------- */
 .card-item {
     padding: 15px;
     border-bottom: 1px solid var(--border-color);
     cursor: pointer;
     transition: 0.3s;
-    position: relative;
 }
-.card-item:hover { background: rgba(212,175,55,0.05); }
+.card-item:hover { background: rgba(212,175,55,0.1); }
 
 .badge-purple {
     background: var(--purple-certified);
@@ -115,47 +172,25 @@ nav a:hover{color:#f5d98c}
 .community-note { color: #f5d98c; }
 .audit-note { color: var(--purple-certified); font-weight: 600; }
 
+/* ---------------------- BESOINS SECTION ---------------------- */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+}
+
 .deadline { color: #ff4d4d; font-size: 11px; font-weight: 600; }
 
-/* ---------------------- SEARCH CONTROLS ---------------------- */
-.controls-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 15px;
-    margin-bottom: 20px;
-    background: var(--bg-card);
-    padding: 20px;
-    border-radius: 12px;
-}
-
-input, select {
-    padding: 12px;
-    background: rgba(0,0,0,0.2);
-    border: 1px solid var(--border-color);
-    color: var(--text-main);
-    border-radius: 8px;
-    font-family: 'Montserrat';
-}
-
-.btn-action {
-    background: var(--gold-gradient);
-    border: none;
-    color: #000;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-}
-
-/* ---------------------- MODAL / MINI PAGE ---------------------- */
+/* ---------------------- MODAL ---------------------- */
 .modal {
     display: none;
     position: fixed;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%; max-width: 600px;
+    width: 90%; max-width: 600px;
     background: #111;
     border: 1px solid var(--text-main);
     padding: 30px;
@@ -167,15 +202,34 @@ input, select {
     display: none;
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.8);
     z-index: 1999;
 }
 
-/* FOOTER (Inchangé) */
-.site-footer { background: var(--bg-footer); border-top: 1px solid var(--border-color); padding: 25px 20px 15px; margin-top: 60px; color: var(--text-main); font-size: 14px; }
-.footer-content { max-width: 1200px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; }
+/* ---------------------- FOOTER ---------------------- */
+.site-footer {
+  background: var(--bg-footer);
+  border-top: 1px solid var(--border-color);
+  padding: 25px 20px 15px;
+  margin-top: 60px;
+  color: var(--text-main);
+  font-size: 14px;
+}
+.footer-content {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
 .footer-section { display: flex; flex-direction: column; gap: 4px; }
+.footer-section h4 { margin-bottom: 6px; color: #f5d98c; font-size: 13px; }
+.footer-section a { color: var(--text-main); text-decoration: none; font-size: 12px; }
+.footer-section a:hover { color: #f5d98c; }
+.footer-legal { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-color); }
 .footer-bottom { text-align: center; margin-top: 15px; font-size: 12px; opacity: 0.7; }
+
+#cb-bubble { position: fixed; bottom: 25px; right: 25px; background: var(--text-main); color: var(--bg-main); width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 26px; cursor: pointer; z-index: 9999; }
 </style>
 </head>
 <body>
@@ -191,37 +245,42 @@ input, select {
     <nav>
       <a href="index.html">Accueil</a>
       <a href="montre.html">Les montres</a>
-      <a href="horlogers.html" style="border-bottom: 1px solid">Horlogers</a>
+      <a href="horlogers.html" style="border-bottom: 2px solid var(--text-main)">Horlogers</a>
       <a href="propos.html">À propos</a>
     </nav>
   </div>
 </header>
 
 <div class="container">
-    <h1 class="gold-text" style="text-align:center; font-size: 35px;">Réseau des Horlogers & Appels d'Offres</h1>
+    <h1 class="gold-text" style="text-align:center; font-size: 40px; margin-bottom: 15px;">Réseau des Horlogers</h1>
     
-    <div class="controls-grid">
-        <input type="text" id="search-input" placeholder="Rechercher un horloger ou une ville..." onkeyup="filterData()">
-        <div style="display:flex; flex-direction:column; gap:5px">
-            <label style="font-size:10px">Rayon : <span id="rad-val">50</span>km</label>
+    <div class="page-description">
+        Trouvez un expert qualifié pour l'entretien de votre garde-temps ou répondez aux appels d'offres en cours. Les membres certifiés <strong>Audit ChronoBase</strong> garantissent un niveau de service optimal, vérifié par nos experts.
+    </div>
+
+    <div class="search-controls">
+        <div class="search-bar-wrapper">
+            <input type="text" id="search-input" placeholder="Rechercher un horloger, une spécialité ou une ville..." onkeyup="filterData()">
+            <button class="btn-action" onclick="openForm('horloger')">+ Rejoindre le réseau</button>
+        </div>
+        <div class="radius-filter">
+            <span>Rayon : <strong id="rad-val">50</strong> km</span>
             <input type="range" id="radius-range" min="0" max="500" value="50" oninput="document.getElementById('rad-val').innerText=this.value; filterData()">
         </div>
-        <button class="btn-action" onclick="openForm('horloger')">Rejoindre le réseau</button>
     </div>
 
     <div class="main-layout">
-        <div class="list-container" id="horloger-list">
-            </div>
+        <div class="list-container" id="horloger-list"></div>
         <div id="map"></div>
     </div>
 
-    <div class="section-title">
+    <div class="section-header">
         <h2 class="gold-text">Besoins Clients & Appels d'Offres</h2>
         <button class="btn-action" onclick="openForm('besoin')">Publier un besoin</button>
     </div>
     
-    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 20px;">
-        Les horlogers certifiés peuvent répondre directement à ces demandes. Nous assurons le suivi de la prestation.
+    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 25px; max-width: 800px;">
+        Les horlogers certifiés peuvent répondre directement à ces demandes. Nous assurons la mise en relation et le suivi de la prestation pour garantir votre satisfaction.
     </p>
 
     <div id="besoins-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px;">
@@ -239,21 +298,51 @@ input, select {
     <div class="footer-section">
       <h4>Navigation</h4>
       <a href="index.html">Accueil</a>
-      <a href="horlogers.html">Carte des horlogers</a>
-      <a href="evenements.html">Événements</a>
+      <a href="montre.html">Les montres</a>
+      <a href="propos.html">À propos</a>
+      <a href="chiffre.html">Chiffres clés</a>
     </div>
     <div class="footer-section">
-      <h4>Contact & Audit</h4>
+      <h4>Contact</h4>
+      <a href="mailto:contact@chronobase.com">Envoyer un email</a>
       <a href="mailto:audit@chronobase.com">Demander un Audit</a>
-      <a href="mailto:contact@chronobase.com">Support client</a>
+      <a href="reseaux.html">Nos réseaux sociaux</a>
     </div>
-    <div class="footer-bottom">© 2026 ChronoBase — Expertise Horlogère</div>
+    <div class="footer-section">
+      <h4>Version</h4>
+      <a href="version.html">Historique des versions</a>
+      <a href="maj.html">Historique des mises à jour</a>
+      <a href="contributeurs.html">Nos contributeurs</a>
+    </div>
+    <div class="footer-section">
+      <h4>Ressources</h4>
+      <a href="horlogers.html">Carte des horlogers</a>
+      <a href="evenements.html">Événements</a>
+      <a href="achats.html">Équipements & achats</a>
+    </div>
   </div>
+  <div class="footer-content footer-legal">
+    <div class="footer-section">
+      <h4>Légal</h4>
+      <a href="mentions.html">Mentions légales</a>
+      <a href="cgu.html">Conditions d’utilisation</a>
+      <a href="confidentialite.html">Confidentialité</a>
+    </div>
+    <div class="footer-section">
+      <h4>Règlements</h4>
+      <a href="reglement-site.html">Règlement du site</a>
+      <a href="reglement-reseaux.html">Règlement réseaux</a>
+      <a href="cookies.html">Cookies</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 ChronoBase — Tous droits réservés</div>
 </footer>
+
+<div id="cb-bubble">💬</div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-// --- DONNÉES DE TEST ---
+// --- DONNÉES ---
 const horlogers = [
     { id: 1, nom: "Atelier du Temps", ville: "Arras", lat: 50.291, lng: 2.777, noteComm: 4.8, audit: true, spec: "Mécanique, Vintage", expertise: "15 ans" },
     { id: 2, nom: "Horlogerie Durand", ville: "Lille", lat: 50.629, lng: 3.057, noteComm: 4.2, audit: false, spec: "Quartz, Luxe", expertise: "8 ans" }
@@ -272,18 +361,18 @@ function init() {
     renderHorlogers(horlogers);
     renderBesoins(besoins);
     updateMarkers();
+    if (localStorage.getItem("theme") === "light") document.body.classList.add("light-theme");
 }
 
-// --- LOGIQUE AFFICHAGE ---
 function renderHorlogers(data) {
     const container = document.getElementById('horloger-list');
     container.innerHTML = data.map(h => `
         <div class="card-item" onclick="showDetails('horloger', ${h.id})">
-            <div style="font-weight:600">${h.nom} ${h.audit ? '<span class="badge-purple">CERTIFIÉ AUDIT</span>' : ''}</div>
-            <div style="font-size:12px; opacity:0.8">${h.ville} • ${h.spec}</div>
+            <div style="font-weight:600; color:var(--text-main);">${h.nom} ${h.audit ? '<span class="badge-purple">CERTIFIÉ AUDIT</span>' : ''}</div>
+            <div style="font-size:12px; opacity:0.8; margin-top:4px;">${h.ville} • ${h.spec}</div>
             <div class="rating-box">
-                <span class="community-note">★ ${h.noteComm}/5 (Communauté)</span>
-                ${h.audit ? '<br><span class="audit-note">✓ Validé par ChronoBase (Audit)</span>' : ''}
+                <span class="community-note">★ ${h.noteComm}/5</span>
+                ${h.audit ? '<br><span class="audit-note">✓ Validé par ChronoBase</span>' : ''}
             </div>
         </div>
     `).join('');
@@ -292,14 +381,14 @@ function renderHorlogers(data) {
 function renderBesoins(data) {
     const container = document.getElementById('besoins-grid');
     container.innerHTML = data.map(b => `
-        <div class="card-item" style="background:var(--bg-card); border-radius:12px">
-            <div style="display:flex; justify-content:space-between">
-                <span style="font-weight:600">${b.montre}</span>
-                <span class="deadline">Fin : ${b.deadline}</span>
+        <div class="card-item" style="background:var(--bg-card); border-radius:12px; border:1px solid var(--border-color); cursor:default;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <span style="font-weight:600; font-size:16px;">${b.montre}</span>
+                <span class="deadline">Échéance : ${b.deadline}</span>
             </div>
-            <div style="font-size:13px; margin: 10px 0;">${b.pb}</div>
-            <div style="font-size:11px; opacity:0.7">${b.ville} • ${b.colis ? '📦 Envoi possible' : '🤝 Remise en main propre'}</div>
-            <button class="btn-action" style="width:100%; margin-top:10px; font-size:12px" onclick="repondreAppel(${b.id})">Répondre à l'offre</button>
+            <div style="font-size:13px; margin: 12px 0; min-height:40px; color:var(--text-secondary);">${b.pb}</div>
+            <div style="font-size:11px; opacity:0.7; margin-bottom:15px;">📍 ${b.ville} • ${b.colis ? '📦 Envoi possible' : '🤝 Remise en main propre'}</div>
+            <button class="btn-action" style="width:100%; font-size:12px;" onclick="repondreAppel(${b.id})">Répondre à l'offre</button>
         </div>
     `).join('');
 }
@@ -307,55 +396,42 @@ function renderBesoins(data) {
 function updateMarkers() {
     markers.forEach(m => map.removeLayer(m));
     markers = [];
-
     horlogers.forEach(h => {
-        let m = L.marker([h.lat, h.lng]).addTo(map).bindPopup(`<b>${h.nom}</b><br>Horloger`);
+        let m = L.marker([h.lat, h.lng]).addTo(map).bindPopup(`<b>${h.nom}</b><br>${h.ville}`);
         markers.push(m);
-    });
-
-    besoins.forEach(b => {
-        let m = L.circle([b.lat, b.lng], {radius: b.radius * 1000, color: '#f5d98c', fillOpacity: 0.1}).addTo(map);
-        let p = L.marker([b.lat, b.lng], {icon: L.divIcon({className: 'custom-div-icon', html: "<div style='background:red; width:10px; height:10px; border-radius:50%'></div>"})}).addTo(map);
-        markers.push(m, p);
     });
 }
 
-// --- ACTIONS & FORMULAIRES ---
 function openForm(type) {
     let subject = type === 'horloger' ? "Demande d'ajout Horloger" : "Nouveau besoin client";
-    let body = "";
-    
-    if(type === 'horloger') {
-        body = "Nom/Entreprise:\nLocalisation:\nHoraires:\nAnnées d'expertise:\nSpécialité (Quartz/Méca):\nNote: Merci de joindre votre carte de visite PDF.";
-    } else {
-        body = "Marque de la montre:\nDescription du problème:\nVille:\nRayon d'action (km):\nEnvoi colis possible (Oui/Non):\nDate de fin souhaitée:";
-    }
-    
+    let body = type === 'horloger' ? 
+        "Nom/Entreprise:\nLocalisation:\nSpécialité:\nExpertise:" : 
+        "Marque de la montre:\nProblème:\nVille:";
     window.location.href = `mailto:contact@chronobase.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
 function repondreAppel(id) {
     const b = besoins.find(x => x.id === id);
-    window.location.href = `mailto:contact@chronobase.com?subject=Reponse Appel Offre ${id}&body=Je souhaite proposer mes services pour la ${b.montre} de ${b.client}.`;
+    window.location.href = `mailto:contact@chronobase.com?subject=Réponse Offre ${id}&body=Je souhaite postuler pour la montre ${b.montre}.`;
 }
 
 function showDetails(type, id) {
     const h = horlogers.find(x => x.id === id);
     const content = document.getElementById('modal-content');
     content.innerHTML = `
-        <h2 class="gold-text">${h.nom}</h2>
-        <p><b>Expertise :</b> ${h.expertise}</p>
-        <p><b>Spécialités :</b> ${h.spec}</p>
-        <p><b>Notation Audit :</b> ${h.audit ? 'Certifié Violet - Critères respectés : Outillage, propreté, traçabilité.' : 'Non audité'}</p>
-        <div style="background:#222; padding:15px; border-radius:10px; margin:10px 0;">
-            <b>Avis Clients :</b><br>
-            "Travail impeccable sur ma Rolex vintage." - 5/5<br>
-            "Rapide et efficace." - 4/5
+        <h2 class="gold-text" style="margin-top:0">${h.nom}</h2>
+        <div style="color:var(--text-secondary); line-height:1.6;">
+            <p><b>📍 Ville :</b> ${h.ville}</p>
+            <p><b>🛠 Expertise :</b> ${h.expertise}</p>
+            <p><b>🔍 Spécialités :</b> ${h.spec}</p>
+            <p><b>📜 Audit :</b> ${h.audit ? 'Certifié - Critères respectés : Outillage, propreté, traçabilité.' : 'Non audité pour le moment.'}</p>
         </div>
-        <p><b>Documents :</b> <a href="#" style="color:var(--text-main)">📄 Télécharger la Carte de Visite (PDF)</a></p>
-        <div style="text-align:center; margin-top:15px;">
-            <p>Scannez pour voir les projets :</p>
-            <div style="width:100px; height:100px; background:white; margin:auto; display:flex; align-items:center; justify-content:center; color:black; font-weight:bold;">QR CODE</div>
+        <div style="background:rgba(212,175,55,0.05); padding:15px; border-radius:10px; margin:20px 0; border:1px solid var(--border-color);">
+            <b style="color:var(--text-main);">Dernier avis client :</b><br>
+            <i style="font-size:13px;">"Travail impeccable sur ma pièce vintage. Je recommande."</i>
+        </div>
+        <div style="text-align:center;">
+            <div style="width:80px; height:80px; background:white; margin:10px auto; display:flex; align-items:center; justify-content:center; color:black; font-size:10px; font-weight:bold;">QR CODE</div>
         </div>
     `;
     document.getElementById('modal').style.display = 'block';
@@ -369,6 +445,7 @@ function closeModal() {
 
 function toggleTheme() {
     document.body.classList.toggle("light-theme");
+    localStorage.setItem("theme", document.body.classList.contains("light-theme") ? "light" : "dark");
 }
 
 window.onload = init;
