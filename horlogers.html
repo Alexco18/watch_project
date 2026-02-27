@@ -298,6 +298,23 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
 .footer-bottom { text-align: center; margin-top: 15px; font-size: 12px; opacity: 0.7; }
 
 #cb-bubble { position: fixed; bottom: 25px; right: 25px; background: var(--text-main); color: var(--bg-main); width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 26px; cursor: pointer; z-index: 9999; }
+
+/* CSS POUR LE BOUTON RESET AVIS */
+.btn-reset-avis {
+    background: none;
+    border: 1px solid var(--text-main);
+    color: var(--text-main);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: 0.2s;
+}
+.btn-reset-avis:hover {
+    background: var(--text-main);
+    color: #000;
+}
 </style>
 </head>
 <body>
@@ -373,7 +390,10 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
             <div id="rating-stats">
                 </div>
             <hr style="border:0; border-top:1px solid var(--border-color); margin:15px 0;">
-            <div id="comments-list-header" style="font-size:11px; margin-bottom:10px; color:var(--text-main); font-weight:bold;">Tous les avis :</div>
+            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                <div id="comments-list-header" style="font-size:11px; color:var(--text-main); font-weight:bold;">Tous les avis :</div>
+                <button id="reset-avis-btn" class="btn-reset-avis" style="display:none;" onclick="renderAvisList(null)">Afficher tout</button>
+            </div>
             <div id="comments-list">
                 </div>
         </div>
@@ -443,7 +463,6 @@ function filterByCityAndRadius() {
     if (searchCity === "") {
         filteredHorlogers = [...allHorlogers];
     } else {
-        // On cherche d'abord les coordonnées de la ville entrée (simulation simplifiée ici basée sur nos données)
         const cityRef = allHorlogers.find(h => h.ville.toLowerCase() === searchCity);
         
         if (cityRef) {
@@ -452,7 +471,6 @@ function filterByCityAndRadius() {
                 return dist <= radius;
             });
         } else {
-            // Si la ville n'est pas trouvée dans la base, on filtre par nom exact pour l'instant
             filteredHorlogers = allHorlogers.filter(h => h.ville.toLowerCase().includes(searchCity));
         }
     }
@@ -512,6 +530,12 @@ function showDetails(id) {
     currentHorloger = allHorlogers.find(x => x.id === id);
     document.getElementById('panel-title').innerText = currentHorloger.nom;
     
+    // AMÉLIORATION CARTE : Zoom sur l'horloger sans cacher les autres
+    map.flyTo([currentHorloger.lat, currentHorloger.lng], 14, {
+        animate: true,
+        duration: 1.5
+    });
+
     // Infos
     document.getElementById('info-content').innerHTML = `
         <h3 class="gold-text">${currentHorloger.nom}</h3>
@@ -551,19 +575,22 @@ function renderRatingStats() {
         `;
     }
     statsDiv.innerHTML = html;
-    renderAvisList(null); // Afficher tous par défaut
+    renderAvisList(null); 
 }
 
 function renderAvisList(filterStars) {
     const list = document.getElementById('comments-list');
     const header = document.getElementById('comments-list-header');
+    const resetBtn = document.getElementById('reset-avis-btn');
     let avisToDisplay = currentHorloger.avis || [];
     
     if (filterStars) {
         avisToDisplay = avisToDisplay.filter(a => a.stars === filterStars);
         header.innerText = `Avis ${filterStars} étoiles (${avisToDisplay.length}) :`;
+        resetBtn.style.display = "inline-block"; // Afficher le bouton de réinitialisation
     } else {
         header.innerText = `Tous les avis (${avisToDisplay.length}) :`;
+        resetBtn.style.display = "none"; // Cacher le bouton
     }
 
     if(avisToDisplay.length === 0) {
