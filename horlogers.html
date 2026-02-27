@@ -462,6 +462,8 @@ function filterByCityAndRadius() {
     
     if (searchCity === "") {
         filteredHorlogers = [...allHorlogers];
+        // FOCUS : Retour à la vue d'ensemble de la France
+        map.flyTo([46.6033, 1.8883], 6);
     } else {
         const cityRef = allHorlogers.find(h => h.ville.toLowerCase() === searchCity);
         
@@ -470,6 +472,8 @@ function filterByCityAndRadius() {
                 const dist = getDistance(cityRef.lat, cityRef.lng, h.lat, h.lng);
                 return dist <= radius;
             });
+            // FOCUS : Centre la carte sur la ville trouvée
+            map.flyTo([cityRef.lat, cityRef.lng], 10);
         } else {
             filteredHorlogers = allHorlogers.filter(h => h.ville.toLowerCase().includes(searchCity));
         }
@@ -498,7 +502,7 @@ function renderHorlogers(page) {
             <div style="font-size:12px; opacity:0.8; margin-top:4px;">${h.ville} • ${h.spec}</div>
             <div class="rating-wrapper">
                 <div class="rating-box"><span class="community-note">★ ${h.noteComm} / 5</span></div>
-                <div class="rating-box">${h.audit ? '<span class="audit-note">✓ Certifié Audit</span>' : '<span style="font-size:9px; opacity:0.5;">Non audité</span>'}</div>
+                <div class="rating-box">${h.audit ? '<span class="audit-note">✓ CERTIFIÉ CHRONOBASE</span>' : '<span style="font-size:9px; opacity:0.5;">Non audité</span>'}</div>
             </div>
         </div>
     `).join('');
@@ -587,10 +591,10 @@ function renderAvisList(filterStars) {
     if (filterStars) {
         avisToDisplay = avisToDisplay.filter(a => a.stars === filterStars);
         header.innerText = `Avis ${filterStars} étoiles (${avisToDisplay.length}) :`;
-        resetBtn.style.display = "inline-block"; // Afficher le bouton de réinitialisation
+        resetBtn.style.display = "inline-block"; 
     } else {
         header.innerText = `Tous les avis (${avisToDisplay.length}) :`;
-        resetBtn.style.display = "none"; // Cacher le bouton
+        resetBtn.style.display = "none"; 
     }
 
     if(avisToDisplay.length === 0) {
