@@ -73,8 +73,8 @@ nav a{
 }
 nav a:hover{color:#f5d98c}
 
-/* ---------------------- SWITCH MODE SOMBRE/CLAIR ---------------------- */
-#theme-switch {
+/* ---------------------- SWITCHES (THEME & LANG) ---------------------- */
+#theme-switch, #lang-switch {
   width: 50px;
   height: 26px;
   background: var(--border-color);
@@ -85,6 +85,7 @@ nav a:hover{color:#f5d98c}
   display: flex;
   align-items: center;
   padding: 3px;
+  user-select: none;
 }
 
 .switch-handle {
@@ -93,11 +94,25 @@ nav a:hover{color:#f5d98c}
   background: var(--text-main);
   border-radius: 50%;
   transition: transform 0.3s, background 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  font-weight: bold;
+  color: var(--bg-header);
 }
 
 .light-theme #theme-switch .switch-handle {
   transform: translateX(24px);
   background: #000;
+}
+
+/* Pour le switch de langue */
+#lang-switch .switch-handle {
+    transform: translateX(0px);
+}
+.lang-en #lang-switch .switch-handle {
+    transform: translateX(24px);
 }
 
 /* ---------------------- VUES ---------------------- */
@@ -182,12 +197,12 @@ nav a:hover{color:#f5d98c}
   }
 }
 
-/* ---------------------- FOOTER COMPACT (identique à index.html) ---------------------- */
+/* ---------------------- FOOTER COMPACT ---------------------- */
 .site-footer {
   background: var(--bg-footer);
   border-top: 1px solid var(--border-color);
   padding: 25px 20px 15px;
-  margin-top: 40px; /* identique à index */
+  margin-top: 40px;
   color: var(--text-main);
   font-size: 14px;
 }
@@ -197,14 +212,14 @@ nav a:hover{color:#f5d98c}
   margin: auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 25px; /* identique à index */
+  gap: 25px;
 }
 
 .footer-section {
   min-height: auto;
   display: flex;
   flex-direction: column;
-  gap: 4px; /* identique à index */
+  gap: 4px;
 }
 
 .footer-section h4 {
@@ -222,8 +237,8 @@ nav a:hover{color:#f5d98c}
 .footer-section a:hover { color: #f5d98c; }
 
 .footer-legal {
-  margin-top: 10px; /* identique à index */
-  padding-top: 10px; /* identique à index */
+  margin-top: 10px;
+  padding-top: 10px;
   border-top: 1px solid var(--border-color);
 }
 
@@ -248,7 +263,7 @@ nav a:hover{color:#f5d98c}
   cursor: pointer;
 }
 
-/* ---------------------- CHATBOT (ULTRA-COMPACT + DRAGGABLE) ---------------------- */
+/* ---------------------- CHATBOT ---------------------- */
 #cb-bubble {
   position: fixed;
   bottom: 25px;
@@ -331,7 +346,7 @@ nav a:hover{color:#f5d98c}
 }
 </style>
 </head>
-<body>
+<body class="lang-fr">
 
 <header>
   <div class="header-container">
@@ -342,116 +357,172 @@ nav a:hover{color:#f5d98c}
       <div id="theme-switch" onclick="toggleTheme()">
         <div class="switch-handle"></div>
       </div>
+
+      <div id="lang-switch" onclick="toggleLang()">
+        <div class="switch-handle" id="lang-label">FR</div>
+      </div>
     </div>
 
     <nav>
-      <a onclick="showView('home-view')">Accueil</a>
-      <a href="montre.html">Les montres</a>
-      <a href="ressources.html">Ressources</a>
-      <a href="propos.html">À propos</a>
+      <a onclick="showView('home-view')" data-key="nav-home">Accueil</a>
+      <a href="montre.html" data-key="nav-watches">Les montres</a>
+      <a href="ressources.html" data-key="nav-res">Ressources</a>
+      <a href="propos.html" data-key="nav-about">À propos</a>
     </nav>
 
   </div>
 </header>
 
-<!-- ACCUEIL -->
 <section id="home-view" class="view active">
 
   <div class="hero">
-    <h1 class="gold-text">La référence mondiale des montres</h1>
-    <p>Explorez l’histoire horlogère à travers des modèles mythiques.</p>
+    <h1 class="gold-text" data-key="hero-title">La référence mondiale des montres</h1>
+    <p data-key="hero-sub">Explorez l’histoire horlogère à travers des modèles mythiques.</p>
     <p style="opacity:.8">
-      👥 <span id="visit-counter">–</span> passionnés ont déjà visité ChronoBase
+      👥 <span id="visit-counter">–</span> <span data-key="hero-visits">passionnés ont déjà visité ChronoBase</span>
     </p>
   </div>
 
-  <!-- ENCADRÉ MISE À JOUR -->
   <div id="update-box">
     <img src="img/update.jpg" alt="Annonce" id="update-img">
 
     <div id="update-info">
-      <h3>Mise à jour 1.2 — Amélioration du catalogue</h3>
+      <h3 data-key="up-title">Mise à jour 1.2 — Amélioration du catalogue</h3>
       <p>
-        Nous avons ajouté 12 nouvelles montres vintage et optimisé la navigation.
+        <span data-key="up-desc">Nous avons ajouté 12 nouvelles montres vintage et optimisé la navigation.</span>
         <br><br>
-        <a href="maj.html" id="update-link">➜ Voir la mise à jour</a>
+        <a href="maj.html" id="update-link" data-key="up-link">➜ Voir la mise à jour</a>
       </p>
-      <p id="update-date"><strong>Dernière mise à jour : 17/02/2026</strong></p>
+      <p id="update-date"><strong data-key="up-date-label">Dernière mise à jour :</strong> 17/02/2026</p>
     </div>
   </div>
 
   <section class="sections">
     <div class="card">
-      <h3>Dernières montres ajoutées</h3>
+      <h3 data-key="card1-title">Dernières montres ajoutées</h3>
       <div id="latest-watches"></div>
     </div>
 
     <div class="card">
-      <h3>Pourquoi ChronoBase ?</h3>
-      <p>
+      <h3 data-key="card2-title">Pourquoi ChronoBase ?</h3>
+      <p data-key="card2-desc">
         Une encyclopédie horlogère construite par passion,
         pensée pour préserver l’histoire des grandes maisons.
       </p>
-      <p style="cursor:pointer;color:#f5d98c" onclick="window.location='propos.html'">
+      <p style="cursor:pointer;color:#f5d98c" onclick="window.location='propos.html'" data-key="card2-link">
         → Découvrir le projet
       </p>
     </div>
   </section>
 </section>
 
-<!-- FOOTER -->
 <footer class="site-footer">
   <div class="footer-content">
     <div class="footer-section">
-      <h4>Navigation</h4>
-      <a href="index.html">Accueil</a>
-      <a href="montre.html">Les montres</a>
-      <a href="propos.html">À propos</a>
-      <a href="chiffre.html">Chiffres clés</a>
+      <h4 data-key="f-nav">Navigation</h4>
+      <a href="index.html" data-key="nav-home">Accueil</a>
+      <a href="montre.html" data-key="nav-watches">Les montres</a>
+      <a href="propos.html" data-key="nav-about">À propos</a>
+      <a href="chiffre.html" data-key="f-stats">Chiffres clés</a>
     </div>
     <div class="footer-section">
-      <h4>Contact</h4>
-      <a href="mailto:contact@chronobase.com">Envoyer un email</a>
-      <a href="#">Formulaire (à venir)</a>
-      <a href="reseaux.html">Nos réseaux sociaux</a>
+      <h4 data-key="f-contact">Contact</h4>
+      <a href="mailto:contact@chronobase.com" data-key="f-mail">Envoyer un email</a>
+      <a href="#" data-key="f-form">Formulaire (à venir)</a>
+      <a href="reseaux.html" data-key="f-social">Nos réseaux sociaux</a>
     </div>
     <div class="footer-section">
-      <h4>Version</h4>
-      <a href="version.html">Historique des versions</a>
-      <a href="maj.html">Historique des mises à jour</a>
-      <a href="contributeurs.html">Nos contributeurs</a>      
+      <h4 data-key="f-version">Version</h4>
+      <a href="version.html" data-key="f-hist-v">Historique des versions</a>
+      <a href="maj.html" data-key="f-hist-u">Historique des mises à jour</a>
+      <a href="contributeurs.html" data-key="f-contrib">Nos contributeurs</a>      
     </div>
     <div class="footer-section">
-      <h4>Ressources horlogères</h4>
-      <a href="horlogers.html">Carte des horlogers</a>
-      <a href="evenements.html">Événements & bourses</a>
-      <a href="achats.html">Équipements & achats</a>
+      <h4 data-key="f-res">Ressources horlogères</h4>
+      <a href="horlogers.html" data-key="f-map">Carte des horlogers</a>
+      <a href="evenements.html" data-key="f-events">Événements & bourses</a>
+      <a href="achats.html" data-key="f-equip">Équipements & achats</a>
     </div>
   </div>
 
   <div class="footer-content footer-legal">
     <div class="footer-section">
-      <h4>Légal</h4>
-      <a href="mentions.html">Mentions légales</a>
-      <a href="cgu.html">Conditions d’utilisation</a>
-      <a href="confidentialite.html">Politique de confidentialité</a>
+      <h4 data-key="f-legal">Légal</h4>
+      <a href="mentions.html" data-key="f-mentions">Mentions légales</a>
+      <a href="cgu.html" data-key="f-cgu">Conditions d’utilisation</a>
+      <a href="confidentialite.html" data-key="f-priv">Politique de confidentialité</a>
     </div>
     <div class="footer-section">
-      <h4>Règlements</h4>
-      <a href="reglement-site.html">Règlement du site</a>
-      <a href="reglement-reseaux.html">Règlement des réseaux sociaux</a>
-      <a href="cookies.html">Gestion des cookies</a>
+      <h4 data-key="f-reg">Règlements</h4>
+      <a href="reglement-site.html" data-key="f-reg-s">Règlement du site</a>
+      <a href="reglement-reseaux.html" data-key="f-reg-n">Règlement des réseaux sociaux</a>
+      <a href="cookies.html" data-key="f-cookies">Gestion des cookies</a>
     </div>
   </div>
 
   <div class="footer-bottom">
-    © 2026 ChronoBase — Tous droits réservés
+    <span data-key="f-copy">© 2026 ChronoBase — Tous droits réservés</span>
     <div class="site-version" onclick="window.location='version.html'">v1.0.0</div>
   </div>
 </footer>
 
-<!-- ---------------------- SCRIPTS ---------------------- -->
 <script>
+// ---------- TRADUCTIONS ----------
+const translations = {
+    fr: {
+        "nav-home": "Accueil", "nav-watches": "Les montres", "nav-res": "Ressources", "nav-about": "À propos",
+        "hero-title": "La référence mondiale des montres", "hero-sub": "Explorez l’histoire horlogère à travers des modèles mythiques.",
+        "hero-visits": "passionnés ont déjà visité ChronoBase", "up-title": "Mise à jour 1.2 — Amélioration du catalogue",
+        "up-desc": "Nous avons ajouté 12 nouvelles montres vintage et optimisé la navigation.", "up-link": "➜ Voir la mise à jour",
+        "up-date-label": "Dernière mise à jour :", "card1-title": "Dernières montres ajoutées", "card2-title": "Pourquoi ChronoBase ?",
+        "card2-desc": "Une encyclopédie horlogère construite par passion, pensée pour préserver l’histoire des grandes maisons.",
+        "card2-link": "→ Découvrir le projet", "f-nav": "Navigation", "f-stats": "Chiffres clés", "f-contact": "Contact",
+        "f-mail": "Envoyer un email", "f-form": "Formulaire (à venir)", "f-social": "Nos réseaux sociaux", "f-version": "Version",
+        "f-hist-v": "Historique des versions", "f-hist-u": "Historique des mises à jour", "f-contrib": "Nos contributeurs",
+        "f-res": "Ressources horlogères", "f-map": "Carte des horlogers", "f-events": "Événements & bourses", "f-equip": "Équipements & achats",
+        "f-legal": "Légal", "f-mentions": "Mentions légales", "f-cgu": "Conditions d’utilisation", "f-priv": "Politique de confidentialité",
+        "f-reg": "Règlements", "f-reg-s": "Règlement du site", "f-reg-n": "Règlement des réseaux sociaux", "f-cookies": "Gestion des cookies",
+        "f-copy": "© 2026 ChronoBase — Tous droits réservés"
+    },
+    en: {
+        "nav-home": "Home", "nav-watches": "Watches", "nav-res": "Resources", "nav-about": "About",
+        "hero-title": "The world reference for watches", "hero-sub": "Explore watchmaking history through legendary models.",
+        "hero-visits": "enthusiasts have already visited ChronoBase", "up-title": "Update 1.2 — Catalog improvement",
+        "up-desc": "We added 12 new vintage watches and optimized navigation.", "up-link": "➜ See update",
+        "up-date-label": "Last update:", "card1-title": "Latest watches added", "card2-title": "Why ChronoBase?",
+        "card2-desc": "A watchmaking encyclopedia built by passion, designed to preserve the history of great houses.",
+        "card2-link": "→ Discover the project", "f-nav": "Navigation", "f-stats": "Key figures", "f-contact": "Contact",
+        "f-mail": "Send an email", "f-form": "Form (coming soon)", "f-social": "Our social media", "f-version": "Version",
+        "f-hist-v": "Version history", "f-hist-u": "Update history", "f-contrib": "Our contributors",
+        "f-res": "Watch resources", "f-map": "Map of watchmakers", "f-events": "Events & fairs", "f-equip": "Equipment & purchases",
+        "f-legal": "Legal", "f-mentions": "Legal notice", "f-cgu": "Terms of use", "f-priv": "Privacy policy",
+        "f-reg": "Regulations", "f-reg-s": "Site rules", "f-reg-n": "Social media rules", "f-cookies": "Cookie management",
+        "f-copy": "© 2026 ChronoBase — All rights reserved"
+    }
+};
+
+function toggleLang() {
+    const body = document.body;
+    const label = document.getElementById("lang-label");
+    const isFr = body.classList.contains("lang-fr");
+    const newLang = isFr ? "en" : "fr";
+
+    body.classList.remove("lang-fr", "lang-en");
+    body.classList.add("lang-" + newLang);
+    label.textContent = newLang.toUpperCase();
+    localStorage.setItem("lang", newLang);
+    applyTranslations(newLang);
+}
+
+function applyTranslations(lang) {
+    document.querySelectorAll("[data-key]").forEach(el => {
+        const key = el.getAttribute("data-key");
+        if (translations[lang][key]) {
+            el.textContent = translations[lang][key];
+        }
+    });
+}
+
 // ---------- VUES ----------
 function showView(id){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
@@ -486,21 +557,22 @@ updateSiteCounter();
 // ---------- THEME SWITCH ----------
 function toggleTheme() {
   document.body.classList.toggle("light-theme");
-
   const isLight = document.body.classList.contains("light-theme");
   localStorage.setItem("theme", isLight ? "light" : "dark");
 }
 
-// Charger le thème sauvegardé
+// Charger les préférences
 (function() {
-  const saved = localStorage.getItem("theme");
-  if (saved === "light") {
-    document.body.classList.add("light-theme");
-  }
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "light") document.body.classList.add("light-theme");
+  
+  const savedLang = localStorage.getItem("lang") || "fr";
+  document.body.classList.remove("lang-fr", "lang-en");
+  document.body.classList.add("lang-" + savedLang);
+  document.getElementById("lang-label").textContent = savedLang.toUpperCase();
+  applyTranslations(savedLang);
 })();
 </script>
-
-<!-- ---------------------- CHATBOT ---------------------- -->
 
 <div id="cb-bubble">💬</div>
 
@@ -580,9 +652,9 @@ function goSection(section) {
 let isDragging = false;
 let offsetX, offsetY;
 
-const header = document.getElementById("cb-header");
+const cbHeader = document.getElementById("cb-header");
 
-header.addEventListener("mousedown", (e) => {
+cbHeader.addEventListener("mousedown", (e) => {
   isDragging = true;
   offsetX = e.clientX - win.offsetLeft;
   offsetY = e.clientY - win.offsetTop;
