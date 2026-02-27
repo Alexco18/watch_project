@@ -20,6 +20,7 @@
   --border-color: rgba(212,175,55,0.2);
   --purple-certified: #8a2be2;
   --rating-bg: rgba(255, 255, 255, 0.05);
+  --red-pin: #ff4d4d;
 }
 
 .light-theme {
@@ -101,7 +102,7 @@ nav a:hover{color:#f5d98c}
     width: 100%;
 }
 
-.custom-input {
+.input-styled {
     flex: 1;
     padding: 15px;
     background: rgba(0,0,0,0.1);
@@ -130,11 +131,11 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
     font-family: 'Montserrat';
     transition: transform 0.2s;
     white-space: nowrap;
+    text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 45px;
-    text-decoration: none;
 }
 .btn-action:hover { transform: scale(1.02); }
 
@@ -201,14 +202,14 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
 .rating-box {
     flex: 1;
     background: var(--rating-bg);
-    padding: 3px; 
+    padding: 3px;
     border-radius: 6px;
     border: 1px solid var(--border-color);
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 28px; 
+    min-height: 28px;
 }
 .community-note { color: #d4af37; font-weight: 600; font-size: 12px; }
 .audit-note { color: var(--purple-certified); font-weight: 600; font-size: 10px; text-transform: uppercase; }
@@ -276,29 +277,6 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
-/* AMAZON STYLE RATING */
-.rating-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; cursor: pointer; }
-.rating-row:hover .bar-container { border: 1px solid var(--text-main); }
-.bar-container { 
-    flex: 1; 
-    height: 10px; 
-    background: var(--rating-bg); 
-    border-radius: 5px; 
-    overflow: hidden; 
-    border: 1px solid var(--border-color); 
-}
-.bar-fill { height: 100%; background: var(--text-main); }
-
-/* VISITING CARD */
-.v-card {
-    background: var(--bg-main);
-    border: 1px solid var(--border-color);
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
 /* ---------------------- FOOTER ---------------------- */
 .site-footer {
   background: var(--bg-footer);
@@ -321,6 +299,22 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
     font-size: 10px;
     cursor: pointer;
     margin-left: 10px;
+    transition: 0.2s;
+}
+.btn-reset-avis:hover { background: var(--text-main); color: #000; }
+
+/* AMAZON STYLE RATING */
+.rating-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; cursor: pointer; }
+.bar-container { flex: 1; height: 100%; background: var(--rating-bg); border-radius: 5px; overflow: hidden; border: 1px solid var(--border-color); height: 10px; }
+.bar-fill { height: 100%; background: var(--text-main); }
+
+.v-card {
+    background: var(--bg-main);
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: center;
 }
 </style>
 </head>
@@ -352,7 +346,7 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
 
     <div class="search-controls">
         <div class="search-bar-wrapper">
-            <input type="text" id="search-input" class="custom-input" placeholder="Saisissez une ville (ex: Arras, Lille...)" onkeyup="filterByCityAndRadius()">
+            <input type="text" id="search-input" class="input-styled" placeholder="Saisissez une ville (ex: Arras, Lille...)" onkeyup="filterByCityAndRadius()">
             <button class="btn-action" onclick="alert('Formulaire horloger')">+ Rejoindre le réseau</button>
         </div>
         <div class="radius-filter">
@@ -369,26 +363,25 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
         <div id="map"></div>
     </div>
 
-    <div id="besoins-section">
-        <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">
-            <h2 class="gold-text">Besoins Clients & Appels d'Offres</h2>
-            <button class="btn-action" onclick="alert('Publier un besoin')">Publier mon besoin</button>
-        </div>
+    <div class="section-header" style="margin-top: 80px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; margin-bottom: 20px;">
+        <h2 class="gold-text">Besoins Clients & Appels d'Offres</h2>
+        <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6;">
+            Cette section est dédiée exclusivement aux demandes de services : <strong>révisions, expertises, restaurations ou tarifications</strong>. 
+            Pour toute demande de pièces détachées ou d'équipements, merci de vous diriger vers notre page dédiée. 
+            Ici, les horlogers répondent directement à vos besoins techniques.
+        </p>
+    </div>
 
-        <div class="page-description" style="text-align: left; margin-bottom: 25px;">
-            Cet espace est exclusivement dédié aux <strong>prestations de services horlogers</strong> (révision, expertise, tarification, polissage). 
-            Pour toute demande d'équipement ou de pièces détachées, veuillez vous diriger vers la page <em>Pièces & Matériel</em>. 
-            Les horlogers peuvent ici répondre directement à vos besoins techniques.
+    <div class="search-controls" style="margin-bottom: 10px;">
+        <div class="search-bar-wrapper">
+            <input type="text" id="search-besoin" class="input-styled" placeholder="Rechercher une marque ou un type de besoin..." onkeyup="filterBesoins()">
+            <button class="btn-action" onclick="alert('Publier un besoin')">Publier un besoin</button>
         </div>
+    </div>
 
-        <div class="search-controls">
-            <input type="text" id="search-besoins" class="custom-input" placeholder="Rechercher une marque, une ville ou un type de besoin..." onkeyup="filterBesoins()">
-        </div>
-
-        <div class="list-wrapper" style="height: 600px;">
-            <div class="list-container" id="besoins-list-container"></div>
-            <div class="pagination" id="pagination-besoins"></div>
-        </div>
+    <div class="list-wrapper" style="height: auto; min-height: 400px; margin-bottom: 40px;">
+        <div class="list-container" id="besoin-list"></div>
+        <div class="pagination" id="pagination-besoins"></div>
     </div>
 </div>
 
@@ -397,7 +390,7 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
         <span style="font-weight:600; font-size:12px;" id="panel-title">Détails</span>
         <span style="cursor:pointer; font-weight:bold;" onclick="closePanel()">✕</span>
     </div>
-    <div class="panel-tabs" id="dynamic-tabs">
+    <div class="panel-tabs" id="panel-tabs-container">
         </div>
     <div class="panel-body" id="panel-body-content">
         </div>
@@ -414,228 +407,66 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
 /* ---------------------- DATA ---------------------- */
 const allHorlogers = [
     { id: 1, nom: "Atelier du Temps", ville: "Arras", lat: 50.291, lng: 2.777, noteComm: 4.8, audit: true, spec: "Mécanique, Vintage", expertise: "15 ans", 
-      avis: [{stars: 5, user: "Pierre G.", date: "12/02/2026", comment: "Excellent travail."}]},
+      avis: [
+        {stars: 5, user: "Pierre G.", date: "12/02/2026", comment: "Excellent travail sur ma Speedmaster."},
+        {stars: 5, user: "Marc A.", date: "05/01/2026", comment: "Un vrai passionné."},
+        {stars: 4, user: "Lucie T.", date: "20/12/2025", comment: "Délai un peu long mais qualité au top."}
+      ]},
     { id: 2, nom: "Horlogerie Durand", ville: "Lille", lat: 50.629, lng: 3.057, noteComm: 4.2, audit: false, spec: "Quartz, Luxe", expertise: "8 ans", avis: []},
-    { id: 3, nom: "La Main d'Or", ville: "Lille", lat: 50.635, lng: 3.060, noteComm: 4.9, audit: true, spec: "Haute Horlogerie", expertise: "25 ans", avis: []}
+    { id: 3, nom: "La Main d'Or", ville: "Lille", lat: 50.635, lng: 3.060, noteComm: 4.9, audit: true, spec: "Haute Horlogerie", expertise: "25 ans", avis: []},
+    { id: 4, nom: "Chrono Nord", ville: "Douai", lat: 50.366, lng: 3.078, noteComm: 3.9, audit: false, spec: "Réparations", expertise: "5 ans", avis: []},
+    { id: 5, nom: "Atelier 24", ville: "Arras", lat: 50.280, lng: 2.780, noteComm: 4.5, audit: true, spec: "Rolex, Omega", expertise: "12 ans", avis: []}
 ];
 
 const allBesoins = [
-    { 
-        id: 101, 
-        client: "Jean Dupont", 
-        ville: "Béthune", 
-        lat: 50.533, lng: 2.633, 
-        titre: "Révision complète Omega", 
-        description: "Ma montre avance de 5 min par jour, besoin d'un nettoyage et huilage.", 
-        montre: "Seamaster 300", 
-        marque: "Omega",
-        envoiColis: "Oui",
-        detailsMontre: "Automatique, Calibre 8800, 2019",
-        deadline: "30/03/2026"
-    },
-    { 
-        id: 102, 
-        client: "Marc Antoine", 
-        ville: "Lens", 
-        lat: 50.428, lng: 2.831, 
-        titre: "Expertise pour assurance", 
-        description: "Demande d'expertise de valeur pour une montre héritée.", 
-        montre: "Submariner", 
-        marque: "Rolex",
-        envoiColis: "Non (remise en main propre)",
-        detailsMontre: "Vintage, 1985, Patine marquée",
-        deadline: "15/04/2026"
-    }
+    { id: 101, client: "Jean Dupont", ville: "Béthune", lat: 50.533, lng: 2.633, colis: true, titre: "Révision complète Omega", desc: "Ma montre avance de 5min par jour.", marque: "Omega", modele: "Seamaster 300", deadline: "2026-04-15" },
+    { id: 102, client: "Alice Morel", ville: "Lens", lat: 50.429, lng: 2.831, colis: false, titre: "Expertise de valeur", desc: "Besoin d'un certificat pour assurance.", marque: "Rolex", modele: "Datejust 36", deadline: "2026-03-20" },
+    { id: 103, client: "Marc Vasseur", ville: "Lille", lat: 50.629, lng: 3.057, colis: true, titre: "Changement de verre", desc: "Verre saphir rayé après chute.", marque: "Tissot", modele: "Le Locle", deadline: "2026-03-10" }
 ];
 
 let filteredHorlogers = [...allHorlogers];
 let filteredBesoins = [...allBesoins];
-let currentHPg = 1;
-let currentBPg = 1;
-const hPerPage = 4;
-const bPerPage = 10;
+let currentHPag = 1;
+let currentBPag = 1;
+const itemsPerPage = 4;
+const besoinsPerPage = 10;
 
-/* ---------------------- CARTE ---------------------- */
+/* ---------------------- MAP INIT ---------------------- */
 let map = L.map('map').setView([50.4, 2.8], 9);
 L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
 let markerLayer = L.layerGroup().addTo(map);
 
+/* ---------------------- FUNCTIONS ---------------------- */
+
+function getDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; 
+    const dLat = (lat2-lat1) * Math.PI / 180;
+    const dLon = (lon2-lon1) * Math.PI / 180;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
 function updateMarkers(highlightBesoin = null) {
     markerLayer.clearLayers();
     
-    // Pins Bleus (Horlogers)
+    // Horlogers (Bleu)
     filteredHorlogers.forEach(h => {
-        const blueIcon = new L.Icon({
-            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
-            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-            iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
-        });
-        L.marker([h.lat, h.lng], {icon: blueIcon}).addTo(markerLayer).bindPopup(`<b>${h.nom}</b>`);
+        L.marker([h.lat, h.lng]).addTo(markerLayer).bindPopup(`<b>${h.nom}</b> (Horloger)`);
     });
 
-    // Pins Rouges (Demandes clients)
-    allBesoins.forEach(b => {
+    // Besoins (Rouge si focus, sinon absent ou discret)
+    if (highlightBesoin) {
         const redIcon = new L.Icon({
             iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
             shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
             iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
         });
-        const m = L.marker([b.lat, b.lng], {icon: redIcon}).addTo(markerLayer).bindPopup(`<b>Besoin : ${b.marque}</b><br>${b.client}`);
-        if(highlightBesoin && highlightBesoin.id === b.id) m.openPopup();
-    });
-}
-
-/* ---------------------- GESTION BESOINS ---------------------- */
-function filterBesoins() {
-    const val = document.getElementById('search-besoins').value.toLowerCase();
-    filteredBesoins = allBesoins.filter(b => 
-        b.titre.toLowerCase().includes(val) || 
-        b.marque.toLowerCase().includes(val) || 
-        b.ville.toLowerCase().includes(val)
-    );
-    currentBPg = 1;
-    renderBesoins();
-}
-
-function renderBesoins() {
-    const container = document.getElementById('besoins-list-container');
-    const start = (currentBPg - 1) * bPerPage;
-    const paginated = filteredBesoins.slice(start, start + bPerPage);
-
-    container.innerHTML = paginated.map(b => `
-        <div class="card-item" onclick="showBesoinDetail(${b.id})">
-            <div style="display:flex; justify-content:space-between; align-items:start;">
-                <div>
-                    <div style="font-weight:600; color:var(--text-main); font-size:16px;">${b.titre}</div>
-                    <div style="font-size:12px; opacity:0.8; margin-top:4px;">${b.marque} - ${b.montre}</div>
-                </div>
-                <div style="text-align:right;">
-                    <div style="font-size:12px; font-weight:600;">${b.ville}</div>
-                    <div style="font-size:10px; color:${b.envoiColis === 'Oui' ? '#4caf50' : '#ff4d4d'}">Colis : ${b.envoiColis}</div>
-                </div>
-            </div>
-            <p style="font-size:13px; margin:10px 0; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${b.description}</p>
-            <div style="font-size:11px; opacity:0.6;">Demandeur : ${b.client} | Clôture : ${b.deadline}</div>
-        </div>
-    `).join('');
-    renderPaginationBesoins();
-}
-
-function renderPaginationBesoins() {
-    const totalPages = Math.ceil(filteredBesoins.length / bPerPage);
-    const nav = document.getElementById('pagination-besoins');
-    if (totalPages <= 1) { nav.innerHTML = ""; return; }
-    
-    let html = `<span class="pg-btn" onclick="changeBPage(${currentBPg - 1})">«</span>`;
-    for (let i = 1; i <= totalPages; i++) {
-        html += `<span class="pg-btn ${i === currentBPg ? 'active' : ''}" onclick="changeBPage(${i})">${i}</span>`;
-    }
-    html += `<span class="pg-btn" onclick="changeBPage(${currentBPg + 1})">»</span>`;
-    nav.innerHTML = html;
-}
-
-function changeBPage(p) {
-    if (p < 1 || p > Math.ceil(filteredBesoins.length / bPerPage)) return;
-    currentBPg = p;
-    renderBesoins();
-}
-
-/* ---------------------- DETAILS BESOINS (FLOATING PANEL) ---------------------- */
-function showBesoinDetail(id) {
-    const b = allBesoins.find(x => x.id === id);
-    document.getElementById('panel-title').innerText = "Appel d'offre : " + b.marque;
-    
-    // Action sur la carte
-    map.flyTo([b.lat, b.lng], 13);
-    updateMarkers(b);
-
-    // Update Tabs
-    const tabs = document.getElementById('dynamic-tabs');
-    tabs.innerHTML = `
-        <button class="tab-btn active" onclick="switchBTab(0, ${b.id})">Client</button>
-        <button class="tab-btn" onclick="switchBTab(1, ${b.id})">Demande</button>
-        <button class="tab-btn" onclick="switchBTab(2, ${b.id})">Répondre</button>
-    `;
-
-    renderBesoinTabContent(0, b);
-    document.getElementById('detail-panel').style.display = 'block';
-}
-
-function switchBTab(idx, id) {
-    const b = allBesoins.find(x => x.id === id);
-    document.querySelectorAll('.tab-btn').forEach((btn, i) => btn.classList.toggle('active', i === idx));
-    renderBesoinTabContent(idx, b);
-}
-
-function renderBesoinTabContent(idx, b) {
-    const body = document.getElementById('panel-body-content');
-    if (idx === 0) {
-        body.innerHTML = `
-            <h3 class="gold-text">${b.client}</h3>
-            <p><b>Localisation :</b> ${b.ville}</p>
-            <p><b>Envoi colis possible :</b> ${b.envoiColis}</p>
-            <hr style="border:0; border-top:1px solid var(--border-color); margin:15px 0;">
-            <p><b>Montre :</b> ${b.marque} ${b.montre}</p>
-            <p style="font-size:11px;">${b.detailsMontre}</p>
-        `;
-    } else if (idx === 1) {
-        body.innerHTML = `
-            <h4 class="gold-text">État des lieux / Problème</h4>
-            <p style="line-height:1.5;">${b.description}</p>
-            <div style="background:rgba(212,175,55,0.1); padding:10px; border-radius:5px; margin-top:15px;">
-                <b>Titre de la demande :</b><br>${b.titre}
-            </div>
-        `;
-    } else if (idx === 2) {
-        body.innerHTML = `
-            <button class="btn-action" style="width:100%; margin-bottom:15px; background:#444; color:#fff;" onclick="alert('Ouverture du PDF photos...')">🖼️ Voir les photos (PDF)</button>
-            <p style="font-size:11px; margin-bottom:20px;">*Les photos permettent de juger l'état cosmétique avant offre.</p>
-            
-            <button class="btn-action" style="width:100%;" onclick="alert('Ouverture du QCM d\'offre...')">📩 Envoyer une offre (QCM)</button>
-            
-            <div style="margin-top:30px; padding:15px; border:1px solid #ff4d4d; border-radius:8px; text-align:center;">
-                <span style="color:#ff4d4d; font-weight:600; font-size:12px;">DATE LIMITE DE RÉPONSE</span><br>
-                <span style="font-size:18px; font-weight:600;">${b.deadline}</span>
-            </div>
-        `;
+        L.marker([highlightBesoin.lat, highlightBesoin.lng], {icon: redIcon}).addTo(markerLayer).bindPopup(`<b>${highlightBesoin.client}</b> (Demandeur)` ).openPopup();
+        map.flyTo([highlightBesoin.lat, highlightBesoin.lng], 12);
     }
 }
 
-/* ---------------------- FONCTIONS EXISTANTES (HORLOGERS) ---------------------- */
-function renderHorlogers(page) {
-    const container = document.getElementById('horloger-list');
-    const start = (page - 1) * hPerPage;
-    const paginated = filteredHorlogers.slice(start, start + hPerPage);
-    container.innerHTML = paginated.map(h => `
-        <div class="card-item" onclick="showHorlogerDetail(${h.id})">
-            <div style="font-weight:600; color:var(--text-main);">${h.nom}</div>
-            <div style="font-size:12px; opacity:0.8; margin-top:4px;">${h.ville} • ${h.spec}</div>
-            <div class="rating-wrapper">
-                <div class="rating-box"><span class="community-note">★ ${h.noteComm} / 5</span></div>
-                ${h.audit ? `<div class="rating-box"><span class="audit-note">✓ CERTIFIÉ</span></div>` : ''}
-            </div>
-        </div>
-    `).join('');
-    renderPaginationHorlogers();
-}
-
-function renderPaginationHorlogers() {
-    const totalPages = Math.ceil(filteredHorlogers.length / hPerPage);
-    const nav = document.getElementById('pagination-controls');
-    let html = `<span class="pg-btn" onclick="changeHPage(${currentHPg - 1})">«</span>`;
-    for (let i = 1; i <= totalPages; i++) {
-        html += `<span class="pg-btn ${i === currentHPg ? 'active' : ''}" onclick="changeHPage(${i})">${i}</span>`;
-    }
-    html += `<span class="pg-btn" onclick="changeHPage(${currentHPg + 1})">»</span>`;
-    nav.innerHTML = html;
-}
-
-function changeHPage(p) {
-    if (p < 1 || p > Math.ceil(filteredHorlogers.length / hPerPage)) return;
-    currentHPg = p;
-    renderHorlogers(currentHPg);
-}
-
+// FILTRAGE HORLOGERS
 function filterByCityAndRadius() {
     const searchCity = document.getElementById('search-input').value.toLowerCase().trim();
     const radius = parseInt(document.getElementById('radius-range').value);
@@ -644,63 +475,164 @@ function filterByCityAndRadius() {
     } else {
         const cityRef = allHorlogers.find(h => h.ville.toLowerCase() === searchCity);
         if (cityRef) {
-            filteredHorlogers = allHorlogers.filter(h => {
-                const dist = getDistance(cityRef.lat, cityRef.lng, h.lat, h.lng);
-                return dist <= radius;
-            });
+            filteredHorlogers = allHorlogers.filter(h => getDistance(cityRef.lat, cityRef.lng, h.lat, h.lng) <= radius);
+            map.flyTo([cityRef.lat, cityRef.lng], 10);
         } else {
             filteredHorlogers = allHorlogers.filter(h => h.ville.toLowerCase().includes(searchCity));
         }
     }
-    currentHPg = 1;
-    renderHorlogers(1);
+    currentHPag = 1;
+    renderHorlogers();
     updateMarkers();
 }
 
-function getDistance(lat1, lon1, lat2, lon2) {
-    const R = 6371;
-    const dLat = (lat2-lat1) * Math.PI / 180;
-    const dLon = (lon2-lon1) * Math.PI / 180;
-    const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
-    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+function renderHorlogers() {
+    const container = document.getElementById('horloger-list');
+    const start = (currentHPag - 1) * itemsPerPage;
+    const paginated = filteredHorlogers.slice(start, start + itemsPerPage);
+    container.innerHTML = paginated.map(h => `
+        <div class="card-item" onclick="showHorlogerDetails(${h.id})">
+            <div style="font-weight:600; color:var(--text-main);">${h.nom}</div>
+            <div style="font-size:12px; opacity:0.8;">${h.ville} • ${h.spec}</div>
+            <div class="rating-wrapper">
+                <div class="rating-box"><span class="community-note">★ ${h.noteComm}</span></div>
+                ${h.audit ? `<div class="rating-box"><span class="audit-note">CERTIFIÉ</span></div>` : ''}
+            </div>
+        </div>
+    `).join('');
+    renderPagination('pagination-controls', filteredHorlogers.length, itemsPerPage, currentHPag, 'changeHPage');
 }
 
-function showHorlogerDetail(id) {
+// FILTRAGE BESOINS
+function filterBesoins() {
+    const term = document.getElementById('search-besoin').value.toLowerCase();
+    filteredBesoins = allBesoins.filter(b => b.titre.toLowerCase().includes(term) || b.marque.toLowerCase().includes(term));
+    currentBPag = 1;
+    renderBesoins();
+}
+
+function renderBesoins() {
+    const container = document.getElementById('besoin-list');
+    const start = (currentBPag - 1) * besoinsPerPage;
+    const paginated = filteredBesoins.slice(start, start + besoinsPerPage);
+    
+    if(paginated.length === 0) {
+        container.innerHTML = "<p style='padding:20px; text-align:center;'>Aucun appel d'offres trouvé.</p>";
+        return;
+    }
+
+    container.innerHTML = paginated.map(b => `
+        <div class="card-item" onclick="showBesoinDetails(${b.id})">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div style="font-weight:600; color:var(--text-main); font-size:16px;">${b.titre}</div>
+                <div style="font-size:11px; color:#ff4d4d; font-weight:bold;">Échéance : ${b.deadline}</div>
+            </div>
+            <div style="font-size:13px; margin:5px 0;"><strong>${b.marque}</strong> - ${b.modele}</div>
+            <div style="font-size:12px; opacity:0.8;">Demandeur : ${b.client} • ${b.ville} • Envoi colis : ${b.colis ? 'Oui' : 'Non'}</div>
+        </div>
+    `).join('');
+    renderPagination('pagination-besoins', filteredBesoins.length, besoinsPerPage, currentBPag, 'changeBPage');
+}
+
+function renderPagination(id, total, perPage, current, funcName) {
+    const totalPages = Math.ceil(total / perPage);
+    const nav = document.getElementById(id);
+    if (totalPages <= 1) { nav.innerHTML = ""; return; }
+    let html = `<span class="pg-btn" onclick="${funcName}(${current - 1})">«</span>`;
+    for (let i = 1; i <= totalPages; i++) {
+        html += `<span class="pg-btn ${i === current ? 'active' : ''}" onclick="${funcName}(${i})">${i}</span>`;
+    }
+    html += `<span class="pg-btn" onclick="${funcName}(${current + 1})">»</span>`;
+    nav.innerHTML = html;
+}
+
+window.changeHPage = (p) => { if(p>0 && p<=Math.ceil(filteredHorlogers.length/itemsPerPage)){ currentHPag=p; renderHorlogers(); }};
+window.changeBPage = (p) => { if(p>0 && p<=Math.ceil(filteredBesoins.length/besoinsPerPage)){ currentBPag=p; renderBesoins(); }};
+
+/* ---------------------- DETAILS & TABS ---------------------- */
+
+function showBesoinDetails(id) {
+    const b = allBesoins.find(x => x.id === id);
+    document.getElementById('panel-title').innerText = "Appel d'Offres - " + b.marque;
+    
+    // Update Map
+    updateMarkers(b);
+
+    // Build Tabs
+    document.getElementById('panel-tabs-container').innerHTML = `
+        <button class="tab-btn active" onclick="switchTab(0)">Client</button>
+        <button class="tab-btn" onclick="switchTab(1)">Problème</button>
+        <button class="tab-btn" onclick="switchTab(2)">Action</button>
+    `;
+
+    // Build Body
+    document.getElementById('panel-body-content').innerHTML = `
+        <div class="tab-content active" id="tab-0">
+            <h3 class="gold-text">${b.client}</h3>
+            <p><b>Localisation :</b> ${b.ville}</p>
+            <p><b>Envoi par colis possible :</b> ${b.colis ? 'Oui' : 'Non'}</p>
+            <hr style="border:0; border-top:1px solid var(--border-color);">
+            <p><b>Montre :</b> ${b.marque} ${b.modele}</p>
+            <p><i>Description : ${b.desc.substring(0,50)}...</i></p>
+        </div>
+        <div class="tab-content" id="tab-1">
+            <h4>État des lieux / Demande</h4>
+            <div style="background:rgba(212,175,55,0.1); padding:15px; border-radius:8px; border-left:4px solid var(--text-main);">
+                ${b.desc}
+            </div>
+            <p style="margin-top:15px; font-size:11px;">Type de service : Révision / Réparation technique</p>
+        </div>
+        <div class="tab-content" id="tab-2">
+            <button class="btn-action" style="width:100%; background:#333; color:#fff; margin-bottom:15px;" onclick="alert('Ouverture du PDF photos...')">📁 Voir les photos (PDF)</button>
+            <p style="font-size:11px; text-align:center; margin-bottom:20px;">Le PDF contient les vues macro du mouvement et du boîtier.</p>
+            
+            <button class="btn-action" style="width:100%; background:var(--gold-gradient); color:#000;" onclick="alert('Ouverture du QCM de réponse...')">✉ Envoyer une offre (QCM)</button>
+            
+            <div style="margin-top:30px; padding:10px; border:1px dashed #ff4d4d; border-radius:8px; text-align:center;">
+                <span style="color:#ff4d4d; font-weight:bold; font-size:11px;">DATE LIMITE DE RÉPONSE : ${b.deadline}</span>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('detail-panel').style.display = 'block';
+}
+
+// Ré-implémentation simplifiée pour l'exemple horloger
+function showHorlogerDetails(id) {
     const h = allHorlogers.find(x => x.id === id);
     document.getElementById('panel-title').innerText = h.nom;
     map.flyTo([h.lat, h.lng], 14);
     
-    const tabs = document.getElementById('dynamic-tabs');
-    tabs.innerHTML = `
-        <button class="tab-btn active" onclick="switchHTab(0, ${h.id})">Infos</button>
-        <button class="tab-btn" onclick="switchHTab(1, ${h.id})">Avis</button>
-        <button class="tab-btn" onclick="switchHTab(2, ${h.id})">Carte</button>
+    document.getElementById('panel-tabs-container').innerHTML = `
+        <button class="tab-btn active" onclick="switchTab(0)">Infos</button>
+        <button class="tab-btn" onclick="switchTab(1)">Avis</button>
     `;
-    renderHorlogerTabContent(0, h);
+    document.getElementById('panel-body-content').innerHTML = `
+        <div class="tab-content active" id="tab-0">
+            <h3 class="gold-text">${h.nom}</h3>
+            <p><b>Ville :</b> ${h.ville}</p>
+            <p><b>Spécialité :</b> ${h.spec}</p>
+        </div>
+        <div class="tab-content" id="tab-1">
+            <p>Avis clients en cours de chargement...</p>
+        </div>
+    `;
     document.getElementById('detail-panel').style.display = 'block';
 }
 
-function switchHTab(idx, id) {
-    const h = allHorlogers.find(x => x.id === id);
+function switchTab(idx) {
     document.querySelectorAll('.tab-btn').forEach((btn, i) => btn.classList.toggle('active', i === idx));
-    renderHorlogerTabContent(idx, h);
+    document.querySelectorAll('.tab-content').forEach((content, i) => content.classList.toggle('active', i === idx));
 }
 
-function renderHorlogerTabContent(idx, h) {
-    const body = document.getElementById('panel-body-content');
-    if(idx === 0) {
-        body.innerHTML = `<h3 class="gold-text">${h.nom}</h3><p><b>Ville :</b> ${h.ville}</p><p><b>Spé :</b> ${h.spec}</p>`;
-    } else if(idx === 1) {
-        body.innerHTML = `<h4>Avis clients</h4><p>Aucun avis récent.</p>`;
-    } else if(idx === 2) {
-        body.innerHTML = `<div class="v-card"><h3 class="gold-text">${h.nom}</h3><p>${h.ville}</p></div>`;
-    }
+function closePanel() { 
+    document.getElementById('detail-panel').style.display = 'none'; 
+    updateMarkers(); // Reset markers focus
 }
 
-function closePanel() { document.getElementById('detail-panel').style.display = 'none'; }
 function toggleTheme() { document.body.classList.toggle("light-theme"); }
 
-/* ---------------------- DRAG PANEL ---------------------- */
+// Drag panel logic
 const panel = document.getElementById("detail-panel");
 const pHeader = document.getElementById("panel-header");
 let isDragging = false; let offsetX, offsetY;
@@ -708,8 +640,9 @@ pHeader.onmousedown = (e) => { isDragging = true; offsetX = e.clientX - panel.of
 document.onmousemove = (e) => { if (!isDragging) return; panel.style.left = (e.clientX - offsetX) + "px"; panel.style.top = (e.clientY - offsetY) + "px"; };
 document.onmouseup = () => isDragging = false;
 
+/* ---------------------- INIT ---------------------- */
 window.onload = () => {
-    renderHorlogers(1);
+    renderHorlogers();
     renderBesoins();
     updateMarkers();
 };
