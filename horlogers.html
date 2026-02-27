@@ -201,14 +201,14 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
 .rating-box {
     flex: 1;
     background: var(--rating-bg);
-    padding: 6px;
+    padding: 3px; /* Affiné de 6px à 3px */
     border-radius: 6px;
     border: 1px solid var(--border-color);
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 35px;
+    min-height: 28px; /* Affiné de 35px à 28px */
 }
 .community-note { color: #d4af37; font-weight: 600; font-size: 12px; }
 .audit-note { color: var(--purple-certified); font-weight: 600; font-size: 10px; text-transform: uppercase; }
@@ -219,7 +219,6 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
     position: fixed;
     top: 150px; left: 50px;
     width: 400px; height: 500px;
-    /* Remplacement des couleurs fixes par des variables */
     background: var(--bg-card); 
     border: 1px solid var(--text-main);
     z-index: 3000;
@@ -271,7 +270,6 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
     height: calc(100% - 95px);
     overflow-y: auto;
     font-size: 13px;
-    /* Utilisation de la variable de texte secondaire pour la lisibilité */
     color: var(--text-secondary);
 }
 
@@ -284,7 +282,7 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
 .bar-container { 
     flex: 1; 
     height: 10px; 
-    background: var(--rating-bg); /* Adapté au thème */
+    background: var(--rating-bg); 
     border-radius: 5px; 
     overflow: hidden; 
     border: 1px solid var(--border-color); 
@@ -293,7 +291,6 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
 
 /* VISITING CARD */
 .v-card {
-    /* Un dégradé qui s'adapte légèrement ou reste élégant */
     background: var(--bg-main);
     border: 1px solid var(--border-color);
     padding: 20px;
@@ -403,15 +400,13 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
         </div>
         <div class="tab-content" id="tab-1">
             <h4 style="margin-top:0">Répartition des avis</h4>
-            <div id="rating-stats">
-                </div>
+            <div id="rating-stats"></div>
             <hr style="border:0; border-top:1px solid var(--border-color); margin:15px 0;">
             <div style="display: flex; align-items: center; margin-bottom: 10px;">
                 <div id="comments-list-header" style="font-size:11px; color:var(--text-main); font-weight:bold;">Tous les avis :</div>
                 <button id="reset-avis-btn" class="btn-reset-avis" style="display:none;" onclick="renderAvisList(null)">Afficher tout</button>
             </div>
-            <div id="comments-list">
-                </div>
+            <div id="comments-list"></div>
         </div>
         <div class="tab-content" id="tab-2">
             <div class="v-card" id="v-card-ui">
@@ -436,7 +431,6 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-// --- DONNÉES ---
 const allHorlogers = [
     { id: 1, nom: "Atelier du Temps", ville: "Arras", lat: 50.291, lng: 2.777, noteComm: 4.8, audit: true, spec: "Mécanique, Vintage", expertise: "15 ans", 
       avis: [
@@ -461,7 +455,6 @@ let currentPage = 1;
 const itemsPerPage = 4;
 let currentHorloger = null;
 
-// --- RECHERCHE PAR VILLE & RAYON ---
 function getDistance(lat1, lon1, lat2, lon2) {
     const R = 6371; 
     const dLat = (lat2-lat1) * Math.PI / 180;
@@ -478,29 +471,24 @@ function filterByCityAndRadius() {
     
     if (searchCity === "") {
         filteredHorlogers = [...allHorlogers];
-        // FOCUS : Retour à la vue d'ensemble de la France
         map.flyTo([46.6033, 1.8883], 6);
     } else {
         const cityRef = allHorlogers.find(h => h.ville.toLowerCase() === searchCity);
-        
         if (cityRef) {
             filteredHorlogers = allHorlogers.filter(h => {
                 const dist = getDistance(cityRef.lat, cityRef.lng, h.lat, h.lng);
                 return dist <= radius;
             });
-            // FOCUS : Centre la carte sur la ville trouvée
             map.flyTo([cityRef.lat, cityRef.lng], 10);
         } else {
             filteredHorlogers = allHorlogers.filter(h => h.ville.toLowerCase().includes(searchCity));
         }
     }
-    
     currentPage = 1;
     renderHorlogers(1);
     updateMarkers();
 }
 
-// --- AFFICHAGE ---
 function renderHorlogers(page) {
     const container = document.getElementById('horloger-list');
     const start = (page - 1) * itemsPerPage;
@@ -518,7 +506,7 @@ function renderHorlogers(page) {
             <div style="font-size:12px; opacity:0.8; margin-top:4px;">${h.ville} • ${h.spec}</div>
             <div class="rating-wrapper">
                 <div class="rating-box"><span class="community-note">★ ${h.noteComm} / 5</span></div>
-                <div class="rating-box">${h.audit ? '<span class="audit-note">✓ CERTIFIÉ CHRONOBASE</span>' : '<span style="font-size:9px; opacity:0.5;">Non audité</span>'}</div>
+                ${h.audit ? `<div class="rating-box"><span class="audit-note">✓ CERTIFIÉ CHRONOBASE</span></div>` : ''}
             </div>
         </div>
     `).join('');
@@ -545,18 +533,11 @@ function changePage(p) {
     renderHorlogers(currentPage);
 }
 
-// --- LOGIQUE DU PANEL ---
 function showDetails(id) {
     currentHorloger = allHorlogers.find(x => x.id === id);
     document.getElementById('panel-title').innerText = currentHorloger.nom;
-    
-    // AMÉLIORATION CARTE : Zoom sur l'horloger sans cacher les autres
-    map.flyTo([currentHorloger.lat, currentHorloger.lng], 14, {
-        animate: true,
-        duration: 1.5
-    });
+    map.flyTo([currentHorloger.lat, currentHorloger.lng], 14, { animate: true, duration: 1.5 });
 
-    // Infos
     document.getElementById('info-content').innerHTML = `
         <h3 class="gold-text">${currentHorloger.nom}</h3>
         <p><b>Localisation :</b> ${currentHorloger.ville}</p>
@@ -564,10 +545,7 @@ function showDetails(id) {
         <p><b>Expertise :</b> ${currentHorloger.expertise}</p>
     `;
 
-    // Avis - Calcul des quantités
     renderRatingStats();
-
-    // Carte de visite
     document.getElementById('vc-name').innerText = currentHorloger.nom;
     document.getElementById('vc-spec').innerText = currentHorloger.spec;
     document.getElementById('vc-loc').innerText = currentHorloger.ville;
@@ -627,18 +605,13 @@ function renderAvisList(filterStars) {
     `).join('');
 }
 
-function filterAvis(stars) {
-    renderAvisList(stars);
-}
-
+function filterAvis(stars) { renderAvisList(stars); }
 function closePanel() { document.getElementById('detail-panel').style.display = 'none'; }
-
 function switchTab(idx) {
     document.querySelectorAll('.tab-btn').forEach((btn, i) => btn.classList.toggle('active', i === idx));
     document.querySelectorAll('.tab-content').forEach((content, i) => content.classList.toggle('active', i === idx));
 }
 
-// --- CARTE ---
 let map = L.map('map').setView([50.4, 2.8], 9);
 L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
 let markerLayer = L.layerGroup().addTo(map);
@@ -650,7 +623,6 @@ function updateMarkers() {
     });
 }
 
-// --- DRAG PANEL ---
 const panel = document.getElementById("detail-panel");
 const pHeader = document.getElementById("panel-header");
 let isDragging = false; let offsetX, offsetY;
@@ -658,7 +630,6 @@ pHeader.onmousedown = (e) => { isDragging = true; offsetX = e.clientX - panel.of
 document.onmousemove = (e) => { if (!isDragging) return; panel.style.left = (e.clientX - offsetX) + "px"; panel.style.top = (e.clientY - offsetY) + "px"; };
 document.onmouseup = () => isDragging = false;
 
-// --- INIT ---
 function init() {
     renderHorlogers(1);
     renderBesoins(besoins);
@@ -680,7 +651,6 @@ function renderBesoins(data) {
 }
 
 function toggleTheme() { document.body.classList.toggle("light-theme"); }
-
 window.onload = init;
 </script>
 </body>
