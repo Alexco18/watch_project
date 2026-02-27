@@ -101,7 +101,7 @@ nav a:hover{color:#f5d98c}
     width: 100%;
 }
 
-#search-input {
+.custom-input {
     flex: 1;
     padding: 15px;
     background: rgba(0,0,0,0.1);
@@ -130,11 +130,11 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
     font-family: 'Montserrat';
     transition: transform 0.2s;
     white-space: nowrap;
-    text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 45px;
+    text-decoration: none;
 }
 .btn-action:hover { transform: scale(1.02); }
 
@@ -201,14 +201,14 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
 .rating-box {
     flex: 1;
     background: var(--rating-bg);
-    padding: 3px; /* Affiné de 6px à 3px */
+    padding: 3px; 
     border-radius: 6px;
     border: 1px solid var(--border-color);
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 28px; /* Affiné de 35px à 28px */
+    min-height: 28px; 
 }
 .community-note { color: #d4af37; font-weight: 600; font-size: 12px; }
 .audit-note { color: var(--purple-certified); font-weight: 600; font-size: 10px; text-transform: uppercase; }
@@ -312,7 +312,6 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
 
 #cb-bubble { position: fixed; bottom: 25px; right: 25px; background: var(--text-main); color: var(--bg-main); width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 26px; cursor: pointer; z-index: 9999; }
 
-/* CSS POUR LE BOUTON RESET AVIS */
 .btn-reset-avis {
     background: none;
     border: 1px solid var(--text-main);
@@ -322,11 +321,6 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
     font-size: 10px;
     cursor: pointer;
     margin-left: 10px;
-    transition: 0.2s;
-}
-.btn-reset-avis:hover {
-    background: var(--text-main);
-    color: #000;
 }
 </style>
 </head>
@@ -358,7 +352,7 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
 
     <div class="search-controls">
         <div class="search-bar-wrapper">
-            <input type="text" id="search-input" placeholder="Saisissez une ville (ex: Arras, Lille...)" onkeyup="filterByCityAndRadius()">
+            <input type="text" id="search-input" class="custom-input" placeholder="Saisissez une ville (ex: Arras, Lille...)" onkeyup="filterByCityAndRadius()">
             <button class="btn-action" onclick="alert('Formulaire horloger')">+ Rejoindre le réseau</button>
         </div>
         <div class="radius-filter">
@@ -375,52 +369,38 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
         <div id="map"></div>
     </div>
 
-    <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">
-        <h2 class="gold-text">Besoins Clients & Appels d'Offres</h2>
-        <button class="btn-action" onclick="alert('Publier un besoin')">Publier un besoin</button>
+    <div id="besoins-section">
+        <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">
+            <h2 class="gold-text">Besoins Clients & Appels d'Offres</h2>
+            <button class="btn-action" onclick="alert('Publier un besoin')">Publier mon besoin</button>
+        </div>
+
+        <div class="page-description" style="text-align: left; margin-bottom: 25px;">
+            Cet espace est exclusivement dédié aux <strong>prestations de services horlogers</strong> (révision, expertise, tarification, polissage). 
+            Pour toute demande d'équipement ou de pièces détachées, veuillez vous diriger vers la page <em>Pièces & Matériel</em>. 
+            Les horlogers peuvent ici répondre directement à vos besoins techniques.
+        </div>
+
+        <div class="search-controls">
+            <input type="text" id="search-besoins" class="custom-input" placeholder="Rechercher une marque, une ville ou un type de besoin..." onkeyup="filterBesoins()">
+        </div>
+
+        <div class="list-wrapper" style="height: 600px;">
+            <div class="list-container" id="besoins-list-container"></div>
+            <div class="pagination" id="pagination-besoins"></div>
+        </div>
     </div>
-    
-    <div id="besoins-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px;"></div>
 </div>
 
 <div class="floating-panel" id="detail-panel">
     <div class="panel-header" id="panel-header">
-        <span style="font-weight:600; font-size:12px;" id="panel-title">Détails Horloger</span>
+        <span style="font-weight:600; font-size:12px;" id="panel-title">Détails</span>
         <span style="cursor:pointer; font-weight:bold;" onclick="closePanel()">✕</span>
     </div>
-    <div class="panel-tabs">
-        <button class="tab-btn active" onclick="switchTab(0)">Infos</button>
-        <button class="tab-btn" onclick="switchTab(1)">Avis</button>
-        <button class="tab-btn" onclick="switchTab(2)">Carte</button>
-    </div>
-    <div class="panel-body">
-        <div class="tab-content active" id="tab-0">
-            <div id="info-content"></div>
-            <button class="btn-action" style="width:100%; margin-top:20px; font-size:11px;" onclick="switchTab(2)">Voir la carte de visite</button>
+    <div class="panel-tabs" id="dynamic-tabs">
         </div>
-        <div class="tab-content" id="tab-1">
-            <h4 style="margin-top:0">Répartition des avis</h4>
-            <div id="rating-stats"></div>
-            <hr style="border:0; border-top:1px solid var(--border-color); margin:15px 0;">
-            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                <div id="comments-list-header" style="font-size:11px; color:var(--text-main); font-weight:bold;">Tous les avis :</div>
-                <button id="reset-avis-btn" class="btn-reset-avis" style="display:none;" onclick="renderAvisList(null)">Afficher tout</button>
-            </div>
-            <div id="comments-list"></div>
+    <div class="panel-body" id="panel-body-content">
         </div>
-        <div class="tab-content" id="tab-2">
-            <div class="v-card" id="v-card-ui">
-                <h3 class="gold-text" id="vc-name">Atelier du Temps</h3>
-                <p id="vc-spec" style="font-size:11px;"></p>
-                <p id="vc-loc" style="font-size:10px; opacity:0.8;"></p>
-                <div style="border-top:1px solid #333; padding-top:10px; margin-top:10px; font-size:10px;">
-                    Contact : 01 23 45 67 89<br>contact@chronobase.fr
-                </div>
-            </div>
-            <button class="btn-action" style="width:100%; margin-bottom:10px;" onclick="alert('Téléchargement de la carte...')">⬇ Télécharger la carte</button>
-            <button class="btn-action" style="width:100%; background: #333; color:#fff;" onclick="alert('Ouverture du catalogue PDF...')">📁 Catalogue Projets (PDF)</button>
-        </div>
-    </div>
 </div>
 
 <footer class="site-footer">
@@ -431,47 +411,236 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+/* ---------------------- DATA ---------------------- */
 const allHorlogers = [
     { id: 1, nom: "Atelier du Temps", ville: "Arras", lat: 50.291, lng: 2.777, noteComm: 4.8, audit: true, spec: "Mécanique, Vintage", expertise: "15 ans", 
-      avis: [
-        {stars: 5, user: "Pierre G.", date: "12/02/2026", comment: "Excellent travail sur ma Speedmaster."},
-        {stars: 5, user: "Marc A.", date: "05/01/2026", comment: "Un vrai passionné."},
-        {stars: 4, user: "Lucie T.", date: "20/12/2025", comment: "Délai un peu long mais qualité au top."}
-      ]},
-    { id: 2, nom: "Horlogerie Durand", ville: "Lille", lat: 50.629, lng: 3.057, noteComm: 4.2, audit: false, spec: "Quartz, Luxe", expertise: "8 ans",
-      avis: [{stars: 4, user: "Jean B.", date: "10/02/2026", comment: "Rapide et efficace."}]},
-    { id: 3, nom: "La Main d'Or", ville: "Lille", lat: 50.635, lng: 3.060, noteComm: 4.9, audit: true, spec: "Haute Horlogerie", expertise: "25 ans", avis: []},
-    { id: 4, nom: "Chrono Nord", ville: "Douai", lat: 50.366, lng: 3.078, noteComm: 3.9, audit: false, spec: "Réparations", expertise: "5 ans", avis: []},
-    { id: 5, nom: "Atelier 24", ville: "Arras", lat: 50.280, lng: 2.780, noteComm: 4.5, audit: true, spec: "Rolex, Omega", expertise: "12 ans", avis: []},
-    { id: 6, nom: "Le Ressort", ville: "Lille", lat: 50.620, lng: 3.040, noteComm: 4.1, audit: false, spec: "Vintage", expertise: "10 ans", avis: []}
+      avis: [{stars: 5, user: "Pierre G.", date: "12/02/2026", comment: "Excellent travail."}]},
+    { id: 2, nom: "Horlogerie Durand", ville: "Lille", lat: 50.629, lng: 3.057, noteComm: 4.2, audit: false, spec: "Quartz, Luxe", expertise: "8 ans", avis: []},
+    { id: 3, nom: "La Main d'Or", ville: "Lille", lat: 50.635, lng: 3.060, noteComm: 4.9, audit: true, spec: "Haute Horlogerie", expertise: "25 ans", avis: []}
 ];
 
-const besoins = [
-    { id: 101, client: "Jean P.", montre: "Omega Seamaster", ville: "Béthune", lat: 50.533, lng: 2.633, pb: "Révision complète", deadline: "2026-03-30", colis: true }
+const allBesoins = [
+    { 
+        id: 101, 
+        client: "Jean Dupont", 
+        ville: "Béthune", 
+        lat: 50.533, lng: 2.633, 
+        titre: "Révision complète Omega", 
+        description: "Ma montre avance de 5 min par jour, besoin d'un nettoyage et huilage.", 
+        montre: "Seamaster 300", 
+        marque: "Omega",
+        envoiColis: "Oui",
+        detailsMontre: "Automatique, Calibre 8800, 2019",
+        deadline: "30/03/2026"
+    },
+    { 
+        id: 102, 
+        client: "Marc Antoine", 
+        ville: "Lens", 
+        lat: 50.428, lng: 2.831, 
+        titre: "Expertise pour assurance", 
+        description: "Demande d'expertise de valeur pour une montre héritée.", 
+        montre: "Submariner", 
+        marque: "Rolex",
+        envoiColis: "Non (remise en main propre)",
+        detailsMontre: "Vintage, 1985, Patine marquée",
+        deadline: "15/04/2026"
+    }
 ];
 
 let filteredHorlogers = [...allHorlogers];
-let currentPage = 1;
-const itemsPerPage = 4;
-let currentHorloger = null;
+let filteredBesoins = [...allBesoins];
+let currentHPg = 1;
+let currentBPg = 1;
+const hPerPage = 4;
+const bPerPage = 10;
 
-function getDistance(lat1, lon1, lat2, lon2) {
-    const R = 6371; 
-    const dLat = (lat2-lat1) * Math.PI / 180;
-    const dLon = (lon2-lon1) * Math.PI / 180;
-    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    return R * c;
+/* ---------------------- CARTE ---------------------- */
+let map = L.map('map').setView([50.4, 2.8], 9);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
+let markerLayer = L.layerGroup().addTo(map);
+
+function updateMarkers(highlightBesoin = null) {
+    markerLayer.clearLayers();
+    
+    // Pins Bleus (Horlogers)
+    filteredHorlogers.forEach(h => {
+        const blueIcon = new L.Icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
+        });
+        L.marker([h.lat, h.lng], {icon: blueIcon}).addTo(markerLayer).bindPopup(`<b>${h.nom}</b>`);
+    });
+
+    // Pins Rouges (Demandes clients)
+    allBesoins.forEach(b => {
+        const redIcon = new L.Icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
+        });
+        const m = L.marker([b.lat, b.lng], {icon: redIcon}).addTo(markerLayer).bindPopup(`<b>Besoin : ${b.marque}</b><br>${b.client}`);
+        if(highlightBesoin && highlightBesoin.id === b.id) m.openPopup();
+    });
+}
+
+/* ---------------------- GESTION BESOINS ---------------------- */
+function filterBesoins() {
+    const val = document.getElementById('search-besoins').value.toLowerCase();
+    filteredBesoins = allBesoins.filter(b => 
+        b.titre.toLowerCase().includes(val) || 
+        b.marque.toLowerCase().includes(val) || 
+        b.ville.toLowerCase().includes(val)
+    );
+    currentBPg = 1;
+    renderBesoins();
+}
+
+function renderBesoins() {
+    const container = document.getElementById('besoins-list-container');
+    const start = (currentBPg - 1) * bPerPage;
+    const paginated = filteredBesoins.slice(start, start + bPerPage);
+
+    container.innerHTML = paginated.map(b => `
+        <div class="card-item" onclick="showBesoinDetail(${b.id})">
+            <div style="display:flex; justify-content:space-between; align-items:start;">
+                <div>
+                    <div style="font-weight:600; color:var(--text-main); font-size:16px;">${b.titre}</div>
+                    <div style="font-size:12px; opacity:0.8; margin-top:4px;">${b.marque} - ${b.montre}</div>
+                </div>
+                <div style="text-align:right;">
+                    <div style="font-size:12px; font-weight:600;">${b.ville}</div>
+                    <div style="font-size:10px; color:${b.envoiColis === 'Oui' ? '#4caf50' : '#ff4d4d'}">Colis : ${b.envoiColis}</div>
+                </div>
+            </div>
+            <p style="font-size:13px; margin:10px 0; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${b.description}</p>
+            <div style="font-size:11px; opacity:0.6;">Demandeur : ${b.client} | Clôture : ${b.deadline}</div>
+        </div>
+    `).join('');
+    renderPaginationBesoins();
+}
+
+function renderPaginationBesoins() {
+    const totalPages = Math.ceil(filteredBesoins.length / bPerPage);
+    const nav = document.getElementById('pagination-besoins');
+    if (totalPages <= 1) { nav.innerHTML = ""; return; }
+    
+    let html = `<span class="pg-btn" onclick="changeBPage(${currentBPg - 1})">«</span>`;
+    for (let i = 1; i <= totalPages; i++) {
+        html += `<span class="pg-btn ${i === currentBPg ? 'active' : ''}" onclick="changeBPage(${i})">${i}</span>`;
+    }
+    html += `<span class="pg-btn" onclick="changeBPage(${currentBPg + 1})">»</span>`;
+    nav.innerHTML = html;
+}
+
+function changeBPage(p) {
+    if (p < 1 || p > Math.ceil(filteredBesoins.length / bPerPage)) return;
+    currentBPg = p;
+    renderBesoins();
+}
+
+/* ---------------------- DETAILS BESOINS (FLOATING PANEL) ---------------------- */
+function showBesoinDetail(id) {
+    const b = allBesoins.find(x => x.id === id);
+    document.getElementById('panel-title').innerText = "Appel d'offre : " + b.marque;
+    
+    // Action sur la carte
+    map.flyTo([b.lat, b.lng], 13);
+    updateMarkers(b);
+
+    // Update Tabs
+    const tabs = document.getElementById('dynamic-tabs');
+    tabs.innerHTML = `
+        <button class="tab-btn active" onclick="switchBTab(0, ${b.id})">Client</button>
+        <button class="tab-btn" onclick="switchBTab(1, ${b.id})">Demande</button>
+        <button class="tab-btn" onclick="switchBTab(2, ${b.id})">Répondre</button>
+    `;
+
+    renderBesoinTabContent(0, b);
+    document.getElementById('detail-panel').style.display = 'block';
+}
+
+function switchBTab(idx, id) {
+    const b = allBesoins.find(x => x.id === id);
+    document.querySelectorAll('.tab-btn').forEach((btn, i) => btn.classList.toggle('active', i === idx));
+    renderBesoinTabContent(idx, b);
+}
+
+function renderBesoinTabContent(idx, b) {
+    const body = document.getElementById('panel-body-content');
+    if (idx === 0) {
+        body.innerHTML = `
+            <h3 class="gold-text">${b.client}</h3>
+            <p><b>Localisation :</b> ${b.ville}</p>
+            <p><b>Envoi colis possible :</b> ${b.envoiColis}</p>
+            <hr style="border:0; border-top:1px solid var(--border-color); margin:15px 0;">
+            <p><b>Montre :</b> ${b.marque} ${b.montre}</p>
+            <p style="font-size:11px;">${b.detailsMontre}</p>
+        `;
+    } else if (idx === 1) {
+        body.innerHTML = `
+            <h4 class="gold-text">État des lieux / Problème</h4>
+            <p style="line-height:1.5;">${b.description}</p>
+            <div style="background:rgba(212,175,55,0.1); padding:10px; border-radius:5px; margin-top:15px;">
+                <b>Titre de la demande :</b><br>${b.titre}
+            </div>
+        `;
+    } else if (idx === 2) {
+        body.innerHTML = `
+            <button class="btn-action" style="width:100%; margin-bottom:15px; background:#444; color:#fff;" onclick="alert('Ouverture du PDF photos...')">🖼️ Voir les photos (PDF)</button>
+            <p style="font-size:11px; margin-bottom:20px;">*Les photos permettent de juger l'état cosmétique avant offre.</p>
+            
+            <button class="btn-action" style="width:100%;" onclick="alert('Ouverture du QCM d\'offre...')">📩 Envoyer une offre (QCM)</button>
+            
+            <div style="margin-top:30px; padding:15px; border:1px solid #ff4d4d; border-radius:8px; text-align:center;">
+                <span style="color:#ff4d4d; font-weight:600; font-size:12px;">DATE LIMITE DE RÉPONSE</span><br>
+                <span style="font-size:18px; font-weight:600;">${b.deadline}</span>
+            </div>
+        `;
+    }
+}
+
+/* ---------------------- FONCTIONS EXISTANTES (HORLOGERS) ---------------------- */
+function renderHorlogers(page) {
+    const container = document.getElementById('horloger-list');
+    const start = (page - 1) * hPerPage;
+    const paginated = filteredHorlogers.slice(start, start + hPerPage);
+    container.innerHTML = paginated.map(h => `
+        <div class="card-item" onclick="showHorlogerDetail(${h.id})">
+            <div style="font-weight:600; color:var(--text-main);">${h.nom}</div>
+            <div style="font-size:12px; opacity:0.8; margin-top:4px;">${h.ville} • ${h.spec}</div>
+            <div class="rating-wrapper">
+                <div class="rating-box"><span class="community-note">★ ${h.noteComm} / 5</span></div>
+                ${h.audit ? `<div class="rating-box"><span class="audit-note">✓ CERTIFIÉ</span></div>` : ''}
+            </div>
+        </div>
+    `).join('');
+    renderPaginationHorlogers();
+}
+
+function renderPaginationHorlogers() {
+    const totalPages = Math.ceil(filteredHorlogers.length / hPerPage);
+    const nav = document.getElementById('pagination-controls');
+    let html = `<span class="pg-btn" onclick="changeHPage(${currentHPg - 1})">«</span>`;
+    for (let i = 1; i <= totalPages; i++) {
+        html += `<span class="pg-btn ${i === currentHPg ? 'active' : ''}" onclick="changeHPage(${i})">${i}</span>`;
+    }
+    html += `<span class="pg-btn" onclick="changeHPage(${currentHPg + 1})">»</span>`;
+    nav.innerHTML = html;
+}
+
+function changeHPage(p) {
+    if (p < 1 || p > Math.ceil(filteredHorlogers.length / hPerPage)) return;
+    currentHPg = p;
+    renderHorlogers(currentHPg);
 }
 
 function filterByCityAndRadius() {
     const searchCity = document.getElementById('search-input').value.toLowerCase().trim();
     const radius = parseInt(document.getElementById('radius-range').value);
-    
     if (searchCity === "") {
         filteredHorlogers = [...allHorlogers];
-        map.flyTo([46.6033, 1.8883], 6);
     } else {
         const cityRef = allHorlogers.find(h => h.ville.toLowerCase() === searchCity);
         if (cityRef) {
@@ -479,150 +648,59 @@ function filterByCityAndRadius() {
                 const dist = getDistance(cityRef.lat, cityRef.lng, h.lat, h.lng);
                 return dist <= radius;
             });
-            map.flyTo([cityRef.lat, cityRef.lng], 10);
         } else {
             filteredHorlogers = allHorlogers.filter(h => h.ville.toLowerCase().includes(searchCity));
         }
     }
-    currentPage = 1;
+    currentHPg = 1;
     renderHorlogers(1);
     updateMarkers();
 }
 
-function renderHorlogers(page) {
-    const container = document.getElementById('horloger-list');
-    const start = (page - 1) * itemsPerPage;
-    const end = start + itemsPerPage;
-    const paginatedItems = filteredHorlogers.slice(start, end);
-
-    if(paginatedItems.length === 0) {
-        container.innerHTML = "<p style='padding:20px; text-align:center;'>Aucun horloger trouvé.</p>";
-        return;
-    }
-
-    container.innerHTML = paginatedItems.map(h => `
-        <div class="card-item" onclick="showDetails(${h.id})">
-            <div style="font-weight:600; color:var(--text-main);">${h.nom}</div>
-            <div style="font-size:12px; opacity:0.8; margin-top:4px;">${h.ville} • ${h.spec}</div>
-            <div class="rating-wrapper">
-                <div class="rating-box"><span class="community-note">★ ${h.noteComm} / 5</span></div>
-                ${h.audit ? `<div class="rating-box"><span class="audit-note">✓ CERTIFIÉ CHRONOBASE</span></div>` : ''}
-            </div>
-        </div>
-    `).join('');
-    renderPagination();
+function getDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2-lat1) * Math.PI / 180;
+    const dLon = (lon2-lon1) * Math.PI / 180;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 }
 
-function renderPagination() {
-    const totalPages = Math.ceil(filteredHorlogers.length / itemsPerPage);
-    const nav = document.getElementById('pagination-controls');
-    if (totalPages <= 1) { nav.innerHTML = ""; return; }
+function showHorlogerDetail(id) {
+    const h = allHorlogers.find(x => x.id === id);
+    document.getElementById('panel-title').innerText = h.nom;
+    map.flyTo([h.lat, h.lng], 14);
     
-    let html = `<span class="pg-btn" onclick="changePage(${currentPage - 1})">«</span>`;
-    for (let i = 1; i <= totalPages; i++) {
-        html += `<span class="pg-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</span>`;
-    }
-    html += `<span class="pg-btn" onclick="changePage(${currentPage + 1})">»</span>`;
-    nav.innerHTML = html;
-}
-
-function changePage(p) {
-    const totalPages = Math.ceil(filteredHorlogers.length / itemsPerPage);
-    if (p < 1 || p > totalPages) return;
-    currentPage = p;
-    renderHorlogers(currentPage);
-}
-
-function showDetails(id) {
-    currentHorloger = allHorlogers.find(x => x.id === id);
-    document.getElementById('panel-title').innerText = currentHorloger.nom;
-    map.flyTo([currentHorloger.lat, currentHorloger.lng], 14, { animate: true, duration: 1.5 });
-
-    document.getElementById('info-content').innerHTML = `
-        <h3 class="gold-text">${currentHorloger.nom}</h3>
-        <p><b>Localisation :</b> ${currentHorloger.ville}</p>
-        <p><b>Spécialités :</b> ${currentHorloger.spec}</p>
-        <p><b>Expertise :</b> ${currentHorloger.expertise}</p>
+    const tabs = document.getElementById('dynamic-tabs');
+    tabs.innerHTML = `
+        <button class="tab-btn active" onclick="switchHTab(0, ${h.id})">Infos</button>
+        <button class="tab-btn" onclick="switchHTab(1, ${h.id})">Avis</button>
+        <button class="tab-btn" onclick="switchHTab(2, ${h.id})">Carte</button>
     `;
-
-    renderRatingStats();
-    document.getElementById('vc-name').innerText = currentHorloger.nom;
-    document.getElementById('vc-spec').innerText = currentHorloger.spec;
-    document.getElementById('vc-loc').innerText = currentHorloger.ville;
-
-    switchTab(0);
+    renderHorlogerTabContent(0, h);
     document.getElementById('detail-panel').style.display = 'block';
 }
 
-function renderRatingStats() {
-    const statsDiv = document.getElementById('rating-stats');
-    const avis = currentHorloger.avis || [];
-    const counts = {5:0, 4:0, 3:0, 2:0, 1:0};
-    avis.forEach(a => counts[a.stars]++);
-
-    let html = "";
-    for(let i=5; i>=1; i--) {
-        const qty = counts[i];
-        const pc = avis.length > 0 ? (qty / avis.length) * 100 : 0;
-        html += `
-            <div class="rating-row" onclick="filterAvis(${i})">
-                <span style="width:25px">${i}★</span>
-                <div class="bar-container"><div class="bar-fill" style="width:${pc}%"></div></div>
-                <span style="width:30px; text-align:right;">${qty}</span>
-            </div>
-        `;
-    }
-    statsDiv.innerHTML = html;
-    renderAvisList(null); 
-}
-
-function renderAvisList(filterStars) {
-    const list = document.getElementById('comments-list');
-    const header = document.getElementById('comments-list-header');
-    const resetBtn = document.getElementById('reset-avis-btn');
-    let avisToDisplay = currentHorloger.avis || [];
-    
-    if (filterStars) {
-        avisToDisplay = avisToDisplay.filter(a => a.stars === filterStars);
-        header.innerText = `Avis ${filterStars} étoiles (${avisToDisplay.length}) :`;
-        resetBtn.style.display = "inline-block"; 
-    } else {
-        header.innerText = `Tous les avis (${avisToDisplay.length}) :`;
-        resetBtn.style.display = "none"; 
-    }
-
-    if(avisToDisplay.length === 0) {
-        list.innerHTML = "<p style='font-size:11px; opacity:0.6;'>Aucun avis pour cette catégorie.</p>";
-        return;
-    }
-
-    list.innerHTML = avisToDisplay.map(a => `
-        <div style="margin-bottom:12px; border-bottom:1px solid #222; padding-bottom:8px;">
-            <div style="color:var(--text-main); font-size:12px;">${"★".repeat(a.stars)} - ${a.user}</div>
-            <div style="font-size:10px; opacity:0.5; margin-bottom:4px;">Le ${a.date}</div>
-            <p style="font-size:11px; font-style:italic; margin:0;">"${a.comment}"</p>
-        </div>
-    `).join('');
-}
-
-function filterAvis(stars) { renderAvisList(stars); }
-function closePanel() { document.getElementById('detail-panel').style.display = 'none'; }
-function switchTab(idx) {
+function switchHTab(idx, id) {
+    const h = allHorlogers.find(x => x.id === id);
     document.querySelectorAll('.tab-btn').forEach((btn, i) => btn.classList.toggle('active', i === idx));
-    document.querySelectorAll('.tab-content').forEach((content, i) => content.classList.toggle('active', i === idx));
+    renderHorlogerTabContent(idx, h);
 }
 
-let map = L.map('map').setView([50.4, 2.8], 9);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
-let markerLayer = L.layerGroup().addTo(map);
-
-function updateMarkers() {
-    markerLayer.clearLayers();
-    filteredHorlogers.forEach(h => {
-        L.marker([h.lat, h.lng]).addTo(markerLayer).bindPopup(`<b>${h.nom}</b><br>${h.ville}`);
-    });
+function renderHorlogerTabContent(idx, h) {
+    const body = document.getElementById('panel-body-content');
+    if(idx === 0) {
+        body.innerHTML = `<h3 class="gold-text">${h.nom}</h3><p><b>Ville :</b> ${h.ville}</p><p><b>Spé :</b> ${h.spec}</p>`;
+    } else if(idx === 1) {
+        body.innerHTML = `<h4>Avis clients</h4><p>Aucun avis récent.</p>`;
+    } else if(idx === 2) {
+        body.innerHTML = `<div class="v-card"><h3 class="gold-text">${h.nom}</h3><p>${h.ville}</p></div>`;
+    }
 }
 
+function closePanel() { document.getElementById('detail-panel').style.display = 'none'; }
+function toggleTheme() { document.body.classList.toggle("light-theme"); }
+
+/* ---------------------- DRAG PANEL ---------------------- */
 const panel = document.getElementById("detail-panel");
 const pHeader = document.getElementById("panel-header");
 let isDragging = false; let offsetX, offsetY;
@@ -630,28 +708,11 @@ pHeader.onmousedown = (e) => { isDragging = true; offsetX = e.clientX - panel.of
 document.onmousemove = (e) => { if (!isDragging) return; panel.style.left = (e.clientX - offsetX) + "px"; panel.style.top = (e.clientY - offsetY) + "px"; };
 document.onmouseup = () => isDragging = false;
 
-function init() {
+window.onload = () => {
     renderHorlogers(1);
-    renderBesoins(besoins);
+    renderBesoins();
     updateMarkers();
-}
-
-function renderBesoins(data) {
-    const container = document.getElementById('besoins-grid');
-    container.innerHTML = data.map(b => `
-        <div class="card-item" style="background:var(--bg-card); border-radius:12px; border:1px solid var(--border-color); cursor:default;">
-            <div style="display:flex; justify-content:space-between;">
-                <span style="font-weight:600;">${b.montre}</span>
-                <span style="color:#ff4d4d; font-size:11px; font-weight:600;">${b.deadline}</span>
-            </div>
-            <div style="font-size:13px; margin: 12px 0; color:var(--text-secondary);">${b.pb}</div>
-            <button class="btn-action" style="width:100%; font-size:12px;">Répondre</button>
-        </div>
-    `).join('');
-}
-
-function toggleTheme() { document.body.classList.toggle("light-theme"); }
-window.onload = init;
+};
 </script>
 </body>
 </html>
