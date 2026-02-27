@@ -1,1313 +1,696 @@
 <!DOCTYPE html>
-
 <html lang="fr">
-
 <head>
-
 <meta charset="UTF-8">
-
 <title>Horlogers & Besoins – ChronoBase</title>
 
-
-
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-
-
 <style>
-
 /* ---------------------- VARIABLES ---------------------- */
-
 :root {
-
   --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951);
-
   --bg-main: radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
-
   --bg-header: #0b0b0b;
-
   --bg-card: linear-gradient(180deg,#111,#0c0c0c);
-
   --bg-footer: #0b0b0b;
-
   --text-main: #d4af37;
-
   --text-secondary: #c1a96b;
-
   --border-color: rgba(212,175,55,0.2);
-
   --purple-certified: #8a2be2;
-
   --rating-bg: rgba(255, 255, 255, 0.05);
-
 }
-
-
 
 .light-theme {
-
   --bg-main: #ffffff;
-
   --bg-header: #ffffff;
-
   --bg-card: #f9f9f9;
-
   --bg-footer: #ffffff;
-
   --text-main: #000000;
-
   --text-secondary: #444444;
-
   --border-color: rgba(0,0,0,0.1);
-
   --rating-bg: rgba(0, 0, 0, 0.05);
-
 }
-
-
 
 /* ---------------------- GLOBAL ---------------------- */
-
 body{
-
   margin:0; padding:0;
-
   font-family:'Montserrat',sans-serif;
-
   background:var(--bg-main);
-
   color:var(--text-main);
-
   font-weight:300;
-
   overflow-x: hidden;
-
 }
-
-
 
 .gold-text{
-
   background:var(--gold-gradient);
-
   -webkit-background-clip:text;
-
   color:transparent;
-
   animation:shine 6s infinite linear;
-
   background-size:200%;
-
 }
-
 @keyframes shine{ 0%{background-position:0%} 100%{background-position:200%} }
 
-
-
 /* ---------------------- HEADER ---------------------- */
-
 header{
-
   width:100%; padding:12px 0;
-
   border-bottom:1px solid var(--border-color);
-
   background:var(--bg-header);
-
   position:fixed; top:0; left:0; z-index:1001;
-
 }
-
 .header-container{
-
   max-width:1200px; margin:auto;
-
   display:flex; justify-content:space-between; align-items:center; padding:0 20px;
-
 }
-
 .header-left { display: flex; align-items: center; gap: 15px; }
 
-
-
 nav a{ margin-left:30px; text-decoration:none; color:var(--text-main); font-size:14px; text-transform:uppercase; letter-spacing:1px; }
-
 nav a:hover{color:#f5d98c}
 
-
-
 #theme-switch { width: 50px; height: 26px; background: var(--border-color); border-radius: 20px; position: relative; cursor: pointer; display: flex; align-items: center; padding: 3px; }
-
 .switch-handle { width: 20px; height: 20px; background: var(--text-main); border-radius: 50%; transition: transform 0.3s; }
-
 .light-theme #theme-switch .switch-handle { transform: translateX(24px); background: #000; }
 
-
-
 /* ---------------------- PAGE CONTENT ---------------------- */
-
 .container{ max-width:1200px; margin:120px auto 80px; padding:0 20px; box-sizing: border-box; }
 
-
-
 .page-description {
-
     text-align: center;
-
     max-width: 900px;
-
     margin: 0 auto 40px;
-
     line-height: 1.6;
-
     color: var(--text-secondary);
-
 }
-
-
 
 /* ---------------------- SEARCH CONTROLS ---------------------- */
-
 .search-controls {
-
     display: flex;
-
     flex-direction: column;
-
     gap: 15px;
-
     margin-bottom: 25px;
-
     background: var(--bg-card);
-
     padding: 20px;
-
     border-radius: 12px;
-
     border: 1px solid var(--border-color);
-
 }
-
-
 
 .search-bar-wrapper {
-
     display: flex;
-
     gap: 15px;
-
     width: 100%;
-
 }
-
-
 
 #search-input {
-
     flex: 1;
-
     padding: 15px;
-
     background: rgba(0,0,0,0.1);
-
     border: 1px solid var(--border-color);
-
     color: var(--text-main);
-
     border-radius: 8px;
-
     font-family: 'Montserrat';
-
 }
-
-
 
 .radius-filter {
-
     display: flex;
-
     align-items: center;
-
     gap: 20px;
-
     font-size: 14px;
-
 }
-
 input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
 
-
-
 .btn-action {
-
     background: var(--gold-gradient);
-
     border: none;
-
     color: #000;
-
     padding: 0 25px;
-
     border-radius: 8px;
-
     font-weight: 600;
-
     cursor: pointer;
-
     font-family: 'Montserrat';
-
     transition: transform 0.2s;
-
     white-space: nowrap;
-
     text-decoration: none;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     min-height: 45px;
-
 }
-
 .btn-action:hover { transform: scale(1.02); }
 
-
-
 /* ---------------------- LAYOUT & CARDS ---------------------- */
-
 .main-layout { 
-
     display: flex; 
-
     gap: 20px; 
-
     height: 550px; 
-
     margin-bottom: 60px; 
-
 }
-
-
 
 .list-wrapper {
-
     flex: 1;
-
     display: flex;
-
     flex-direction: column;
-
     background: var(--bg-card);
-
     border: 1px solid var(--border-color);
-
     border-radius: 8px;
-
     overflow: hidden;
-
 }
-
-
 
 .list-container {
-
     flex: 1;
-
     overflow-y: auto;
-
 }
-
-
 
 /* PAGINATION STYLE */
-
 .pagination {
-
     display: flex;
-
     justify-content: center;
-
     align-items: center;
-
     gap: 8px;
-
     padding: 15px;
-
     border-top: 1px solid var(--border-color);
-
     font-size: 13px;
-
 }
-
 .pg-btn {
-
     cursor: pointer;
-
     padding: 4px 8px;
-
     border-radius: 4px;
-
     border: 1px solid var(--border-color);
-
     transition: 0.2s;
-
     user-select: none;
-
 }
-
 .pg-btn:hover { background: var(--border-color); }
-
 .pg-btn.active { background: var(--text-main); color: #000; font-weight: bold; }
-
-
 
 #map { flex: 2; border-radius: 8px; border: 1px solid var(--border-color); z-index: 1; }
 
-
-
 .card-item {
-
     padding: 15px;
-
     border-bottom: 1px solid var(--border-color);
-
     cursor: pointer;
-
     transition: 0.3s;
-
 }
-
 .card-item:hover { background: rgba(212,175,55,0.05); }
 
-
-
 /* NOTATIONS UNIFORMISÉES */
-
 .rating-wrapper {
-
     display: flex;
-
     gap: 10px;
-
     margin-top: 10px;
-
 }
-
 .rating-box {
-
     flex: 1;
-
     background: var(--rating-bg);
-
-    padding: 3px; /* Affiné de 6px à 3px */
-
+    padding: 3px;
     border-radius: 6px;
-
     border: 1px solid var(--border-color);
-
     text-align: center;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
-    min-height: 28px; /* Affiné de 35px à 28px */
-
+    min-height: 28px;
 }
-
 .community-note { color: #d4af37; font-weight: 600; font-size: 12px; }
-
 .audit-note { color: var(--purple-certified); font-weight: 600; font-size: 10px; text-transform: uppercase; }
 
-
-
 /* ---------------------- FLOATING PANEL ---------------------- */
-
 .floating-panel {
-
     display: none;
-
     position: fixed;
-
     top: 150px; left: 50px;
-
     width: 400px; height: 500px;
-
     background: var(--bg-card); 
-
     border: 1px solid var(--text-main);
-
     z-index: 3000;
-
     border-radius: 12px;
-
     box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-
     overflow: hidden;
-
     resize: both;
-
     min-width: 300px; min-height: 400px;
-
     max-width: 80vw; max-height: 80vh;
-
 }
-
-
 
 .panel-header {
-
     background: var(--bg-header);
-
     padding: 12px 15px;
-
     cursor: move;
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
     border-bottom: 1px solid var(--border-color);
-
 }
-
-
 
 .panel-tabs {
-
     display: flex;
-
     background: var(--bg-header);
-
     border-bottom: 1px solid var(--border-color);
-
 }
-
-
 
 .tab-btn {
-
     flex: 1;
-
     padding: 10px;
-
     background: none;
-
     border: none;
-
     color: var(--text-secondary);
-
     cursor: pointer;
-
     font-size: 11px;
-
     font-family: 'Montserrat';
-
     text-transform: uppercase;
-
     transition: 0.3s;
-
 }
-
-
 
 .tab-btn.active {
-
     color: var(--text-main);
-
     border-bottom: 2px solid var(--text-main);
-
     background: rgba(212,175,55,0.05);
-
 }
-
-
 
 .panel-body {
-
     padding: 15px;
-
     height: calc(100% - 95px);
-
     overflow-y: auto;
-
     font-size: 13px;
-
     color: var(--text-secondary);
-
 }
-
-
 
 .tab-content { display: none; }
-
 .tab-content.active { display: block; }
 
-
-
 /* AMAZON STYLE RATING */
-
 .rating-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; cursor: pointer; }
-
 .rating-row:hover .bar-container { border: 1px solid var(--text-main); }
-
 .bar-container { 
-
     flex: 1; 
-
     height: 10px; 
-
     background: var(--rating-bg); 
-
-    border-radius: 5px; 
-
+    border-radius: 50px; 
     overflow: hidden; 
-
     border: 1px solid var(--border-color); 
-
 }
-
 .bar-fill { height: 100%; background: var(--text-main); }
 
-
-
 /* VISITING CARD */
-
 .v-card {
-
     background: var(--bg-main);
-
     border: 1px solid var(--border-color);
-
     padding: 20px;
-
     border-radius: 8px;
-
     margin-bottom: 15px;
-
     text-align: center;
-
 }
-
-
 
 /* ---------------------- FOOTER ---------------------- */
-
 .site-footer {
-
   background: var(--bg-footer);
-
   border-top: 1px solid var(--border-color);
-
   padding: 25px 20px 15px;
-
   margin-top: 60px;
-
   color: var(--text-main);
-
   font-size: 14px;
-
 }
-
 .footer-bottom { text-align: center; margin-top: 15px; font-size: 12px; opacity: 0.7; }
-
-
 
 #cb-bubble { position: fixed; bottom: 25px; right: 25px; background: var(--text-main); color: var(--bg-main); width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 26px; cursor: pointer; z-index: 9999; }
 
-
-
 /* CSS POUR LE BOUTON RESET AVIS */
-
 .btn-reset-avis {
-
     background: none;
-
     border: 1px solid var(--text-main);
-
     color: var(--text-main);
-
     padding: 4px 8px;
-
     border-radius: 4px;
-
     font-size: 10px;
-
     cursor: pointer;
-
     margin-left: 10px;
-
     transition: 0.2s;
-
 }
-
 .btn-reset-avis:hover {
-
     background: var(--text-main);
-
     color: #000;
-
 }
 
+/* NEW: BESOINS FULL WIDTH */
+.full-width-list {
+    width: 100%;
+    height: 600px;
+    margin-bottom: 40px;
+}
 </style>
-
 </head>
-
 <body>
 
-
-
 <header>
-
   <div class="header-container">
-
     <div class="header-left">
-
       <h2 class="gold-text">ChronoBase</h2>
-
       <div id="theme-switch" onclick="toggleTheme()">
-
         <div class="switch-handle"></div>
-
       </div>
-
     </div>
-
     <nav>
-
       <a href="#">Accueil</a>
-
       <a href="#">Les montres</a>
-
       <a href="#" style="border-bottom: 2px solid var(--text-main)">Horlogers</a>
-
       <a href="#">À propos</a>
-
     </nav>
-
   </div>
-
 </header>
 
-
-
 <div class="container">
-
     <h1 class="gold-text" style="text-align:center; font-size: 40px; margin-bottom: 15px;">Réseau des Horlogers</h1>
-
     
-
     <div class="page-description">
-
         Trouvez un expert qualifié pour l'entretien de votre garde-temps. Indiquez une <strong>ville</strong> pour filtrer les horlogers à proximité.
-
     </div>
-
-
 
     <div class="search-controls">
-
         <div class="search-bar-wrapper">
-
             <input type="text" id="search-input" placeholder="Saisissez une ville (ex: Arras, Lille...)" onkeyup="filterByCityAndRadius()">
-
             <button class="btn-action" onclick="alert('Formulaire horloger')">+ Rejoindre le réseau</button>
-
         </div>
-
         <div class="radius-filter">
-
             <span>Rayon : <strong id="rad-val">50</strong> km</span>
-
             <input type="range" id="radius-range" min="1" max="500" value="50" oninput="document.getElementById('rad-val').innerText=this.value; filterByCityAndRadius();">
-
         </div>
-
     </div>
-
-
 
     <div class="main-layout">
-
         <div class="list-wrapper">
-
             <div class="list-container" id="horloger-list"></div>
-
             <div class="pagination" id="pagination-controls"></div>
-
         </div>
-
         <div id="map"></div>
-
     </div>
-
-
 
     <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">
-
         <h2 class="gold-text">Besoins Clients & Appels d'Offres</h2>
-
-        <button class="btn-action" onclick="alert('Publier un besoin')">Publier un besoin</button>
-
+        <a href="mailto:contact@chronobase.fr?subject=Publication%20de%20besoin%20horloger" class="btn-action">Publier un besoin</a>
+    </div>
+    
+    <div class="page-description" style="text-align: left; margin-bottom: 25px;">
+        Cette section est dédiée aux <strong>appels d'offres de nos clients</strong>. Vous y trouverez des demandes de <strong>révisions complètes</strong>, 
+        des besoins d'<strong>expertises authentification</strong>, ou des demandes de <strong>tarification/estimation</strong> de montres. 
+        Toutes les demandes sont vérifiées par notre équipe avant publication.
     </div>
 
-    
-
-    <div id="besoins-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px;"></div>
-
+    <div class="list-wrapper full-width-list">
+        <div class="list-container" id="besoins-list"></div>
+        <div class="pagination" id="pagination-besoins"></div>
+    </div>
 </div>
-
-
 
 <div class="floating-panel" id="detail-panel">
-
     <div class="panel-header" id="panel-header">
-
         <span style="font-weight:600; font-size:12px;" id="panel-title">Détails Horloger</span>
-
         <span style="cursor:pointer; font-weight:bold;" onclick="closePanel()">✕</span>
-
     </div>
-
     <div class="panel-tabs">
-
         <button class="tab-btn active" onclick="switchTab(0)">Infos</button>
-
         <button class="tab-btn" onclick="switchTab(1)">Avis</button>
-
         <button class="tab-btn" onclick="switchTab(2)">Carte</button>
-
     </div>
-
     <div class="panel-body">
-
         <div class="tab-content active" id="tab-0">
-
             <div id="info-content"></div>
-
             <button class="btn-action" style="width:100%; margin-top:20px; font-size:11px;" onclick="switchTab(2)">Voir la carte de visite</button>
-
         </div>
-
         <div class="tab-content" id="tab-1">
-
             <h4 style="margin-top:0">Répartition des avis</h4>
-
             <div id="rating-stats"></div>
-
             <hr style="border:0; border-top:1px solid var(--border-color); margin:15px 0;">
-
             <div style="display: flex; align-items: center; margin-bottom: 10px;">
-
                 <div id="comments-list-header" style="font-size:11px; color:var(--text-main); font-weight:bold;">Tous les avis :</div>
-
                 <button id="reset-avis-btn" class="btn-reset-avis" style="display:none;" onclick="renderAvisList(null)">Afficher tout</button>
-
             </div>
-
             <div id="comments-list"></div>
-
         </div>
-
         <div class="tab-content" id="tab-2">
-
             <div class="v-card" id="v-card-ui">
-
                 <h3 class="gold-text" id="vc-name">Atelier du Temps</h3>
-
                 <p id="vc-spec" style="font-size:11px;"></p>
-
                 <p id="vc-loc" style="font-size:10px; opacity:0.8;"></p>
-
                 <div style="border-top:1px solid #333; padding-top:10px; margin-top:10px; font-size:10px;">
-
                     Contact : 01 23 45 67 89<br>contact@chronobase.fr
-
                 </div>
-
             </div>
-
             <button class="btn-action" style="width:100%; margin-bottom:10px;" onclick="alert('Téléchargement de la carte...')">⬇ Télécharger la carte</button>
-
             <button class="btn-action" style="width:100%; background: #333; color:#fff;" onclick="alert('Ouverture du catalogue PDF...')">📁 Catalogue Projets (PDF)</button>
-
         </div>
-
     </div>
-
 </div>
 
-
-
 <footer class="site-footer">
-
     <div class="footer-bottom">© 2026 ChronoBase — Tous droits réservés</div>
-
 </footer>
-
-
 
 <div id="cb-bubble">💬</div>
 
-
-
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 <script>
-
 const allHorlogers = [
-
     { id: 1, nom: "Atelier du Temps", ville: "Arras", lat: 50.291, lng: 2.777, noteComm: 4.8, audit: true, spec: "Mécanique, Vintage", expertise: "15 ans", 
-
       avis: [
-
         {stars: 5, user: "Pierre G.", date: "12/02/2026", comment: "Excellent travail sur ma Speedmaster."},
-
         {stars: 5, user: "Marc A.", date: "05/01/2026", comment: "Un vrai passionné."},
-
         {stars: 4, user: "Lucie T.", date: "20/12/2025", comment: "Délai un peu long mais qualité au top."}
-
       ]},
-
     { id: 2, nom: "Horlogerie Durand", ville: "Lille", lat: 50.629, lng: 3.057, noteComm: 4.2, audit: false, spec: "Quartz, Luxe", expertise: "8 ans",
-
       avis: [{stars: 4, user: "Jean B.", date: "10/02/2026", comment: "Rapide et efficace."}]},
-
     { id: 3, nom: "La Main d'Or", ville: "Lille", lat: 50.635, lng: 3.060, noteComm: 4.9, audit: true, spec: "Haute Horlogerie", expertise: "25 ans", avis: []},
-
     { id: 4, nom: "Chrono Nord", ville: "Douai", lat: 50.366, lng: 3.078, noteComm: 3.9, audit: false, spec: "Réparations", expertise: "5 ans", avis: []},
-
     { id: 5, nom: "Atelier 24", ville: "Arras", lat: 50.280, lng: 2.780, noteComm: 4.5, audit: true, spec: "Rolex, Omega", expertise: "12 ans", avis: []},
-
     { id: 6, nom: "Le Ressort", ville: "Lille", lat: 50.620, lng: 3.040, noteComm: 4.1, audit: false, spec: "Vintage", expertise: "10 ans", avis: []}
-
 ];
 
-
-
-const besoins = [
-
-    { id: 101, client: "Jean P.", montre: "Omega Seamaster", ville: "Béthune", lat: 50.533, lng: 2.633, pb: "Révision complète", deadline: "2026-03-30", colis: true }
-
+const besoinsData = [
+    { id: 101, client: "Jean P.", montre: "Omega Seamaster", ville: "Béthune", lat: 50.533, lng: 2.633, pb: "Révision complète : mouvement bloqué.", type: "Révision", deadline: "30/03/2026" },
+    { id: 102, client: "Marc L.", montre: "Rolex Submariner", ville: "Lens", lat: 50.429, lng: 2.831, pb: "Expertise authentification avant vente.", type: "Expertise", deadline: "15/03/2026" },
+    { id: 103, client: "Sophie K.", montre: "Cartier Tank", ville: "Valenciennes", lat: 50.357, lng: 3.523, pb: "Demande de tarification pour remise en état.", type: "Tarification", deadline: "01/04/2026" }
 ];
-
-
 
 let filteredHorlogers = [...allHorlogers];
-
 let currentPage = 1;
-
+let currentBesoinsPage = 1;
 const itemsPerPage = 4;
-
+const besoinsPerPage = 10;
 let currentHorloger = null;
 
-
-
-function getDistance(lat1, lon1, lat2, lon2) {
-
-    const R = 6371; 
-
-    const dLat = (lat2-lat1) * Math.PI / 180;
-
-    const dLon = (lon2-lon1) * Math.PI / 180;
-
-    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-
-              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
-
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-
-    return R * c;
-
-}
-
-
-
-function filterByCityAndRadius() {
-
-    const searchCity = document.getElementById('search-input').value.toLowerCase().trim();
-
-    const radius = parseInt(document.getElementById('radius-range').value);
-
-    
-
-    if (searchCity === "") {
-
-        filteredHorlogers = [...allHorlogers];
-
-        map.flyTo([46.6033, 1.8883], 6);
-
-    } else {
-
-        const cityRef = allHorlogers.find(h => h.ville.toLowerCase() === searchCity);
-
-        if (cityRef) {
-
-            filteredHorlogers = allHorlogers.filter(h => {
-
-                const dist = getDistance(cityRef.lat, cityRef.lng, h.lat, h.lng);
-
-                return dist <= radius;
-
-            });
-
-            map.flyTo([cityRef.lat, cityRef.lng], 10);
-
-        } else {
-
-            filteredHorlogers = allHorlogers.filter(h => h.ville.toLowerCase().includes(searchCity));
-
-        }
-
-    }
-
-    currentPage = 1;
-
-    renderHorlogers(1);
-
-    updateMarkers();
-
-}
-
-
-
-function renderHorlogers(page) {
-
-    const container = document.getElementById('horloger-list');
-
-    const start = (page - 1) * itemsPerPage;
-
-    const end = start + itemsPerPage;
-
-    const paginatedItems = filteredHorlogers.slice(start, end);
-
-
-
-    if(paginatedItems.length === 0) {
-
-        container.innerHTML = "<p style='padding:20px; text-align:center;'>Aucun horloger trouvé.</p>";
-
-        return;
-
-    }
-
-
-
-    container.innerHTML = paginatedItems.map(h => `
-
-        <div class="card-item" onclick="showDetails(${h.id})">
-
-            <div style="font-weight:600; color:var(--text-main);">${h.nom}</div>
-
-            <div style="font-size:12px; opacity:0.8; margin-top:4px;">${h.ville} • ${h.spec}</div>
-
-            <div class="rating-wrapper">
-
-                <div class="rating-box"><span class="community-note">★ ${h.noteComm} / 5</span></div>
-
-                ${h.audit ? `<div class="rating-box"><span class="audit-note">✓ CERTIFIÉ CHRONOBASE</span></div>` : ''}
-
-            </div>
-
-        </div>
-
-    `).join('');
-
-    renderPagination();
-
-}
-
-
-
-function renderPagination() {
-
-    const totalPages = Math.ceil(filteredHorlogers.length / itemsPerPage);
-
-    const nav = document.getElementById('pagination-controls');
-
-    if (totalPages <= 1) { nav.innerHTML = ""; return; }
-
-    
-
-    let html = `<span class="pg-btn" onclick="changePage(${currentPage - 1})">«</span>`;
-
-    for (let i = 1; i <= totalPages; i++) {
-
-        html += `<span class="pg-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</span>`;
-
-    }
-
-    html += `<span class="pg-btn" onclick="changePage(${currentPage + 1})">»</span>`;
-
-    nav.innerHTML = html;
-
-}
-
-
-
-function changePage(p) {
-
-    const totalPages = Math.ceil(filteredHorlogers.length / itemsPerPage);
-
-    if (p < 1 || p > totalPages) return;
-
-    currentPage = p;
-
-    renderHorlogers(currentPage);
-
-}
-
-
-
-function showDetails(id) {
-
-    currentHorloger = allHorlogers.find(x => x.id === id);
-
-    document.getElementById('panel-title').innerText = currentHorloger.nom;
-
-    map.flyTo([currentHorloger.lat, currentHorloger.lng], 14, { animate: true, duration: 1.5 });
-
-
-
-    document.getElementById('info-content').innerHTML = `
-
-        <h3 class="gold-text">${currentHorloger.nom}</h3>
-
-        <p><b>Localisation :</b> ${currentHorloger.ville}</p>
-
-        <p><b>Spécialités :</b> ${currentHorloger.spec}</p>
-
-        <p><b>Expertise :</b> ${currentHorloger.expertise}</p>
-
-    `;
-
-
-
-    renderRatingStats();
-
-    document.getElementById('vc-name').innerText = currentHorloger.nom;
-
-    document.getElementById('vc-spec').innerText = currentHorloger.spec;
-
-    document.getElementById('vc-loc').innerText = currentHorloger.ville;
-
-
-
-    switchTab(0);
-
-    document.getElementById('detail-panel').style.display = 'block';
-
-}
-
-
-
-function renderRatingStats() {
-
-    const statsDiv = document.getElementById('rating-stats');
-
-    const avis = currentHorloger.avis || [];
-
-    const counts = {5:0, 4:0, 3:0, 2:0, 1:0};
-
-    avis.forEach(a => counts[a.stars]++);
-
-
-
-    let html = "";
-
-    for(let i=5; i>=1; i--) {
-
-        const qty = counts[i];
-
-        const pc = avis.length > 0 ? (qty / avis.length) * 100 : 0;
-
-        html += `
-
-            <div class="rating-row" onclick="filterAvis(${i})">
-
-                <span style="width:25px">${i}★</span>
-
-                <div class="bar-container"><div class="bar-fill" style="width:${pc}%"></div></div>
-
-                <span style="width:30px; text-align:right;">${qty}</span>
-
-            </div>
-
-        `;
-
-    }
-
-    statsDiv.innerHTML = html;
-
-    renderAvisList(null); 
-
-}
-
-
-
-function renderAvisList(filterStars) {
-
-    const list = document.getElementById('comments-list');
-
-    const header = document.getElementById('comments-list-header');
-
-    const resetBtn = document.getElementById('reset-avis-btn');
-
-    let avisToDisplay = currentHorloger.avis || [];
-
-    
-
-    if (filterStars) {
-
-        avisToDisplay = avisToDisplay.filter(a => a.stars === filterStars);
-
-        header.innerText = `Avis ${filterStars} étoiles (${avisToDisplay.length}) :`;
-
-        resetBtn.style.display = "inline-block"; 
-
-    } else {
-
-        header.innerText = `Tous les avis (${avisToDisplay.length}) :`;
-
-        resetBtn.style.display = "none"; 
-
-    }
-
-
-
-    if(avisToDisplay.length === 0) {
-
-        list.innerHTML = "<p style='font-size:11px; opacity:0.6;'>Aucun avis pour cette catégorie.</p>";
-
-        return;
-
-    }
-
-
-
-    list.innerHTML = avisToDisplay.map(a => `
-
-        <div style="margin-bottom:12px; border-bottom:1px solid #222; padding-bottom:8px;">
-
-            <div style="color:var(--text-main); font-size:12px;">${"★".repeat(a.stars)} - ${a.user}</div>
-
-            <div style="font-size:10px; opacity:0.5; margin-bottom:4px;">Le ${a.date}</div>
-
-            <p style="font-size:11px; font-style:italic; margin:0;">"${a.comment}"</p>
-
-        </div>
-
-    `).join('');
-
-}
-
-
-
-function filterAvis(stars) { renderAvisList(stars); }
-
-function closePanel() { document.getElementById('detail-panel').style.display = 'none'; }
-
-function switchTab(idx) {
-
-    document.querySelectorAll('.tab-btn').forEach((btn, i) => btn.classList.toggle('active', i === idx));
-
-    document.querySelectorAll('.tab-content').forEach((content, i) => content.classList.toggle('active', i === idx));
-
-}
-
-
-
+// LEAFLET MAP INIT
 let map = L.map('map').setView([50.4, 2.8], 9);
-
 L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
-
 let markerLayer = L.layerGroup().addTo(map);
 
+// PIN ICONES
+const redIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
+});
 
+function getDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; 
+    const dLat = (lat2-lat1) * Math.PI / 180;
+    const dLon = (lon2-lon1) * Math.PI / 180;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
+function filterByCityAndRadius() {
+    const searchCity = document.getElementById('search-input').value.toLowerCase().trim();
+    const radius = parseInt(document.getElementById('radius-range').value);
+    
+    if (searchCity === "") {
+        filteredHorlogers = [...allHorlogers];
+        map.flyTo([46.6033, 1.8883], 6);
+    } else {
+        const cityRef = allHorlogers.find(h => h.ville.toLowerCase() === searchCity);
+        if (cityRef) {
+            filteredHorlogers = allHorlogers.filter(h => getDistance(cityRef.lat, cityRef.lng, h.lat, h.lng) <= radius);
+            map.flyTo([cityRef.lat, cityRef.lng], 10);
+        } else {
+            filteredHorlogers = allHorlogers.filter(h => h.ville.toLowerCase().includes(searchCity));
+        }
+    }
+    currentPage = 1;
+    renderHorlogers(1);
+    updateMarkers();
+}
+
+function renderHorlogers(page) {
+    const container = document.getElementById('horloger-list');
+    const start = (page - 1) * itemsPerPage;
+    const paginatedItems = filteredHorlogers.slice(start, start + itemsPerPage);
+
+    if(paginatedItems.length === 0) {
+        container.innerHTML = "<p style='padding:20px; text-align:center;'>Aucun horloger trouvé.</p>";
+        return;
+    }
+
+    container.innerHTML = paginatedItems.map(h => `
+        <div class="card-item" onclick="showDetails(${h.id})">
+            <div style="font-weight:600; color:var(--text-main);">${h.nom}</div>
+            <div style="font-size:12px; opacity:0.8; margin-top:4px;">${h.ville} • ${h.spec}</div>
+            <div class="rating-wrapper">
+                <div class="rating-box"><span class="community-note">★ ${h.noteComm} / 5</span></div>
+                ${h.audit ? `<div class="rating-box"><span class="audit-note">✓ CERTIFIÉ CHRONOBASE</span></div>` : ''}
+            </div>
+        </div>
+    `).join('');
+    renderPagination();
+}
+
+function renderPagination() {
+    const totalPages = Math.ceil(filteredHorlogers.length / itemsPerPage);
+    const nav = document.getElementById('pagination-controls');
+    if (totalPages <= 1) { nav.innerHTML = ""; return; }
+    let html = `<span class="pg-btn" onclick="changePage(${currentPage - 1})">«</span>`;
+    for (let i = 1; i <= totalPages; i++) {
+        html += `<span class="pg-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</span>`;
+    }
+    html += `<span class="pg-btn" onclick="changePage(${currentPage + 1})">»</span>`;
+    nav.innerHTML = html;
+}
+
+function changePage(p) {
+    if (p < 1 || p > Math.ceil(filteredHorlogers.length / itemsPerPage)) return;
+    currentPage = p;
+    renderHorlogers(currentPage);
+}
+
+// BESOINS LOGIC
+function renderBesoins(page) {
+    const container = document.getElementById('besoins-list');
+    const start = (page - 1) * besoinsPerPage;
+    const paginatedItems = besoinsData.slice(start, start + besoinsPerPage);
+
+    container.innerHTML = paginatedItems.map(b => `
+        <div class="card-item" onclick="focusBesoin(${b.lat}, ${b.lng}, '${b.montre.replace(/'/g, "\\'")}')">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-weight:600; color:var(--text-main); font-size:16px;">${b.montre}</span>
+                <span style="font-size:11px; background:rgba(212,175,55,0.1); padding:2px 8px; border-radius:4px;">${b.type}</span>
+            </div>
+            <div style="font-size:13px; margin: 8px 0; color:var(--text-secondary);">${b.pb}</div>
+            <div style="display:flex; justify-content:space-between; font-size:11px; opacity:0.7;">
+                <span>📍 ${b.ville}</span>
+                <span>Échéance : ${b.deadline}</span>
+            </div>
+        </div>
+    `).join('');
+    renderBesoinsPagination();
+}
+
+function renderBesoinsPagination() {
+    const totalPages = Math.ceil(besoinsData.length / besoinsPerPage);
+    const nav = document.getElementById('pagination-besoins');
+    if (totalPages <= 1) { nav.innerHTML = ""; return; }
+    let html = `<span class="pg-btn" onclick="changeBesoinsPage(${currentBesoinsPage - 1})">«</span>`;
+    for (let i = 1; i <= totalPages; i++) {
+        html += `<span class="pg-btn ${i === currentBesoinsPage ? 'active' : ''}" onclick="changeBesoinsPage(${i})">${i}</span>`;
+    }
+    html += `<span class="pg-btn" onclick="changeBesoinsPage(${currentBesoinsPage + 1})">»</span>`;
+    nav.innerHTML = html;
+}
+
+function changeBesoinsPage(p) {
+    if (p < 1 || p > Math.ceil(besoinsData.length / besoinsPerPage)) return;
+    currentBesoinsPage = p;
+    renderBesoins(currentBesoinsPage);
+}
+
+function focusBesoin(lat, lng, title) {
+    map.flyTo([lat, lng], 13);
+    L.marker([lat, lng], {icon: redIcon}).addTo(markerLayer)
+     .bindPopup(`<b>Besoin Client</b><br>${title}`).openPopup();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// UI HELPERS
+function showDetails(id) {
+    currentHorloger = allHorlogers.find(x => x.id === id);
+    document.getElementById('panel-title').innerText = currentHorloger.nom;
+    map.flyTo([currentHorloger.lat, currentHorloger.lng], 14);
+    document.getElementById('info-content').innerHTML = `
+        <h3 class="gold-text">${currentHorloger.nom}</h3>
+        <p><b>Localisation :</b> ${currentHorloger.ville}</p>
+        <p><b>Spécialités :</b> ${currentHorloger.spec}</p>
+        <p><b>Expertise :</b> ${currentHorloger.expertise}</p>
+    `;
+    renderRatingStats();
+    document.getElementById('vc-name').innerText = currentHorloger.nom;
+    document.getElementById('vc-spec').innerText = currentHorloger.spec;
+    document.getElementById('vc-loc').innerText = currentHorloger.ville;
+    switchTab(0);
+    document.getElementById('detail-panel').style.display = 'block';
+}
+
+function renderRatingStats() {
+    const statsDiv = document.getElementById('rating-stats');
+    const avis = currentHorloger.avis || [];
+    const counts = {5:0, 4:0, 3:0, 2:0, 1:0};
+    avis.forEach(a => counts[a.stars]++);
+    let html = "";
+    for(let i=5; i>=1; i--) {
+        const pc = avis.length > 0 ? (counts[i] / avis.length) * 100 : 0;
+        html += `<div class="rating-row" onclick="filterAvis(${i})">
+            <span style="width:25px">${i}★</span>
+            <div class="bar-container"><div class="bar-fill" style="width:${pc}%"></div></div>
+            <span style="width:30px; text-align:right;">${counts[i]}</span>
+        </div>`;
+    }
+    statsDiv.innerHTML = html;
+    renderAvisList(null); 
+}
+
+function renderAvisList(filterStars) {
+    const list = document.getElementById('comments-list');
+    const header = document.getElementById('comments-list-header');
+    const resetBtn = document.getElementById('reset-avis-btn');
+    let avisToDisplay = currentHorloger.avis || [];
+    if (filterStars) {
+        avisToDisplay = avisToDisplay.filter(a => a.stars === filterStars);
+        header.innerText = `Avis ${filterStars} étoiles (${avisToDisplay.length}) :`;
+        resetBtn.style.display = "inline-block"; 
+    } else {
+        header.innerText = `Tous les avis (${avisToDisplay.length}) :`;
+        resetBtn.style.display = "none"; 
+    }
+    list.innerHTML = avisToDisplay.length === 0 ? "<p style='font-size:11px; opacity:0.6;'>Aucun avis.</p>" : 
+        avisToDisplay.map(a => `<div style="margin-bottom:12px; border-bottom:1px solid #222; padding-bottom:8px;">
+            <div style="color:var(--text-main); font-size:12px;">${"★".repeat(a.stars)} - ${a.user}</div>
+            <p style="font-size:11px; font-style:italic; margin:0;">"${a.comment}"</p>
+        </div>`).join('');
+}
+
+function filterAvis(stars) { renderAvisList(stars); }
+function closePanel() { document.getElementById('detail-panel').style.display = 'none'; }
+function switchTab(idx) {
+    document.querySelectorAll('.tab-btn').forEach((btn, i) => btn.classList.toggle('active', i === idx));
+    document.querySelectorAll('.tab-content').forEach((content, i) => content.classList.toggle('active', i === idx));
+}
 
 function updateMarkers() {
-
     markerLayer.clearLayers();
-
     filteredHorlogers.forEach(h => {
-
         L.marker([h.lat, h.lng]).addTo(markerLayer).bindPopup(`<b>${h.nom}</b><br>${h.ville}`);
-
     });
-
 }
 
-
-
+// DRAGGABLE PANEL
 const panel = document.getElementById("detail-panel");
-
 const pHeader = document.getElementById("panel-header");
-
 let isDragging = false; let offsetX, offsetY;
-
 pHeader.onmousedown = (e) => { isDragging = true; offsetX = e.clientX - panel.offsetLeft; offsetY = e.clientY - panel.offsetTop; };
-
 document.onmousemove = (e) => { if (!isDragging) return; panel.style.left = (e.clientX - offsetX) + "px"; panel.style.top = (e.clientY - offsetY) + "px"; };
-
 document.onmouseup = () => isDragging = false;
-
-
-
-function init() {
-
-    renderHorlogers(1);
-
-    renderBesoins(besoins);
-
-    updateMarkers();
-
-}
-
-
-
-function renderBesoins(data) {
-
-    const container = document.getElementById('besoins-grid');
-
-    container.innerHTML = data.map(b => `
-
-        <div class="card-item" style="background:var(--bg-card); border-radius:12px; border:1px solid var(--border-color); cursor:default;">
-
-            <div style="display:flex; justify-content:space-between;">
-
-                <span style="font-weight:600;">${b.montre}</span>
-
-                <span style="color:#ff4d4d; font-size:11px; font-weight:600;">${b.deadline}</span>
-
-            </div>
-
-            <div style="font-size:13px; margin: 12px 0; color:var(--text-secondary);">${b.pb}</div>
-
-            <button class="btn-action" style="width:100%; font-size:12px;">Répondre</button>
-
-        </div>
-
-    `).join('');
-
-}
-
-
 
 function toggleTheme() { document.body.classList.toggle("light-theme"); }
 
-window.onload = init;
-
+window.onload = () => {
+    renderHorlogers(1);
+    renderBesoins(1);
+    updateMarkers();
+};
 </script>
-
 </body>
-
 </html>
