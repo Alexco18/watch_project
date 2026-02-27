@@ -158,7 +158,7 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
 
 .list-container {
     flex: 1;
-    overflow-y: hidden;
+    overflow-y: auto;
 }
 
 /* PAGINATION STYLE */
@@ -199,7 +199,7 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
     margin-top: 10px;
 }
 .rating-box {
-    flex: 1; /* Même taille pour les deux */
+    flex: 1;
     background: var(--rating-bg);
     padding: 6px;
     border-radius: 6px;
@@ -213,7 +213,7 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
 .community-note { color: #d4af37; font-weight: 600; font-size: 12px; }
 .audit-note { color: var(--purple-certified); font-weight: 600; font-size: 10px; text-transform: uppercase; }
 
-/* ---------------------- FLOATING PANEL (NOUVEAU) ---------------------- */
+/* ---------------------- FLOATING PANEL ---------------------- */
 .floating-panel {
     display: none;
     position: fixed;
@@ -272,8 +272,8 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
 
 /* AMAZON STYLE RATING */
 .rating-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; cursor: pointer; }
-.rating-row:hover { text-decoration: underline; }
-.bar-container { flex: 1; height: 10px; background: #222; border-radius: 5px; overflow: hidden; }
+.rating-row:hover .bar-container { border: 1px solid var(--text-main); }
+.bar-container { flex: 1; height: 10px; background: #222; border-radius: 5px; overflow: hidden; border: 1px solid transparent; }
 .bar-fill { height: 100%; background: #d4af37; }
 
 /* VISITING CARD */
@@ -285,17 +285,6 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
     margin-bottom: 15px;
     text-align: center;
 }
-
-/* ---------------------- BESOINS SECTION ---------------------- */
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 15px;
-}
-.deadline { color: #ff4d4d; font-size: 11px; font-weight: 600; }
 
 /* ---------------------- FOOTER ---------------------- */
 .site-footer {
@@ -334,17 +323,17 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
     <h1 class="gold-text" style="text-align:center; font-size: 40px; margin-bottom: 15px;">Réseau des Horlogers</h1>
     
     <div class="page-description">
-        Trouvez un expert qualifié pour l'entretien de votre garde-temps. Les membres certifiés <strong>Audit ChronoBase</strong> garantissent un niveau de service optimal.
+        Trouvez un expert qualifié pour l'entretien de votre garde-temps. Indiquez une <strong>ville</strong> pour filtrer les horlogers à proximité.
     </div>
 
     <div class="search-controls">
         <div class="search-bar-wrapper">
-            <input type="text" id="search-input" placeholder="Rechercher un horloger, une spécialité ou une ville..." onkeyup="filterData()">
+            <input type="text" id="search-input" placeholder="Saisissez une ville (ex: Arras, Lille...)" onkeyup="filterByCityAndRadius()">
             <button class="btn-action" onclick="alert('Formulaire horloger')">+ Rejoindre le réseau</button>
         </div>
         <div class="radius-filter">
             <span>Rayon : <strong id="rad-val">50</strong> km</span>
-            <input type="range" id="radius-range" min="0" max="500" value="50" oninput="document.getElementById('rad-val').innerText=this.value;">
+            <input type="range" id="radius-range" min="1" max="500" value="50" oninput="document.getElementById('rad-val').innerText=this.value; filterByCityAndRadius();">
         </div>
     </div>
 
@@ -356,7 +345,7 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
         <div id="map"></div>
     </div>
 
-    <div class="section-header">
+    <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">
         <h2 class="gold-text">Besoins Clients & Appels d'Offres</h2>
         <button class="btn-action" onclick="alert('Publier un besoin')">Publier un besoin</button>
     </div>
@@ -382,19 +371,11 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
         <div class="tab-content" id="tab-1">
             <h4 style="margin-top:0">Répartition des avis</h4>
             <div id="rating-stats">
-                <div class="rating-row" onclick="filterAvis(5)"><span>5★</span><div class="bar-container"><div class="bar-fill" style="width:80%"></div></div><span>80%</span></div>
-                <div class="rating-row" onclick="filterAvis(4)"><span>4★</span><div class="bar-container"><div class="bar-fill" style="width:15%"></div></div><span>15%</span></div>
-                <div class="rating-row" onclick="filterAvis(3)"><span>3★</span><div class="bar-container"><div class="bar-fill" style="width:5%"></div></div><span>5%</span></div>
-                <div class="rating-row" onclick="filterAvis(2)"><span>2★</span><div class="bar-container"><div class="bar-fill" style="width:0%"></div></div><span>0%</span></div>
-                <div class="rating-row" onclick="filterAvis(1)"><span>1★</span><div class="bar-container"><div class="bar-fill" style="width:0%"></div></div><span>0%</span></div>
-            </div>
-            <hr style="border:0; border-top:1px solid var(--border-color); margin:15px 0;">
-            <div id="comments-list">
-                <div style="margin-bottom:10px; border-bottom:1px solid #222; padding-bottom:5px;">
-                    <div style="color:var(--text-main)">★★★★★ - Pierre G.</div>
-                    <p style="font-size:11px; font-style:italic;">"Excellent travail sur ma Speedmaster. Je recommande."</p>
                 </div>
-            </div>
+            <hr style="border:0; border-top:1px solid var(--border-color); margin:15px 0;">
+            <div id="comments-list-header" style="font-size:11px; margin-bottom:10px; color:var(--text-main); font-weight:bold;">Tous les avis :</div>
+            <div id="comments-list">
+                </div>
         </div>
         <div class="tab-content" id="tab-2">
             <div class="v-card" id="v-card-ui">
@@ -419,40 +400,87 @@ input[type=range] { flex: 1; cursor: pointer; accent-color: #d4af37; }
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+// --- DONNÉES ---
 const allHorlogers = [
-    { id: 1, nom: "Atelier du Temps", ville: "Arras", lat: 50.291, lng: 2.777, noteComm: 4.8, audit: true, spec: "Mécanique, Vintage", expertise: "15 ans" },
-    { id: 2, nom: "Horlogerie Durand", ville: "Lille", lat: 50.629, lng: 3.057, noteComm: 4.2, audit: false, spec: "Quartz, Luxe", expertise: "8 ans" },
-    { id: 3, nom: "La Main d'Or", ville: "Lille", lat: 50.635, lng: 3.060, noteComm: 4.9, audit: true, spec: "Haute Horlogerie", expertise: "25 ans" },
-    { id: 4, nom: "Chrono Nord", ville: "Douai", lat: 50.366, lng: 3.078, noteComm: 3.9, audit: false, spec: "Réparations", expertise: "5 ans" },
-    { id: 5, nom: "Atelier 24", ville: "Arras", lat: 50.280, lng: 2.780, noteComm: 4.5, audit: true, spec: "Rolex, Omega", expertise: "12 ans" },
-    { id: 6, nom: "Le Ressort", ville: "Lille", lat: 50.620, lng: 3.040, noteComm: 4.1, audit: false, spec: "Vintage", expertise: "10 ans" }
+    { id: 1, nom: "Atelier du Temps", ville: "Arras", lat: 50.291, lng: 2.777, noteComm: 4.8, audit: true, spec: "Mécanique, Vintage", expertise: "15 ans", 
+      avis: [
+        {stars: 5, user: "Pierre G.", date: "12/02/2026", comment: "Excellent travail sur ma Speedmaster."},
+        {stars: 5, user: "Marc A.", date: "05/01/2026", comment: "Un vrai passionné."},
+        {stars: 4, user: "Lucie T.", date: "20/12/2025", comment: "Délai un peu long mais qualité au top."}
+      ]},
+    { id: 2, nom: "Horlogerie Durand", ville: "Lille", lat: 50.629, lng: 3.057, noteComm: 4.2, audit: false, spec: "Quartz, Luxe", expertise: "8 ans",
+      avis: [{stars: 4, user: "Jean B.", date: "10/02/2026", comment: "Rapide et efficace."}]},
+    { id: 3, nom: "La Main d'Or", ville: "Lille", lat: 50.635, lng: 3.060, noteComm: 4.9, audit: true, spec: "Haute Horlogerie", expertise: "25 ans", avis: []},
+    { id: 4, nom: "Chrono Nord", ville: "Douai", lat: 50.366, lng: 3.078, noteComm: 3.9, audit: false, spec: "Réparations", expertise: "5 ans", avis: []},
+    { id: 5, nom: "Atelier 24", ville: "Arras", lat: 50.280, lng: 2.780, noteComm: 4.5, audit: true, spec: "Rolex, Omega", expertise: "12 ans", avis: []},
+    { id: 6, nom: "Le Ressort", ville: "Lille", lat: 50.620, lng: 3.040, noteComm: 4.1, audit: false, spec: "Vintage", expertise: "10 ans", avis: []}
 ];
 
 const besoins = [
     { id: 101, client: "Jean P.", montre: "Omega Seamaster", ville: "Béthune", lat: 50.533, lng: 2.633, pb: "Révision complète", deadline: "2026-03-30", colis: true }
 ];
 
+let filteredHorlogers = [...allHorlogers];
 let currentPage = 1;
 const itemsPerPage = 4;
+let currentHorloger = null;
 
+// --- RECHERCHE PAR VILLE & RAYON ---
+function getDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; 
+    const dLat = (lat2-lat1) * Math.PI / 180;
+    const dLon = (lon2-lon1) * Math.PI / 180;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c;
+}
+
+function filterByCityAndRadius() {
+    const searchCity = document.getElementById('search-input').value.toLowerCase().trim();
+    const radius = parseInt(document.getElementById('radius-range').value);
+    
+    if (searchCity === "") {
+        filteredHorlogers = [...allHorlogers];
+    } else {
+        // On cherche d'abord les coordonnées de la ville entrée (simulation simplifiée ici basée sur nos données)
+        const cityRef = allHorlogers.find(h => h.ville.toLowerCase() === searchCity);
+        
+        if (cityRef) {
+            filteredHorlogers = allHorlogers.filter(h => {
+                const dist = getDistance(cityRef.lat, cityRef.lng, h.lat, h.lng);
+                return dist <= radius;
+            });
+        } else {
+            // Si la ville n'est pas trouvée dans la base, on filtre par nom exact pour l'instant
+            filteredHorlogers = allHorlogers.filter(h => h.ville.toLowerCase().includes(searchCity));
+        }
+    }
+    
+    currentPage = 1;
+    renderHorlogers(1);
+    updateMarkers();
+}
+
+// --- AFFICHAGE ---
 function renderHorlogers(page) {
     const container = document.getElementById('horloger-list');
     const start = (page - 1) * itemsPerPage;
     const end = start + itemsPerPage;
-    const paginatedItems = allHorlogers.slice(start, end);
+    const paginatedItems = filteredHorlogers.slice(start, end);
+
+    if(paginatedItems.length === 0) {
+        container.innerHTML = "<p style='padding:20px; text-align:center;'>Aucun horloger trouvé.</p>";
+        return;
+    }
 
     container.innerHTML = paginatedItems.map(h => `
         <div class="card-item" onclick="showDetails(${h.id})">
             <div style="font-weight:600; color:var(--text-main);">${h.nom}</div>
             <div style="font-size:12px; opacity:0.8; margin-top:4px;">${h.ville} • ${h.spec}</div>
-            
             <div class="rating-wrapper">
-                <div class="rating-box">
-                    <span class="community-note">★ ${h.noteComm} / 5</span>
-                </div>
-                <div class="rating-box">
-                    ${h.audit ? '<span class="audit-note">✓ Certifié Audit</span>' : '<span style="font-size:9px; opacity:0.5;">Non audité</span>'}
-                </div>
+                <div class="rating-box"><span class="community-note">★ ${h.noteComm} / 5</span></div>
+                <div class="rating-box">${h.audit ? '<span class="audit-note">✓ Certifié Audit</span>' : '<span style="font-size:9px; opacity:0.5;">Non audité</span>'}</div>
             </div>
         </div>
     `).join('');
@@ -460,95 +488,134 @@ function renderHorlogers(page) {
 }
 
 function renderPagination() {
-    const totalPages = Math.ceil(allHorlogers.length / itemsPerPage);
+    const totalPages = Math.ceil(filteredHorlogers.length / itemsPerPage);
     const nav = document.getElementById('pagination-controls');
+    if (totalPages <= 1) { nav.innerHTML = ""; return; }
+    
     let html = `<span class="pg-btn" onclick="changePage(${currentPage - 1})">«</span>`;
     for (let i = 1; i <= totalPages; i++) {
-        if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
-            html += `<span class="pg-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</span>`;
-        }
+        html += `<span class="pg-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</span>`;
     }
     html += `<span class="pg-btn" onclick="changePage(${currentPage + 1})">»</span>`;
     nav.innerHTML = html;
 }
 
 function changePage(p) {
-    const totalPages = Math.ceil(allHorlogers.length / itemsPerPage);
+    const totalPages = Math.ceil(filteredHorlogers.length / itemsPerPage);
     if (p < 1 || p > totalPages) return;
     currentPage = p;
     renderHorlogers(currentPage);
 }
 
-// --- LOGIQUE DU PANEL FLOTTANT ---
+// --- LOGIQUE DU PANEL ---
 function showDetails(id) {
-    const h = allHorlogers.find(x => x.id === id);
-    document.getElementById('panel-title').innerText = h.nom;
+    currentHorloger = allHorlogers.find(x => x.id === id);
+    document.getElementById('panel-title').innerText = currentHorloger.nom;
     
-    // Remplissage Onglet 1
+    // Infos
     document.getElementById('info-content').innerHTML = `
-        <h3 class="gold-text">${h.nom}</h3>
-        <p><b>Localisation :</b> ${h.ville}</p>
-        <p><b>Spécialités :</b> ${h.spec}</p>
-        <p><b>Expertise :</b> ${h.expertise}</p>
-        <p><b>Note actuelle :</b> ★ ${h.noteComm} / 5</p>
+        <h3 class="gold-text">${currentHorloger.nom}</h3>
+        <p><b>Localisation :</b> ${currentHorloger.ville}</p>
+        <p><b>Spécialités :</b> ${currentHorloger.spec}</p>
+        <p><b>Expertise :</b> ${currentHorloger.expertise}</p>
     `;
 
-    // Remplissage Onglet 3 (Carte)
-    document.getElementById('vc-name').innerText = h.nom;
-    document.getElementById('vc-spec').innerText = h.spec;
-    document.getElementById('vc-loc').innerText = h.ville;
+    // Avis - Calcul des quantités
+    renderRatingStats();
+
+    // Carte de visite
+    document.getElementById('vc-name').innerText = currentHorloger.nom;
+    document.getElementById('vc-spec').innerText = currentHorloger.spec;
+    document.getElementById('vc-loc').innerText = currentHorloger.ville;
 
     switchTab(0);
     document.getElementById('detail-panel').style.display = 'block';
 }
 
-function closePanel() {
-    document.getElementById('detail-panel').style.display = 'none';
+function renderRatingStats() {
+    const statsDiv = document.getElementById('rating-stats');
+    const avis = currentHorloger.avis || [];
+    const counts = {5:0, 4:0, 3:0, 2:0, 1:0};
+    avis.forEach(a => counts[a.stars]++);
+
+    let html = "";
+    for(let i=5; i>=1; i--) {
+        const qty = counts[i];
+        const pc = avis.length > 0 ? (qty / avis.length) * 100 : 0;
+        html += `
+            <div class="rating-row" onclick="filterAvis(${i})">
+                <span style="width:25px">${i}★</span>
+                <div class="bar-container"><div class="bar-fill" style="width:${pc}%"></div></div>
+                <span style="width:30px; text-align:right;">${qty}</span>
+            </div>
+        `;
+    }
+    statsDiv.innerHTML = html;
+    renderAvisList(null); // Afficher tous par défaut
 }
 
-function switchTab(idx) {
-    document.querySelectorAll('.tab-btn').forEach((btn, i) => {
-        btn.classList.toggle('active', i === idx);
-    });
-    document.querySelectorAll('.tab-content').forEach((content, i) => {
-        content.classList.toggle('active', i === idx);
-    });
+function renderAvisList(filterStars) {
+    const list = document.getElementById('comments-list');
+    const header = document.getElementById('comments-list-header');
+    let avisToDisplay = currentHorloger.avis || [];
+    
+    if (filterStars) {
+        avisToDisplay = avisToDisplay.filter(a => a.stars === filterStars);
+        header.innerText = `Avis ${filterStars} étoiles (${avisToDisplay.length}) :`;
+    } else {
+        header.innerText = `Tous les avis (${avisToDisplay.length}) :`;
+    }
+
+    if(avisToDisplay.length === 0) {
+        list.innerHTML = "<p style='font-size:11px; opacity:0.6;'>Aucun avis pour cette catégorie.</p>";
+        return;
+    }
+
+    list.innerHTML = avisToDisplay.map(a => `
+        <div style="margin-bottom:12px; border-bottom:1px solid #222; padding-bottom:8px;">
+            <div style="color:var(--text-main); font-size:12px;">${"★".repeat(a.stars)} - ${a.user}</div>
+            <div style="font-size:10px; opacity:0.5; margin-bottom:4px;">Le ${a.date}</div>
+            <p style="font-size:11px; font-style:italic; margin:0;">"${a.comment}"</p>
+        </div>
+    `).join('');
 }
 
 function filterAvis(stars) {
-    alert("Filtrage des avis pour " + stars + " étoiles...");
+    renderAvisList(stars);
 }
 
-// DRAG AND DROP POUR LE PANEL
-const panel = document.getElementById("detail-panel");
-const header = document.getElementById("panel-header");
-let isDragging = false;
-let offsetX, offsetY;
+function closePanel() { document.getElementById('detail-panel').style.display = 'none'; }
 
-header.onmousedown = (e) => {
-    isDragging = true;
-    offsetX = e.clientX - panel.offsetLeft;
-    offsetY = e.clientY - panel.offsetTop;
-};
+function switchTab(idx) {
+    document.querySelectorAll('.tab-btn').forEach((btn, i) => btn.classList.toggle('active', i === idx));
+    document.querySelectorAll('.tab-content').forEach((content, i) => content.classList.toggle('active', i === idx));
+}
 
-document.onmousemove = (e) => {
-    if (!isDragging) return;
-    panel.style.left = (e.clientX - offsetX) + "px";
-    panel.style.top = (e.clientY - offsetY) + "px";
-};
-
-document.onmouseup = () => isDragging = false;
-
-// --- INITIALISATION ---
+// --- CARTE ---
 let map = L.map('map').setView([50.4, 2.8], 9);
 L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
+let markerLayer = L.layerGroup().addTo(map);
 
+function updateMarkers() {
+    markerLayer.clearLayers();
+    filteredHorlogers.forEach(h => {
+        L.marker([h.lat, h.lng]).addTo(markerLayer).bindPopup(`<b>${h.nom}</b><br>${h.ville}`);
+    });
+}
+
+// --- DRAG PANEL ---
+const panel = document.getElementById("detail-panel");
+const pHeader = document.getElementById("panel-header");
+let isDragging = false; let offsetX, offsetY;
+pHeader.onmousedown = (e) => { isDragging = true; offsetX = e.clientX - panel.offsetLeft; offsetY = e.clientY - panel.offsetTop; };
+document.onmousemove = (e) => { if (!isDragging) return; panel.style.left = (e.clientX - offsetX) + "px"; panel.style.top = (e.clientY - offsetY) + "px"; };
+document.onmouseup = () => isDragging = false;
+
+// --- INIT ---
 function init() {
     renderHorlogers(1);
     renderBesoins(besoins);
-    allHorlogers.forEach(h => {
-        L.marker([h.lat, h.lng]).addTo(map).bindPopup(`<b>${h.nom}</b>`);
-    });
+    updateMarkers();
 }
 
 function renderBesoins(data) {
@@ -557,7 +624,7 @@ function renderBesoins(data) {
         <div class="card-item" style="background:var(--bg-card); border-radius:12px; border:1px solid var(--border-color); cursor:default;">
             <div style="display:flex; justify-content:space-between;">
                 <span style="font-weight:600;">${b.montre}</span>
-                <span class="deadline">${b.deadline}</span>
+                <span style="color:#ff4d4d; font-size:11px; font-weight:600;">${b.deadline}</span>
             </div>
             <div style="font-size:13px; margin: 12px 0; color:var(--text-secondary);">${b.pb}</div>
             <button class="btn-action" style="width:100%; font-size:12px;">Répondre</button>
@@ -565,12 +632,9 @@ function renderBesoins(data) {
     `).join('');
 }
 
-function toggleTheme() {
-    document.body.classList.toggle("light-theme");
-}
+function toggleTheme() { document.body.classList.toggle("light-theme"); }
 
 window.onload = init;
 </script>
-
 </body>
 </html>
