@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="favicon.jpg">
+    <title>Contributeurs - ChronoBase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root{--gold-gradient:linear-gradient(90deg,#d4af37,#f5d98c,#c8a951);--bg-main:radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);--bg-header:#0b0b0b;--bg-footer:#0b0b0b;--bg-card:linear-gradient(180deg,#111,#0c0c0c);--text-main:#d4af37;--text-secondary:#c1a96b;--border-color:rgba(212,175,55,0.2)}
+        .light-theme{--bg-main:#fff;--bg-header:#fff;--bg-footer:#fff;--bg-card:#f7f7f7;--text-main:#000;--text-secondary:#444;--border-color:rgba(0,0,0,0.2)}
+        body{margin:0;padding:0;font-family:'Montserrat',sans-serif;background:var(--bg-main);color:var(--text-main);font-weight:300;overflow-x:hidden}
+        .gold-text{background:var(--gold-gradient);-webkit-background-clip:text;color:transparent;animation:shine 6s infinite linear;background-size:200%}
+        @keyframes shine{0%{background-position:0%}100%{background-position:200%}}
+        header{width:100%;padding:12px 0;border-bottom:1px solid var(--border-color);background:var(--bg-header);position:fixed;top:0;left:0;z-index:10}
+        .header-container{max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:0 20px}
+        .header-left{display:flex;align-items:center;gap:15px}
+        nav a{margin-left:30px;text-decoration:none;color:var(--text-main);font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer}
+        nav a:hover{color:#f5d98c}
+        #theme-switch,#lang-switch{width:50px;height:26px;background:var(--border-color);border-radius:20px;position:relative;cursor:pointer;transition:background .3s;display:flex;align-items:center;padding:3px}
+        .switch-handle{width:20px;height:20px;background:var(--text-main);border-radius:50%;transition:transform .3s;display:flex;justify-content:center;align-items:center;font-size:10px;font-weight:700;color:var(--bg-header)}
+        .light-theme #theme-switch .switch-handle{transform:translateX(24px);background:#000}
+        .lang-en #lang-switch .switch-handle{transform:translateX(24px)}
+        .view{min-height:100vh;padding-top:120px;opacity:1;transition:.5s}
+        .hero{text-align:center;padding:0 20px}.hero h1{font-size:45px;font-weight:300;margin-bottom:10px}
+        .legal-content{max-width:900px;margin:40px auto;padding:0 20px 80px;line-height:1.6}
+        .card{background:var(--bg-card);border:1px solid var(--border-color);padding:40px;border-radius:12px;margin-bottom:30px}
+        .card h2{color:#f5d98c;font-size:26px;margin:0 0 15px 0;font-weight:400}
+        .card p, .card li{color:var(--text-secondary)}
+
+        /* --- Nouveaux Styles Spécifiques au Classement --- */
+        .search-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-main);
+            outline: none;
+        }
+        .filter-btn {
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .filter-btn:hover {
+            background: var(--text-main);
+            color: var(--bg-header);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th {
+            text-align: left;
+            border-bottom: 2px solid var(--border-color);
+            padding: 15px;
+            color: #f5d98c;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+        td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .rank-badge {
+            font-weight: bold;
+            display: inline-block;
+            width: 30px;
+        }
+        .score-val {
+            font-weight: 500;
+            color: #f5d98c;
+        }
+        .update-note {
+            font-size: 12px;
+            font-style: italic;
+            margin-top: 10px;
+            text-align: right;
+            opacity: 0.7;
+        }
+
+        #back-to-top {
+            position: fixed; bottom: 30px; right: 30px; width: 45px; height: 45px;
+            background: var(--bg-header); border: 1px solid var(--text-main);
+            color: var(--text-main); border-radius: 50%; cursor: pointer;
+            display: none; align-items: center; justify-content: center;
+            font-size: 20px; z-index: 100; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        .site-footer{background:var(--bg-footer);border-top:1px solid var(--border-color);padding:25px 20px 15px;margin-top:40px;color:var(--text-main);font-size:14px}
+        .footer-content{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px}
+        .footer-section{display:flex;flex-direction:column;gap:4px}
+        .footer-section h4{margin-bottom:6px;color:#f5d98c;font-size:13px}
+        .footer-section a{color:var(--text-main);text-decoration:none;font-size:12px}
+        .footer-legal{margin-top:10px;padding-top:10px;border-top:1px solid var(--border-color)}
+        .footer-bottom{text-align:center;margin-top:15px;font-size:12px;opacity:0.7}
+    </style>
+</head>
+<body class="lang-fr">
+
+<header>
+    <div class="header-container">
+        <div class="header-left">
+            <h2 class="gold-text" style="cursor:pointer" onclick="window.location='index.html'">ChronoBase</h2>
+            <div id="theme-switch" onclick="toggleTheme()"><div class="switch-handle"></div></div>
+            <div id="lang-switch" onclick="toggleLang()"><div class="switch-handle" id="lang-label">FR</div></div>
+        </div>
+        <nav>
+            <a href="index.html">Accueil</a>
+            <a href="montre.html">Les montres</a>
+            <a href="ressources.html">Ressources</a>
+            <a href="propos.html">À propos</a>
+        </nav>
+    </div>
+</header>
+
+<main class="view">
+    <section class="hero">
+        <h1 class="gold-text">Contributeurs</h1>
+        <p style="max-width: 700px; margin: auto;">Reconnaître l'engagement de ceux qui font vivre la base de données.</p>
+    </section>
+
+    <div class="legal-content">
+        <div class="card">
+            <h2>Pourquoi un classement ?</h2>
+            <p>ChronoBase est un projet communautaire. Ce classement récompense les utilisateurs qui participent activement à la précision et à la richesse de notre base de données horlogère.</p>
+            <h3>Comment gagner des points ?</h3>
+            <ul>
+                <li><strong>Avis & Notes :</strong> Donnez votre avis sur des modèles ou des horlogers.</li>
+                <li><strong>Corrections :</strong> Signalez une erreur technique dans une fiche.</li>
+                <li><strong>Demandes & Outils :</strong> Participez aux sections d'équipement ou faites des demandes d'ajouts.</li>
+                <li><strong>Annonces :</strong> Contribuez à la section des annonces horlogères.</li>
+            </ul>
+            <p><em>Note : L'attribution des points est validée par notre équipe de modération. Le classement est mis à jour chaque dimanche.</em></p>
+        </div>
+
+        <div class="card">
+            <div class="search-container">
+                <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Rechercher un pseudo...">
+                <button class="filter-btn" onclick="sortTable()">Trier par score (Min/Max)</button>
+            </div>
+
+            <table id="contributorsTable">
+                <thead>
+                    <tr>
+                        <th>Rang</th>
+                        <th>Pseudo</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr><td><span class="rank-badge">1</span></td><td>OmegaPassion</td><td class="score-val">125</td></tr>
+                    <tr><td><span class="rank-badge">2</span></td><td>WatchMaker_75</td><td class="score-val">98</td></tr>
+                    <tr><td><span class="rank-badge">3</span></td><td>HorloFan</td><td class="score-val">84</td></tr>
+                    <tr><td><span class="rank-badge">4</span></td><td>TimeKeeper</td><td class="score-val">56</td></tr>
+                    <tr><td><span class="rank-badge">5</span></td><td>VintageLover</td><td class="score-val">42</td></tr>
+                </tbody>
+            </table>
+            <p class="update-note">Dernière mise à jour : Dimanche dernier à 23h59.</p>
+        </div>
+
+        <div class="card">
+            <h2>Règlement & Éthique</h2>
+            <p>Tout comportement inapproprié, vulgarité ou non-respect des autres membres entraînera une déduction de points ou une exclusion définitive du classement. ChronoBase se réserve le droit de valider ou refuser une contribution selon sa pertinence.</p>
+        </div>
+    </div>
+</main>
+
+<button id="back-to-top" onclick="scrollToTop()">↑</button>
+
+<footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>Navigation</h4>
+            <a href="index.html">Accueil</a>
+            <a href="montre.html">Les montres</a>
+            <a href="propos.html">À propos</a>
+            <a href="contributeurs.html">Contributeurs</a>
+        </div>
+        <div class="footer-section">
+            <h4>Contact</h4>
+            <a href="mailto:contact@chronobase.com">Email</a>
+            <a href="#">Formulaire</a>
+        </div>
+        <div class="footer-section">
+            <h4>Légal</h4>
+            <a href="mentions.html">Mentions</a>
+            <a href="cgu.html">CGU</a>
+        </div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 ChronoBase</span></div>
+</footer>
+
+<script>
+    // --- Logique de recherche ---
+    function filterTable() {
+        const input = document.getElementById("searchInput");
+        const filter = input.value.toUpperCase();
+        const table = document.getElementById("tableBody");
+        const tr = table.getElementsByTagName("tr");
+
+        for (let i = 0; i < tr.length; i++) {
+            let td = tr[i].getElementsByTagName("td")[1]; // Colonne Pseudo
+            if (td) {
+                let txtValue = td.textContent || td.innerText;
+                tr[i].style.display = txtValue.toUpperCase().indexOf(filter) > -1 ? "" : "none";
+            }
+        }
+    }
+
+    // --- Logique de tri ---
+    let sortAsc = false;
+    function sortTable() {
+        const table = document.getElementById("tableBody");
+        let rows = Array.from(table.rows);
+        sortAsc = !sortAsc;
+
+        rows.sort((a, b) => {
+            let valA = parseInt(a.cells[2].innerText);
+            let valB = parseInt(b.cells[2].innerText);
+            return sortAsc ? valA - valB : valB - valA;
+        });
+
+        rows.forEach(row => table.appendChild(row));
+    }
+
+    // --- Fonctions communes (Theme/Lang/Scroll) ---
+    function toggleTheme(){
+        document.body.classList.toggle("light-theme");
+        localStorage.setItem("theme", document.body.classList.contains("light-theme") ? "light" : "dark");
+    }
+
+    const btn = document.getElementById("back-to-top");
+    window.onscroll = function() {
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) btn.style.display = "flex";
+        else btn.style.display = "none";
+    };
+    function scrollToTop() { window.scrollTo({top: 0, behavior: 'smooth'}); }
+
+    // Init Theme
+    if(localStorage.getItem("theme") === "light") document.body.classList.add("light-theme");
+</script>
+
+</body>
+</html>
