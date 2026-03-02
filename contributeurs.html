@@ -47,13 +47,17 @@
             font-size: 20px; z-index: 100; transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
+
+        /* --- Nouveau Footer (Identique à Confidentialité) --- */
         .site-footer{background:var(--bg-footer);border-top:1px solid var(--border-color);padding:25px 20px 15px;margin-top:40px;color:var(--text-main);font-size:14px}
         .footer-content{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px}
         .footer-section{display:flex;flex-direction:column;gap:4px}
         .footer-section h4{margin-bottom:6px;color:#f5d98c;font-size:13px}
         .footer-section a{color:var(--text-main);text-decoration:none;font-size:12px}
+        .footer-section a:hover{color:#f5d98c}
         .footer-legal{margin-top:10px;padding-top:10px;border-top:1px solid var(--border-color)}
         .footer-bottom{text-align:center;margin-top:15px;font-size:12px;opacity:0.7}
+        .site-version{font-size:10px;margin-top:5px}
     </style>
 </head>
 <body class="lang-fr">
@@ -135,20 +139,45 @@
             <a href="index.html" data-key="nav-home">Accueil</a>
             <a href="montre.html" data-key="nav-watches">Les montres</a>
             <a href="propos.html" data-key="nav-about">À propos</a>
-            <a href="contributeurs.html" data-key="f-contrib">Contributeurs</a>
+            <a href="chiffre.html" data-key="f-stats">Chiffres clés</a>
         </div>
         <div class="footer-section">
             <h4 data-key="f-contact">Contact</h4>
             <a href="mailto:contact@chronobase.com" data-key="f-mail">Email</a>
             <a href="#" data-key="f-form">Formulaire</a>
+            <a href="reseaux.html" data-key="f-social">Réseaux</a>
         </div>
+        <div class="footer-section">
+            <h4 data-key="f-version">Version</h4>
+            <a href="version.html" data-key="f-hist-v">Historique</a>
+            <a href="maj.html" data-key="f-hist-u">Mises à jour</a>
+            <a href="contributeurs.html" data-key="f-contrib">Contributeurs</a>
+        </div>
+        <div class="footer-section">
+            <h4 data-key="f-res">Ressources</h4>
+            <a href="horlogers.html" data-key="f-map">Carte</a>
+            <a href="evenements.html" data-key="f-events">Événements</a>
+            <a href="achats.html" data-key="f-equip">Achats</a>
+        </div>
+    </div>
+    <div class="footer-content footer-legal">
         <div class="footer-section">
             <h4 data-key="f-legal">Légal</h4>
             <a href="mentions.html" data-key="f-mentions">Mentions</a>
             <a href="cgu.html" data-key="f-cgu">CGU</a>
+            <a href="confidentialite.html" data-key="f-priv">Confidentialité</a>
+        </div>
+        <div class="footer-section">
+            <h4 data-key="f-reg">Règlements</h4>
+            <a href="reglement-site.html" data-key="f-reg-s">Site</a>
+            <a href="reglement-reseaux.html" data-key="f-reg-n">Réseaux</a>
+            <a href="cookies.html" data-key="f-cookies">Cookies</a>
         </div>
     </div>
-    <div class="footer-bottom"><span data-key="f-copy">© 2026 ChronoBase</span></div>
+    <div class="footer-bottom">
+        <span data-key="f-copy">© 2026 ChronoBase</span>
+        <div class="site-version">v1.0.0</div>
+    </div>
 </footer>
 
 <script>
@@ -162,7 +191,7 @@
             "search-placeholder": "Rechercher un pseudo...", "btn-sort": "Trier par score (Min/Max)",
             "th-rank": "Rang", "th-pseudo": "Pseudo", "th-score": "Score", "update-note": "Dernière mise à jour : Dimanche dernier à 23h59.",
             "card3-title": "Règlement & Éthique", "card3-p1": "Tout comportement inapproprié, vulgarité ou non-respect des autres membres entraînera une déduction de points ou une exclusion définitive du classement.",
-            "f-nav": "Navigation", "f-contrib": "Contributeurs", "f-contact": "Contact", "f-mail": "Email", "f-form": "Formulaire", "f-legal": "Légal", "f-mentions": "Mentions", "f-cgu": "CGU", "f-copy": "© 2026 ChronoBase"
+            "f-nav": "Navigation", "f-stats": "Chiffres clés", "f-contact": "Contact", "f-mail": "Envoyer un email", "f-form": "Formulaire (à venir)", "f-social": "Nos réseaux sociaux", "f-version": "Version", "f-hist-v": "Historique des versions", "f-hist-u": "Historique des mises à jour", "f-contrib": "Nos contributeurs", "f-res": "Ressources horlogères", "f-map": "Carte des horlogers", "f-events": "Événements & bourses", "f-equip": "Équipements & achats", "f-legal": "Légal", "f-mentions": "Mentions légales", "f-cgu": "Conditions d’utilisation", "f-priv": "Politique de confidentialité", "f-reg": "Règlements", "f-reg-s": "Règlement du site", "f-reg-n": "Règlement des réseaux sociaux", "f-cookies": "Gestion des cookies", "f-copy": "© 2026 ChronoBase — Tous droits réservés"
         },
         en: {
             "nav-home": "Home", "nav-watches": "Watches", "nav-res": "Resources", "nav-about": "About",
@@ -173,7 +202,7 @@
             "search-placeholder": "Search username...", "btn-sort": "Sort by score (Min/Max)",
             "th-rank": "Rank", "th-pseudo": "Username", "th-score": "Score", "update-note": "Last update: Last Sunday at 11:59 PM.",
             "card3-title": "Rules & Ethics", "card3-p1": "Any inappropriate behavior, vulgarity, or lack of respect for other members will result in a deduction of points or permanent exclusion.",
-            "f-nav": "Navigation", "f-contrib": "Contributors", "f-contact": "Contact", "f-mail": "Email", "f-form": "Form", "f-legal": "Legal", "f-mentions": "Legal Notice", "f-cgu": "Terms of Use", "f-copy": "© 2026 ChronoBase"
+            "f-nav": "Navigation", "f-stats": "Key figures", "f-contact": "Contact", "f-mail": "Send an email", "f-form": "Form (coming soon)", "f-social": "Our social networks", "f-version": "Version", "f-hist-v": "Version history", "f-hist-u": "Update history", "f-contrib": "Our contributors", "f-res": "Watch resources", "f-map": "Watchmakers map", "f-events": "Events & fairs", "f-equip": "Equipment & purchases", "f-legal": "Legal", "f-mentions": "Legal notice", "f-cgu": "Terms of use", "f-priv": "Privacy policy", "f-reg": "Regulations", "f-reg-s": "Site regulations", "f-reg-n": "Social media regulations", "f-cookies": "Cookie management", "f-copy": "© 2026 ChronoBase — All rights reserved"
         }
     };
 
@@ -204,7 +233,7 @@
         localStorage.setItem("theme", document.body.classList.contains("light-theme") ? "light" : "dark");
     }
 
-    // --- Logique de recherche & tri (Inchangée) ---
+    // --- Logique de recherche & tri ---
     function filterTable() {
         const input = document.getElementById("searchInput");
         const filter = input.value.toUpperCase();
