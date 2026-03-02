@@ -148,14 +148,6 @@ nav a:hover{color:#f5d98c}
 .footer-section a:hover { color: #f5d98c; }
 .footer-legal { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-color); }
 .footer-bottom { text-align: center; margin-top: 15px; font-size: 12px; opacity: 0.7; }
-
-/* ---------------------- CHATBOT ---------------------- */
-#cb-bubble {
-  position: fixed; bottom: 25px; right: 25px; background: var(--text-main);
-  color: var(--bg-main); width: 55px; height: 55px; border-radius: 50%;
-  display: flex; justify-content: center; align-items: center; font-size: 26px;
-  cursor: pointer; z-index: 9999; box-shadow: 0 0 10px rgba(0,0,0,0.4);
-}
 </style>
 </head>
 <body class="lang-fr">
@@ -402,11 +394,6 @@ function toggleLang() {
   document.getElementById("lang-label").textContent = savedLang.toUpperCase();
   updateContent(savedLang);
 })();
-
-// Assistant Chatbot
-const bubble = document.createElement("div");
-bubble.id = "cb-bubble"; bubble.innerHTML = "💬"; document.body.appendChild(bubble);
-bubble.onclick = () => alert("Assistant ChronoBase activé.");
 </script>
 
 </body>
