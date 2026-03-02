@@ -111,7 +111,8 @@ nav a:hover{color:#f5d98c}
 #lang-switch .switch-handle {
     transform: translateX(0px);
 }
-.lang-en #lang-switch .switch-handle {
+/* On utilise la classe sur le body pour déplacer le bouton */
+body.lang-en #lang-switch .switch-handle {
     transform: translateX(24px);
 }
 
@@ -517,7 +518,7 @@ function toggleLang() {
 function applyTranslations(lang) {
     document.querySelectorAll("[data-key]").forEach(el => {
         const key = el.getAttribute("data-key");
-        if (translations[lang][key]) {
+        if (translations[lang] && translations[lang][key]) {
             el.textContent = translations[lang][key];
         }
     });
@@ -550,7 +551,8 @@ displayLatestWatches();
 function updateSiteCounter(){
   fetch("https://api.countapi.xyz/hit/chronobase/visits")
     .then(r=>r.json())
-    .then(d=>document.getElementById("visit-counter").textContent=d.value);
+    .then(d=>document.getElementById("visit-counter").textContent=d.value)
+    .catch(e => console.log("Note: API Count inaccessible"));
 }
 updateSiteCounter();
 
@@ -561,15 +563,20 @@ function toggleTheme() {
   localStorage.setItem("theme", isLight ? "light" : "dark");
 }
 
-// Charger les préférences
+// Charger les préférences au chargement de la page
 (function() {
+  // Thème
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "light") document.body.classList.add("light-theme");
   
+  // Langue
   const savedLang = localStorage.getItem("lang") || "fr";
-  document.body.classList.remove("lang-fr", "lang-en");
-  document.body.classList.add("lang-" + savedLang);
-  document.getElementById("lang-label").textContent = savedLang.toUpperCase();
+  const body = document.body;
+  const label = document.getElementById("lang-label");
+  
+  body.classList.remove("lang-fr", "lang-en");
+  body.classList.add("lang-" + savedLang);
+  if(label) label.textContent = savedLang.toUpperCase();
   applyTranslations(savedLang);
 })();
 </script>
