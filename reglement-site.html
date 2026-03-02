@@ -1,399 +1,254 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>Règlement du site – ChronoBase</title>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="favicon.jpg">
+    <title>Règlement du site - ChronoBase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root{--gold-gradient:linear-gradient(90deg,#d4af37,#f5d98c,#c8a951);--bg-main:radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);--bg-header:#0b0b0b;--bg-footer:#0b0b0b;--bg-card:linear-gradient(180deg,#111,#0c0c0c);--text-main:#d4af37;--text-secondary:#c1a96b;--border-color:rgba(212,175,55,0.2)}
+        .light-theme{--bg-main:#fff;--bg-header:#fff;--bg-footer:#fff;--bg-card:#f7f7f7;--text-main:#000;--text-secondary:#444;--border-color:rgba(0,0,0,0.2)}
+        body{margin:0;padding:0;font-family:'Montserrat',sans-serif;background:var(--bg-main);color:var(--text-main);font-weight:300;overflow-x:hidden}
+        .gold-text{background:var(--gold-gradient);-webkit-background-clip:text;color:transparent;animation:shine 6s infinite linear;background-size:200%}
+        @keyframes shine{0%{background-position:0%}100%{background-position:200%}}
+        header{width:100%;padding:12px 0;border-bottom:1px solid var(--border-color);background:var(--bg-header);position:fixed;top:0;left:0;z-index:10}
+        .header-container{max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:0 20px}
+        .header-left{display:flex;align-items:center;gap:15px}
+        nav a{margin-left:30px;text-decoration:none;color:var(--text-main);font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer}
+        nav a:hover{color:#f5d98c}
+        #theme-switch,#lang-switch{width:50px;height:26px;background:var(--border-color);border-radius:20px;position:relative;cursor:pointer;transition:background .3s;display:flex;align-items:center;padding:3px}
+        .switch-handle{width:20px;height:20px;background:var(--text-main);border-radius:50%;transition:transform .3s;display:flex;justify-content:center;align-items:center;font-size:10px;font-weight:700;color:var(--bg-header)}
+        .light-theme #theme-switch .switch-handle{transform:translateX(24px);background:#000}
+        .lang-en #lang-switch .switch-handle{transform:translateX(24px)}
+        .view{min-height:100vh;padding-top:120px;opacity:1;transition:.5s}
+        .hero{text-align:center;padding:0 20px}.hero h1{font-size:45px;font-weight:300;margin-bottom:10px}
+        .legal-content{max-width:900px;margin:40px auto;padding:0 20px 80px;line-height:1.6}
+        .card{background:var(--bg-card);border:1px solid var(--border-color);padding:40px;border-radius:12px;margin-bottom:30px}
+        .card h2{color:#f5d98c;font-size:26px;margin:0 0 15px 0;font-weight:400}
+        .card p, .card li{color:var(--text-secondary)}
+        .card ul { list-style: none; padding-left: 0; }
+        .card ul li { margin-bottom: 12px; position: relative; padding-left: 20px; }
+        .card ul li::before { content: "•"; position: absolute; left: 0; color: #f5d98c; }
+        strong { color: #f5d98c; font-weight: 500; }
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+        #back-to-top {
+            position: fixed; bottom: 30px; right: 30px; width: 45px; height: 45px;
+            background: var(--bg-header); border: 1px solid var(--text-main);
+            color: var(--text-main); border-radius: 50%; cursor: pointer;
+            display: none; align-items: center; justify-content: center;
+            font-size: 20px; z-index: 100; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
 
-<style>
-/* ---------------------- VARIABLES ---------------------- */
-:root {
-  --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951);
-  --bg-main: radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
-  --bg-header: #0b0b0b;
-  --bg-card: linear-gradient(180deg,#111,#0c0c0c);
-  --bg-footer: #0b0b0b;
-  --text-main: #d4af37;
-  --text-secondary: #c1a96b;
-  --border-color: rgba(212,175,55,0.2);
-}
-
-.light-theme {
-  --bg-main: #ffffff;
-  --bg-header: #ffffff;
-  --bg-card: #ffffff;
-  --bg-footer: #ffffff;
-  --text-main: #000000;
-  --text-secondary: #444444;
-  --border-color: rgba(0,0,0,0.2);
-}
-
-/* ---------------------- GLOBAL ---------------------- */
-body{
-  margin:0; padding:0;
-  font-family:'Montserrat',sans-serif;
-  background:var(--bg-main);
-  color:var(--text-main);
-  font-weight:300;
-  overflow-x:hidden;
-  line-height: 1.6;
-}
-
-.gold-text{
-  background:var(--gold-gradient);
-  -webkit-background-clip:text;
-  color:transparent;
-  animation:shine 6s infinite linear;
-  background-size:200%;
-}
-
-@keyframes shine{ 0%{background-position:0%} 100%{background-position:200%} }
-
-/* ---------------------- HEADER ---------------------- */
-header{
-  width:100%; padding:12px 0;
-  border-bottom:1px solid var(--border-color);
-  background:var(--bg-header);
-  position:fixed; top:0; left:0; z-index:10;
-}
-
-.header-container{
-  max-width:1200px; margin:auto;
-  display:flex; justify-content:space-between; align-items:center; padding:0 20px;
-}
-
-.header-left { display: flex; align-items: center; gap: 15px; }
-
-nav a{
-  margin-left:30px; text-decoration:none;
-  color:var(--text-main); font-size:14px;
-  letter-spacing:1px; text-transform:uppercase;
-}
-nav a:hover{color:#f5d98c}
-
-#theme-switch {
-  width: 50px; height: 26px; background: var(--border-color);
-  border-radius: 20px; position: relative; cursor: pointer;
-  display: flex; align-items: center; padding: 3px;
-}
-
-.switch-handle {
-  width: 20px; height: 20px; background: var(--text-main);
-  border-radius: 50%; transition: transform 0.3s;
-}
-
-.light-theme #theme-switch .switch-handle { transform: translateX(24px); background: #000; }
-
-/* ---------------------- CONTENT ---------------------- */
-.container{ max-width:1000px; margin:120px auto 80px; padding:0 20px; }
-
-.intro-text {
-    text-align: center;
-    margin-bottom: 40px;
-    color: var(--text-secondary);
-    font-size: 1.1em;
-}
-
-.card{
-  background:var(--bg-card);
-  border:1px solid var(--border-color);
-  padding:35px;
-  border-radius:12px;
-  margin-bottom:30px;
-  transition: border-color 0.3s;
-}
-.card:hover{border-color:rgba(212,175,55,.4)}
-
-.card h2 {
-  margin-top:0; font-weight:400; font-size:22px;
-  color:#f5d98c; border-bottom: 1px solid var(--border-color);
-  padding-bottom: 10px; margin-bottom: 20px;
-}
-
-.card h3 { font-size: 18px; color: #f5d98c; margin-top: 20px; font-weight: 400; }
-
-.article-content ul { list-style: none; padding-left: 0; }
-.article-content ul li { margin-bottom: 12px; position: relative; padding-left: 20px; }
-.article-content ul li::before { content: "•"; position: absolute; left: 0; color: #f5d98c; }
-
-strong { color: #f5d98c; font-weight: 500; }
-
-/* ---------------------- FOOTER COMPACT (Mis à jour) ---------------------- */
-.site-footer {
-  background: var(--bg-footer);
-  border-top: 1px solid var(--border-color);
-  padding: 25px 20px 15px;
-  margin-top: 60px;
-  color: var(--text-main);
-  font-size: 14px;
-}
-
-.footer-content {
-  max-width: 1200px;
-  margin: auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 25px;
-}
-
-.footer-section {
-  min-height: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.footer-section h4 {
-  margin-bottom: 6px;
-  color: #f5d98c;
-  font-size: 13px;
-  text-transform: uppercase;
-}
-
-.footer-section a {
-  color: var(--text-main);
-  text-decoration: none;
-  font-size: 12px;
-  display: block;
-}
-
-.footer-section a:hover { color: #f5d98c; }
-
-.footer-legal {
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid var(--border-color);
-}
-
-.footer-bottom {
-  text-align: center;
-  margin-top: 15px;
-  font-size: 12px;
-  opacity: 0.7;
-}
-
-/* ---------------------- CHATBOT ---------------------- */
-#cb-bubble {
-  position: fixed; bottom: 25px; right: 25px;
-  background: var(--text-main); color: var(--bg-main);
-  width: 55px; height: 55px; border-radius: 50%;
-  display: flex; justify-content: center; align-items: center;
-  font-size: 26px; cursor: pointer; z-index: 9999;
-}
-
-#cb-window {
-  position: fixed; bottom: 95px; right: 25px;
-  width: 220px; height: 300px; background: var(--bg-header);
-  border: 1px solid var(--border-color); border-radius: 10px;
-  display: none; flex-direction: column; z-index: 9999;
-}
-
-#cb-header {
-  padding: 10px; background: var(--bg-card);
-  display: flex; justify-content: space-between; font-size: 13px;
-  border-bottom: 1px solid var(--border-color); cursor: grab;
-}
-
-#cb-content { padding: 15px; overflow-y: auto; font-size: 13px; }
-.cb-btn {
-  background: var(--bg-card); border: 1px solid var(--border-color);
-  padding: 8px; margin-top: 10px; border-radius: 5px;
-  cursor: pointer; text-align: center; font-size: 12px;
-}
-</style>
+        .site-footer{background:var(--bg-footer);border-top:1px solid var(--border-color);padding:25px 20px 15px;margin-top:40px;color:var(--text-main);font-size:14px}.footer-content{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px}.footer-section{display:flex;flex-direction:column;gap:4px}.footer-section h4{margin-bottom:6px;color:#f5d98c;font-size:13px}.footer-section a{color:var(--text-main);text-decoration:none;font-size:12px}.footer-section a:hover{color:#f5d98c}.footer-legal{margin-top:10px;padding-top:10px;border-top:1px solid var(--border-color)}.footer-bottom{text-align:center;margin-top:15px;font-size:12px;opacity:0.7}.site-version{display:block;margin-top:5px}
+    </style>
 </head>
-<body>
+<body class="lang-fr">
 
 <header>
-  <div class="header-container">
-    <div class="header-left">
-      <h2 class="gold-text">ChronoBase</h2>
-      <div id="theme-switch" onclick="toggleTheme()">
-        <div class="switch-handle"></div>
-      </div>
+    <div class="header-container">
+        <div class="header-left">
+            <h2 class="gold-text" style="cursor:pointer" onclick="window.location='index.html'">ChronoBase</h2>
+            <div id="theme-switch" onclick="toggleTheme()"><div class="switch-handle"></div></div>
+            <div id="lang-switch" onclick="toggleLang()"><div class="switch-handle" id="lang-label">FR</div></div>
+        </div>
+        <nav>
+            <a href="index.html" data-key="nav-home">Accueil</a>
+            <a href="montre.html" data-key="nav-watches">Les montres</a>
+            <a href="ressources.html" data-key="nav-res">Ressources</a>
+            <a href="propos.html" data-key="nav-about">À propos</a>
+        </nav>
     </div>
-    <nav>
-      <a href="index.html">Accueil</a>
-      <a href="montre.html">Les montres</a>
-      <a href="propos.html">À propos</a>
-    </nav>
-  </div>
 </header>
 
-<div class="container">
-  <h1 class="gold-text" style="text-align:center; margin-bottom: 10px;">Règlement du site</h1>
-  <p class="intro-text">Règlement Général d'Utilisation de la plateforme ChronoBase</p>
+<main class="view">
+    <section class="hero">
+        <h1 class="gold-text" data-key="hero-title">Règlement du site</h1>
+        <p style="max-width: 700px; margin: auto;" data-key="hero-desc">Règlement Général d'Utilisation de la plateforme ChronoBase</p>
+    </section>
 
-  <div class="card">
-    <p>Bienvenue sur notre plateforme dédiée à l'horlogerie. Le présent règlement définit les conditions de participation, de communication et d'utilisation des services du site. L’utilisation du site implique l’acceptation pleine et entière de ces règles.</p>
-  </div>
+    <div class="legal-content">
+        <div class="card">
+            <p data-key="intro-p">Bienvenue sur notre plateforme dédiée à l'horlogerie. Le présent règlement définit les conditions de participation, de communication et d'utilisation des services du site. L’utilisation du site implique l’acceptation pleine et entière de ces règles.</p>
+        </div>
 
-  <div class="card article-content">
-    <h2>Article 1 : Communication et Déontologie</h2>
-    <p>La communication avec l'équipe de modération s'effectue via les formulaires du site, par e-mail ou via nos réseaux sociaux officiels.</p>
-    <ul>
-        <li><strong>Respect et Courtoisie :</strong> Tout échange doit rester poli. La vulgarité, l'agressivité ou le manque de respect ne seront pas tolérés.</li>
-        <li><strong>Pertinence :</strong> Les messages doivent concerner l'horlogerie ou le fonctionnement du site. L'envoi de publicités non sollicitées (spam) ou de fausses informations est strictement interdit.</li>
-    </ul>
-  </div>
+        <div class="card">
+            <h2 data-key="art1-title">Article 1 : Communication et Déontologie</h2>
+            <p data-key="art1-p">La communication avec l'équipe de modération s'effectue via les formulaires du site, par e-mail ou via nos réseaux sociaux officiels.</p>
+            <ul>
+                <li data-key="art1-li1"><strong>Respect et Courtoisie :</strong> Tout échange doit rester poli. La vulgarité, l'agressivité ou le manque de respect ne seront pas tolérés.</li>
+                <li data-key="art1-li2"><strong>Pertinence :</strong> Les messages doivent concerner l'horlogerie ou le fonctionnement du site. L'envoi de publicités non sollicitées (spam) ou de fausses informations est strictement interdit.</li>
+            </ul>
+        </div>
 
-  <div class="card article-content">
-    <h2>Article 2 : Protection du Contenu et Propriété Intellectuelle</h2>
-    <p>Le contenu diffusé sur le site est protégé par des droits de propriété intellectuelle et des brevets déposés.</p>
-    <ul>
-        <li><strong>Sécurisation :</strong> Les documents PDF transmis par nos soins comportent une signature numérique et un filigrane (logo de l'entreprise en arrière-plan) afin d'identifier l'origine des données et d'empêcher toute modification.</li>
-        <li><strong>Partage autorisé :</strong> Vous pouvez partager nos documents, à condition de ne pas altérer le contenu, de ne pas retirer notre logo et de citer explicitement la source. Il est interdit de s'approprier la paternité de nos travaux.</li>
-        <li><strong>Sanctions :</strong> Toute tentative de plagiat, de retrait de filigrane ou d'utilisation abusive de nos données pourra donner lieu à des poursuites judiciaires.</li>
-    </ul>
-  </div>
+        <div class="card">
+            <h2 data-key="art2-title">Article 2 : Protection du Contenu et Propriété Intellectuelle</h2>
+            <p data-key="art2-p">Le contenu diffusé sur le site est protégé par des droits de propriété intellectuelle et des brevets déposés.</p>
+            <ul>
+                <li data-key="art2-li1"><strong>Sécurisation :</strong> Les documents PDF transmis par nos soins comportent une signature numérique et un filigrane (logo de l'entreprise en arrière-plan) afin d'identifier l'origine des données et d'empêcher toute modification.</li>
+                <li data-key="art2-li2"><strong>Partage autorisé :</strong> Vous pouvez partager nos documents, à condition de ne pas altérer le contenu, de ne pas retirer notre logo et de citer explicitement la source. Il est interdit de s'approprier la paternité de nos travaux.</li>
+                <li data-key="art2-li3"><strong>Sanctions :</strong> Toute tentative de plagiat, de retrait de filigrane ou d'utilisation abusive de nos données pourra donner lieu à des poursuites judiciaires.</li>
+            </ul>
+        </div>
 
-  <div class="card article-content">
-    <h2>Article 3 : Traitement des Retours Utilisateurs</h2>
-    <p>Nous accordons une grande importance à vos avis pour améliorer notre base de données.</p>
-    <ul>
-        <li><strong>Procédure :</strong> Pour être traité, un retour (erreur constatée, avis, demande d'information) doit être constructif et soumis via l'onglet "Espace Contribution".</li>
-        <li><strong>Engagement de réponse :</strong> Nous nous engageons à répondre à tout e-mail jugé utile et constructif dans un délai de 48 heures. Les messages ne respectant pas les formes (vulgarité, hors-sujet) ne recevront aucune réponse.</li>
-    </ul>
-  </div>
+        <div class="card">
+            <h2 data-key="art3-title">Article 3 : Traitement des Retours Utilisateurs</h2>
+            <p data-key="art3-p">Nous accordons une grande importance à vos avis pour améliorer notre base de données.</p>
+            <ul>
+                <li data-key="art3-li1"><strong>Procédure :</strong> Pour être traité, un retour (erreur constatée, avis, demande d'information) doit être constructif et soumis via l'onglet "Espace Contribution".</li>
+                <li data-key="art3-li2"><strong>Engagement de réponse :</strong> Nous nous engageons à répondre à tout e-mail jugé utile et constructif dans un délai de 48 heures. Les messages ne respectant pas les formes (vulgarité, hors-sujet) ne recevront aucune réponse.</li>
+            </ul>
+        </div>
 
-  <div class="card article-content">
-    <h2>Article 4 : Événements, Bourses et Cartographie</h2>
-    <p>Les pages "Événements & Bourses" et "Carte des Horlogers" sont des outils de référencement.</p>
-    <ul>
-        <li><strong>Vérification :</strong> Chaque événement ou professionnel est sélectionné après une recherche approfondie pour garantir la pertinence horlogère (pièces, outils, expertise).</li>
-        <li><strong>Responsabilité :</strong> Ces informations sont fournies à titre indicatif. Nous ne saurions être tenus responsables des incidents survenant lors d'événements tiers. En cas de retour négatif avéré sur un lieu, nous nous réservons le droit de le retirer définitivement de nos listes.</li>
-        <li><strong>Classement :</strong> Les classements (avis utilisateurs et Google) sont purement informatifs et n'engagent pas notre responsabilité sur la prestation finale de l'artisan.</li>
-    </ul>
-  </div>
+        <div class="card">
+            <h2 data-key="art4-title">Article 4 : Événements, Bourses et Cartographie</h2>
+            <p data-key="art4-p">Les pages "Événements & Bourses" et "Carte des Horlogers" sont des outils de référencement.</p>
+            <ul>
+                <li data-key="art4-li1"><strong>Vérification :</strong> Chaque événement ou professionnel est sélectionné après une recherche approfondie pour garantir la pertinence horlogère (pièces, outils, expertise).</li>
+                <li data-key="art4-li2"><strong>Responsabilité :</strong> Ces informations sont fournies à titre indicatif. Nous ne saurions être tenus responsables des incidents survenant lors d'événements tiers. En cas de retour négatif avéré sur un lieu, nous nous réservons le droit de le retirer définitivement de nos listes.</li>
+                <li data-key="art4-li3"><strong>Classement :</strong> Les classements (avis utilisateurs et Google) sont purement informatifs et n'engagent pas notre responsabilité sur la prestation finale de l'artisan.</li>
+            </ul>
+        </div>
 
-  <div class="card article-content">
-    <h2>Article 5 : Équipements, Achats et Publicité</h2>
-    <p>La page "Équipements & Achats" répertorie des revendeurs et partenaires de confiance.</p>
-    <ul>
-        <li>Les demandes de publicité ou d'ajout de sites doivent être effectuées par e-mail. Nous refusons systématiquement les pratiques de type "putaclic" ou les sites sans lien direct avec notre thématique.</li>
-    </ul>
-  </div>
+        <div class="card">
+            <h2 data-key="art5-title">Article 5 : Équipements, Achats et Publicité</h2>
+            <p data-key="art5-p">La page "Équipements & Achats" répertorie des revendeurs et partenaires de confiance.</p>
+            <ul>
+                <li data-key="art5-li1">Les demandes de publicité ou d'ajout de sites doivent être effectuées par e-mail. Nous refusons systématiquement les pratiques de type "putaclic" ou les sites sans lien direct avec notre thématique.</li>
+            </ul>
+        </div>
 
-  <div class="card article-content">
-    <h2>Article 6 : Système de Contribution et Classement</h2>
-    <p>Pour valoriser l'aide de notre communauté, un système de points est mis en place :</p>
-    <ul>
-        <li><strong>Gain de points :</strong> Accordés pour des retours constructifs, des signalements d'erreurs ou des propositions de partenariats.</li>
-        <li><strong>Pertes de points :</strong> En cas de comportement inapproprié ou de retours malveillants.</li>
-        <li><strong>Confidentialité :</strong> Les contributeurs peuvent choisir d'apparaître sous un pseudonyme, de rester anonymes ou de ne pas figurer dans le classement public. Vos données personnelles (e-mails) sont sécurisées et utilisées uniquement pour la gestion interne des points.</li>
-    </ul>
-  </div>
+        <div class="card">
+            <h2 data-key="art6-title">Article 6 : Système de Contribution et Classement</h2>
+            <p data-key="art6-p">Pour valoriser l'aide de notre communauté, un système de points est mis en place :</p>
+            <ul>
+                <li data-key="art6-li1"><strong>Gain de points :</strong> Accordés pour des retours constructifs, des signalements d'erreurs ou des propositions de partenariats.</li>
+                <li data-key="art6-li2"><strong>Pertes de points :</strong> En cas de comportement inapproprié ou de retours malveillants.</li>
+                <li data-key="art6-li3"><strong>Confidentialité :</strong> Les contributeurs peuvent choisir d'apparaître sous un pseudonyme, de rester anonymes ou de ne pas figurer dans le classement public. Vos données personnelles (e-mails) sont sécurisées et utilisées uniquement pour la gestion interne des points.</li>
+            </ul>
+        </div>
 
-  <div class="card article-content">
-    <h2>Article 7 : Newsletter et Rappels</h2>
-    <ul>
-        <li><strong>Newsletter :</strong> Envoyée toutes les deux semaines, elle permet de suivre l'actualité et de consulter les archives sur demande.</li>
-        <li><strong>Rappels :</strong> Un récapitulatif des règles de bonne conduite sera diffusé mensuellement sur nos plateformes.</li>
-    </ul>
-  </div>
+        <div class="card">
+            <h2 data-key="art7-title">Article 7 : Newsletter et Rappels</h2>
+            <ul>
+                <li data-key="art7-li1"><strong>Newsletter :</strong> Envoyée toutes les deux semaines, elle permet de suivre l'actualité et de consulter les archives sur demande.</li>
+                <li data-key="art7-li2"><strong>Rappels :</strong> Un récapitulatif des règles de bonne conduite sera diffusé mensuellement sur nos plateformes.</li>
+            </ul>
+        </div>
 
-  <div class="card article-content">
-    <h2>Article 8 : Sanctions et Liste Noire</h2>
-    <p>Le non-respect répété du présent règlement (vulgarité, fausses informations, harcèlement) entraînera l'inscription de l'utilisateur sur une liste noire. Cette mesure suspend de manière permanente toute possibilité d'interaction, de publicité ou de contribution sur le site.</p>
-  </div>
-</div>
-
-<footer class="site-footer">
-  <div class="footer-content">
-    <div class="footer-section">
-      <h4>Navigation</h4>
-      <a href="index.html">Accueil</a>
-      <a href="montre.html">Les montres</a>
-      <a href="propos.html">À propos</a>
-      <a href="chiffre.html">Chiffres clés</a>
+        <div class="card">
+            <h2 data-key="art8-title">Article 8 : Sanctions et Liste Noire</h2>
+            <p data-key="art8-p">Le non-respect répété du présent règlement (vulgarité, fausses informations, harcèlement) entraînera l'inscription de l'utilisateur sur une liste noire. Cette mesure suspend de manière permanente toute possibilité d'interaction, de publicité ou de contribution sur le site.</p>
+        </div>
     </div>
+</main>
 
-    <div class="footer-section">
-      <h4>Contact</h4>
-      <a href="mailto:contact@chronobase.com">Envoyer un email</a>
-      <a href="#">Formulaire (à venir)</a>
-      <a href="reseaux.html">Nos réseaux sociaux</a>
-    </div>
+<button id="back-to-top" onclick="scrollToTop()">↑</button>
 
-    <div class="footer-section">
-      <h4>Version</h4>
-      <a href="version.html">Historique des versions</a>
-      <a href="maj.html">Historique des mises à jour</a>
-      <a href="contributeurs.html">Nos contributeurs</a>
-    </div>
-
-    <div class="footer-section">
-      <h4>Ressources</h4>
-      <a href="horlogers.html">Carte des horlogers</a>
-      <a href="evenements.html">Événements</a>
-      <a href="achats.html">Équipements & achats</a>
-    </div>
-  </div>
-
-  <div class="footer-content footer-legal">
-    <div class="footer-section">
-      <h4>Légal</h4>
-      <a href="mentions.html">Mentions légales</a>
-      <a href="cgu.html">Conditions d’utilisation</a>
-      <a href="confidentialite.html">Confidentialité</a>
-    </div>
-
-    <div class="footer-section">
-      <h4>Règlements</h4>
-      <a href="reglement-site.html">Règlement du site</a>
-      <a href="reglement-reseaux.html">Règlement réseaux</a>
-      <a href="cookies.html">Cookies</a>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    © 2026 ChronoBase — Tous droits réservés
-  </div>
-</footer>
-
-<div id="cb-bubble"><span>💬</span></div>
-<div id="cb-window">
-    <div id="cb-header"><span>Assistant ChronoBase</span><span id="cb-close" style="cursor:pointer">✖</span></div>
-    <div id="cb-content"></div>
-</div>
+<footer class="site-footer"><div class="footer-content"><div class="footer-section"><h4 data-key="f-nav">Navigation</h4><a href="index.html" data-key="nav-home">Accueil</a><a href="montre.html" data-key="nav-watches">Les montres</a><a href="propos.html" data-key="nav-about">À propos</a><a href="chiffre.html" data-key="f-stats">Chiffres clés</a></div><div class="footer-section"><h4 data-key="f-contact">Contact</h4><a href="mailto:contact@chronobase.com" data-key="f-mail">Email</a><a href="#" data-key="f-form">Formulaire</a><a href="reseaux.html" data-key="f-social">Réseaux</a></div><div class="footer-section"><h4 data-key="f-version">Version</h4><a href="version.html" data-key="f-hist-v">Historique</a><a href="maj.html" data-key="f-hist-u">Mises à jour</a><a href="contributeurs.html" data-key="f-contrib">Contributeurs</a></div><div class="footer-section"><h4 data-key="f-res">Ressources</h4><a href="horlogers.html" data-key="f-map">Carte</a><a href="evenements.html" data-key="f-events">Événements</a><a href="achats.html" data-key="f-equip">Achats</a></div></div><div class="footer-content footer-legal"><div class="footer-section"><h4 data-key="f-legal">Légal</h4><a href="mentions.html" data-key="f-mentions">Mentions</a><a href="cgu.html" data-key="f-cgu">CGU</a><a href="confidentialite.html" data-key="f-priv">Confidentialité</a></div><div class="footer-section"><h4 data-key="f-reg">Règlements</h4><a href="reglement-site.html" data-key="f-reg-s">Site</a><a href="reglement-reseaux.html" data-key="f-reg-n">Réseaux</a><a href="cookies.html" data-key="f-cookies">Cookies</a></div></div><div class="footer-bottom"><span data-key="f-copy">© 2026 ChronoBase</span><div class="site-version">v1.0.0</div></div></footer>
 
 <script>
-function toggleTheme() {
-  document.body.classList.toggle("light-theme");
-  localStorage.setItem("theme", document.body.classList.contains("light-theme") ? "light" : "dark");
-}
-(function() {
-  if (localStorage.getItem("theme") === "light") document.body.classList.add("light-theme");
-})();
+    const translations = {
+        fr: {
+            "nav-home": "Accueil", "nav-watches": "Les montres", "nav-res": "Ressources", "nav-about": "À propos",
+            "hero-title": "Règlement du site", "hero-desc": "Règlement Général d'Utilisation de la plateforme ChronoBase",
+            "intro-p": "Bienvenue sur notre plateforme dédiée à l'horlogerie. Le présent règlement définit les conditions de participation, de communication et d'utilisation des services du site. L’utilisation du site implique l’acceptation pleine et entière de ces règles.",
+            "art1-title": "Article 1 : Communication et Déontologie", "art1-p": "La communication avec l'équipe de modération s'effectue via les formulaires du site, par e-mail ou via nos réseaux sociaux officiels.",
+            "art1-li1": "Respect et Courtoisie : Tout échange doit rester poli. La vulgarité, l'agressivité ou le manque de respect ne seront pas tolérés.",
+            "art1-li2": "Pertinence : Les messages doivent concerner l'horlogerie ou le fonctionnement du site. L'envoi de publicités non sollicitées (spam) ou de fausses informations est strictement interdit.",
+            "art2-title": "Article 2 : Protection du Contenu et Propriété Intellectuelle", "art2-p": "Le contenu diffusé sur le site est protégé par des droits de propriété intellectuelle et des brevets déposés.",
+            "art2-li1": "Sécurisation : Les documents PDF transmis par nos soins comportent une signature numérique et un filigrane.",
+            "art2-li2": "Partage autorisé : Vous pouvez partager nos documents sans altérer le contenu.",
+            "art2-li3": "Sanctions : Toute tentative de plagiat pourra donner lieu à des poursuites.",
+            "art3-title": "Article 3 : Traitement des Retours Utilisateurs", "art3-p": "Nous accordons une grande importance à vos avis.",
+            "art3-li1": "Procédure : Un retour doit être constructif via l'onglet 'Espace Contribution'.",
+            "art3-li2": "Engagement : Réponse sous 48 heures aux e-mails utiles.",
+            "art4-title": "Article 4 : Événements, Bourses et Cartographie", "art4-p": "Les outils de référencement.",
+            "art4-li1": "Vérification : Recherche approfondie pour garantir la pertinence.",
+            "art4-li2": "Responsabilité : Informations fournies à titre indicatif.",
+            "art4-li3": "Classement : Les avis sont informatifs.",
+            "art5-title": "Article 5 : Équipements, Achats et Publicité", "art5-p": "Revendeurs et partenaires de confiance.",
+            "art5-li1": "Publicité : Demandes par e-mail, thématique horlogère uniquement.",
+            "art6-title": "Article 6 : Système de Contribution et Classement", "art6-p": "Valorisation de l'aide communautaire.",
+            "art6-li1": "Gain : Retours constructifs et signalements.",
+            "art6-li2": "Pertes : Comportement inapproprié.",
+            "art6-li3": "Confidentialité : Pseudonymat possible.",
+            "art7-title": "Article 7 : Newsletter et Rappels",
+            "art7-li1": "Newsletter : Bi-mensuelle sur l'actualité.",
+            "art7-li2": "Rappels : Récapitulatif mensuel des règles.",
+            "art8-title": "Article 8 : Sanctions et Liste Noire",
+            "art8-p": "L'inscription sur liste noire suspend l'interaction de manière permanente.",
+            "f-nav":"Navigation","f-stats":"Chiffres clés","f-contact":"Contact","f-mail":"Envoyer un email","f-form":"Formulaire (à venir)","f-social":"Nos réseaux sociaux","f-version":"Version","f-hist-v":"Historique des versions","f-hist-u":"Historique des mises à jour","f-contrib":"Nos contributeurs","f-res":"Ressources horlogères","f-map":"Carte des horlogers","f-events":"Événements & bourses","f-equip":"Équipements & achats","f-legal":"Légal","f-mentions":"Mentions légales","f-cgu":"Conditions d’utilisation","f-priv":"Politique de confidentialité","f-reg":"Règlements","f-reg-s":"Règlement du site","f-reg-n":"Règlement des réseaux sociaux","f-cookies":"Gestion des cookies","f-copy":"© 2026 ChronoBase — Tous droits réservés"
+        },
+        en: {
+            "nav-home": "Home", "nav-watches": "Watches", "nav-res": "Resources", "nav-about": "About",
+            "hero-title": "Site Rules", "hero-desc": "General Terms of Use for the ChronoBase platform",
+            "intro-p": "Welcome to our platform dedicated to watchmaking. These rules define the conditions of participation and use of the site.",
+            "art1-title": "Article 1: Communication and Ethics", "art1-p": "Communication with the moderation team is done via site forms or official social networks.",
+            "art1-li1": "Respect: All exchanges must remain polite. Vulgarity or lack of respect will not be tolerated.",
+            "art1-li2": "Relevance: Messages must concern watchmaking. Spam is strictly forbidden.",
+            "art2-title": "Article 2: Content Protection", "art2-p": "Content on the site is protected by intellectual property rights.",
+            "art2-li1": "Security: PDF documents include a digital signature and watermark.",
+            "art2-li2": "Sharing: You may share documents without altering the content.",
+            "art2-li3": "Sanctions: Plagiarism may lead to legal action.",
+            "art3-title": "Article 3: User Feedback", "art3-p": "We value your opinions to improve our database.",
+            "art3-li1": "Procedure: Feedback must be constructive via the 'Contribution Space'.",
+            "art3-li2": "Response: We commit to answering useful emails within 48 hours.",
+            "art4-title": "Article 4: Events and Mapping", "art4-p": "Referencing tools for the community.",
+            "art4-li1": "Verification: Deep research to ensure horological relevance.",
+            "art4-li2": "Responsibility: Information is for guidance only.",
+            "art4-li3": "Ranking: User reviews are informative.",
+            "art5-title": "Article 5: Equipment and Purchases", "art5-p": "Trusted retailers and partners.",
+            "art5-li1": "Advertising: Requests via email only, watch-related.",
+            "art6-title": "Article 6: Contribution System", "art6-p": "Rewarding community help.",
+            "art6-li1": "Gain: Constructive feedback and error reporting.",
+            "art6-li2": "Loss: Inappropriate behavior.",
+            "art6-li3": "Privacy: Contributors can choose to be anonymous.",
+            "art7-title": "Article 7: Newsletter",
+            "art7-li1": "Newsletter: Sent every two weeks.",
+            "art7-li2": "Reminders: Monthly recap of rules.",
+            "art8-title": "Article 8: Sanctions and Blacklist",
+            "art8-p": "Repeated violation leads to permanent blacklist and suspension of interactions.",
+            "f-nav":"Navigation","f-stats":"Key Figures","f-contact":"Contact","f-mail":"Send an email","f-form":"Form (coming soon)","f-social":"Social Media","f-version":"Version","f-hist-v":"Version History","f-hist-u":"Update History","f-contrib":"Our Contributors","f-res":"Watchmaking Resources","f-map":"Watchmakers Map","f-events":"Events & Fairs","f-equip":"Equipment & Purchases","f-legal":"Legal","f-mentions":"Legal Notice","f-cgu":"Terms of Use","f-priv":"Privacy Policy","f-reg":"Regulations","f-reg-s":"Site Rules","f-reg-n":"Social Media Rules","f-cookies":"Cookie Management","f-copy":"© 2026 ChronoBase — All rights reserved"
+        }
+    };
 
-// Chatbot logic ...
-const bubble = document.getElementById("cb-bubble");
-const win = document.getElementById("cb-window");
-const content = document.getElementById("cb-content");
+    function toggleTheme() {
+        document.body.classList.toggle("light-theme");
+        localStorage.setItem("theme", document.body.classList.contains("light-theme") ? "light" : "dark");
+    }
 
-bubble.onclick = () => { win.style.display = "flex"; startChat(); };
-document.getElementById("cb-close").onclick = () => win.style.display = "none";
+    function toggleLang() {
+        const body = document.body;
+        const newLang = body.classList.contains("lang-fr") ? "en" : "fr";
+        body.classList.remove("lang-fr", "lang-en");
+        body.classList.add("lang-" + newLang);
+        document.getElementById("lang-label").innerText = newLang.toUpperCase();
+        updateTranslations(newLang);
+        localStorage.setItem("lang", newLang);
+    }
 
-function startChat() {
-  content.innerHTML = `<p>Besoin d'aide sur le règlement ?</p>
-  <div class="cb-btn" onclick="win.style.display='none'">J'ai compris</div>
-  <div class="cb-btn" onclick="window.location='mailto:contact@chronobase.com'">Contacter un modérateur</div>`;
-}
+    function updateTranslations(lang) {
+        document.querySelectorAll("[data-key]").forEach(el => {
+            const key = el.getAttribute("data-key");
+            if (translations[lang][key]) {
+                if (el.tagName === "INPUT") el.placeholder = translations[lang][key];
+                else el.innerHTML = translations[lang][key];
+            }
+        });
+    }
 
-// Drag & Drop logic ...
-let isDragging = false, ox, oy;
-document.getElementById("cb-header").onmousedown = (e) => {
-  isDragging = true; ox = e.clientX - win.offsetLeft; oy = e.clientY - win.offsetTop;
-};
-document.onmousemove = (e) => {
-  if (isDragging) {
-    win.style.left = (e.clientX - ox) + "px"; win.style.top = (e.clientY - oy) + "px";
-    win.style.bottom = "auto"; win.style.right = "auto";
-  }
-};
-document.onmouseup = () => isDragging = false;
+    window.onscroll = function() {
+        document.getElementById("back-to-top").style.display = (window.pageYOffset > 300) ? "flex" : "none";
+    };
+
+    function scrollToTop() { window.scrollTo({top: 0, behavior: 'smooth'}); }
+
+    (function init() {
+        if (localStorage.getItem("theme") === "light") document.body.classList.add("light-theme");
+        const savedLang = localStorage.getItem("lang") || "fr";
+        if (savedLang === "en") toggleLang();
+    })();
 </script>
-
 </body>
 </html>
