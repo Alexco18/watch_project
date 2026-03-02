@@ -188,6 +188,22 @@ body.lang-en #lang-switch .switch-handle {
 .carousel-content p {
   font-size: 18px;
   max-width: 600px;
+  margin-bottom: 15px;
+}
+
+.carousel-link {
+  display: inline-block;
+  color: #f5d98c;
+  text-decoration: none;
+  font-size: 14px;
+  border-bottom: 1px solid transparent;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.carousel-link:hover {
+  border-bottom: 1px solid #f5d98c;
+  letter-spacing: 1px;
 }
 
 .carousel-btn {
@@ -379,7 +395,7 @@ body.lang-en #lang-switch .switch-handle {
 
     <nav>
       <a onclick="showView('home-view')" data-key="nav-home">Accueil</a>
-      <a href="montre.html" data-key="nav-watches">Les montres</a>
+      <a href="montres.html" data-key="nav-watches">Les montres</a>
       <a href="atelier.html" data-key="nav-workshop">L'atelier</a>
       <a href="ressources.html" data-key="nav-res">Ressources</a>
       <a href="propos.html" data-key="nav-about">À propos</a>
@@ -404,6 +420,7 @@ body.lang-en #lang-switch .switch-handle {
       <div class="carousel-content">
         <h2>La montre de la semaine</h2>
         <p>Découvrez la Rolex Submariner 1960, une icône indémodable.</p>
+        <a href="montres.html" class="carousel-link">En découvrir davantage, suivre ce lien →</a>
       </div>
     </div>
     <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1508685096489-7aac291ba59e?q=80&w=1000&auto=format&fit=crop');">
@@ -411,6 +428,7 @@ body.lang-en #lang-switch .switch-handle {
       <div class="carousel-content">
         <h2>Chiffre du moment</h2>
         <p>Plus de 500 références répertoriées dans notre base de données.</p>
+        <a href="chiffres.html" class="carousel-link">En voir plus, cliquer sur ce lien →</a>
       </div>
     </div>
     <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1547996160-81dfa63595dd?q=80&w=1000&auto=format&fit=crop');">
@@ -418,13 +436,14 @@ body.lang-en #lang-switch .switch-handle {
       <div class="carousel-content">
         <h2>Nouveautés sur le site</h2>
         <p>Mise à jour 1.2 : 12 nouvelles montres vintage ajoutées !</p>
+        <a href="versions.html" class="carousel-link">En découvrir davantage, suivre ce lien →</a>
       </div>
     </div>
     <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?q=80&w=1000&auto=format&fit=crop');">
       <div class="carousel-overlay"></div>
       <div class="carousel-content">
         <h2>Le saviez-vous ?</h2>
-        <p>Le premier mouvement automatique a été inventé en 1770 par Abraham-Louis Perrelet.</p>
+        <p id="anecdote-text">Chargement de l'anecdote...</p>
       </div>
     </div>
     <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000&auto=format&fit=crop');">
@@ -432,6 +451,7 @@ body.lang-en #lang-switch .switch-handle {
       <div class="carousel-content">
         <h2>Appel à contribution</h2>
         <p>Rejoignez la communauté et aidez-nous à enrichir l'encyclopédie.</p>
+        <a href="avis.html" class="carousel-link">Laissez un avis sur le site →</a>
       </div>
     </div>
 
@@ -463,10 +483,10 @@ body.lang-en #lang-switch .switch-handle {
     <div class="footer-section">
       <h4 data-key="f-nav">Navigation</h4>
       <a href="index.html" data-key="nav-home">Accueil</a>
-      <a href="montre.html" data-key="nav-watches">Les montres</a>
+      <a href="montres.html" data-key="nav-watches">Les montres</a>
       <a href="atelier.html" data-key="nav-workshop">L'atelier</a>
       <a href="propos.html" data-key="nav-about">À propos</a>
-      <a href="chiffre.html" data-key="f-stats">Chiffres clés</a>
+      <a href="chiffres.html" data-key="f-stats">Chiffres clés</a>
     </div>
     <div class="footer-section">
       <h4 data-key="f-contact">Contact</h4>
@@ -476,7 +496,7 @@ body.lang-en #lang-switch .switch-handle {
     </div>
     <div class="footer-section">
       <h4 data-key="f-version">Version</h4>
-      <a href="version.html" data-key="f-hist-v">Historique des versions</a>
+      <a href="versions.html" data-key="f-hist-v">Historique des versions</a>
       <a href="maj.html" data-key="f-hist-u">Historique des mises à jour</a>
       <a href="contributeurs.html" data-key="f-contrib">Nos contributeurs</a>      
     </div>
@@ -504,11 +524,41 @@ body.lang-en #lang-switch .switch-handle {
 
   <div class="footer-bottom">
     <span data-key="f-copy">© 2026 ChronoBase — Tous droits réservés</span>
-    <div class="site-version" onclick="window.location='version.html'">v1.0.0</div>
+    <div class="site-version" onclick="window.location='versions.html'">v1.0.0</div>
   </div>
 </footer>
 
 <script>
+// ---------- ANECDOTES LOGIC ----------
+const anecdotes = [
+  "Le premier mouvement automatique a été inventé en 1770 par Abraham-Louis Perrelet.",
+  "La Rolex GMT-Master a été conçue à l'origine pour les pilotes de la Pan Am.",
+  "L'Omega Speedmaster est la seule montre à avoir été portée sur la Lune.",
+  "Le mot 'Horlogerie' vient du grec 'horologion', qui signifie 'instrument pour dire l'heure'.",
+  "Patek Philippe a inventé la montre-bracelet pour femme en 1868.",
+  "Une montre à quartz est généralement plus précise qu'une montre mécanique de luxe.",
+  "Le 'Tic-Tac' d'une montre provient du bruit de l'échappement qui libère l'énergie.",
+  "La Cartier Tank a été inspirée par le design des premiers chars d'assaut Renault.",
+  "Louis Cartier a créé la première montre de pilote pour son ami Alberto Santos-Dumont.",
+  "Le record de la montre la plus chère vendue aux enchères dépasse les 30 millions de dollars.",
+  "Une montre automatique se remonte grâce aux mouvements naturels de votre poignet.",
+  "Le 'Grand Feu' est une technique d'émaillage extrêmement difficile pour les cadrans.",
+  "Le tourbillon a été inventé par Breguet pour contrer les effets de la gravité.",
+  "Le terme 'Chronographe' signifie littéralement 'écrivain de temps'.",
+  "Les premières horloges n'avaient qu'une seule aiguille : celle des heures.",
+  "Le rubis dans une montre sert à réduire la friction entre les pièces mobiles.",
+  "La lunette tournante des montres de plongée sert à calculer le temps d'immersion.",
+  "Vacheron Constantin est la plus ancienne manufacture horlogère sans interruption depuis 1755.",
+  "Le tritium était utilisé autrefois pour rendre les aiguilles lumineuses dans le noir.",
+  "Le verre saphir d'une montre est presque aussi dur qu'un diamant."
+];
+
+function setRandomAnecdote() {
+  const randomIndex = Math.floor(Math.random() * anecdotes.length);
+  const textElement = document.getElementById("anecdote-text");
+  if(textElement) textElement.textContent = anecdotes[randomIndex];
+}
+
 // ---------- CARROUSEL LOGIC ----------
 let currentSlide = 0;
 const slides = document.querySelectorAll('.carousel-slide');
@@ -643,6 +693,9 @@ function toggleTheme() {
   body.classList.add("lang-" + savedLang);
   if(label) label.textContent = savedLang.toUpperCase();
   applyTranslations(savedLang);
+
+  // Anecdote
+  setRandomAnecdote();
 })();
 </script>
 
@@ -709,9 +762,9 @@ function goSection(section) {
   };
   const links = {
     home: "index.html",
-    watches: "montre.html",
+    watches: "montres.html",
     about: "propos.html",
-    version: "version.html"
+    version: "versions.html"
   };
   content.innerHTML = `
     <p>${labels[lang][section]}</p>
