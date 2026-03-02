@@ -137,66 +137,79 @@ body.lang-en #lang-switch .switch-handle {
 }
 .card:hover{border-color:rgba(212,175,55,.35)}
 
-/* ---------------------- ENCADRÉ MISE À JOUR ---------------------- */
-#update-box {
-  max-width: 900px;
-  margin: 30px auto;
-  padding: 15px;
-  background: var(--bg-card);
+/* ---------------------- CARROUSEL PUBLICITAIRE ---------------------- */
+#carousel-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  position: relative;
+  height: 300px;
+  border-radius: 15px;
+  overflow: hidden;
   border: 1px solid var(--border-color);
-  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
   display: flex;
-  gap: 15px;
   align-items: center;
-  animation: fadeIn 0.4s ease;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
 }
 
-#update-img {
-  width: 90px;
-  height: 90px;
-  border-radius: 8px;
-  object-fit: cover;
-  border: 1px solid var(--border-color);
+.carousel-slide.active { opacity: 1; z-index: 1; }
+
+.carousel-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5); /* Contraste pour le texte */
 }
 
-#update-info h3 {
-  margin: 0;
-  font-size: 16px;
-  color: var(--text-main);
+.carousel-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 20px;
+  color: #fff;
 }
 
-#update-info p {
-  margin: 5px 0;
-  color: var(--text-secondary);
-  font-size: 14px;
-}
-
-#update-link {
+.carousel-content h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
   color: #f5d98c;
-  text-decoration: none;
-  font-weight: 500;
 }
 
-#update-link:hover {
-  text-decoration: underline;
+.carousel-content p {
+  font-size: 18px;
+  max-width: 600px;
 }
 
-#update-date {
-  margin-top: 8px;
-  font-size: 13px;
-  color: var(--text-main);
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(212,175,55,0.3);
+  color: white;
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+  z-index: 3;
+  font-size: 20px;
+  transition: 0.3s;
+  border-radius: 50%;
+  width: 50px; height: 50px;
+  display: flex; align-items: center; justify-content: center;
 }
 
-@media(max-width: 600px) {
-  #update-box {
-    flex-direction: column;
-    text-align: center;
-  }
-  #update-img {
-    width: 120px;
-    height: 120px;
-  }
-}
+.carousel-btn:hover { background: rgba(212,175,55,0.8); }
+.btn-prev { left: 20px; }
+.btn-next { right: 20px; }
 
 /* ---------------------- FOOTER COMPACT ---------------------- */
 .site-footer {
@@ -385,18 +398,45 @@ body.lang-en #lang-switch .switch-handle {
     </p>
   </div>
 
-  <div id="update-box">
-    <img src="img/update.jpg" alt="Annonce" id="update-img">
-
-    <div id="update-info">
-      <h3 data-key="up-title">Mise à jour 1.2 — Amélioration du catalogue</h3>
-      <p>
-        <span data-key="up-desc">Nous avons ajouté 12 nouvelles montres vintage et optimisé la navigation.</span>
-        <br><br>
-        <a href="maj.html" id="update-link" data-key="up-link">➜ Voir la mise à jour</a>
-      </p>
-      <p id="update-date"><strong data-key="up-date-label">Dernière mise à jour :</strong> 17/02/2026</p>
+  <div id="carousel-container">
+    <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop');">
+      <div class="carousel-overlay"></div>
+      <div class="carousel-content">
+        <h2>La montre de la semaine</h2>
+        <p>Découvrez la Rolex Submariner 1960, une icône indémodable.</p>
+      </div>
     </div>
+    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1508685096489-7aac291ba59e?q=80&w=1000&auto=format&fit=crop');">
+      <div class="carousel-overlay"></div>
+      <div class="carousel-content">
+        <h2>Chiffre du moment</h2>
+        <p>Plus de 500 références répertoriées dans notre base de données.</p>
+      </div>
+    </div>
+    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1547996160-81dfa63595dd?q=80&w=1000&auto=format&fit=crop');">
+      <div class="carousel-overlay"></div>
+      <div class="carousel-content">
+        <h2>Nouveautés sur le site</h2>
+        <p>Mise à jour 1.2 : 12 nouvelles montres vintage ajoutées !</p>
+      </div>
+    </div>
+    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?q=80&w=1000&auto=format&fit=crop');">
+      <div class="carousel-overlay"></div>
+      <div class="carousel-content">
+        <h2>Le saviez-vous ?</h2>
+        <p>Le premier mouvement automatique a été inventé en 1770 par Abraham-Louis Perrelet.</p>
+      </div>
+    </div>
+    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000&auto=format&fit=crop');">
+      <div class="carousel-overlay"></div>
+      <div class="carousel-content">
+        <h2>Appel à contribution</h2>
+        <p>Rejoignez la communauté et aidez-nous à enrichir l'encyclopédie.</p>
+      </div>
+    </div>
+
+    <button class="carousel-btn btn-prev" onclick="changeSlide(-1)">❮</button>
+    <button class="carousel-btn btn-next" onclick="changeSlide(1)">❯</button>
   </div>
 
   <section class="sections">
@@ -469,6 +509,30 @@ body.lang-en #lang-switch .switch-handle {
 </footer>
 
 <script>
+// ---------- CARROUSEL LOGIC ----------
+let currentSlide = 0;
+const slides = document.querySelectorAll('.carousel-slide');
+
+function showSlide(index) {
+  slides.forEach(s => s.classList.remove('active'));
+  if (index >= slides.length) currentSlide = 0;
+  else if (index < 0) currentSlide = slides.length - 1;
+  else currentSlide = index;
+  slides[currentSlide].classList.add('active');
+}
+
+function changeSlide(n) {
+  showSlide(currentSlide + n);
+  resetTimer();
+}
+
+let autoScroll = setInterval(() => changeSlide(1), 5000); // 5 secondes
+
+function resetTimer() {
+  clearInterval(autoScroll);
+  autoScroll = setInterval(() => changeSlide(1), 5000);
+}
+
 // ---------- TRADUCTIONS ----------
 const translations = {
     fr: {
