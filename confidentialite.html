@@ -308,41 +308,62 @@ nav a:hover{color:#f5d98c}
 </footer>
 
 <script>
-// --- DICTIONNAIRE DE TRADUCTION ---
+// --- DICTIONNAIRE DE TRADUCTION COMPLET ---
 const translations = {
   fr: {
     "nav-home": "Accueil", "nav-watches": "Les montres", "nav-res": "Ressources", "nav-about": "À propos",
     "priv-title": "Politique de Confidentialité", "priv-update": "Dernière mise à jour :",
-    "priv-p1": "Bienvenue sur notre site. La protection de vos données n'est pas qu'une obligation légale pour nous, c'est une marque de respect envers votre contribution à notre projet.",
+    "priv-p1": "Bienvenue sur notre site. La protection de vos données n'est pas qu'une obligation légale pour nous, c'est une marque de respect envers votre contribution à notre projet. Cette page vous explique en toute transparence comment nous traitons les informations que vous nous transmettez.",
     "priv-h3-1": "1. Collecte des données : l’humain avant tout",
-    "priv-p2": "Actuellement, notre site n'utilise pas d'automatisme ni d'API pour collecter vos données...",
-    "priv-l1-1": "Votre identité (nom, prénom ou pseudonyme).", "priv-l1-2": "Votre adresse e-mail.", "priv-l1-3": "Le contenu de vos propositions.",
-    "priv-h3-2": "2. Utilisation et finalité", "priv-l2-1": "Répondre à vos demandes.", "priv-l2-2": "Analyser vos propositions.",
-    "priv-h3-3": "3. Stockage et Anonymat", "priv-opt1": "Option 1 (Par défaut) :", "priv-opt2": "Option 2 (Sur demande) :",
-    "hist-title": "Historique des versions", "th-v": "Version", "th-d": "Date", "th-a": "Action",
+    "priv-p2": "Actuellement, notre site n'utilise pas d'automatisme ni d'API pour collecter vos données. La transmission d'informations se fait exclusivement par e-mail, via les boutons de contact présents sur le site. En nous contactant, vous pouvez être amenés à nous partager :",
+    "priv-l1-1": "Votre identité (nom, prénom ou pseudonyme).", "priv-l1-2": "Votre adresse e-mail.", "priv-l1-3": "Le contenu de vos propositions (avis, événements, besoins, offres).",
+    "priv-h3-2": "2. Utilisation et finalité", "priv-p3": "Les données collectées nous servent à :",
+    "priv-l2-1": "Répondre à vos demandes de documents.", "priv-l2-2": "Analyser et intégrer vos propositions d'événements ou de besoins.", "priv-l2-3": "Alimenter nos indicateurs de performance (KPI) de manière anonymisée.", "priv-l2-4": "Valoriser votre contribution dans nos onglets dédiés (si vous avez donné votre accord).",
+    "priv-h3-3": "3. Stockage et Anonymat", "priv-p4": "C'est vous qui gardez le contrôle :",
+    "priv-opt1": "Option 1 (Par défaut) :", "priv-l3-1": "Vos données sont traitées en interne pour répondre à votre besoin, puis supprimées ou anonymisées.",
+    "priv-opt2": "Option 2 (Sur demande) :", "priv-l3-2": "Nous stockons vos coordonnées uniquement si vous souhaitez être référencé comme contributeur ou être recontacté pour le suivi d'un projet.",
+    "priv-p5": "Sans action explicite de votre part pour apparaître publiquement, toutes les données publiées sur le site (statistiques, retours d’expérience) sont strictement anonymisées.",
+    "priv-h3-4": "4. Partage et sécurité", "priv-p6": "Vos e-mails sont traités en interne par notre équipe. Nous ne vendons, n'échangeons et ne transférons aucune donnée personnelle à des tiers. Bien que l'envoi d'un mail comporte toujours une part de risque inhérente à Internet, nous appliquons des protocoles de sécurité rigoureux pour protéger nos boîtes de réception et nos serveurs de stockage.",
+    "priv-h3-5": "5. Vos droits (RGPD)", "priv-p7": "Conformément à la réglementation, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour toute demande (par exemple : 'Je ne souhaite plus apparaître dans la liste des contributeurs'), un simple mail suffit. Nous traiterons votre demande dans les plus brefs délais.",
+    "priv-h3-6": "6. Évolution du document", "priv-p8": "Ce site évolue. Si nous mettons en place une API ou de nouveaux outils de collecte, cette page sera mise à jour. Vous trouverez ci-dessous un lien vers la version officielle signée (PDF) de ce document, ainsi que l'historique des versions précédentes pour consulter nos évolutions en toute clarté.",
+    "hist-title": "Historique des versions", "th-v": "Version", "th-d": "Date", "th-a": "Action", "v-curr": "Version Actuelle (v1.2)", "v-init": "Version Initiale (v1.0)",
     "btn-dl": "📥 Télécharger PDF", "btn-arch": "📥 Archive PDF", "f-copy": "© 2026 ChronoBase — Tous droits réservés",
-    "f-nav": "Navigation", "f-contact": "Contact", "f-legal": "Légal", "f-priv": "Politique de confidentialité"
-    // Ajoutez ici les autres clés manquantes du footer si nécessaire
+    "f-nav": "Navigation", "f-stats": "Chiffres clés", "f-contact": "Contact", "f-mail": "Envoyer un email", "f-form": "Formulaire (à venir)", "f-social": "Nos réseaux sociaux",
+    "f-version": "Version", "f-hist-v": "Historique des versions", "f-hist-u": "Historique des mises à jour", "f-contrib": "Nos contributeurs",
+    "f-res": "Ressources horlogères", "f-map": "Carte des horlogers", "f-events": "Événements & bourses", "f-equip": "Équipements & achats",
+    "f-legal": "Légal", "f-mentions": "Mentions légales", "f-cgu": "Conditions d’utilisation", "f-priv": "Politique de confidentialité",
+    "f-reg": "Règlements", "f-reg-s": "Règlement du site", "f-reg-n": "Règlement des réseaux sociaux", "f-cookies": "Gestion des cookies"
   },
   en: {
     "nav-home": "Home", "nav-watches": "Watches", "nav-res": "Resources", "nav-about": "About",
     "priv-title": "Privacy Policy", "priv-update": "Last updated:",
-    "priv-p1": "Welcome to our site. Protecting your data is not just a legal obligation for us, it is a mark of respect for your contribution to our project.",
-    "priv-h3-1": "1. Data Collection: Humans first",
-    "priv-p2": "Currently, our site does not use any automation or API to collect your data. Data is shared exclusively via email.",
-    "priv-l1-1": "Your identity (name or pseudonym).", "priv-l1-2": "Your email address.", "priv-l1-3": "Content of your proposals.",
-    "priv-h3-2": "2. Use and Purpose", "priv-l2-1": "Respond to your requests.", "priv-l2-2": "Analyze your suggestions.",
-    "priv-h3-3": "3. Storage and Anonymity", "priv-opt1": "Option 1 (Default):", "priv-opt2": "Option 2 (On request):",
-    "hist-title": "Version History", "th-v": "Version", "th-d": "Date", "th-a": "Action",
+    "priv-p1": "Welcome to our site. Protecting your data is not just a legal obligation for us, it is a mark of respect for your contribution to our project. This page explains transparently how we process the information you send to us.",
+    "priv-h3-1": "1. Data Collection: Humans First",
+    "priv-p2": "Currently, our site does not use any automation or API to collect your data. Information transmission is exclusively done by email via the contact buttons on the site. By contacting us, you may share:",
+    "priv-l1-1": "Your identity (first name, last name or pseudonym).", "priv-l1-2": "Your email address.", "priv-l1-3": "The content of your proposals (feedback, events, needs, offers).",
+    "priv-h3-2": "2. Use and Purpose", "priv-p3": "The data collected is used to:",
+    "priv-l2-1": "Respond to your document requests.", "priv-l2-2": "Analyze and integrate your event or needs proposals.", "priv-l2-3": "Supply our performance indicators (KPIs) in an anonymized way.", "priv-l2-4": "Highlight your contribution in our dedicated tabs (if you have given your consent).",
+    "priv-h3-3": "3. Storage and Anonymity", "priv-p4": "You stay in control:",
+    "priv-opt1": "Option 1 (Default):", "priv-l3-1": "Your data is processed internally to meet your needs, then deleted or anonymized.",
+    "priv-opt2": "Option 2 (On request):", "priv-l3-2": "We store your contact details only if you wish to be listed as a contributor or be contacted for project follow-up.",
+    "priv-p5": "Without explicit action from you to appear publicly, all data published on the site (statistics, feedback) is strictly anonymized.",
+    "priv-h3-4": "4. Sharing and Security", "priv-p6": "Your emails are processed internally by our team. We do not sell, exchange, or transfer any personal data to third parties. Although sending an email always carries a risk inherent to the Internet, we apply rigorous security protocols to protect our inboxes and storage servers.",
+    "priv-h3-5": "5. Your Rights (GDPR)", "priv-p7": "In accordance with regulations, you have a right of access, rectification, and deletion of your data. For any request (e.g., 'I no longer wish to appear in the contributor list'), a simple email is enough. We will process your request as soon as possible.",
+    "priv-h3-6": "6. Evolution of the Document", "priv-p8": "This site is evolving. If we implement an API or new collection tools, this page will be updated. Below you will find a link to the official signed version (PDF) of this document, as well as the history of previous versions.",
+    "hist-title": "Version History", "th-v": "Version", "th-d": "Date", "th-a": "Action", "v-curr": "Current Version (v1.2)", "v-init": "Initial Version (v1.0)",
     "btn-dl": "📥 Download PDF", "btn-arch": "📥 Archive PDF", "f-copy": "© 2026 ChronoBase — All rights reserved",
-    "f-nav": "Navigation", "f-contact": "Contact", "f-legal": "Legal", "f-priv": "Privacy Policy"
+    "f-nav": "Navigation", "f-stats": "Key Figures", "f-contact": "Contact", "f-mail": "Send an email", "f-form": "Form (coming soon)", "f-social": "Our Social Media",
+    "f-version": "Version", "f-hist-v": "Version History", "f-hist-u": "Update History", "f-contrib": "Our Contributors",
+    "f-res": "Watch Resources", "f-map": "Watchmakers Map", "f-events": "Events & Fairs", "f-equip": "Equipment & Purchases",
+    "f-legal": "Legal", "f-mentions": "Legal Notice", "f-cgu": "Terms of Use", "f-priv": "Privacy Policy",
+    "f-reg": "Regulations", "f-reg-s": "Site Rules", "f-reg-n": "Social Media Rules", "f-cookies": "Cookies Management"
   }
 };
 
 function updateContent(lang) {
   document.querySelectorAll('[data-key]').forEach(el => {
     const key = el.getAttribute('data-key');
-    if (translations[lang][key]) {
+    if (translations[lang] && translations[lang][key]) {
       el.textContent = translations[lang][key];
     }
   });
@@ -381,7 +402,10 @@ function toggleLang() {
 // Assistant Chatbot
 const bubble = document.createElement("div");
 bubble.id = "cb-bubble"; bubble.innerHTML = "💬"; document.body.appendChild(bubble);
-bubble.onclick = () => alert("Assistant ChronoBase activé.");
+bubble.onclick = () => {
+    const currentLang = document.body.classList.contains("lang-fr") ? "fr" : "en";
+    alert(currentLang === "fr" ? "Assistant ChronoBase activé." : "ChronoBase Assistant activated.");
+};
 </script>
 
 </body>
