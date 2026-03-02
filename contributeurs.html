@@ -39,6 +39,13 @@
         .score-val { font-weight: 500; color: #f5d98c; }
         .update-note { font-size: 12px; font-style: italic; margin-top: 10px; text-align: right; opacity: 0.7; }
 
+        /* Pagination Style */
+        .pagination { display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: 25px; }
+        .pagination button { background: none; border: 1px solid var(--border-color); color: var(--text-main); padding: 5px 12px; cursor: pointer; border-radius: 4px; transition: 0.3s; }
+        .pagination button:hover:not(:disabled) { border-color: #f5d98c; color: #f5d98c; }
+        .pagination button:disabled { opacity: 0.3; cursor: not-allowed; }
+        #page-info { font-weight: 500; }
+
         #back-to-top {
             position: fixed; bottom: 30px; right: 30px; width: 45px; height: 45px;
             background: var(--bg-header); border: 1px solid var(--text-main);
@@ -47,17 +54,13 @@
             font-size: 20px; z-index: 100; transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
-
-        /* --- Nouveau Footer (Identique à Confidentialité) --- */
         .site-footer{background:var(--bg-footer);border-top:1px solid var(--border-color);padding:25px 20px 15px;margin-top:40px;color:var(--text-main);font-size:14px}
         .footer-content{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px}
         .footer-section{display:flex;flex-direction:column;gap:4px}
         .footer-section h4{margin-bottom:6px;color:#f5d98c;font-size:13px}
         .footer-section a{color:var(--text-main);text-decoration:none;font-size:12px}
-        .footer-section a:hover{color:#f5d98c}
         .footer-legal{margin-top:10px;padding-top:10px;border-top:1px solid var(--border-color)}
         .footer-bottom{text-align:center;margin-top:15px;font-size:12px;opacity:0.7}
-        .site-version{font-size:10px;margin-top:5px}
     </style>
 </head>
 <body class="lang-fr">
@@ -113,13 +116,15 @@
                     </tr>
                 </thead>
                 <tbody id="tableBody">
-                    <tr><td><span class="rank-badge">1</span></td><td>OmegaPassion</td><td class="score-val">125</td></tr>
-                    <tr><td><span class="rank-badge">2</span></td><td>WatchMaker_75</td><td class="score-val">98</td></tr>
-                    <tr><td><span class="rank-badge">3</span></td><td>HorloFan</td><td class="score-val">84</td></tr>
-                    <tr><td><span class="rank-badge">4</span></td><td>TimeKeeper</td><td class="score-val">56</td></tr>
-                    <tr><td><span class="rank-badge">5</span></td><td>VintageLover</td><td class="score-val">42</td></tr>
-                </tbody>
+                    </tbody>
             </table>
+
+            <div class="pagination">
+                <button onclick="prevPage()" id="btn-prev">&lt;&lt;</button>
+                <span id="page-info">1</span>
+                <button onclick="nextPage()" id="btn-next">&gt;&gt;</button>
+            </div>
+
             <p class="update-note" data-key="update-note">Dernière mise à jour : Dimanche dernier à 23h59.</p>
         </div>
 
@@ -139,48 +144,44 @@
             <a href="index.html" data-key="nav-home">Accueil</a>
             <a href="montre.html" data-key="nav-watches">Les montres</a>
             <a href="propos.html" data-key="nav-about">À propos</a>
-            <a href="chiffre.html" data-key="f-stats">Chiffres clés</a>
+            <a href="contributeurs.html" data-key="f-contrib">Contributeurs</a>
         </div>
         <div class="footer-section">
             <h4 data-key="f-contact">Contact</h4>
             <a href="mailto:contact@chronobase.com" data-key="f-mail">Email</a>
             <a href="#" data-key="f-form">Formulaire</a>
-            <a href="reseaux.html" data-key="f-social">Réseaux</a>
         </div>
-        <div class="footer-section">
-            <h4 data-key="f-version">Version</h4>
-            <a href="version.html" data-key="f-hist-v">Historique</a>
-            <a href="maj.html" data-key="f-hist-u">Mises à jour</a>
-            <a href="contributeurs.html" data-key="f-contrib">Contributeurs</a>
-        </div>
-        <div class="footer-section">
-            <h4 data-key="f-res">Ressources</h4>
-            <a href="horlogers.html" data-key="f-map">Carte</a>
-            <a href="evenements.html" data-key="f-events">Événements</a>
-            <a href="achats.html" data-key="f-equip">Achats</a>
-        </div>
-    </div>
-    <div class="footer-content footer-legal">
         <div class="footer-section">
             <h4 data-key="f-legal">Légal</h4>
             <a href="mentions.html" data-key="f-mentions">Mentions</a>
             <a href="cgu.html" data-key="f-cgu">CGU</a>
-            <a href="confidentialite.html" data-key="f-priv">Confidentialité</a>
-        </div>
-        <div class="footer-section">
-            <h4 data-key="f-reg">Règlements</h4>
-            <a href="reglement-site.html" data-key="f-reg-s">Site</a>
-            <a href="reglement-reseaux.html" data-key="f-reg-n">Réseaux</a>
-            <a href="cookies.html" data-key="f-cookies">Cookies</a>
         </div>
     </div>
-    <div class="footer-bottom">
-        <span data-key="f-copy">© 2026 ChronoBase</span>
-        <div class="site-version">v1.0.0</div>
-    </div>
+    <div class="footer-bottom"><span data-key="f-copy">© 2026 ChronoBase</span></div>
 </footer>
 
 <script>
+    // --- Données de test (24 pseudos) ---
+    let contributors = [
+        {pseudo: "OmegaPassion", score: 125}, {pseudo: "WatchMaker_75", score: 98},
+        {pseudo: "HorloFan", score: 84}, {pseudo: "TimeKeeper", score: 56},
+        {pseudo: "VintageLover", score: 42}, {pseudo: "RolexKing", score: 110},
+        {pseudo: "Zenith_Guy", score: 35}, {pseudo: "PatekCollector", score: 210},
+        {pseudo: "DialMaster", score: 77}, {pseudo: "BezelExplorer", score: 23},
+        {pseudo: "TickingMind", score: 89}, {pseudo: "ChronoSeeker", score: 45},
+        {pseudo: "LumeLover", score: 12}, {pseudo: "SteelBracelet", score: 67},
+        {pseudo: "GoldMovement", score: 154}, {pseudo: "SwissPrecision", score: 92},
+        {pseudo: "NanoSecond", score: 8}, {pseudo: "LeatherStrap", score: 31},
+        {pseudo: "MoonWatch_88", score: 115}, {pseudo: "HackingSeconds", score: 50},
+        {pseudo: "TourbillonFan", score: 180}, {pseudo: "CalendarMan", score: 29},
+        {pseudo: "SpringDrive", score: 73}, {pseudo: "QuartzCrisis", score: 19}
+    ];
+
+    // --- Paramètres Pagination ---
+    let currentPage = 1;
+    const recordsPerPage = 10;
+    let filteredData = [...contributors]; // Copie pour recherche/tri
+
     const translations = {
         fr: {
             "nav-home": "Accueil", "nav-watches": "Les montres", "nav-res": "Ressources", "nav-about": "À propos",
@@ -191,7 +192,7 @@
             "search-placeholder": "Rechercher un pseudo...", "btn-sort": "Trier par score (Min/Max)",
             "th-rank": "Rang", "th-pseudo": "Pseudo", "th-score": "Score", "update-note": "Dernière mise à jour : Dimanche dernier à 23h59.",
             "card3-title": "Règlement & Éthique", "card3-p1": "Tout comportement inapproprié, vulgarité ou non-respect des autres membres entraînera une déduction de points ou une exclusion définitive du classement.",
-            "f-nav": "Navigation", "f-stats": "Chiffres clés", "f-contact": "Contact", "f-mail": "Envoyer un email", "f-form": "Formulaire (à venir)", "f-social": "Nos réseaux sociaux", "f-version": "Version", "f-hist-v": "Historique des versions", "f-hist-u": "Historique des mises à jour", "f-contrib": "Nos contributeurs", "f-res": "Ressources horlogères", "f-map": "Carte des horlogers", "f-events": "Événements & bourses", "f-equip": "Équipements & achats", "f-legal": "Légal", "f-mentions": "Mentions légales", "f-cgu": "Conditions d’utilisation", "f-priv": "Politique de confidentialité", "f-reg": "Règlements", "f-reg-s": "Règlement du site", "f-reg-n": "Règlement des réseaux sociaux", "f-cookies": "Gestion des cookies", "f-copy": "© 2026 ChronoBase — Tous droits réservés"
+            "f-nav": "Navigation", "f-contrib": "Contributeurs", "f-contact": "Contact", "f-mail": "Email", "f-form": "Formulaire", "f-legal": "Légal", "f-mentions": "Mentions", "f-cgu": "CGU", "f-copy": "© 2026 ChronoBase"
         },
         en: {
             "nav-home": "Home", "nav-watches": "Watches", "nav-res": "Resources", "nav-about": "About",
@@ -202,9 +203,49 @@
             "search-placeholder": "Search username...", "btn-sort": "Sort by score (Min/Max)",
             "th-rank": "Rank", "th-pseudo": "Username", "th-score": "Score", "update-note": "Last update: Last Sunday at 11:59 PM.",
             "card3-title": "Rules & Ethics", "card3-p1": "Any inappropriate behavior, vulgarity, or lack of respect for other members will result in a deduction of points or permanent exclusion.",
-            "f-nav": "Navigation", "f-stats": "Key figures", "f-contact": "Contact", "f-mail": "Send an email", "f-form": "Form (coming soon)", "f-social": "Our social networks", "f-version": "Version", "f-hist-v": "Version history", "f-hist-u": "Update history", "f-contrib": "Our contributors", "f-res": "Watch resources", "f-map": "Watchmakers map", "f-events": "Events & fairs", "f-equip": "Equipment & purchases", "f-legal": "Legal", "f-mentions": "Legal notice", "f-cgu": "Terms of use", "f-priv": "Privacy policy", "f-reg": "Regulations", "f-reg-s": "Site regulations", "f-reg-n": "Social media regulations", "f-cookies": "Cookie management", "f-copy": "© 2026 ChronoBase — All rights reserved"
+            "f-nav": "Navigation", "f-contrib": "Contributors", "f-contact": "Contact", "f-mail": "Email", "f-form": "Form", "f-legal": "Legal", "f-mentions": "Legal Notice", "f-cgu": "Terms of Use", "f-copy": "© 2026 ChronoBase"
         }
     };
+
+    function displayTable() {
+        const tableBody = document.getElementById("tableBody");
+        tableBody.innerHTML = "";
+        
+        // Calcul des index
+        let start = (currentPage - 1) * recordsPerPage;
+        let end = start + recordsPerPage;
+        let paginatedItems = filteredData.slice(start, end);
+
+        paginatedItems.forEach((item, index) => {
+            let row = `<tr>
+                <td><span class="rank-badge">${start + index + 1}</span></td>
+                <td>${item.pseudo}</td>
+                <td class="score-val">${item.score}</td>
+            </tr>`;
+            tableBody.innerHTML += row;
+        });
+
+        document.getElementById("page-info").textContent = currentPage;
+        document.getElementById("btn-prev").disabled = (currentPage === 1);
+        document.getElementById("btn-next").disabled = (currentPage === Math.ceil(filteredData.length / recordsPerPage)) || filteredData.length === 0;
+    }
+
+    function prevPage() { if (currentPage > 1) { currentPage--; displayTable(); } }
+    function nextPage() { if (currentPage < Math.ceil(filteredData.length / recordsPerPage)) { currentPage++; displayTable(); } }
+
+    function filterTable() {
+        const query = document.getElementById("searchInput").value.toUpperCase();
+        filteredData = contributors.filter(item => item.pseudo.toUpperCase().includes(query));
+        currentPage = 1;
+        displayTable();
+    }
+
+    let sortAsc = false;
+    function sortTable() {
+        sortAsc = !sortAsc;
+        filteredData.sort((a, b) => sortAsc ? a.score - b.score : b.score - a.score);
+        displayTable();
+    }
 
     function updateContent(lang) {
         document.querySelectorAll("[data-key]").forEach(el => {
@@ -233,34 +274,6 @@
         localStorage.setItem("theme", document.body.classList.contains("light-theme") ? "light" : "dark");
     }
 
-    // --- Logique de recherche & tri ---
-    function filterTable() {
-        const input = document.getElementById("searchInput");
-        const filter = input.value.toUpperCase();
-        const table = document.getElementById("tableBody");
-        const tr = table.getElementsByTagName("tr");
-        for (let i = 0; i < tr.length; i++) {
-            let td = tr[i].getElementsByTagName("td")[1];
-            if (td) {
-                let txtValue = td.textContent || td.innerText;
-                tr[i].style.display = txtValue.toUpperCase().indexOf(filter) > -1 ? "" : "none";
-            }
-        }
-    }
-
-    let sortAsc = false;
-    function sortTable() {
-        const table = document.getElementById("tableBody");
-        let rows = Array.from(table.rows);
-        sortAsc = !sortAsc;
-        rows.sort((a, b) => {
-            let valA = parseInt(a.cells[2].innerText);
-            let valB = parseInt(b.cells[2].innerText);
-            return sortAsc ? valA - valB : valB - valA;
-        });
-        rows.forEach(row => table.appendChild(row));
-    }
-
     const btn = document.getElementById("back-to-top");
     window.onscroll = function() {
         if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) btn.style.display = "flex";
@@ -273,9 +286,15 @@
         if(localStorage.getItem("theme") === "light") document.body.classList.add("light-theme");
         const savedLang = localStorage.getItem("lang") || "fr";
         document.body.classList.remove("lang-fr", "lang-en");
-        document.body.classList.add("lang-" + savedLang);
+        bodyClass = "lang-" + savedLang;
+        document.body.classList.add(bodyClass);
         document.getElementById("lang-label").textContent = savedLang.toUpperCase();
         updateContent(savedLang);
+        
+        // Tri initial par score décroissant
+        contributors.sort((a, b) => b.score - a.score);
+        filteredData = [...contributors];
+        displayTable();
     })();
 </script>
 
