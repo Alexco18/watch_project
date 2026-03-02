@@ -100,44 +100,38 @@ nav a:hover{color:#f5d98c}
 .card ul { padding-left: 20px; }
 .card li { margin-bottom: 10px; color: var(--text-secondary); }
 
-/* ---------------------- VERSION HISTORY TABLE ---------------------- */
-.version-history {
-  margin-top: 50px;
+/* ---------------------- ARCHIVES SECTION ---------------------- */
+.version-archives {
+  margin-top: 40px;
   border-top: 1px solid var(--border-color);
   padding-top: 30px;
 }
 .version-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-top: 15px;
   font-size: 14px;
 }
 .version-table th {
   text-align: left;
   color: #f5d98c;
-  padding: 12px;
+  padding: 10px;
   border-bottom: 1px solid var(--border-color);
 }
 .version-table td {
-  padding: 15px 12px;
+  padding: 12px 10px;
   border-bottom: 1px solid rgba(212,175,55,0.1);
   color: var(--text-secondary);
 }
 .btn-download {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
   color: var(--text-main);
   text-decoration: none;
-  border: 1px solid var(--border-color);
-  padding: 5px 12px;
-  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   transition: 0.3s;
 }
-.btn-download:hover {
-  background: var(--text-main);
-  color: var(--bg-header);
-}
+.btn-download:hover { color: #f5d98c; transform: translateX(5px); }
 
 /* ---------------------- FOOTER ---------------------- */
 .site-footer {
@@ -162,6 +156,22 @@ nav a:hover{color:#f5d98c}
   display: flex; justify-content: center; align-items: center; font-size: 26px;
   cursor: pointer; z-index: 9999; box-shadow: 0 0 10px rgba(0,0,0,0.4);
 }
+#cb-window {
+  position: fixed; bottom: 95px; right: 25px; width: 200px; height: 260px;
+  background: var(--bg-header); border: 1px solid var(--border-color);
+  border-radius: 10px; display: none; flex-direction: column; z-index: 9999;
+}
+#cb-header {
+  padding: 8px; background: var(--bg-card); color: var(--text-main);
+  font-size: 13px; border-bottom: 1px solid var(--border-color);
+  display: flex; justify-content: space-between; cursor: grab;
+}
+#cb-content { padding: 10px; overflow-y: auto; font-size: 13px; }
+.cb-btn {
+  background: var(--bg-card); padding: 6px; margin-top: 8px;
+  border-radius: 5px; cursor: pointer; text-align: center; font-size: 12px;
+  border: 1px solid var(--border-color);
+}
 </style>
 </head>
 <body class="lang-fr">
@@ -178,10 +188,10 @@ nav a:hover{color:#f5d98c}
       </div>
     </div>
     <nav>
-      <a href="index.html">Accueil</a>
-      <a href="montre.html">Les montres</a>
-      <a href="ressources.html">Ressources</a>
-      <a href="propos.html">À propos</a>
+      <a href="index.html" data-key="nav-home">Accueil</a>
+      <a href="montre.html" data-key="nav-watches">Les montres</a>
+      <a href="ressources.html" data-key="nav-res">Ressources</a>
+      <a href="propos.html" data-key="nav-about">À propos</a>
     </nav>
   </div>
 </header>
@@ -197,45 +207,69 @@ nav a:hover{color:#f5d98c}
       <p>Bienvenue sur notre site. La protection de vos données n'est pas qu'une obligation légale pour nous, c'est une marque de respect envers votre contribution à notre projet. Cette page vous explique en toute transparence comment nous traitons les informations que vous nous transmettez.</p>
 
       <h3>1. Collecte des données : l’humain avant tout</h3>
-      <p>Actuellement, notre site n'utilise pas d'automatisme ni d'API pour collecter vos données. La transmission d'informations se fait exclusivement par e-mail...</p>
-      
+      <p>Actuellement, notre site n'utilise pas d'automatisme ni d'API pour collecter vos données. La transmission d'informations se fait exclusivement par e-mail, via les boutons de contact présents sur le site. En nous contactant, vous pouvez être amenés à nous partager :</p>
+      <ul>
+        <li>Votre identité (nom, prénom ou pseudonyme).</li>
+        <li>Votre adresse e-mail.</li>
+        <li>Le contenu de vos propositions (avis, événements, besoins, offres).</li>
+      </ul>
+
+      <h3>2. Utilisation et finalité</h3>
+      <p>Les données collectées nous servent à :</p>
+      <ul>
+        <li>Répondre à vos demandes de documents.</li>
+        <li>Analyser et intégrer vos propositions d'événements ou de besoins.</li>
+        <li>Alimenter nos indicateurs de performance (KPI) de manière anonymisée.</li>
+        <li>Valoriser votre contribution dans nos onglets dédiés (si vous avez donné votre accord).</li>
+      </ul>
+
+      <h3>3. Stockage et Anonymat</h3>
+      <p>C'est vous qui gardez le contrôle :</p>
+      <ul>
+        <li><strong>Option 1 (Par défaut) :</strong> Vos données sont traitées en interne pour répondre à votre besoin, puis supprimées ou anonymisées.</li>
+        <li><strong>Option 2 (Sur demande) :</strong> Nous stockons vos coordonnées uniquement si vous souhaitez être référencé comme contributeur ou être recontacté pour le suivi d'un projet.</li>
+      </ul>
+      <p>Sans action explicite de votre part pour apparaître publiquement, toutes les données publiées sur le site (statistiques, retours d’expérience) sont strictement anonymisées.</p>
+
+      <h3>4. Partage et sécurité</h3>
+      <p>Vos e-mails sont traités en interne par notre équipe. Nous ne vendons, n'échangeons et ne transférons aucune donnée personnelle à des tiers. Bien que l'envoi d'un mail comporte toujours une part de risque inhérente à Internet, nous appliquons des protocoles de sécurité rigoureux pour protéger nos boîtes de réception et nos serveurs de stockage.</p>
+
+      <h3>5. Vos droits (RGPD)</h3>
+      <p>Conformément à la réglementation, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour toute demande (par exemple : "Je ne souhaite plus apparaître dans la liste des contributeurs"), un simple mail suffit. Nous traiterons votre demande dans les plus brefs délais.</p>
+
       <h3>6. Évolution du document</h3>
-      <p>Ce site évolue. Si nous mettons en place une API ou de nouveaux outils de collecte, cette page sera mise à jour. Vous trouverez ci-dessous l'historique des versions pour consulter nos évolutions en toute clarté.</p>
-      
-      <div class="version-history">
-        <h3 style="margin-top:0">Historique des versions</h3>
+      <p>Ce site évolue. Si nous mettons en place une API ou de nouveaux outils de collecte, cette page sera mise à jour. Vous trouverez ci-dessous un lien vers la version officielle signée (PDF) de ce document, ainsi que l'historique des versions précédentes pour consulter nos évolutions en toute clarté.</p>
+
+      <div class="version-archives">
+        <h3 class="gold-text">Historique des versions</h3>
         <table class="version-table">
           <thead>
             <tr>
               <th>Version</th>
               <th>Date</th>
-              <th>Changements majeurs</th>
-              <th>Document</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><strong>v1.1.0 (Actuelle)</strong></td>
-              <td>02/03/2026</td>
-              <td>Ajout de la section historique et lien PDF.</td>
-              <td><a href="docs/politique-v1.1.0.pdf" class="btn-download" download>💾 PDF</a></td>
+              <td>Version Actuelle (v1.2)</td>
+              <td>02 Mars 2026</td>
+              <td><a href="docs/politique-confidentialite-v1.2.pdf" class="btn-download" download>📥 Télécharger PDF</a></td>
             </tr>
             <tr>
-              <td>v1.0.1</td>
-              <td>15/01/2026</td>
-              <td>Précisions sur le stockage des e-mails.</td>
-              <td><a href="docs/politique-v1.0.1.pdf" class="btn-download" download>💾 PDF</a></td>
+              <td>Version 1.1</td>
+              <td>15 Janvier 2026</td>
+              <td><a href="docs/politique-confidentialite-v1.1.pdf" class="btn-download" download>📥 Archive PDF</a></td>
             </tr>
             <tr>
-              <td>v1.0.0</td>
-              <td>01/12/2025</td>
-              <td>Version initiale.</td>
-              <td><a href="docs/politique-v1.0.0.pdf" class="btn-download" download>💾 PDF</a></td>
+              <td>Version Initial (v1.0)</td>
+              <td>01 Décembre 2025</td>
+              <td><a href="docs/politique-confidentialite-v1.0.pdf" class="btn-download" download>📥 Archive PDF</a></td>
             </tr>
           </tbody>
         </table>
       </div>
-    </div>
+      </div>
   </div>
 </main>
 
@@ -279,11 +313,12 @@ nav a:hover{color:#f5d98c}
 
   <div class="footer-bottom">
     <span>© 2026 ChronoBase — Tous droits réservés</span>
-    <div class="site-version">v1.1.0</div>
+    <div class="site-version">v1.0.0</div>
   </div>
 </footer>
 
 <script>
+// Logique de thème et langue identiques
 function toggleTheme() {
   document.body.classList.toggle("light-theme");
   localStorage.setItem("theme", document.body.classList.contains("light-theme") ? "light" : "dark");
@@ -299,6 +334,7 @@ function toggleLang() {
   localStorage.setItem("lang", newLang);
 }
 
+// Initialisation
 (function() {
   if (localStorage.getItem("theme") === "light") document.body.classList.add("light-theme");
   const savedLang = localStorage.getItem("lang") || "fr";
@@ -306,6 +342,7 @@ function toggleLang() {
   document.getElementById("lang-label").textContent = savedLang.toUpperCase();
 })();
 
+// Assistant Chatbot (Minimal pour l'exemple)
 const bubble = document.createElement("div");
 bubble.id = "cb-bubble"; bubble.innerHTML = "💬"; document.body.appendChild(bubble);
 bubble.onclick = () => alert("Assistant ChronoBase activé.");
