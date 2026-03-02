@@ -1,552 +1,261 @@
 <!DOCTYPE html>
-
 <html lang="fr">
-
 <head>
-
 <meta charset="UTF-8">
-
 <link rel="icon" type="image/png" href="favicon.jpg">
-
 <title>Confidentialité - ChronoBase</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
-
-
 <style>
-
 /* ---------------------- VARIABLES ---------------------- */
-
 :root {
-
   --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951);
-
   --bg-main: radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
-
   --bg-header: #0b0b0b;
-
   --bg-footer: #0b0b0b;
-
   --bg-card: linear-gradient(180deg,#111,#0c0c0c);
-
   --text-main: #d4af37;
-
   --text-secondary: #c1a96b;
-
   --border-color: rgba(212,175,55,0.2);
-
 }
-
-
 
 .light-theme {
-
   --bg-main: #ffffff;
-
   --bg-header: #ffffff;
-
   --bg-footer: #ffffff;
-
   --bg-card: #f7f7f7;
-
   --text-main: #000000;
-
   --text-secondary: #444444;
-
   --border-color: rgba(0,0,0,0.2);
-
 }
-
-
 
 /* ---------------------- GLOBAL ---------------------- */
-
 body{
-
   margin:0;padding:0;font-family:'Montserrat',sans-serif;
-
   background:var(--bg-main);
-
   color:var(--text-main);
-
   font-weight:300;overflow-x:hidden;
-
 }
-
-
 
 .gold-text{
-
   background:var(--gold-gradient);
-
   -webkit-background-clip:text;color:transparent;
-
   animation:shine 6s infinite linear;background-size:200%;
-
 }
-
 @keyframes shine{0%{background-position:0%}100%{background-position:200%}}
 
-
-
 /* ---------------------- HEADER ---------------------- */
-
 header{
-
   width:100%;padding:12px 0;border-bottom:1px solid var(--border-color);
-
   background:var(--bg-header);position:fixed;top:0;left:0;z-index:10;
-
 }
-
 .header-container{
-
   max-width:1200px;margin:auto;display:flex;justify-content:space-between;
-
   align-items:center;padding:0 20px;
-
 }
-
 .header-left { display: flex; align-items: center; gap: 15px; }
 
-
-
 nav a{
-
   margin-left:30px;text-decoration:none;color:var(--text-main);
-
   font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;
-
 }
-
 nav a:hover{color:#f5d98c}
 
-
-
 /* ---------------------- SWITCHES ---------------------- */
-
 #theme-switch, #lang-switch {
-
   width: 50px; height: 26px; background: var(--border-color);
-
   border-radius: 20px; position: relative; cursor: pointer;
-
   transition: background 0.3s; display: flex; align-items: center; padding: 3px;
-
 }
-
 .switch-handle {
-
   width: 20px; height: 20px; background: var(--text-main);
-
   border-radius: 50%; transition: transform 0.3s;
-
   display: flex; justify-content: center; align-items: center;
-
   font-size: 10px; font-weight: bold; color: var(--bg-header);
-
 }
-
 .light-theme #theme-switch .switch-handle { transform: translateX(24px); background: #000; }
-
 .lang-en #lang-switch .switch-handle { transform: translateX(24px); }
 
-
-
 /* ---------------------- VUES / CONTENT ---------------------- */
-
 .view{min-height:100vh;padding-top:120px; opacity:1; transition:.5s}
-
 .hero{text-align:center;padding:0 20px}
-
 .hero h1{font-size:45px;font-weight:300; margin-bottom: 10px;}
-
 .hero p{color:var(--text-secondary);font-size:16px;max-width:800px;margin:10px auto}
 
-
-
 .legal-content {
-
   max-width: 900px;
-
   margin: 40px auto;
-
   padding: 0 20px 80px;
-
   line-height: 1.6;
-
 }
-
 .card {
-
   background: var(--bg-card);
-
   border: 1px solid var(--border-color);
-
   padding: 40px;
-
   border-radius: 12px;
-
   margin-bottom: 30px;
-
 }
-
 .card h2 { color: #f5d98c; font-size: 22px; margin-top: 0; }
-
 .card h3 { color: #f5d98c; font-size: 18px; margin-top: 25px; }
-
 .card ul { padding-left: 20px; }
-
 .card li { margin-bottom: 10px; color: var(--text-secondary); }
 
-
-
 /* ---------------------- ARCHIVES SECTION ---------------------- */
-
 .version-archives {
-
   margin-top: 40px;
-
   border-top: 1px solid var(--border-color);
-
   padding-top: 30px;
-
 }
-
 .version-table {
-
   width: 100%;
-
   border-collapse: collapse;
-
   margin-top: 15px;
-
   font-size: 14px;
-
 }
-
 .version-table th {
-
   text-align: left;
-
   color: #f5d98c;
-
   padding: 10px;
-
   border-bottom: 1px solid var(--border-color);
-
 }
-
 .version-table td {
-
   padding: 12px 10px;
-
   border-bottom: 1px solid rgba(212,175,55,0.1);
-
   color: var(--text-secondary);
-
 }
-
 .btn-download {
-
   color: var(--text-main);
-
   text-decoration: none;
-
   display: inline-flex;
-
   align-items: center;
-
   gap: 5px;
-
   transition: 0.3s;
-
 }
-
 .btn-download:hover { color: #f5d98c; transform: translateX(5px); }
 
-
-
 /* ---------------------- FOOTER ---------------------- */
-
 .site-footer {
-
   background: var(--bg-footer); border-top: 1px solid var(--border-color);
-
   padding: 25px 20px 15px; margin-top: 40px; color: var(--text-main); font-size: 14px;
-
 }
-
 .footer-content {
-
   max-width: 1200px; margin: auto; display: grid;
-
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px;
-
 }
-
 .footer-section { display: flex; flex-direction: column; gap: 4px; }
-
 .footer-section h4 { margin-bottom: 6px; color: #f5d98c; font-size: 13px; }
-
 .footer-section a { color: var(--text-main); text-decoration: none; font-size: 12px; }
-
 .footer-section a:hover { color: #f5d98c; }
-
 .footer-legal { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-color); }
-
 .footer-bottom { text-align: center; margin-top: 15px; font-size: 12px; opacity: 0.7; }
 
-
-
 /* ---------------------- CHATBOT ---------------------- */
-
 #cb-bubble {
-
   position: fixed; bottom: 25px; right: 25px; background: var(--text-main);
-
   color: var(--bg-main); width: 55px; height: 55px; border-radius: 50%;
-
   display: flex; justify-content: center; align-items: center; font-size: 26px;
-
   cursor: pointer; z-index: 9999; box-shadow: 0 0 10px rgba(0,0,0,0.4);
-
 }
-
-#cb-window {
-
-  position: fixed; bottom: 95px; right: 25px; width: 200px; height: 260px;
-
-  background: var(--bg-header); border: 1px solid var(--border-color);
-
-  border-radius: 10px; display: none; flex-direction: column; z-index: 9999;
-
-}
-
-#cb-header {
-
-  padding: 8px; background: var(--bg-card); color: var(--text-main);
-
-  font-size: 13px; border-bottom: 1px solid var(--border-color);
-
-  display: flex; justify-content: space-between; cursor: grab;
-
-}
-
-#cb-content { padding: 10px; overflow-y: auto; font-size: 13px; }
-
-.cb-btn {
-
-  background: var(--bg-card); padding: 6px; margin-top: 8px;
-
-  border-radius: 5px; cursor: pointer; text-align: center; font-size: 12px;
-
-  border: 1px solid var(--border-color);
-
-}
-
 </style>
-
 </head>
-
 <body class="lang-fr">
 
-
-
 <header>
-
   <div class="header-container">
-
     <div class="header-left">
-
       <h2 class="gold-text" style="cursor:pointer" onclick="window.location='index.html'">ChronoBase</h2>
-
       <div id="theme-switch" onclick="toggleTheme()">
-
         <div class="switch-handle"></div>
-
       </div>
-
       <div id="lang-switch" onclick="toggleLang()">
-
         <div class="switch-handle" id="lang-label">FR</div>
-
       </div>
-
     </div>
-
     <nav>
-
       <a href="index.html" data-key="nav-home">Accueil</a>
-
       <a href="montre.html" data-key="nav-watches">Les montres</a>
-
       <a href="ressources.html" data-key="nav-res">Ressources</a>
-
       <a href="propos.html" data-key="nav-about">À propos</a>
-
     </nav>
-
   </div>
-
 </header>
 
-
-
 <main class="view">
-
   <section class="hero">
-
-    <h1 class="gold-text">Politique de Confidentialité</h1>
-
-    <p>Dernière mise à jour : <strong>2 mars 2026</strong></p>
-
+    <h1 class="gold-text" data-key="priv-title">Politique de Confidentialité</h1>
+    <p><span data-key="priv-update">Dernière mise à jour :</span> <strong>2 mars 2026</strong></p>
   </section>
 
-
-
   <div class="legal-content">
-
     <div class="card">
+      <p data-key="priv-p1">Bienvenue sur notre site. La protection de vos données n'est pas qu'une obligation légale pour nous, c'est une marque de respect envers votre contribution à notre projet. Cette page vous explique en toute transparence comment nous traitons les informations que vous nous transmettez.</p>
 
-      <p>Bienvenue sur notre site. La protection de vos données n'est pas qu'une obligation légale pour nous, c'est une marque de respect envers votre contribution à notre projet. Cette page vous explique en toute transparence comment nous traitons les informations que vous nous transmettez.</p>
-
-
-
-      <h3>1. Collecte des données : l’humain avant tout</h3>
-
-      <p>Actuellement, notre site n'utilise pas d'automatisme ni d'API pour collecter vos données. La transmission d'informations se fait exclusivement par e-mail, via les boutons de contact présents sur le site. En nous contactant, vous pouvez être amenés à nous partager :</p>
-
+      <h3 data-key="priv-h3-1">1. Collecte des données : l’humain avant tout</h3>
+      <p data-key="priv-p2">Actuellement, notre site n'utilise pas d'automatisme ni d'API pour collecter vos données. La transmission d'informations se fait exclusivement par e-mail, via les boutons de contact présents sur le site. En nous contactant, vous pouvez être amenés à nous partager :</p>
       <ul>
-
-        <li>Votre identité (nom, prénom ou pseudonyme).</li>
-
-        <li>Votre adresse e-mail.</li>
-
-        <li>Le contenu de vos propositions (avis, événements, besoins, offres).</li>
-
+        <li data-key="priv-l1-1">Votre identité (nom, prénom ou pseudonyme).</li>
+        <li data-key="priv-l1-2">Votre adresse e-mail.</li>
+        <li data-key="priv-l1-3">Le contenu de vos propositions (avis, événements, besoins, offres).</li>
       </ul>
 
-
-
-      <h3>2. Utilisation et finalité</h3>
-
-      <p>Les données collectées nous servent à :</p>
-
+      <h3 data-key="priv-h3-2">2. Utilisation et finalité</h3>
+      <p data-key="priv-p3">Les données collectées nous servent à :</p>
       <ul>
-
-        <li>Répondre à vos demandes de documents.</li>
-
-        <li>Analyser et intégrer vos propositions d'événements ou de besoins.</li>
-
-        <li>Alimenter nos indicateurs de performance (KPI) de manière anonymisée.</li>
-
-        <li>Valoriser votre contribution dans nos onglets dédiés (si vous avez donné votre accord).</li>
-
+        <li data-key="priv-l2-1">Répondre à vos demandes de documents.</li>
+        <li data-key="priv-l2-2">Analyser et intégrer vos propositions d'événements ou de besoins.</li>
+        <li data-key="priv-l2-3">Alimenter nos indicateurs de performance (KPI) de manière anonymisée.</li>
+        <li data-key="priv-l2-4">Valoriser votre contribution dans nos onglets dédiés (si vous avez donné votre accord).</li>
       </ul>
 
-
-
-      <h3>3. Stockage et Anonymat</h3>
-
-      <p>C'est vous qui gardez le contrôle :</p>
-
+      <h3 data-key="priv-h3-3">3. Stockage et Anonymat</h3>
+      <p data-key="priv-p4">C'est vous qui gardez le contrôle :</p>
       <ul>
-
-        <li><strong>Option 1 (Par défaut) :</strong> Vos données sont traitées en interne pour répondre à votre besoin, puis supprimées ou anonymisées.</li>
-
-        <li><strong>Option 2 (Sur demande) :</strong> Nous stockons vos coordonnées uniquement si vous souhaitez être référencé comme contributeur ou être recontacté pour le suivi d'un projet.</li>
-
+        <li><strong data-key="priv-opt1">Option 1 (Par défaut) :</strong> <span data-key="priv-l3-1">Vos données sont traitées en interne pour répondre à votre besoin, puis supprimées ou anonymisées.</span></li>
+        <li><strong data-key="priv-opt2">Option 2 (Sur demande) :</strong> <span data-key="priv-l3-2">Nous stockons vos coordonnées uniquement si vous souhaitez être référencé comme contributeur ou être recontacté pour le suivi d'un projet.</span></li>
       </ul>
+      <p data-key="priv-p5">Sans action explicite de votre part pour apparaître publiquement, toutes les données publiées sur le site (statistiques, retours d’expérience) sont strictement anonymisées.</p>
 
-      <p>Sans action explicite de votre part pour apparaître publiquement, toutes les données publiées sur le site (statistiques, retours d’expérience) sont strictement anonymisées.</p>
+      <h3 data-key="priv-h3-4">4. Partage et sécurité</h3>
+      <p data-key="priv-p6">Vos e-mails sont traités en interne par notre équipe. Nous ne vendons, n'échangeons et ne transférons aucune donnée personnelle à des tiers. Bien que l'envoi d'un mail comporte toujours une part de risque inhérente à Internet, nous appliquons des protocoles de sécurité rigoureux pour protéger nos boîtes de réception et nos serveurs de stockage.</p>
 
+      <h3 data-key="priv-h3-5">5. Vos droits (RGPD)</h3>
+      <p data-key="priv-p7">Conformément à la réglementation, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour toute demande (par exemple : "Je ne souhaite plus apparaître dans la liste des contributeurs"), un simple mail suffit. Nous traiterons votre demande dans les plus brefs délais.</p>
 
-
-      <h3>4. Partage et sécurité</h3>
-
-      <p>Vos e-mails sont traités en interne par notre équipe. Nous ne vendons, n'échangeons et ne transférons aucune donnée personnelle à des tiers. Bien que l'envoi d'un mail comporte toujours une part de risque inhérente à Internet, nous appliquons des protocoles de sécurité rigoureux pour protéger nos boîtes de réception et nos serveurs de stockage.</p>
-
-
-
-      <h3>5. Vos droits (RGPD)</h3>
-
-      <p>Conformément à la réglementation, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour toute demande (par exemple : "Je ne souhaite plus apparaître dans la liste des contributeurs"), un simple mail suffit. Nous traiterons votre demande dans les plus brefs délais.</p>
-
-
-
-      <h3>6. Évolution du document</h3>
-
-      <p>Ce site évolue. Si nous mettons en place une API ou de nouveaux outils de collecte, cette page sera mise à jour. Vous trouverez ci-dessous un lien vers la version officielle signée (PDF) de ce document, ainsi que l'historique des versions précédentes pour consulter nos évolutions en toute clarté.</p>
-
-
+      <h3 data-key="priv-h3-6">6. Évolution du document</h3>
+      <p data-key="priv-p8">Ce site évolue. Si nous mettons en place une API ou de nouveaux outils de collecte, cette page sera mise à jour. Vous trouverez ci-dessous un lien vers la version officielle signée (PDF) de ce document, ainsi que l'historique des versions précédentes pour consulter nos évolutions en toute clarté.</p>
 
       <div class="version-archives">
-
-        <h3 class="gold-text">Historique des versions</h3>
-
+        <h3 class="gold-text" data-key="hist-title">Historique des versions</h3>
         <table class="version-table">
-
           <thead>
-
             <tr>
-
-              <th>Version</th>
-
-              <th>Date</th>
-
-              <th>Action</th>
-
+              <th data-key="th-v">Version</th>
+              <th data-key="th-d">Date</th>
+              <th data-key="th-a">Action</th>
             </tr>
-
           </thead>
-
           <tbody>
-
             <tr>
-
-              <td>Version Actuelle (v1.2)</td>
-
+              <td data-key="v-curr">Version Actuelle (v1.2)</td>
               <td>02 Mars 2026</td>
-
-              <td><a href="docs/politique-confidentialite-v1.2.pdf" class="btn-download" download>📥 Télécharger PDF</a></td>
-
+              <td><a href="docs/politique-confidentialite-v1.2.pdf" class="btn-download" download><span data-key="btn-dl">📥 Télécharger PDF</span></a></td>
             </tr>
-
             <tr>
-
               <td>Version 1.1</td>
-
               <td>15 Janvier 2026</td>
-
-              <td><a href="docs/politique-confidentialite-v1.1.pdf" class="btn-download" download>📥 Archive PDF</a></td>
-
+              <td><a href="docs/politique-confidentialite-v1.1.pdf" class="btn-download" download><span data-key="btn-arch">📥 Archive PDF</span></a></td>
             </tr>
-
             <tr>
-
-              <td>Version Initial (v1.0)</td>
-
+              <td data-key="v-init">Version Initiale (v1.0)</td>
               <td>01 Décembre 2025</td>
-
-              <td><a href="docs/politique-confidentialite-v1.0.pdf" class="btn-download" download>📥 Archive PDF</a></td>
-
+              <td><a href="docs/politique-confidentialite-v1.0.pdf" class="btn-download" download><span data-key="btn-arch">📥 Archive PDF</span></a></td>
             </tr>
-
           </tbody>
-
         </table>
-
       </div>
-
-      </div>
-
+    </div>
   </div>
-
 </main>
-
-
 
 <footer class="site-footer">
   <div class="footer-content">
@@ -592,81 +301,88 @@ nav a:hover{color:#f5d98c}
     </div>
   </div>
 
-
   <div class="footer-bottom">
-
-    <span>© 2026 ChronoBase — Tous droits réservés</span>
-
+    <span data-key="f-copy">© 2026 ChronoBase — Tous droits réservés</span>
     <div class="site-version">v1.0.0</div>
-
   </div>
-
 </footer>
 
-
-
 <script>
+// --- DICTIONNAIRE DE TRADUCTION ---
+const translations = {
+  fr: {
+    "nav-home": "Accueil", "nav-watches": "Les montres", "nav-res": "Ressources", "nav-about": "À propos",
+    "priv-title": "Politique de Confidentialité", "priv-update": "Dernière mise à jour :",
+    "priv-p1": "Bienvenue sur notre site. La protection de vos données n'est pas qu'une obligation légale pour nous, c'est une marque de respect envers votre contribution à notre projet.",
+    "priv-h3-1": "1. Collecte des données : l’humain avant tout",
+    "priv-p2": "Actuellement, notre site n'utilise pas d'automatisme ni d'API pour collecter vos données...",
+    "priv-l1-1": "Votre identité (nom, prénom ou pseudonyme).", "priv-l1-2": "Votre adresse e-mail.", "priv-l1-3": "Le contenu de vos propositions.",
+    "priv-h3-2": "2. Utilisation et finalité", "priv-l2-1": "Répondre à vos demandes.", "priv-l2-2": "Analyser vos propositions.",
+    "priv-h3-3": "3. Stockage et Anonymat", "priv-opt1": "Option 1 (Par défaut) :", "priv-opt2": "Option 2 (Sur demande) :",
+    "hist-title": "Historique des versions", "th-v": "Version", "th-d": "Date", "th-a": "Action",
+    "btn-dl": "📥 Télécharger PDF", "btn-arch": "📥 Archive PDF", "f-copy": "© 2026 ChronoBase — Tous droits réservés",
+    "f-nav": "Navigation", "f-contact": "Contact", "f-legal": "Légal", "f-priv": "Politique de confidentialité"
+    // Ajoutez ici les autres clés manquantes du footer si nécessaire
+  },
+  en: {
+    "nav-home": "Home", "nav-watches": "Watches", "nav-res": "Resources", "nav-about": "About",
+    "priv-title": "Privacy Policy", "priv-update": "Last updated:",
+    "priv-p1": "Welcome to our site. Protecting your data is not just a legal obligation for us, it is a mark of respect for your contribution to our project.",
+    "priv-h3-1": "1. Data Collection: Humans first",
+    "priv-p2": "Currently, our site does not use any automation or API to collect your data. Data is shared exclusively via email.",
+    "priv-l1-1": "Your identity (name or pseudonym).", "priv-l1-2": "Your email address.", "priv-l1-3": "Content of your proposals.",
+    "priv-h3-2": "2. Use and Purpose", "priv-l2-1": "Respond to your requests.", "priv-l2-2": "Analyze your suggestions.",
+    "priv-h3-3": "3. Storage and Anonymity", "priv-opt1": "Option 1 (Default):", "priv-opt2": "Option 2 (On request):",
+    "hist-title": "Version History", "th-v": "Version", "th-d": "Date", "th-a": "Action",
+    "btn-dl": "📥 Download PDF", "btn-arch": "📥 Archive PDF", "f-copy": "© 2026 ChronoBase — All rights reserved",
+    "f-nav": "Navigation", "f-contact": "Contact", "f-legal": "Legal", "f-priv": "Privacy Policy"
+  }
+};
 
-// Logique de thème et langue identiques
+function updateContent(lang) {
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const key = el.getAttribute('data-key');
+    if (translations[lang][key]) {
+      el.textContent = translations[lang][key];
+    }
+  });
+}
 
 function toggleTheme() {
-
   document.body.classList.toggle("light-theme");
-
   localStorage.setItem("theme", document.body.classList.contains("light-theme") ? "light" : "dark");
-
 }
-
-
 
 function toggleLang() {
-
   const body = document.body;
-
-  const isFr = body.classList.contains("lang-fr");
-
-  const newLang = isFr ? "en" : "fr";
-
+  const currentLang = body.classList.contains("lang-fr") ? "fr" : "en";
+  const newLang = currentLang === "fr" ? "en" : "fr";
+  
   body.classList.remove("lang-fr", "lang-en");
-
   body.classList.add("lang-" + newLang);
-
   document.getElementById("lang-label").textContent = newLang.toUpperCase();
-
   localStorage.setItem("lang", newLang);
-
+  updateContent(newLang);
 }
 
-
-
 // Initialisation
-
 (function() {
-
+  // Thème
   if (localStorage.getItem("theme") === "light") document.body.classList.add("light-theme");
-
+  
+  // Langue
   const savedLang = localStorage.getItem("lang") || "fr";
-
+  document.body.classList.remove("lang-fr", "lang-en");
   document.body.classList.add("lang-" + savedLang);
-
   document.getElementById("lang-label").textContent = savedLang.toUpperCase();
-
+  updateContent(savedLang);
 })();
 
-
-
-// Assistant Chatbot (Minimal pour l'exemple)
-
+// Assistant Chatbot
 const bubble = document.createElement("div");
-
 bubble.id = "cb-bubble"; bubble.innerHTML = "💬"; document.body.appendChild(bubble);
-
 bubble.onclick = () => alert("Assistant ChronoBase activé.");
-
 </script>
 
-
-
 </body>
-
 </html>
