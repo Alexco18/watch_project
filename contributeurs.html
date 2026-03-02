@@ -39,16 +39,6 @@
         .score-val { font-weight: 500; color: #f5d98c; }
         .update-note { font-size: 12px; font-style: italic; margin-top: 10px; text-align: right; opacity: 0.7; }
 
-        /* --- Style "Information" pour le règlement --- */
-        .info-box {
-            border-left: 3px solid #f5d98c;
-            padding: 20px 30px;
-            background: rgba(212, 175, 55, 0.05);
-            border-radius: 0 12px 12px 0;
-        }
-        .info-box h2 { font-size: 20px; margin-bottom: 10px; font-style: normal; }
-        .info-box p { font-style: italic; font-size: 15px; margin: 0; }
-
         #back-to-top {
             position: fixed; bottom: 30px; right: 30px; width: 45px; height: 45px;
             background: var(--bg-header); border: 1px solid var(--text-main);
@@ -62,6 +52,7 @@
         .footer-section{display:flex;flex-direction:column;gap:4px}
         .footer-section h4{margin-bottom:6px;color:#f5d98c;font-size:13px}
         .footer-section a{color:var(--text-main);text-decoration:none;font-size:12px}
+        .footer-legal{margin-top:10px;padding-top:10px;border-top:1px solid var(--border-color)}
         .footer-bottom{text-align:center;margin-top:15px;font-size:12px;opacity:0.7}
     </style>
 </head>
@@ -75,62 +66,62 @@
             <div id="lang-switch" onclick="toggleLang()"><div class="switch-handle" id="lang-label">FR</div></div>
         </div>
         <nav>
-            <a href="index.html">Accueil</a>
-            <a href="montre.html">Les montres</a>
-            <a href="ressources.html">Ressources</a>
-            <a href="propos.html">À propos</a>
+            <a href="index.html" data-key="nav-home">Accueil</a>
+            <a href="montre.html" data-key="nav-watches">Les montres</a>
+            <a href="ressources.html" data-key="nav-res">Ressources</a>
+            <a href="propos.html" data-key="nav-about">À propos</a>
         </nav>
     </div>
 </header>
 
 <main class="view">
     <section class="hero">
-        <h1 class="gold-text">Contributeurs</h1>
-        <p style="max-width: 700px; margin: auto;">Reconnaître l'engagement de ceux qui font vivre la base de données.</p>
+        <h1 class="gold-text" data-key="hero-title">Contributeurs</h1>
+        <p style="max-width: 700px; margin: auto;" data-key="hero-desc">Reconnaître l'engagement de ceux qui font vivre la base de données.</p>
     </section>
 
     <div class="legal-content">
         <div class="card">
-            <h2>Pourquoi un classement ?</h2>
-            <p>ChronoBase est un projet communautaire. Ce classement récompense les utilisateurs qui participent activement à la précision et à la richesse de notre base de données horlogère.</p>
-            <h3>Comment gagner des points ?</h3>
+            <h2 data-key="card1-title">Pourquoi un classement ?</h2>
+            <p data-key="card1-p1">ChronoBase est un projet communautaire. Ce classement récompense les utilisateurs qui participent activement à la précision et à la richesse de notre base de données horlogère.</p>
+            <h3 data-key="card1-h3">Comment gagner des points ?</h3>
             <ul>
-                <li><strong>Avis & Notes :</strong> Donnez votre avis sur des modèles ou des horlogers.</li>
-                <li><strong>Corrections :</strong> Signalez une erreur technique dans une fiche.</li>
-                <li><strong>Demandes & Outils :</strong> Participez aux sections d'équipement ou faites des demandes d'ajouts.</li>
-                <li><strong>Annonces :</strong> Contribuez à la section des annonces horlogères.</li>
+                <li data-key="li-1"><strong>Avis & Notes :</strong> Donnez votre avis sur des modèles ou des horlogers.</li>
+                <li data-key="li-2"><strong>Corrections :</strong> Signalez une erreur technique dans une fiche.</li>
+                <li data-key="li-3"><strong>Demandes & Outils :</strong> Participez aux sections d'équipement ou faites des demandes d'ajouts.</li>
+                <li data-key="li-4"><strong>Annonces :</strong> Contribuez à la section des annonces horlogères.</li>
             </ul>
-            <p><em>Note : L'attribution des points est validée par notre équipe de modération. Le classement est mis à jour chaque dimanche.</em></p>
+            <p><em data-key="card1-note">Note : L'attribution des points est validée par notre équipe de modération. Le classement est mis à jour chaque dimanche.</em></p>
         </div>
 
         <div class="card">
             <div class="search-container">
-                <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Rechercher un pseudo...">
-                <button class="filter-btn" onclick="sortTable()">Trier par score (Min/Max)</button>
+                <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Rechercher un pseudo..." data-placeholder="search-placeholder">
+                <button class="filter-btn" onclick="sortTable()" data-key="btn-sort">Trier par score (Min/Max)</button>
             </div>
 
             <table id="contributorsTable">
                 <thead>
                     <tr>
-                        <th>Rang</th>
-                        <th>Pseudo</th>
-                        <th>Score</th>
+                        <th data-key="th-rank">Rang</th>
+                        <th data-key="th-pseudo">Pseudo</th>
+                        <th data-key="th-score">Score</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
-                    <tr><td><span class="rank-badge">1</span></td><td translate="no">OmegaPassion</td><td class="score-val">125</td></tr>
-                    <tr><td><span class="rank-badge">2</span></td><td translate="no">WatchMaker_75</td><td class="score-val">98</td></tr>
-                    <tr><td><span class="rank-badge">3</span></td><td translate="no">HorloFan</td><td class="score-val">84</td></tr>
-                    <tr><td><span class="rank-badge">4</span></td><td translate="no">TimeKeeper</td><td class="score-val">56</td></tr>
-                    <tr><td><span class="rank-badge">5</span></td><td translate="no">VintageLover</td><td class="score-val">42</td></tr>
+                    <tr><td><span class="rank-badge">1</span></td><td>OmegaPassion</td><td class="score-val">125</td></tr>
+                    <tr><td><span class="rank-badge">2</span></td><td>WatchMaker_75</td><td class="score-val">98</td></tr>
+                    <tr><td><span class="rank-badge">3</span></td><td>HorloFan</td><td class="score-val">84</td></tr>
+                    <tr><td><span class="rank-badge">4</span></td><td>TimeKeeper</td><td class="score-val">56</td></tr>
+                    <tr><td><span class="rank-badge">5</span></td><td>VintageLover</td><td class="score-val">42</td></tr>
                 </tbody>
             </table>
-            <p class="update-note">Dernière mise à jour : Dimanche dernier à 23h59.</p>
+            <p class="update-note" data-key="update-note">Dernière mise à jour : Dimanche dernier à 23h59.</p>
         </div>
 
-        <div class="info-box">
-            <h2>Règlement & Éthique</h2>
-            <p>Tout comportement inapproprié, vulgarité ou non-respect des autres membres entraînera une déduction de points ou une exclusion définitive du classement. ChronoBase se réserve le droit de valider ou refuser une contribution selon sa pertinence.</p>
+        <div class="card">
+            <h2 data-key="card3-title">Règlement & Éthique</h2>
+            <p data-key="card3-p1">Tout comportement inapproprié, vulgarité ou non-respect des autres membres entraînera une déduction de points ou une exclusion définitive du classement. ChronoBase se réserve le droit de valider ou refuser une contribution selon sa pertinence.</p>
         </div>
     </div>
 </main>
@@ -140,33 +131,85 @@
 <footer class="site-footer">
     <div class="footer-content">
         <div class="footer-section">
-            <h4>Navigation</h4>
-            <a href="index.html">Accueil</a>
-            <a href="montre.html">Les montres</a>
-            <a href="propos.html">À propos</a>
-            <a href="contributeurs.html">Contributeurs</a>
+            <h4 data-key="f-nav">Navigation</h4>
+            <a href="index.html" data-key="nav-home">Accueil</a>
+            <a href="montre.html" data-key="nav-watches">Les montres</a>
+            <a href="propos.html" data-key="nav-about">À propos</a>
+            <a href="contributeurs.html" data-key="f-contrib">Contributeurs</a>
         </div>
         <div class="footer-section">
-            <h4>Contact</h4>
-            <a href="mailto:contact@chronobase.com">Email</a>
-            <a href="#">Formulaire</a>
+            <h4 data-key="f-contact">Contact</h4>
+            <a href="mailto:contact@chronobase.com" data-key="f-mail">Email</a>
+            <a href="#" data-key="f-form">Formulaire</a>
         </div>
         <div class="footer-section">
-            <h4>Légal</h4>
-            <a href="mentions.html">Mentions</a>
-            <a href="cgu.html">CGU</a>
+            <h4 data-key="f-legal">Légal</h4>
+            <a href="mentions.html" data-key="f-mentions">Mentions</a>
+            <a href="cgu.html" data-key="f-cgu">CGU</a>
         </div>
     </div>
-    <div class="footer-bottom"><span>© 2026 ChronoBase</span></div>
+    <div class="footer-bottom"><span data-key="f-copy">© 2026 ChronoBase</span></div>
 </footer>
 
 <script>
+    const translations = {
+        fr: {
+            "nav-home": "Accueil", "nav-watches": "Les montres", "nav-res": "Ressources", "nav-about": "À propos",
+            "hero-title": "Contributeurs", "hero-desc": "Reconnaître l'engagement de ceux qui font vivre la base de données.",
+            "card1-title": "Pourquoi un classement ?", "card1-p1": "ChronoBase est un projet communautaire. Ce classement récompense les utilisateurs qui participent activement à la précision et à la richesse de notre base de données horlogère.",
+            "card1-h3": "Comment gagner des points ?", "li-1": "Avis & Notes : Donnez votre avis sur des modèles ou des horlogers.", "li-2": "Corrections : Signalez une erreur technique dans une fiche.", "li-3": "Demandes & Outils : Participez aux sections d'équipement ou faites des demandes d'ajouts.", "li-4": "Annonces : Contribuez à la section des annonces horlogères.",
+            "card1-note": "Note : L'attribution des points est validée par notre équipe de modération. Le classement est mis à jour chaque dimanche.",
+            "search-placeholder": "Rechercher un pseudo...", "btn-sort": "Trier par score (Min/Max)",
+            "th-rank": "Rang", "th-pseudo": "Pseudo", "th-score": "Score", "update-note": "Dernière mise à jour : Dimanche dernier à 23h59.",
+            "card3-title": "Règlement & Éthique", "card3-p1": "Tout comportement inapproprié, vulgarité ou non-respect des autres membres entraînera une déduction de points ou une exclusion définitive du classement.",
+            "f-nav": "Navigation", "f-contrib": "Contributeurs", "f-contact": "Contact", "f-mail": "Email", "f-form": "Formulaire", "f-legal": "Légal", "f-mentions": "Mentions", "f-cgu": "CGU", "f-copy": "© 2026 ChronoBase"
+        },
+        en: {
+            "nav-home": "Home", "nav-watches": "Watches", "nav-res": "Resources", "nav-about": "About",
+            "hero-title": "Contributors", "hero-desc": "Recognizing the commitment of those who keep the database alive.",
+            "card1-title": "Why a ranking?", "card1-p1": "ChronoBase is a community project. This ranking rewards users who actively participate in the accuracy and richness of our watch database.",
+            "card1-h3": "How to earn points?", "li-1": "Reviews & Ratings: Review models or watchmakers.", "li-2": "Corrections: Report a technical error in a file.", "li-3": "Requests & Tools: Participate in equipment sections or request additions.", "li-4": "Ads: Contribute to the watch classifieds section.",
+            "card1-note": "Note: Points allocation is validated by our moderation team. Ranking is updated every Sunday.",
+            "search-placeholder": "Search username...", "btn-sort": "Sort by score (Min/Max)",
+            "th-rank": "Rank", "th-pseudo": "Username", "th-score": "Score", "update-note": "Last update: Last Sunday at 11:59 PM.",
+            "card3-title": "Rules & Ethics", "card3-p1": "Any inappropriate behavior, vulgarity, or lack of respect for other members will result in a deduction of points or permanent exclusion.",
+            "f-nav": "Navigation", "f-contrib": "Contributors", "f-contact": "Contact", "f-mail": "Email", "f-form": "Form", "f-legal": "Legal", "f-mentions": "Legal Notice", "f-cgu": "Terms of Use", "f-copy": "© 2026 ChronoBase"
+        }
+    };
+
+    function updateContent(lang) {
+        document.querySelectorAll("[data-key]").forEach(el => {
+            const key = el.getAttribute("data-key");
+            if (translations[lang][key]) el.textContent = translations[lang][key];
+        });
+        document.querySelectorAll("[data-placeholder]").forEach(el => {
+            const key = el.getAttribute("data-placeholder");
+            if (translations[lang][key]) el.placeholder = translations[lang][key];
+        });
+    }
+
+    function toggleLang() {
+        const body = document.body;
+        const currentLang = body.classList.contains("lang-fr") ? "fr" : "en";
+        const newLang = currentLang === "fr" ? "en" : "fr";
+        body.classList.remove("lang-fr", "lang-en");
+        body.classList.add("lang-" + newLang);
+        document.getElementById("lang-label").textContent = newLang.toUpperCase();
+        localStorage.setItem("lang", newLang);
+        updateContent(newLang);
+    }
+
+    function toggleTheme(){
+        document.body.classList.toggle("light-theme");
+        localStorage.setItem("theme", document.body.classList.contains("light-theme") ? "light" : "dark");
+    }
+
+    // --- Logique de recherche & tri (Inchangée) ---
     function filterTable() {
         const input = document.getElementById("searchInput");
         const filter = input.value.toUpperCase();
         const table = document.getElementById("tableBody");
         const tr = table.getElementsByTagName("tr");
-
         for (let i = 0; i < tr.length; i++) {
             let td = tr[i].getElementsByTagName("td")[1];
             if (td) {
@@ -181,19 +224,12 @@
         const table = document.getElementById("tableBody");
         let rows = Array.from(table.rows);
         sortAsc = !sortAsc;
-
         rows.sort((a, b) => {
             let valA = parseInt(a.cells[2].innerText);
             let valB = parseInt(b.cells[2].innerText);
             return sortAsc ? valA - valB : valB - valA;
         });
-
         rows.forEach(row => table.appendChild(row));
-    }
-
-    function toggleTheme(){
-        document.body.classList.toggle("light-theme");
-        localStorage.setItem("theme", document.body.classList.contains("light-theme") ? "light" : "dark");
     }
 
     const btn = document.getElementById("back-to-top");
@@ -203,7 +239,15 @@
     };
     function scrollToTop() { window.scrollTo({top: 0, behavior: 'smooth'}); }
 
-    if(localStorage.getItem("theme") === "light") document.body.classList.add("light-theme");
+    // Init au chargement
+    (function init() {
+        if(localStorage.getItem("theme") === "light") document.body.classList.add("light-theme");
+        const savedLang = localStorage.getItem("lang") || "fr";
+        document.body.classList.remove("lang-fr", "lang-en");
+        document.body.classList.add("lang-" + savedLang);
+        document.getElementById("lang-label").textContent = savedLang.toUpperCase();
+        updateContent(savedLang);
+    })();
 </script>
 
 </body>
