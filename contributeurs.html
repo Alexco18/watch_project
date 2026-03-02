@@ -54,13 +54,9 @@
             font-size: 20px; z-index: 100; transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
-        .site-footer{background:var(--bg-footer);border-top:1px solid var(--border-color);padding:25px 20px 15px;margin-top:40px;color:var(--text-main);font-size:14px}
-        .footer-content{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px}
-        .footer-section{display:flex;flex-direction:column;gap:4px}
-        .footer-section h4{margin-bottom:6px;color:#f5d98c;font-size:13px}
-        .footer-section a{color:var(--text-main);text-decoration:none;font-size:12px}
-        .footer-legal{margin-top:10px;padding-top:10px;border-top:1px solid var(--border-color)}
-        .footer-bottom{text-align:center;margin-top:15px;font-size:12px;opacity:0.7}
+
+        /* Footer Styles from Confidentialite */
+        .site-footer{background:var(--bg-footer);border-top:1px solid var(--border-color);padding:25px 20px 15px;margin-top:40px;color:var(--text-main);font-size:14px}.footer-content{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px}.footer-section{display:flex;flex-direction:column;gap:4px}.footer-section h4{margin-bottom:6px;color:#f5d98c;font-size:13px}.footer-section a{color:var(--text-main);text-decoration:none;font-size:12px}.footer-section a:hover{color:#f5d98c}.footer-legal{margin-top:10px;padding-top:10px;border-top:1px solid var(--border-color)}.footer-bottom{text-align:center;margin-top:15px;font-size:12px;opacity:0.7}.site-version{display:inline-block;margin-left:10px}
     </style>
 </head>
 <body class="lang-fr">
@@ -144,24 +140,48 @@
             <a href="index.html" data-key="nav-home">Accueil</a>
             <a href="montre.html" data-key="nav-watches">Les montres</a>
             <a href="propos.html" data-key="nav-about">À propos</a>
-            <a href="contributeurs.html" data-key="f-contrib">Contributeurs</a>
+            <a href="chiffre.html" data-key="f-stats">Chiffres clés</a>
         </div>
         <div class="footer-section">
             <h4 data-key="f-contact">Contact</h4>
             <a href="mailto:contact@chronobase.com" data-key="f-mail">Email</a>
             <a href="#" data-key="f-form">Formulaire</a>
+            <a href="reseaux.html" data-key="f-social">Réseaux</a>
         </div>
+        <div class="footer-section">
+            <h4 data-key="f-version">Version</h4>
+            <a href="version.html" data-key="f-hist-v">Historique</a>
+            <a href="maj.html" data-key="f-hist-u">Mises à jour</a>
+            <a href="contributeurs.html" data-key="f-contrib">Contributeurs</a>
+        </div>
+        <div class="footer-section">
+            <h4 data-key="f-res">Ressources</h4>
+            <a href="horlogers.html" data-key="f-map">Carte</a>
+            <a href="evenements.html" data-key="f-events">Événements</a>
+            <a href="achats.html" data-key="f-equip">Achats</a>
+        </div>
+    </div>
+    <div class="footer-content footer-legal">
         <div class="footer-section">
             <h4 data-key="f-legal">Légal</h4>
             <a href="mentions.html" data-key="f-mentions">Mentions</a>
             <a href="cgu.html" data-key="f-cgu">CGU</a>
+            <a href="confidentialite.html" data-key="f-priv">Confidentialité</a>
+        </div>
+        <div class="footer-section">
+            <h4 data-key="f-reg">Règlements</h4>
+            <a href="reglement-site.html" data-key="f-reg-s">Site</a>
+            <a href="reglement-reseaux.html" data-key="f-reg-n">Réseaux</a>
+            <a href="cookies.html" data-key="f-cookies">Cookies</a>
         </div>
     </div>
-    <div class="footer-bottom"><span data-key="f-copy">© 2026 ChronoBase</span></div>
+    <div class="footer-bottom">
+        <span data-key="f-copy">© 2026 ChronoBase</span>
+        <div class="site-version">v1.0.0</div>
+    </div>
 </footer>
 
 <script>
-    // --- Données de test (24 pseudos) ---
     let contributors = [
         {pseudo: "OmegaPassion", score: 125}, {pseudo: "WatchMaker_75", score: 98},
         {pseudo: "HorloFan", score: 84}, {pseudo: "TimeKeeper", score: 56},
@@ -177,10 +197,9 @@
         {pseudo: "SpringDrive", score: 73}, {pseudo: "QuartzCrisis", score: 19}
     ];
 
-    // --- Paramètres Pagination ---
     let currentPage = 1;
     const recordsPerPage = 10;
-    let filteredData = [...contributors]; // Copie pour recherche/tri
+    let filteredData = [...contributors].sort((a,b) => b.score - a.score); 
 
     const translations = {
         fr: {
@@ -192,50 +211,45 @@
             "search-placeholder": "Rechercher un pseudo...", "btn-sort": "Trier par score (Min/Max)",
             "th-rank": "Rang", "th-pseudo": "Pseudo", "th-score": "Score", "update-note": "Dernière mise à jour : Dimanche dernier à 23h59.",
             "card3-title": "Règlement & Éthique", "card3-p1": "Tout comportement inapproprié, vulgarité ou non-respect des autres membres entraînera une déduction de points ou une exclusion définitive du classement.",
-            "f-nav": "Navigation", "f-contrib": "Contributeurs", "f-contact": "Contact", "f-mail": "Email", "f-form": "Formulaire", "f-legal": "Légal", "f-mentions": "Mentions", "f-cgu": "CGU", "f-copy": "© 2026 ChronoBase"
+            "f-nav":"Navigation","f-stats":"Chiffres clés","f-contact":"Contact","f-mail":"Envoyer un email","f-form":"Formulaire (à venir)","f-social":"Nos réseaux sociaux","f-version":"Version","f-hist-v":"Historique des versions","f-hist-u":"Historique des mises à jour","f-contrib":"Nos contributeurs","f-res":"Ressources horlogères","f-map":"Carte des horlogers","f-events":"Événements & bourses","f-equip":"Équipements & achats","f-legal":"Légal","f-mentions":"Mentions légales","f-cgu":"Conditions d’utilisation","f-priv":"Politique de confidentialité","f-reg":"Règlements","f-reg-s":"Règlement du site","f-reg-n":"Règlement des réseaux sociaux","f-cookies":"Gestion des cookies","f-copy":"© 2026 ChronoBase — Tous droits réservés"
         },
         en: {
             "nav-home": "Home", "nav-watches": "Watches", "nav-res": "Resources", "nav-about": "About",
             "hero-title": "Contributors", "hero-desc": "Recognizing the commitment of those who keep the database alive.",
             "card1-title": "Why a ranking?", "card1-p1": "ChronoBase is a community project. This ranking rewards users who actively participate in the accuracy and richness of our watch database.",
-            "card1-h3": "How to earn points?", "li-1": "Reviews & Ratings: Review models or watchmakers.", "li-2": "Corrections: Report a technical error in a file.", "li-3": "Requests & Tools: Participate in equipment sections or request additions.", "li-4": "Ads: Contribute to the watch classifieds section.",
-            "card1-note": "Note: Points allocation is validated by our moderation team. Ranking is updated every Sunday.",
-            "search-placeholder": "Search username...", "btn-sort": "Sort by score (Min/Max)",
+            "card1-h3": "How to earn points?", "li-1": "Reviews & Ratings: Give your opinion on models or watchmakers.", "li-2": "Corrections: Report a technical error in a file.", "li-3": "Requests & Tools: Participate in equipment sections or make requests for additions.", "li-4": "Ads: Contribute to the horological ads section.",
+            "card1-note": "Note: Points allocation is validated by our moderation team. The ranking is updated every Sunday.",
+            "search-placeholder": "Search for a nickname...", "btn-sort": "Sort by score (Min/Max)",
             "th-rank": "Rank", "th-pseudo": "Username", "th-score": "Score", "update-note": "Last update: Last Sunday at 11:59 PM.",
-            "card3-title": "Rules & Ethics", "card3-p1": "Any inappropriate behavior, vulgarity, or lack of respect for other members will result in a deduction of points or permanent exclusion.",
-            "f-nav": "Navigation", "f-contrib": "Contributors", "f-contact": "Contact", "f-mail": "Email", "f-form": "Form", "f-legal": "Legal", "f-mentions": "Legal Notice", "f-cgu": "Terms of Use", "f-copy": "© 2026 ChronoBase"
+            "card3-title": "Rules & Ethics", "card3-p1": "Any inappropriate behavior, vulgarity, or lack of respect for other members will result in a point deduction or permanent exclusion from the ranking.",
+            "f-nav":"Navigation","f-stats":"Key Figures","f-contact":"Contact","f-mail":"Send an email","f-form":"Form (coming soon)","f-social":"Social Media","f-version":"Version","f-hist-v":"Version History","f-hist-u":"Update History","f-contrib":"Our Contributors","f-res":"Watchmaking Resources","f-map":"Watchmakers Map","f-events":"Events & Fairs","f-equip":"Equipment & Purchases","f-legal":"Legal","f-mentions":"Legal Notice","f-cgu":"Terms of Use","f-priv":"Privacy Policy","f-reg":"Regulations","f-reg-s":"Site Rules","f-reg-n":"Social Media Rules","f-cookies":"Cookie Management","f-copy":"© 2026 ChronoBase — All rights reserved"
         }
     };
 
     function displayTable() {
-        const tableBody = document.getElementById("tableBody");
-        tableBody.innerHTML = "";
-        
-        // Calcul des index
+        const tbody = document.getElementById("tableBody");
+        tbody.innerHTML = "";
         let start = (currentPage - 1) * recordsPerPage;
         let end = start + recordsPerPage;
-        let paginatedItems = filteredData.slice(start, end);
+        let pageData = filteredData.slice(start, end);
 
-        paginatedItems.forEach((item, index) => {
+        pageData.forEach((item, index) => {
             let row = `<tr>
-                <td><span class="rank-badge">${start + index + 1}</span></td>
+                <td><span class="rank-badge">#${start + index + 1}</span></td>
                 <td>${item.pseudo}</td>
-                <td class="score-val">${item.score}</td>
+                <td><span class="score-val">${item.score} pts</span></td>
             </tr>`;
-            tableBody.innerHTML += row;
+            tbody.innerHTML += row;
         });
 
         document.getElementById("page-info").textContent = currentPage;
         document.getElementById("btn-prev").disabled = (currentPage === 1);
-        document.getElementById("btn-next").disabled = (currentPage === Math.ceil(filteredData.length / recordsPerPage)) || filteredData.length === 0;
+        document.getElementById("btn-next").disabled = (end >= filteredData.length);
     }
 
-    function prevPage() { if (currentPage > 1) { currentPage--; displayTable(); } }
-    function nextPage() { if (currentPage < Math.ceil(filteredData.length / recordsPerPage)) { currentPage++; displayTable(); } }
-
     function filterTable() {
-        const query = document.getElementById("searchInput").value.toUpperCase();
-        filteredData = contributors.filter(item => item.pseudo.toUpperCase().includes(query));
+        let val = document.getElementById("searchInput").value.toLowerCase();
+        filteredData = contributors.filter(item => item.pseudo.toLowerCase().includes(val));
         currentPage = 1;
         displayTable();
     }
@@ -247,56 +261,47 @@
         displayTable();
     }
 
-    function updateContent(lang) {
-        document.querySelectorAll("[data-key]").forEach(el => {
-            const key = el.getAttribute("data-key");
-            if (translations[lang][key]) el.textContent = translations[lang][key];
-        });
-        document.querySelectorAll("[data-placeholder]").forEach(el => {
-            const key = el.getAttribute("data-placeholder");
-            if (translations[lang][key]) el.placeholder = translations[lang][key];
-        });
-    }
+    function prevPage() { if(currentPage > 1) { currentPage--; displayTable(); } }
+    function nextPage() { if((currentPage * recordsPerPage) < filteredData.length) { currentPage++; displayTable(); } }
 
-    function toggleLang() {
-        const body = document.body;
-        const currentLang = body.classList.contains("lang-fr") ? "fr" : "en";
-        const newLang = currentLang === "fr" ? "en" : "fr";
-        body.classList.remove("lang-fr", "lang-en");
-        body.classList.add("lang-" + newLang);
-        document.getElementById("lang-label").textContent = newLang.toUpperCase();
-        localStorage.setItem("lang", newLang);
-        updateContent(newLang);
-    }
+    window.onscroll = function() {
+        document.getElementById("back-to-top").style.display = (window.scrollY > 300) ? "flex" : "none";
+    };
+    function scrollToTop() { window.scrollTo({top: 0, behavior: 'smooth'}); }
 
     function toggleTheme(){
         document.body.classList.toggle("light-theme");
         localStorage.setItem("theme", document.body.classList.contains("light-theme") ? "light" : "dark");
     }
 
-    const btn = document.getElementById("back-to-top");
-    window.onscroll = function() {
-        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) btn.style.display = "flex";
-        else btn.style.display = "none";
-    };
-    function scrollToTop() { window.scrollTo({top: 0, behavior: 'smooth'}); }
+    function updateContent(lang) {
+        document.querySelectorAll("[data-key]").forEach(el => {
+            const key = el.getAttribute("data-key");
+            if(translations[lang][key]) {
+                if(el.tagName === "INPUT") el.placeholder = translations[lang][key];
+                else el.textContent = translations[lang][key];
+            }
+        });
+    }
 
-    // Init au chargement
-    (function init() {
+    function toggleLang(){
+        const currentLang = document.body.classList.contains("lang-fr") ? "fr" : "en";
+        const newLang = currentLang === "fr" ? "en" : "fr";
+        document.body.classList.remove("lang-fr", "lang-en");
+        document.body.classList.add("lang-" + newLang);
+        document.getElementById("lang-label").textContent = newLang.toUpperCase();
+        localStorage.setItem("lang", newLang);
+        updateContent(newLang);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
         if(localStorage.getItem("theme") === "light") document.body.classList.add("light-theme");
         const savedLang = localStorage.getItem("lang") || "fr";
-        document.body.classList.remove("lang-fr", "lang-en");
-        bodyClass = "lang-" + savedLang;
-        document.body.classList.add(bodyClass);
+        document.body.classList.add("lang-" + savedLang);
         document.getElementById("lang-label").textContent = savedLang.toUpperCase();
         updateContent(savedLang);
-        
-        // Tri initial par score décroissant
-        contributors.sort((a, b) => b.score - a.score);
-        filteredData = [...contributors];
         displayTable();
-    })();
+    });
 </script>
-
 </body>
 </html>
