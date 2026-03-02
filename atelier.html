@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="favicon.jpg">
+    <title>L'Atelier - ChronoBase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ---------------------- VARIABLES (Identiques) ---------------------- */
+        :root {
+            --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951);
+            --bg-main: radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
+            --bg-header: #0b0b0b;
+            --bg-footer: #0b0b0b;
+            --bg-card: linear-gradient(180deg,#111,#0c0c0c);
+            --text-main: #d4af37;
+            --text-secondary: #c1a96b;
+            --border-color: rgba(212,175,55,0.2);
+        }
+
+        .light-theme {
+            --bg-main: #ffffff;
+            --bg-header: #ffffff;
+            --bg-footer: #ffffff;
+            --bg-card: #f7f7f7;
+            --text-main: #000000;
+            --text-secondary: #444444;
+            --border-color: rgba(0,0,0,0.2);
+        }
+
+        body {
+            margin:0;padding:0;font-family:'Montserrat',sans-serif;
+            background:var(--bg-main);
+            color:var(--text-main);
+            font-weight:300;overflow-x:hidden;
+        }
+
+        .gold-text {
+            background:var(--gold-gradient);
+            -webkit-background-clip:text;color:transparent;
+            animation:shine 6s infinite linear;background-size:200%;
+        }
+        @keyframes shine{0%{background-position:0%}100%{background-position:200%}}
+
+        /* ---------------------- HEADER & NAV ---------------------- */
+        header{
+            width:100%;padding:12px 0;border-bottom:1px solid var(--border-color);
+            background:var(--bg-header);position:fixed;top:0;left:0;z-index:10;
+        }
+        .header-container{
+            max-width:1200px;margin:auto;display:flex;justify-content:space-between;
+            align-items:center;padding:0 20px;
+        }
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        nav a{
+            margin-left:30px;text-decoration:none;color:var(--text-main);
+            font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;
+        }
+        nav a:hover{color:#f5d98c}
+
+        /* Switches */
+        #theme-switch, #lang-switch {
+            width: 50px; height: 26px; background: var(--border-color);
+            border-radius: 20px; position: relative; cursor: pointer;
+            display: flex; align-items: center; padding: 3px;
+        }
+        .switch-handle {
+            width: 20px; height: 20px; background: var(--text-main);
+            border-radius: 50%; transition: transform 0.3s;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 10px; color: var(--bg-header);
+        }
+        .light-theme #theme-switch .switch-handle { transform: translateX(24px); background: #000; }
+        body.lang-en #lang-switch .switch-handle { transform: translateX(24px); }
+
+        /* ---------------------- CONTENU ATELIER ---------------------- */
+        .workshop-view {
+            min-height:100vh; padding-top:120px; text-align:center;
+        }
+
+        .workshop-intro {
+            max-width: 800px; margin: 0 auto 40px; padding: 0 20px;
+        }
+
+        /* Le Schéma Interactif */
+        .watch-diagram-container {
+            position: relative;
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        
+
+        .diagram-svg {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 10px rgba(212,175,55,0.1));
+        }
+
+        .hotspot {
+            cursor: pointer;
+            transition: 0.3s;
+            fill: rgba(212,175,55,0.1);
+            stroke: var(--text-main);
+            stroke-width: 1;
+        }
+
+        .hotspot:hover {
+            fill: rgba(212,175,55,0.4);
+            filter: brightness(1.2);
+        }
+
+        /* Cartes de sections */
+        .workshop-grid {
+            max-width: 1200px;
+            margin: 50px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .workshop-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 40px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .workshop-card:hover {
+            border-color: #d4af37;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .workshop-card i {
+            display: block;
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        /* ---------------------- FOOTER (Identique) ---------------------- */
+        .site-footer {
+            background: var(--bg-footer); border-top: 1px solid var(--border-color);
+            padding: 25px 20px 15px; margin-top: 80px; font-size: 14px;
+        }
+        .footer-content {
+            max-width: 1200px; margin: auto; display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px;
+        }
+        .footer-section { display: flex; flex-direction: column; gap: 4px; }
+        .footer-section h4 { margin-bottom: 6px; color: #f5d98c; font-size: 13px; }
+        .footer-section a { color: var(--text-main); text-decoration: none; font-size: 12px; }
+        .footer-bottom { text-align: center; margin-top: 30px; font-size: 12px; opacity: 0.7; }
+    </style>
+</head>
+<body class="lang-fr">
+
+<header>
+    <div class="header-container">
+        <div class="header-left">
+            <h2 class="gold-text" style="cursor:pointer" onclick="window.location='index.html'">ChronoBase</h2>
+            <div id="theme-switch" onclick="toggleTheme()"><div class="switch-handle"></div></div>
+            <div id="lang-switch" onclick="toggleLang()"><div class="switch-handle" id="lang-label">FR</div></div>
+        </div>
+        <nav>
+            <a href="index.html">Accueil</a>
+            <a href="montre.html">Les montres</a>
+            <a href="atelier.html" style="color:#f5d98c">L'atelier</a>
+            <a href="propos.html">À propos</a>
+        </nav>
+    </div>
+</header>
+
+<main class="workshop-view">
+    <div class="workshop-intro">
+        <h1 class="gold-text">L'Atelier ChronoBase</h1>
+        <p>Plongez au cœur de la mécanique. Sélectionnez un composant pour explorer ses secrets, sa fabrication et ses variantes.</p>
+    </div>
+
+    <div class="watch-diagram-container">
+        <svg viewBox="0 0 200 200" class="diagram-svg">
+            <path class="hotspot" d="M70 10 H130 L125 50 H75 Z" onclick="window.location='#bracelet'" />
+            <circle class="hotspot" cx="100" cy="100" r="50" onclick="window.location='#boitier'" />
+            <circle class="hotspot" cx="100" cy="100" r="40" onclick="window.location='#verre'" />
+            <path class="hotspot" d="M75 150 H125 L130 190 H70 Z" onclick="window.location='#bracelet'" />
+            
+            <text x="100" y="102" text-anchor="middle" fill="currentColor" style="font-size:6px; pointer-events:none; font-weight:bold">MOUVEMENT</text>
+        </svg>
+        <p style="font-size: 12px; opacity: 0.6; margin-top: 10px;">(Cliquez sur une partie de la montre pour l'explorer)</p>
+    </div>
+
+    <section class="workshop-grid">
+        <a href="atelier-bracelets.html" class="workshop-card">
+            <h3>Les Bracelets</h3>
+            <p>Cuir, acier, NATO ou caoutchouc : l'esthétique au poignet.</p>
+        </a>
+        <a href="atelier-mouvements.html" class="workshop-card">
+            <h3>Les Mouvements</h3>
+            <p>Automatique, manuel ou quartz : le cœur battant de la montre.</p>
+        </a>
+        <a href="atelier-verres.html" class="workshop-card">
+            <h3>Les Verres</h3>
+            <p>Hésalite, minéral ou saphir : la protection et la clarté.</p>
+        </a>
+        <a href="atelier-boitiers.html" class="workshop-card">
+            <h3>Les Boîtiers</h3>
+            <p>Acier, titane, or ou céramique : l'armure du temps.</p>
+        </a>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>Navigation</h4>
+            <a href="index.html">Accueil</a>
+            <a href="montre.html">Les montres</a>
+            <a href="atelier.html">L'atelier</a>
+        </div>
+        <div class="footer-section">
+            <h4>Contact</h4>
+            <a href="mailto:contact@chronobase.com">Envoyer un email</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>© 2026 ChronoBase — Tous droits réservés</span>
+        <div class="site-version">v1.0.0</div>
+    </div>
+</footer>
+
+<script>
+    // Logique de Thème (Reprise de votre code)
+    function toggleTheme() {
+        document.body.classList.toggle("light-theme");
+        localStorage.setItem("theme", document.body.classList.contains("light-theme") ? "light" : "dark");
+    }
+
+    // Logique de Langue (Simplifiée pour l'exemple)
+    function toggleLang() {
+        const isFr = document.body.classList.contains("lang-fr");
+        document.body.classList.replace(isFr ? "lang-fr" : "lang-en", isFr ? "lang-en" : "lang-fr");
+        document.getElementById("lang-label").textContent = isFr ? "EN" : "FR";
+    }
+
+    // Initialisation
+    (function() {
+        if (localStorage.getItem("theme") === "light") document.body.classList.add("light-theme");
+    })();
+</script>
+
+</body>
+</html>
