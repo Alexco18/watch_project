@@ -126,9 +126,9 @@ body.lang-en #lang-switch .switch-handle {
 
 /* ---------------------- SECTIONS ---------------------- */
 .sections{
-  max-width:1200px;margin:80px auto;
+  max-width:1200px;margin:40px auto;
   display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:30px;padding:0 20px 80px;
+  gap:30px;padding:0 20px 40px;
 }
 .card{
   background:var(--bg-card);
@@ -250,6 +250,55 @@ body.lang-en #lang-switch .switch-handle {
 
 .dot.active {
   background: #f5d98c;
+}
+
+/* ---------------------- NOUVEAU CONTENU ACCUEIL ---------------------- */
+.welcome-intro {
+  max-width: 800px;
+  margin: 60px auto 20px;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.welcome-intro h2 {
+  font-size: 32px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.welcome-intro p {
+  line-height: 1.8;
+  color: var(--text-secondary);
+  font-size: 17px;
+}
+
+.stats-bar {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 40px auto;
+  max-width: 1000px;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  text-align: center;
+  border-left: 1px solid var(--border-color);
+  padding-left: 20px;
+}
+
+.stat-number {
+  display: block;
+  font-size: 24px;
+  color: #f5d98c;
+  font-weight: 500;
+}
+
+.stat-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.7;
 }
 
 /* ---------------------- FOOTER COMPACT ---------------------- */
@@ -492,6 +541,29 @@ body.lang-en #lang-switch .switch-handle {
     <button class="carousel-btn btn-next" onclick="changeSlide(1)">❯</button>
   </div>
 
+  <div class="welcome-intro">
+    <h2 class="gold-text">Un espace pour tous les passionnés</h2>
+    <p>
+        Que vous soyez un collectionneur aguerri à la recherche d'archives précises, un professionnel de l'horlogerie ou simplement un curieux désireux de comprendre le mécanisme de sa première montre, <strong>ChronoBase est votre maison</strong>. 
+        Ici, la passion n'a pas de niveau : nous célébrons aussi bien la haute horlogerie que les modèles les plus accessibles. Plongez dans notre catalogue et laissez-vous guider par le battement des calibres.
+    </p>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat-item">
+        <span class="stat-number">1,240+</span>
+        <span class="stat-label">Modèles archivés</span>
+    </div>
+    <div class="stat-item">
+        <span class="stat-number">85</span>
+        <span class="stat-label">Manufactures</span>
+    </div>
+    <div class="stat-item">
+        <span class="stat-number">24/7</span>
+        <span class="stat-label">Accès libre</span>
+    </div>
+  </div>
+
   <section class="sections">
     <div class="card">
       <h3 data-key="card1-title">Dernières montres ajoutées</h3>
@@ -507,6 +579,16 @@ body.lang-en #lang-switch .switch-handle {
       <p style="cursor:pointer;color:#f5d98c" onclick="window.location='propos.html'" data-key="card2-link">
         → Découvrir le projet
       </p>
+    </div>
+
+    <div class="card">
+        <h3>L'œil de l'expert</h3>
+        <p style="font-style: italic; font-size: 14px; color: var(--text-secondary);">
+            "Ne négligez jamais l'entretien de l'étanchéité, même si vous ne nagez pas avec votre montre. Les variations d'humidité sont le premier ennemi des cadrans vintage."
+        </p>
+        <p style="margin-top: 15px; font-size: 12px; color: #f5d98c; text-transform: uppercase;">
+            Conseil de la semaine
+        </p>
     </div>
   </section>
 </section>
@@ -595,19 +677,16 @@ function setRandomAnecdote() {
 // ---------- CARROUSEL LOGIC ----------
 let currentSlide = 0;
 const slides = document.querySelectorAll('.carousel-slide');
-const dots = document.querySelectorAll('.dot'); // On récupère les points
+const dots = document.querySelectorAll('.dot'); 
 
 function showSlide(index) {
-  // Gestion de l'index
   if (index >= slides.length) currentSlide = 0;
   else if (index < 0) currentSlide = slides.length - 1;
   else currentSlide = index;
 
-  // Mise à jour des classes slides
   slides.forEach(s => s.classList.remove('active'));
   slides[currentSlide].classList.add('active');
 
-  // Mise à jour des points
   dots.forEach(d => d.classList.remove('active'));
   dots[currentSlide].classList.add('active');
 }
@@ -617,7 +696,7 @@ function changeSlide(n) {
   resetTimer();
 }
 
-let autoScroll = setInterval(() => changeSlide(1), 5000); // 5 secondes
+let autoScroll = setInterval(() => changeSlide(1), 5000); 
 
 function resetTimer() {
   clearInterval(autoScroll);
@@ -719,13 +798,10 @@ function toggleTheme() {
   localStorage.setItem("theme", isLight ? "light" : "dark");
 }
 
-// Charger les préférences au chargement de la page
 (function() {
-  // Thème
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "light") document.body.classList.add("light-theme");
   
-  // Langue
   const savedLang = localStorage.getItem("lang") || "fr";
   const body = document.body;
   const label = document.getElementById("lang-label");
@@ -735,7 +811,6 @@ function toggleTheme() {
   if(label) label.textContent = savedLang.toUpperCase();
   applyTranslations(savedLang);
 
-  // Anecdote
   setRandomAnecdote();
 })();
 </script>
