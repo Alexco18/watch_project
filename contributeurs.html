@@ -27,68 +27,27 @@
         .card h2{color:#f5d98c;font-size:26px;margin:0 0 15px 0;font-weight:400}
         .card p, .card li{color:var(--text-secondary)}
 
-        /* --- Nouveaux Styles Spécifiques au Classement --- */
-        .search-container {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
+        /* --- Styles Spécifiques au Classement --- */
+        .search-container { display: flex; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
+        input[type="text"] { flex: 1; padding: 12px 20px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-main); outline: none; }
+        .filter-btn { padding: 10px 20px; background: transparent; border: 1px solid var(--text-main); color: var(--text-main); border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        .filter-btn:hover { background: var(--text-main); color: var(--bg-header); }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th { text-align: left; border-bottom: 2px solid var(--border-color); padding: 15px; color: #f5d98c; text-transform: uppercase; font-size: 13px; }
+        td { padding: 15px; border-bottom: 1px solid var(--border-color); }
+        .rank-badge { font-weight: bold; display: inline-block; width: 30px; }
+        .score-val { font-weight: 500; color: #f5d98c; }
+        .update-note { font-size: 12px; font-style: italic; margin-top: 10px; text-align: right; opacity: 0.7; }
+
+        /* --- Style "Information" pour le règlement --- */
+        .info-box {
+            border-left: 3px solid #f5d98c;
+            padding: 20px 30px;
+            background: rgba(212, 175, 55, 0.05);
+            border-radius: 0 12px 12px 0;
         }
-        input[type="text"] {
-            flex: 1;
-            padding: 12px 20px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            color: var(--text-main);
-            outline: none;
-        }
-        .filter-btn {
-            padding: 10px 20px;
-            background: transparent;
-            border: 1px solid var(--text-main);
-            color: var(--text-main);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .filter-btn:hover {
-            background: var(--text-main);
-            color: var(--bg-header);
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-        th {
-            text-align: left;
-            border-bottom: 2px solid var(--border-color);
-            padding: 15px;
-            color: #f5d98c;
-            text-transform: uppercase;
-            font-size: 13px;
-        }
-        td {
-            padding: 15px;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .rank-badge {
-            font-weight: bold;
-            display: inline-block;
-            width: 30px;
-        }
-        .score-val {
-            font-weight: 500;
-            color: #f5d98c;
-        }
-        .update-note {
-            font-size: 12px;
-            font-style: italic;
-            margin-top: 10px;
-            text-align: right;
-            opacity: 0.7;
-        }
+        .info-box h2 { font-size: 20px; margin-bottom: 10px; font-style: normal; }
+        .info-box p { font-style: italic; font-size: 15px; margin: 0; }
 
         #back-to-top {
             position: fixed; bottom: 30px; right: 30px; width: 45px; height: 45px;
@@ -103,7 +62,6 @@
         .footer-section{display:flex;flex-direction:column;gap:4px}
         .footer-section h4{margin-bottom:6px;color:#f5d98c;font-size:13px}
         .footer-section a{color:var(--text-main);text-decoration:none;font-size:12px}
-        .footer-legal{margin-top:10px;padding-top:10px;border-top:1px solid var(--border-color)}
         .footer-bottom{text-align:center;margin-top:15px;font-size:12px;opacity:0.7}
     </style>
 </head>
@@ -160,17 +118,17 @@
                     </tr>
                 </thead>
                 <tbody id="tableBody">
-                    <tr><td><span class="rank-badge">1</span></td><td>OmegaPassion</td><td class="score-val">125</td></tr>
-                    <tr><td><span class="rank-badge">2</span></td><td>WatchMaker_75</td><td class="score-val">98</td></tr>
-                    <tr><td><span class="rank-badge">3</span></td><td>HorloFan</td><td class="score-val">84</td></tr>
-                    <tr><td><span class="rank-badge">4</span></td><td>TimeKeeper</td><td class="score-val">56</td></tr>
-                    <tr><td><span class="rank-badge">5</span></td><td>VintageLover</td><td class="score-val">42</td></tr>
+                    <tr><td><span class="rank-badge">1</span></td><td translate="no">OmegaPassion</td><td class="score-val">125</td></tr>
+                    <tr><td><span class="rank-badge">2</span></td><td translate="no">WatchMaker_75</td><td class="score-val">98</td></tr>
+                    <tr><td><span class="rank-badge">3</span></td><td translate="no">HorloFan</td><td class="score-val">84</td></tr>
+                    <tr><td><span class="rank-badge">4</span></td><td translate="no">TimeKeeper</td><td class="score-val">56</td></tr>
+                    <tr><td><span class="rank-badge">5</span></td><td translate="no">VintageLover</td><td class="score-val">42</td></tr>
                 </tbody>
             </table>
             <p class="update-note">Dernière mise à jour : Dimanche dernier à 23h59.</p>
         </div>
 
-        <div class="card">
+        <div class="info-box">
             <h2>Règlement & Éthique</h2>
             <p>Tout comportement inapproprié, vulgarité ou non-respect des autres membres entraînera une déduction de points ou une exclusion définitive du classement. ChronoBase se réserve le droit de valider ou refuser une contribution selon sa pertinence.</p>
         </div>
@@ -203,7 +161,6 @@
 </footer>
 
 <script>
-    // --- Logique de recherche ---
     function filterTable() {
         const input = document.getElementById("searchInput");
         const filter = input.value.toUpperCase();
@@ -211,7 +168,7 @@
         const tr = table.getElementsByTagName("tr");
 
         for (let i = 0; i < tr.length; i++) {
-            let td = tr[i].getElementsByTagName("td")[1]; // Colonne Pseudo
+            let td = tr[i].getElementsByTagName("td")[1];
             if (td) {
                 let txtValue = td.textContent || td.innerText;
                 tr[i].style.display = txtValue.toUpperCase().indexOf(filter) > -1 ? "" : "none";
@@ -219,7 +176,6 @@
         }
     }
 
-    // --- Logique de tri ---
     let sortAsc = false;
     function sortTable() {
         const table = document.getElementById("tableBody");
@@ -235,7 +191,6 @@
         rows.forEach(row => table.appendChild(row));
     }
 
-    // --- Fonctions communes (Theme/Lang/Scroll) ---
     function toggleTheme(){
         document.body.classList.toggle("light-theme");
         localStorage.setItem("theme", document.body.classList.contains("light-theme") ? "light" : "dark");
@@ -248,7 +203,6 @@
     };
     function scrollToTop() { window.scrollTo({top: 0, behavior: 'smooth'}); }
 
-    // Init Theme
     if(localStorage.getItem("theme") === "light") document.body.classList.add("light-theme");
 </script>
 
