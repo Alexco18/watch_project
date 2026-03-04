@@ -27,6 +27,10 @@
         .hero{text-align:center;margin-bottom:60px;}
         .hero p { max-width: 800px; margin: 20px auto; line-height: 1.6; }
         
+        /* Nouveau style pour la section feedback dans le hero */
+        .feedback-hero { margin-top: 30px; padding: 20px; border-top: 1px solid var(--border-color); display: inline-block; }
+        .feedback-hero p { font-size: 14px; color: var(--text-secondary); margin-bottom: 15px; }
+
         /* Galerie Bracelets */
         .strap-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 80px; }
         .category-group { margin-bottom: 20px; }
@@ -62,16 +66,15 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
-        /* Bouton Feedback fixe */
-        #feedback-btn {
-            position: fixed; bottom: 30px; left: 30px; padding: 12px 20px;
+        /* Bouton Feedback modifié pour intégration texte */
+        .btn-inline {
+            display: inline-flex; align-items: center; padding: 10px 25px;
             background: var(--bg-header); border: 1px solid var(--text-main);
             color: var(--text-main); border-radius: 30px; cursor: pointer;
-            z-index: 100; transition: all 0.3s ease; font-size: 13px;
+            transition: all 0.3s ease; font-size: 13px;
             text-transform: uppercase; letter-spacing: 1px; text-decoration: none;
-            display: flex; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
-        #feedback-btn:hover { background: var(--text-main); color: var(--bg-header); }
+        .btn-inline:hover { background: var(--text-main); color: var(--bg-header); }
 
         /* Footer */
         .site-footer{background:var(--bg-footer);border-top:1px solid var(--border-color);padding:25px 20px 15px;margin-top:40px;color:var(--text-main);font-size:14px}.footer-content{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px}.footer-section{display:flex;flex-direction:column;gap:4px}.footer-section h4{margin-bottom:6px;color:#f5d98c;font-size:13px}.footer-section a{color:var(--text-main);text-decoration:none;font-size:12px}.footer-section a:hover{color:#f5d98c}.footer-legal{margin-top:10px;padding-top:10px;border-top:1px solid var(--border-color)}.footer-bottom{text-align:center;margin-top:15px;font-size:12px;opacity:0.7}.site-version{display:block;margin-top:5px}
@@ -90,7 +93,7 @@
             <a href="index.html" data-key="nav-home">Accueil</a>
             <a href="montre.html" data-key="nav-watches">Les montres</a>
             <a href="atelier.html" data-key="nav-workshop" style="color:#f5d98c">L'atelier</a>
-            <a href="ressources.html" data-key="nav-res" style="color:#f5d98c">Ressources</a>
+            <a href="ressources.html" data-key="nav-res">Ressources</a>
             <a href="propos.html" data-key="nav-about">À propos</a>
         </nav>
     </div>
@@ -100,6 +103,11 @@
     <section class="hero">
         <h1 class="gold-text" data-key="strap-title">Les Bracelets d'Horlogerie</h1>
         <p data-key="strap-intro">Explorez les différents types de bracelets pour transformer l'esthétique de votre garde-temps. Cette galerie vous offre une première approche visuelle des styles emblématiques, du cuir classique aux mailles métalliques robustes.</p>
+        
+        <div class="feedback-hero">
+            <p data-key="feedback-text">Votre avis est important pour nous aider à améliorer votre expérience. N'hésitez pas à nous faire part de vos suggestions !</p>
+            <a href="mailto:feedback@chronobase.com?subject=Avis sur ChronoBase&body=Bonjour, voici mon retour concernant le site :" class="btn-inline" data-key="btn-feedback">Donner mon avis</a>
+        </div>
     </section>
 
     <section class="strap-gallery">
@@ -162,8 +170,6 @@
     </section>
 </main>
 
-<a href="mailto:feedback@chronobase.com?subject=Avis sur ChronoBase&body=Bonjour, voici mon retour concernant le site :" id="feedback-btn" data-key="btn-feedback">Donner mon avis</a>
-
 <button id="back-to-top" onclick="scrollToTop()">↑</button>
 
 <footer class="site-footer">
@@ -220,6 +226,7 @@
             "nav-home": "Accueil", "nav-watches": "Les montres", "nav-workshop": "L'atelier", "nav-about": "À propos", "nav-res": "Ressources",
             "strap-title": "Les Bracelets d'Horlogerie", 
             "strap-intro": "Explorez les différents types de bracelets pour transformer l'esthétique de votre garde-temps. Cette galerie vous offre une première approche visuelle des styles emblématiques, du cuir classique aux mailles métalliques robustes.",
+            "feedback-text": "Votre avis est important pour nous aider à améliorer votre expérience. N'hésitez pas à nous faire part de vos suggestions !",
             "cat-classic": "Classiques", "cat-robust": "Robustes", "cat-sport": "Sportifs", "cat-original": "Originaux",
             "s-smooth": "Cuir Lisse", "s-embossed": "Cuir Embossé", "s-rallye": "Rallye", "s-milan": "Milanaise",
             "btn-feedback": "Donner mon avis",
@@ -229,6 +236,7 @@
             "nav-home": "Home", "nav-watches": "Watches", "nav-workshop": "Workshop", "nav-about": "About", "nav-res": "Resources",
             "strap-title": "Watch Straps", 
             "strap-intro": "Explore the different types of straps to transform your timepiece's look. This gallery provides a visual introduction to iconic styles, from classic leather to robust metal bracelets.",
+            "feedback-text": "Your feedback is important to help us improve your experience. Feel free to share your suggestions!",
             "cat-classic": "Classic", "cat-robust": "Robust", "cat-sport": "Sport", "cat-original": "Original",
             "s-smooth": "Smooth Leather", "s-embossed": "Embossed Leather", "s-rallye": "Rally", "s-milan": "Milanese",
             "btn-feedback": "Give Feedback",
