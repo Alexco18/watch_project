@@ -24,43 +24,64 @@
         .light-theme #theme-switch .switch-handle{transform:translateX(24px);background:#000;}
         .lang-en #lang-switch .switch-handle{transform:translateX(24px);}
 
-        /* New Visual Grid Styles */
+        /* --- AJUSTEMENTS POUR LE CÔTE À CÔTE --- */
         .content-view{min-height:100vh;padding-top:120px;max-width:1100px;margin:0 auto;padding-left:20px;padding-right:20px;}
         .intro-section{text-align:center;margin-bottom:60px;}
         
-        .strap-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 80px; }
+        /* Grille principale : 2 colonnes */
+        .strap-gallery { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; /* Force 2 colonnes */
+            gap: 40px; 
+            margin-bottom: 80px; 
+        }
+
+        /* Style des catégories cliquables */
+        .category-group { margin-bottom: 20px; }
         
+        summary { list-style: none; cursor: pointer; outline: none; }
+        summary::-webkit-details-marker { display: none; }
+
         .strap-card { 
             position: relative; 
-            height: 400px; 
+            height: 350px; 
             border-radius: 15px; 
             overflow: hidden; 
             border: 1px solid var(--border-color);
             transition: transform 0.4s ease;
         }
         
-        .strap-card:hover { transform: scale(1.02); border-color: var(--accent-color); }
-        
-        .strap-card img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6); transition: 0.4s; }
-        .strap-card:hover img { filter: brightness(0.8); }
+        .strap-card:hover { transform: translateY(-5px); border-color: var(--accent-color); }
+        .strap-card img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.5); transition: 0.4s; }
+        .strap-card:hover img { filter: brightness(0.7); }
 
         .strap-overlay {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 30px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            text-align: center;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 100%; text-align: center;
         }
 
         .strap-overlay h3 { 
-            margin: 0; 
-            font-size: 1.5rem; 
-            text-transform: uppercase; 
-            letter-spacing: 2px;
-            color: #fff; /* On garde blanc pour la lisibilité sur image */
+            margin: 0; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 4px; color: #fff; 
         }
+
+        /* Sous-liste qui apparaît au clic */
+        .strap-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            padding: 20px 10px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .sub-item { text-align: center; }
+        .sub-item img { width: 100%; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 8px; }
+        .sub-item span { font-size: 12px; color: var(--text-secondary); text-transform: uppercase; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Responsive : 1 seule colonne sur mobile */
+        @media (max-width: 768px) { .strap-gallery { grid-template-columns: 1fr; } }
 
         /* Floating buttons */
         #back-to-top, #report-error { position: fixed; right: 30px; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 100; transition: 0.3s; border: 1px solid var(--text-main); background: var(--bg-header); color: var(--text-main); }
@@ -74,7 +95,6 @@
         .footer-section h4{color:var(--accent-color);margin-bottom:15px}
         .footer-section a{display:block;color:var(--text-main);text-decoration:none;font-size:12px;margin-bottom:8px}
         .footer-bottom{text-align:center;margin-top:40px;border-top:1px solid var(--border-color);padding-top:20px;opacity:0.7}
-
     </style>
 </head>
 <body class="lang-fr">
@@ -98,37 +118,68 @@
 <main class="content-view">
     <section class="intro-section">
         <h1 class="gold-text" data-key="strap-title">Les Bracelets d'Horlogerie</h1>
-        <p data-key="strap-intro">Bien plus qu'un simple accessoire de maintien, le bracelet définit le caractère et l'usage d'un garde-temps.</p>
+        <p data-key="strap-intro">Cliquez sur une catégorie pour découvrir les différents styles.</p>
     </section>
 
     <section class="strap-gallery">
-        <div class="strap-card">
-            <img src="cuir.jpg" alt="Bracelet Cuir">
-            <div class="strap-overlay">
-                <h3 data-key="mat-leather-t">Bracelet en Cuir</h3>
+        
+        <details class="category-group">
+            <summary>
+                <div class="strap-card">
+                    <img src="cuir_main.jpg" alt="Classiques">
+                    <div class="strap-overlay"><h3>Classiques</h3></div>
+                </div>
+            </summary>
+            <div class="strap-details">
+                <div class="sub-item"><img src="lisse.jpg"><span>Cuir Lisse</span></div>
+                <div class="sub-item"><img src="embosse.jpg"><span>Cuir Embossé</span></div>
+                <div class="sub-item"><img src="rallye.jpg"><span>Rallye</span></div>
             </div>
-        </div>
+        </details>
 
-        <div class="strap-card">
-            <img src="acier.jpg" alt="Bracelet Acier">
-            <div class="strap-overlay">
-                <h3 data-key="mat-steel-t">Bracelet en Acier</h3>
+        <details class="category-group">
+            <summary>
+                <div class="strap-card">
+                    <img src="metal_main.jpg" alt="Robustes">
+                    <div class="strap-overlay"><h3>Robustes</h3></div>
+                </div>
+            </summary>
+            <div class="strap-details">
+                <div class="sub-item"><img src="oyster.jpg"><span>Oyster</span></div>
+                <div class="sub-item"><img src="jubile.jpg"><span>Jubilé</span></div>
+                <div class="sub-item"><img src="mesh.jpg"><span>Milanaise</span></div>
+                <div class="sub-item"><img src="ingenieur.jpg"><span>Ingénieur</span></div>
             </div>
-        </div>
+        </details>
 
-        <div class="strap-card">
-            <img src="nato.jpg" alt="Bracelet NATO">
-            <div class="strap-overlay">
-                <h3 data-key="mat-atypic-t">Bracelet NATO</h3>
+        <details class="category-group">
+            <summary>
+                <div class="strap-card">
+                    <img src="sport_main.jpg" alt="Sportifs">
+                    <div class="strap-overlay"><h3>Sportifs</h3></div>
+                </div>
+            </summary>
+            <div class="strap-details">
+                <div class="sub-item"><img src="nato_sub.jpg"><span>NATO</span></div>
+                <div class="sub-item"><img src="tropic.jpg"><span>Tropic</span></div>
+                <div class="sub-item"><img src="fkm.jpg"><span>Silicone / FKM</span></div>
+                <div class="sub-item"><img src="perlon.jpg"><span>Perlon</span></div>
             </div>
-        </div>
+        </details>
 
-        <div class="strap-card">
-            <img src="rubber.jpg" alt="Bracelet Caoutchouc">
-            <div class="strap-overlay">
-                <h3 data-key="mat-rubber-t">Bracelet Caoutchouc</h3>
+        <details class="category-group">
+            <summary>
+                <div class="strap-card">
+                    <img src="original_main.jpg" alt="Originaux">
+                    <div class="strap-overlay"><h3>Originaux</h3></div>
+                </div>
+            </summary>
+            <div class="strap-details">
+                <div class="sub-item"><img src="canvas.jpg"><span>Canvas</span></div>
+                <div class="sub-item"><img src="bund.jpg"><span>Bund</span></div>
             </div>
-        </div>
+        </details>
+
     </section>
 </main>
 
@@ -145,22 +196,15 @@
 </footer>
 
 <script>
+    /* Le script reste identique à ton original pour préserver les fonctions de thème et langue */
     const translations = {
         fr: {
             "nav-home": "Accueil", "nav-watches": "Les montres", "nav-workshop": "L'atelier", "nav-about": "À propos",
-            "strap-title": "Les Bracelets d'Horlogerie", "strap-intro": "Bien plus qu'un simple accessoire de maintien, le bracelet définit le caractère et l'usage d'un garde-temps.",
-            "mat-leather-t": "Bracelet en Cuir",
-            "mat-steel-t": "Bracelet en Acier",
-            "mat-atypic-t": "Bracelet NATO",
-            "mat-rubber-t": "Bracelet Caoutchouc"
+            "strap-title": "Les Bracelets d'Horlogerie", "strap-intro": "Cliquez sur une catégorie pour découvrir les différents styles."
         },
         en: {
             "nav-home": "Home", "nav-watches": "Watches", "nav-workshop": "Workshop", "nav-about": "About",
-            "strap-title": "Watch Straps", "strap-intro": "More than just a holder, the strap defines the character and use of a timepiece.",
-            "mat-leather-t": "Leather Strap",
-            "mat-steel-t": "Steel Bracelet",
-            "mat-atypic-t": "NATO Strap",
-            "mat-rubber-t": "Rubber Strap"
+            "strap-title": "Watch Straps", "strap-intro": "Click on a category to discover the different styles."
         }
     };
 
