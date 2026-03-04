@@ -29,7 +29,7 @@
             --text-main: #000000;
             --text-secondary: #444444;
             --border-color: rgba(0,0,0,0.2);
-            --bg-diagram: rgba(0, 0, 0, 0.08); /* Plus sombre pour faire ressortir le verre */
+            --bg-diagram: rgba(0, 0, 0, 0.12); /* Ajusté pour la visibilité du verre en mode jour */
         }
 
         body {
@@ -83,7 +83,7 @@
 
         .workshop-intro {
             max-width: 800px; margin: 0 auto 10px; padding: 0 20px;
-            text-align: center; /* Maintien du centrage pour l'élégance */
+            text-align: center;
         }
 
         .instruction-banner {
@@ -100,7 +100,7 @@
         /* ---------------------- LE SCHÉMA ÉCLATÉ ---------------------- */
         .watch-diagram-container {
             position: relative;
-            max-width: 700px; /* Élargi pour un meilleur centrage visuel */
+            max-width: 800px; /* Élargi pour permettre au schéma de respirer au centre */
             margin: 0 auto;
             perspective: 1000px;
             padding: 60px 40px;
@@ -126,7 +126,7 @@
             filter: drop-shadow(0 15px 20px rgba(0,0,0,0.4));
             transition: transform 0.5s ease;
             overflow: visible; 
-            margin-left: -40px; /* Compense visuellement les labels à droite pour recentrer l'objet */
+            margin-left: 0; /* Suppression du décalage pour un centrage parfait de l'objet */
         }
 
         /* Styles des composants */
