@@ -6,91 +6,63 @@
     <title>Les Bracelets - ChronoBase</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        :root{--gold-gradient:linear-gradient(90deg,#d4af37,#f5d98c,#c8a951);--bg-main:radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);--bg-header:#0b0b0b;--bg-footer:#0b0b0b;--bg-card:linear-gradient(180deg,#111,#0c0c0c);--text-main:#d4af37;--text-secondary:#c1a96b;--border-color:rgba(212,175,55,0.2);--accent-color:#f5d98c;}
-        .light-theme{--bg-main:#ffffff;--bg-header:#ffffff;--bg-footer:#ffffff;--bg-card:#f7f7f7;--text-main:#000000;--text-secondary:#444444;--border-color:rgba(0,0,0,0.2);--accent-color:#d4af37;}
-        
+        :root{--gold-gradient:linear-gradient(90deg,#d4af37,#f5d98c,#c8a951);--bg-main:radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);--bg-header:#0b0b0b;--bg-footer:#0b0b0b;--bg-card:linear-gradient(180deg,#111,#0c0c0c);--text-main:#d4af37;--text-secondary:#c1a96b;--border-color:rgba(212,175,55,0.2)}
+        .light-theme{--bg-main:#fff;--bg-header:#fff;--bg-footer:#fff;--bg-card:#f7f7f7;--text-main:#000;--text-secondary:#444;--border-color:rgba(0,0,0,0.2)}
         body{margin:0;padding:0;font-family:'Montserrat',sans-serif;background:var(--bg-main);color:var(--text-main);font-weight:300;overflow-x:hidden;scroll-behavior: smooth;}
-        .gold-text{background:var(--gold-gradient);-webkit-background-clip:text;color:transparent;animation:shine 6s infinite linear;background-size:200%;}
+        .gold-text{background:var(--gold-gradient);-webkit-background-clip:text;color:transparent;animation:shine 6s infinite linear;background-size:200%}
         @keyframes shine{0%{background-position:0%}100%{background-position:200%}}
         
-        header{width:100%;padding:12px 0;border-bottom:1px solid var(--border-color);background:var(--bg-header);position:fixed;top:0;left:0;z-index:100;}
-        .header-container{max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:0 20px;}
-        .header-left{display:flex;align-items:center;gap:15px;}
-        nav a{margin-left:30px;text-decoration:none;color:var(--text-main);font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;}
-        nav a:hover{color:var(--accent-color)}
+        header{width:100%;padding:12px 0;border-bottom:1px solid var(--border-color);background:var(--bg-header);position:fixed;top:0;left:0;z-index:100}
+        .header-container{max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:0 20px}
+        .header-left{display:flex;align-items:center;gap:15px}
+        nav a{margin-left:30px;text-decoration:none;color:var(--text-main);font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer}
+        nav a:hover{color:#f5d98c}
         
-        #theme-switch,#lang-switch{width:50px;height:26px;background:var(--border-color);border-radius:20px;position:relative;cursor:pointer;transition:background .3s;display:flex;align-items:center;padding:3px;}
-        .switch-handle{width:20px;height:20px;background:var(--text-main);border-radius:50%;transition:transform 0.3s;display:flex;justify-content:center;align-items:center;font-size:10px;font-weight:700;color:var(--bg-header);}
-        .light-theme #theme-switch .switch-handle{transform:translateX(24px);background:#000;}
-        .lang-en #lang-switch .switch-handle{transform:translateX(24px);}
+        #theme-switch,#lang-switch{width:50px;height:26px;background:var(--border-color);border-radius:20px;position:relative;cursor:pointer;transition:background .3s;display:flex;align-items:center;padding:3px}
+        .switch-handle{width:20px;height:20px;background:var(--text-main);border-radius:50%;transition:transform .3s;display:flex;justify-content:center;align-items:center;font-size:10px;font-weight:700;color:var(--bg-header)}
+        .light-theme #theme-switch .switch-handle{transform:translateX(24px);background:#000}
+        .lang-en #lang-switch .switch-handle{transform:translateX(24px)}
 
-        .content-view{min-height:100vh;padding-top:120px;max-width:1100px;margin:0 auto;padding-left:20px;padding-right:20px;}
-        .intro-section{text-align:center;margin-bottom:60px;}
+        .view{min-height:100vh;padding-top:120px;max-width:1100px;margin:0 auto;padding-left:20px;padding-right:20px;}
+        .hero{text-align:center;margin-bottom:60px;}
         
-        .strap-gallery { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 40px; 
-            margin-bottom: 80px; 
-        }
-
+        /* Galerie Bracelets */
+        .strap-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 80px; }
         .category-group { margin-bottom: 20px; }
-        
         summary { list-style: none; cursor: pointer; outline: none; }
         summary::-webkit-details-marker { display: none; }
 
         .strap-card { 
-            position: relative; 
-            height: 350px; 
-            border-radius: 15px; 
-            overflow: hidden; 
-            border: 1px solid var(--border-color);
-            transition: transform 0.4s ease;
+            position: relative; height: 350px; border-radius: 15px; overflow: hidden; 
+            border: 1px solid var(--border-color); transition: transform 0.4s ease;
         }
-        
-        .strap-card:hover { transform: translateY(-5px); border-color: var(--accent-color); }
+        .strap-card:hover { transform: translateY(-5px); border-color: #f5d98c; }
         .strap-card img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); transition: 0.4s; }
         .strap-card:hover img { filter: brightness(0.6); }
 
-        .strap-overlay {
-            position: absolute;
-            top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 100%; text-align: center;
-        }
+        .strap-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; text-align: center; }
+        .strap-overlay h3 { margin: 0; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 4px; color: #ffffff !important; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); }
 
-        /* Correction couleur : On force le blanc pour que ça reste lisible sur l'image sombre même en mode jour */
-        .strap-overlay h3 { 
-            margin: 0; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 4px; 
-            color: #ffffff !important; 
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
-        }
-
-        .strap-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            padding: 30px 10px;
-            animation: fadeIn 0.5s ease;
-        }
-
+        .strap-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; padding: 30px 10px; animation: fadeIn 0.5s ease; }
         .sub-item { text-align: center; display: flex; flex-direction: column; align-items: center; }
         .sub-item img { width: 100%; max-width: 180px; height: 120px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 10px; }
         .sub-item span { font-size: 13px; color: var(--text-secondary); text-transform: uppercase; font-weight: 500; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-
         @media (max-width: 768px) { .strap-gallery { grid-template-columns: 1fr; } }
 
-        #back-to-top, #report-error { position: fixed; right: 30px; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 100; transition: 0.3s; border: 1px solid var(--text-main); background: var(--bg-header); color: var(--text-main); }
-        #back-to-top { bottom: 90px; display: none; }
-        #report-error { bottom: 30px; }
-        #report-error:hover { background: #8b0000; color: white; border-color: #8b0000; }
+        /* Bouton Back to Top */
+        #back-to-top {
+            position: fixed; bottom: 30px; right: 30px; width: 45px; height: 45px;
+            background: var(--bg-header); border: 1px solid var(--text-main);
+            color: var(--text-main); border-radius: 50%; cursor: pointer;
+            display: none; align-items: center; justify-content: center;
+            font-size: 20px; z-index: 100; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
 
-        .site-footer{background:var(--bg-footer);border-top:1px solid var(--border-color);padding:40px 20px;margin-top:80px;color:var(--text-main);font-size:14px}
-        .footer-content{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:25px}
-        .footer-section h4{color:var(--accent-color);margin-bottom:15px}
-        .footer-section a{display:block;color:var(--text-main);text-decoration:none;font-size:12px;margin-bottom:8px}
-        .footer-bottom{text-align:center;margin-top:40px;border-top:1px solid var(--border-color);padding-top:20px;opacity:0.7}
+        /* Footer */
+        .site-footer{background:var(--bg-footer);border-top:1px solid var(--border-color);padding:25px 20px 15px;margin-top:40px;color:var(--text-main);font-size:14px}.footer-content{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px}.footer-section{display:flex;flex-direction:column;gap:4px}.footer-section h4{margin-bottom:6px;color:#f5d98c;font-size:13px}.footer-section a{color:var(--text-main);text-decoration:none;font-size:12px}.footer-section a:hover{color:#f5d98c}.footer-legal{margin-top:10px;padding-top:10px;border-top:1px solid var(--border-color)}.footer-bottom{text-align:center;margin-top:15px;font-size:12px;opacity:0.7}.site-version{display:block;margin-top:5px}
     </style>
 </head>
 <body class="lang-fr">
@@ -105,31 +77,30 @@
         <nav>
             <a href="index.html" data-key="nav-home">Accueil</a>
             <a href="montre.html" data-key="nav-watches">Les montres</a>
-            <a href="atelier.html" data-key="nav-workshop" style="color:var(--accent-color)">L'atelier</a>
+            <a href="atelier.html" data-key="nav-workshop" style="color:#f5d98c">L'atelier</a>
             <a href="propos.html" data-key="nav-about">À propos</a>
         </nav>
     </div>
 </header>
 
-<main class="content-view">
-    <section class="intro-section">
+<main class="view">
+    <section class="hero">
         <h1 class="gold-text" data-key="strap-title">Les Bracelets d'Horlogerie</h1>
         <p data-key="strap-intro">Cliquez sur une catégorie pour découvrir les différents styles.</p>
     </section>
 
     <section class="strap-gallery">
-        
         <details class="category-group">
             <summary>
                 <div class="strap-card">
                     <img src="cuir_main.jpg" alt="Classiques">
-                    <div class="strap-overlay"><h3>Classiques</h3></div>
+                    <div class="strap-overlay"><h3 data-key="cat-classic">Classiques</h3></div>
                 </div>
             </summary>
             <div class="strap-details">
-                <div class="sub-item"><img src="lisse.jpg"><span>Cuir Lisse</span></div>
-                <div class="sub-item"><img src="embosse.jpg"><span>Cuir Embossé</span></div>
-                <div class="sub-item"><img src="rallye.jpg"><span>Rallye</span></div>
+                <div class="sub-item"><img src="lisse.jpg"><span data-key="s-smooth">Cuir Lisse</span></div>
+                <div class="sub-item"><img src="embosse.jpg"><span data-key="s-embossed">Cuir Embossé</span></div>
+                <div class="sub-item"><img src="rallye.jpg"><span data-key="s-rallye">Rallye</span></div>
             </div>
         </details>
 
@@ -137,13 +108,13 @@
             <summary>
                 <div class="strap-card">
                     <img src="metal_main.jpg" alt="Robustes">
-                    <div class="strap-overlay"><h3>Robustes</h3></div>
+                    <div class="strap-overlay"><h3 data-key="cat-robust">Robustes</h3></div>
                 </div>
             </summary>
             <div class="strap-details">
                 <div class="sub-item"><img src="oyster.jpg"><span>Oyster</span></div>
                 <div class="sub-item"><img src="jubile.jpg"><span>Jubilé</span></div>
-                <div class="sub-item"><img src="mesh.jpg"><span>Milanaise</span></div>
+                <div class="sub-item"><img src="mesh.jpg"><span data-key="s-milan">Milanaise</span></div>
                 <div class="sub-item"><img src="ingenieur.jpg"><span>Ingénieur</span></div>
             </div>
         </details>
@@ -152,7 +123,7 @@
             <summary>
                 <div class="strap-card">
                     <img src="sport_main.jpg" alt="Sportifs">
-                    <div class="strap-overlay"><h3>Sportifs</h3></div>
+                    <div class="strap-overlay"><h3 data-key="cat-sport">Sportifs</h3></div>
                 </div>
             </summary>
             <div class="strap-details">
@@ -167,7 +138,7 @@
             <summary>
                 <div class="strap-card">
                     <img src="original_main.jpg" alt="Originaux">
-                    <div class="strap-overlay"><h3>Originaux</h3></div>
+                    <div class="strap-overlay"><h3 data-key="cat-original">Originaux</h3></div>
                 </div>
             </summary>
             <div class="strap-details">
@@ -175,31 +146,74 @@
                 <div class="sub-item"><img src="bund.jpg"><span>Bund</span></div>
             </div>
         </details>
-
     </section>
 </main>
 
 <button id="back-to-top" onclick="scrollToTop()">↑</button>
-<button id="report-error" onclick="reportError()" title="Signaler une erreur">!</button>
 
 <footer class="site-footer">
     <div class="footer-content">
-        <div class="footer-section"><h4>Navigation</h4><a href="index.html">Accueil</a><a href="montre.html">Les montres</a><a href="propos.html">À propos</a></div>
-        <div class="footer-section"><h4>Contact</h4><a href="mailto:contact@chronobase.com">Email</a><a href="#">Formulaire</a></div>
-        <div class="footer-section"><h4>Légal</h4><a href="mentions.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a></div>
+        <div class="footer-section">
+            <h4 data-key="f-nav">Navigation</h4>
+            <a href="index.html" data-key="nav-home">Accueil</a>
+            <a href="montre.html" data-key="nav-watches">Les montres</a>
+            <a href="propos.html" data-key="nav-about">À propos</a>
+            <a href="chiffre.html" data-key="f-stats">Chiffres clés</a>
+        </div>
+        <div class="footer-section">
+            <h4 data-key="f-contact">Contact</h4>
+            <a href="mailto:contact@chronobase.com" data-key="f-mail">Email</a>
+            <a href="#" data-key="f-form">Formulaire</a>
+            <a href="reseaux.html" data-key="f-social">Réseaux</a>
+        </div>
+        <div class="footer-section">
+            <h4 data-key="f-version">Version</h4>
+            <a href="version.html" data-key="f-hist-v">Historique</a>
+            <a href="maj.html" data-key="f-hist-u">Mises à jour</a>
+            <a href="contributeurs.html" data-key="f-contrib">Contributeurs</a>
+        </div>
+        <div class="footer-section">
+            <h4 data-key="f-res">Ressources</h4>
+            <a href="horlogers.html" data-key="f-map">Carte</a>
+            <a href="evenements.html" data-key="f-events">Événements</a>
+            <a href="achats.html" data-key="f-equip">Achats</a>
+        </div>
     </div>
-    <div class="footer-bottom">© 2026 ChronoBase — Tous droits réservés <br> v1.0.0</div>
+    <div class="footer-content footer-legal">
+        <div class="footer-section">
+            <h4 data-key="f-legal">Légal</h4>
+            <a href="mentions.html" data-key="f-mentions">Mentions</a>
+            <a href="cgu.html" data-key="f-cgu">CGU</a>
+            <a href="confidentialite.html" data-key="f-priv">Confidentialité</a>
+        </div>
+        <div class="footer-section">
+            <h4 data-key="f-reg">Règlements</h4>
+            <a href="reglement-site.html" data-key="f-reg-s">Site</a>
+            <a href="reglement-reseaux.html" data-key="f-reg-n">Réseaux</a>
+            <a href="cookies.html" data-key="f-cookies">Cookies</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span data-key="f-copy">© 2026 ChronoBase — Tous droits réservés</span>
+        <div class="site-version">v1.0.0</div>
+    </div>
 </footer>
 
 <script>
     const translations = {
         fr: {
             "nav-home": "Accueil", "nav-watches": "Les montres", "nav-workshop": "L'atelier", "nav-about": "À propos",
-            "strap-title": "Les Bracelets d'Horlogerie", "strap-intro": "Cliquez sur une catégorie pour découvrir les différents styles."
+            "strap-title": "Les Bracelets d'Horlogerie", "strap-intro": "Cliquez sur une catégorie pour découvrir les différents styles.",
+            "cat-classic": "Classiques", "cat-robust": "Robustes", "cat-sport": "Sportifs", "cat-original": "Originaux",
+            "s-smooth": "Cuir Lisse", "s-embossed": "Cuir Embossé", "s-rallye": "Rallye", "s-milan": "Milanaise",
+            "f-nav":"Navigation","f-stats":"Chiffres clés","f-contact":"Contact","f-mail":"Envoyer un email","f-form":"Formulaire (à venir)","f-social":"Nos réseaux sociaux","f-version":"Version","f-hist-v":"Historique des versions","f-hist-u":"Historique des mises à jour","f-contrib":"Nos contributeurs","f-res":"Ressources horlogères","f-map":"Carte des horlogers","f-events":"Événements & bourses","f-equip":"Équipements & achats","f-legal":"Légal","f-mentions":"Mentions légales","f-cgu":"Conditions d’utilisation","f-priv":"Politique de confidentialité","f-reg":"Règlements","f-reg-s":"Règlement du site","f-reg-n":"Règlement des réseaux sociaux","f-cookies":"Gestion des cookies","f-copy":"© 2026 ChronoBase — Tous droits réservés"
         },
         en: {
             "nav-home": "Home", "nav-watches": "Watches", "nav-workshop": "Workshop", "nav-about": "About",
-            "strap-title": "Watch Straps", "strap-intro": "Click on a category to discover the different styles."
+            "strap-title": "Watch Straps", "strap-intro": "Click on a category to discover the different styles.",
+            "cat-classic": "Classic", "cat-robust": "Robust", "cat-sport": "Sport", "cat-original": "Original",
+            "s-smooth": "Smooth Leather", "s-embossed": "Embossed Leather", "s-rallye": "Rally", "s-milan": "Milanese",
+            "f-nav":"Navigation","f-stats":"Key Figures","f-contact":"Contact","f-mail":"Send an email","f-form":"Form (coming soon)","f-social":"Social Media","f-version":"Version","f-hist-v":"Version History","f-hist-u":"Update History","f-contrib":"Our Contributors","f-res":"Watchmaking Resources","f-map":"Watchmakers Map","f-events":"Events & Fairs","f-equip":"Equipment & Purchases","f-legal":"Legal","f-mentions":"Legal Notice","f-cgu":"Terms of Use","f-priv":"Privacy Policy","f-reg":"Regulations","f-reg-s":"Site Rules","f-reg-n":"Social Media Rules","f-cookies":"Cookie Management","f-copy":"© 2026 ChronoBase — All rights reserved"
         }
     };
 
@@ -225,11 +239,6 @@
         });
     }
 
-    function reportError() {
-        const msg = prompt("Merci de nous aider ! Décrivez l'erreur constatée :");
-        if(msg) alert("Merci ! Votre signalement a été envoyé à l'équipe ChronoBase.");
-    }
-
     window.onscroll = function() {
         document.getElementById("back-to-top").style.display = (window.scrollY > 300) ? "flex" : "none";
     };
@@ -239,6 +248,7 @@
     document.addEventListener("DOMContentLoaded", () => {
         if(localStorage.getItem("theme") === "light") document.body.classList.add("light-theme");
         const savedLang = localStorage.getItem("lang") || "fr";
+        document.body.classList.remove("lang-fr", "lang-en");
         document.body.classList.add("lang-" + savedLang);
         document.getElementById("lang-label").textContent = savedLang.toUpperCase();
         updateContent(savedLang);
