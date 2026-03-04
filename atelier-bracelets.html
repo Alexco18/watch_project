@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="favicon.jpg">
+    <title>Les Bracelets - ChronoBase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root{--gold-gradient:linear-gradient(90deg,#d4af37,#f5d98c,#c8a951);--bg-main:radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);--bg-header:#0b0b0b;--bg-footer:#0b0b0b;--bg-card:linear-gradient(180deg,#111,#0c0c0c);--text-main:#d4af37;--text-secondary:#c1a96b;--border-color:rgba(212,175,55,0.2);--accent-color:#f5d98c;}
+        .light-theme{--bg-main:#ffffff;--bg-header:#ffffff;--bg-footer:#ffffff;--bg-card:#f7f7f7;--text-main:#000000;--text-secondary:#444444;--border-color:rgba(0,0,0,0.2);--accent-color:#d4af37;}
+        
+        body{margin:0;padding:0;font-family:'Montserrat',sans-serif;background:var(--bg-main);color:var(--text-main);font-weight:300;overflow-x:hidden;scroll-behavior: smooth;}
+        .gold-text{background:var(--gold-gradient);-webkit-background-clip:text;color:transparent;animation:shine 6s infinite linear;background-size:200%;}
+        @keyframes shine{0%{background-position:0%}100%{background-position:200%}}
+        
+        header{width:100%;padding:12px 0;border-bottom:1px solid var(--border-color);background:var(--bg-header);position:fixed;top:0;left:0;z-index:100;}
+        .header-container{max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:0 20px;}
+        .header-left{display:flex;align-items:center;gap:15px;}
+        nav a{margin-left:30px;text-decoration:none;color:var(--text-main);font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;}
+        nav a:hover{color:var(--accent-color)}
+        
+        #theme-switch,#lang-switch{width:50px;height:26px;background:var(--border-color);border-radius:20px;position:relative;cursor:pointer;transition:background .3s;display:flex;align-items:center;padding:3px;}
+        .switch-handle{width:20px;height:20px;background:var(--text-main);border-radius:50%;transition:transform 0.3s;display:flex;justify-content:center;align-items:center;font-size:10px;font-weight:700;color:var(--bg-header);}
+        .light-theme #theme-switch .switch-handle{transform:translateX(24px);background:#000;}
+        .lang-en #lang-switch .switch-handle{transform:translateX(24px);}
+
+        /* Content Styles */
+        .content-view{min-height:100vh;padding-top:120px;max-width:1000px;margin:0 auto;padding-left:20px;padding-right:20px;}
+        .intro-section{text-align:center;margin-bottom:60px;}
+        
+        .history-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-bottom: 80px; }
+        .history-text { text-align: left; line-height: 1.6; }
+        
+        .materials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 80px; }
+        .material-card { background: var(--bg-card); border: 1px solid var(--border-color); padding: 25px; border-radius: 15px; transition: 0.3s; }
+        .material-card:hover { border-color: var(--accent-color); transform: translateY(-5px); }
+        .material-card h3 { color: var(--accent-color); margin-top: 0; }
+
+        .map-container { background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 20px; padding: 40px; text-align: center; margin-bottom: 80px; }
+        .map-placeholder { width: 100%; max-width: 600px; margin: 20px auto; border: 1px dashed var(--text-secondary); padding: 40px; border-radius: 10px; opacity: 0.7; }
+
+        .shop-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 60px; }
+        .btn-shop { padding: 12px 25px; border: 1px solid var(--text-main); text-decoration: none; color: var(--text-main); border-radius: 5px; transition: 0.3s; }
+        .btn-shop:hover { background: var(--text-main); color: #000; }
+
+        /* Floating buttons */
+        #back-to-top, #report-error { position: fixed; right: 30px; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 100; transition: 0.3s; border: 1px solid var(--text-main); background: var(--bg-header); color: var(--text-main); }
+        #back-to-top { bottom: 90px; display: none; }
+        #report-error { bottom: 30px; }
+        #report-error:hover { background: #8b0000; color: white; border-color: #8b0000; }
+
+        /* Footer */
+        .site-footer{background:var(--bg-footer);border-top:1px solid var(--border-color);padding:40px 20px;margin-top:80px;color:var(--text-main);font-size:14px}
+        .footer-content{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:25px}
+        .footer-section h4{color:var(--accent-color);margin-bottom:15px}
+        .footer-section a{display:block;color:var(--text-main);text-decoration:none;font-size:12px;margin-bottom:8px}
+        .footer-bottom{text-align:center;margin-top:40px;border-top:1px solid var(--border-color);padding-top:20px;opacity:0.7}
+
+        @media (max-width: 768px) { .history-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body class="lang-fr">
+
+<header>
+    <div class="header-container">
+        <div class="header-left">
+            <h2 class="gold-text" style="cursor:pointer" onclick="window.location='index.html'">ChronoBase</h2>
+            <div id="theme-switch" onclick="toggleTheme()"><div class="switch-handle"></div></div>
+            <div id="lang-switch" onclick="toggleLang()"><div class="switch-handle" id="lang-label">FR</div></div>
+        </div>
+        <nav>
+            <a href="index.html" data-key="nav-home">Accueil</a>
+            <a href="montre.html" data-key="nav-watches">Les montres</a>
+            <a href="atelier.html" data-key="nav-workshop" style="color:var(--accent-color)">L'atelier</a>
+            <a href="propos.html" data-key="nav-about">À propos</a>
+        </nav>
+    </div>
+</header>
+
+<main class="content-view">
+    <section class="intro-section">
+        <h1 class="gold-text" data-key="strap-title">Les Bracelets d'Horlogerie</h1>
+        <p data-key="strap-intro">Bien plus qu'un simple accessoire de maintien, le bracelet définit le caractère et l'usage d'un garde-temps.</p>
+    </section>
+
+    <section class="history-grid">
+        <div class="history-text">
+            <h2 data-key="hist-title">Une Perspective Historique</h2>
+            <p data-key="hist-p1">À l'origine, les montres se portaient dans la poche. C'est durant la Guerre des Boers, puis la Première Guerre Mondiale, que les soldats ont commencé à souder des anses à leurs boîtiers pour y glisser des lanières de cuir, créant ainsi les premières montres-bracelets.</p>
+            <p data-key="hist-p2">Dans les années 1940, l'apparition des bracelets métalliques articulés a révolutionné le confort et la durabilité, notamment avec les célèbres bracelets Oyster et Jubilé.</p>
+        </div>
+        <div class="material-card" style="display:flex; align-items:center; justify-content:center; height:200px; border:2px solid var(--accent-color)">
+            <span style="font-size: 40px;">⌚</span>
+            <p style="margin-left:15px; font-weight:bold">Évolution du style<br>1900 - 2026</p>
+        </div>
+    </section>
+
+    <h2 style="text-align: center; margin-bottom: 40px;" data-key="mat-title">Matières & Savoir-faire</h2>
+    <section class="materials-grid">
+        <div class="material-card">
+            <h3 data-key="mat-leather-t">Cuir Véritable</h3>
+            <p data-key="mat-leather-p">Veau, Alligator, Autruche. Le choix classique pour l'élégance. Il se patine avec le temps et offre un confort thermique inégalé.</p>
+        </div>
+        <div class="material-card">
+            <h3 data-key="mat-steel-t">Acier & Métaux</h3>
+            <p data-key="mat-steel-p">Inoxydable 316L ou 904L. Robuste, parfait pour les montres de plongée (Diver) et un usage quotidien intensif.</p>
+        </div>
+        <div class="material-card">
+            <h3 data-key="mat-atypic-t">Atypiques & Modernes</h3>
+            <p data-key="mat-atypic-p">Nylon "NATO", Caoutchouc FKM ou Voile de bateau. Conçus pour l'aventure, ils résistent à l'eau et aux conditions extrêmes.</p>
+        </div>
+    </section>
+
+    <section class="map-container">
+        <h2 data-key="map-title">Cartographie de Fabrication</h2>
+        <p data-key="map-desc">Où sont produits les meilleurs bracelets au monde ?</p>
+        <div class="map-placeholder">
+            [Image de la carte du monde des centres de tannerie et d'usinage - France, Italie, Suisse, Japon]
+            <div style="margin-top:20px; font-size: 0.9em;">
+                📍 <strong>Italie :</strong> Maître du cuir | 📍 <strong>Suisse :</strong> Acier de précision | 📍 <strong>Vietnam :</strong> Caoutchouc haute qualité
+            </div>
+        </div>
+    </section>
+
+    <h2 style="text-align: center;" data-key="shop-title">Où s'équiper ?</h2>
+    <div class="shop-links">
+        <a href="#" class="btn-shop">Boutique Officielle</a>
+        <a href="#" class="btn-shop">Artisans Selliers</a>
+        <a href="#" class="btn-shop">Accessoires NATO</a>
+    </div>
+</main>
+
+<button id="back-to-top" onclick="scrollToTop()">↑</button>
+<button id="report-error" onclick="reportError()" title="Signaler une erreur">!</button>
+
+<footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-section"><h4>Navigation</h4><a href="index.html">Accueil</a><a href="montre.html">Les montres</a><a href="propos.html">À propos</a></div>
+        <div class="footer-section"><h4>Contact</h4><a href="mailto:contact@chronobase.com">Email</a><a href="#">Formulaire</a></div>
+        <div class="footer-section"><h4>Légal</h4><a href="mentions.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a></div>
+    </div>
+    <div class="footer-bottom">© 2026 ChronoBase — Tous droits réservés <br> v1.0.0</div>
+</footer>
+
+<script>
+    const translations = {
+        fr: {
+            "nav-home": "Accueil", "nav-watches": "Les montres", "nav-workshop": "L'atelier", "nav-about": "À propos",
+            "strap-title": "Les Bracelets d'Horlogerie", "strap-intro": "Bien plus qu'un simple accessoire de maintien, le bracelet définit le caractère et l'usage d'un garde-temps.",
+            "hist-title": "Une Perspective Historique", "hist-p1": "À l'origine, les montres se portaient dans la poche...", "hist-p2": "Dans les années 1940...",
+            "mat-title": "Matières & Savoir-faire", "mat-leather-t": "Cuir Véritable", "mat-leather-p": "Veau, Alligator, Autruche. Le choix classique.",
+            "mat-steel-t": "Acier & Métaux", "mat-steel-p": "Inoxydable 316L. Robuste et durable.",
+            "mat-atypic-t": "Atypiques & Modernes", "mat-atypic-p": "NATO, Caoutchouc FKM. Pour l'aventure.",
+            "map-title": "Cartographie de Fabrication", "map-desc": "Où sont produits les meilleurs bracelets au monde ?",
+            "shop-title": "Où s'équiper ?"
+        },
+        en: {
+            "nav-home": "Home", "nav-watches": "Watches", "nav-workshop": "Workshop", "nav-about": "About",
+            "strap-title": "Watch Straps", "strap-intro": "More than just a holder, the strap defines the character and use of a timepiece.",
+            "hist-title": "Historical Perspective", "hist-p1": "Originally, watches were carried in pockets...", "hist-p2": "In the 1940s...",
+            "mat-title": "Materials & Craftsmanship", "mat-leather-t": "Genuine Leather", "mat-leather-p": "Calf, Alligator, Ostrich. The classic choice.",
+            "mat-steel-t": "Steel & Metals", "mat-steel-p": "316L Stainless steel. Robust and durable.",
+            "mat-atypic-t": "Atypical & Modern", "mat-atypic-p": "NATO, FKM Rubber. For adventure.",
+            "map-title": "Manufacturing Mapping", "map-desc": "Where are the world's best straps produced?",
+            "shop-title": "Where to buy?"
+        }
+    };
+
+    function toggleTheme(){
+        document.body.classList.toggle("light-theme");
+        localStorage.setItem("theme", document.body.classList.contains("light-theme") ? "light" : "dark");
+    }
+
+    function toggleLang(){
+        const currentLang = document.body.classList.contains("lang-fr") ? "fr" : "en";
+        const newLang = currentLang === "fr" ? "en" : "fr";
+        document.body.classList.remove("lang-fr", "lang-en");
+        document.body.classList.add("lang-" + newLang);
+        document.getElementById("lang-label").textContent = newLang.toUpperCase();
+        localStorage.setItem("lang", newLang);
+        updateContent(newLang);
+    }
+
+    function updateContent(lang) {
+        document.querySelectorAll("[data-key]").forEach(el => {
+            const key = el.getAttribute("data-key");
+            if(translations[lang][key]) el.innerHTML = translations[lang][key];
+        });
+    }
+
+    function reportError() {
+        const msg = prompt("Merci de nous aider ! Décrivez l'erreur constatée :");
+        if(msg) alert("Merci ! Votre signalement a été envoyé à l'équipe ChronoBase.");
+    }
+
+    window.onscroll = function() {
+        document.getElementById("back-to-top").style.display = (window.scrollY > 300) ? "flex" : "none";
+    };
+
+    function scrollToTop() { window.scrollTo({top: 0, behavior: 'smooth'}); }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        if(localStorage.getItem("theme") === "light") document.body.classList.add("light-theme");
+        const savedLang = localStorage.getItem("lang") || "fr";
+        document.body.classList.add("lang-" + savedLang);
+        document.getElementById("lang-label").textContent = savedLang.toUpperCase();
+        updateContent(savedLang);
+    });
+</script>
+</body>
+</html>
