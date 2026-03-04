@@ -25,6 +25,7 @@
 
         .view{min-height:100vh;padding-top:120px;max-width:1100px;margin:0 auto;padding-left:20px;padding-right:20px;}
         .hero{text-align:center;margin-bottom:60px;}
+        .hero p { max-width: 800px; margin: 20px auto; line-height: 1.6; }
         
         /* Galerie Bracelets */
         .strap-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 80px; }
@@ -61,6 +62,17 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
+        /* Bouton Feedback fixe */
+        #feedback-btn {
+            position: fixed; bottom: 30px; left: 30px; padding: 12px 20px;
+            background: var(--bg-header); border: 1px solid var(--text-main);
+            color: var(--text-main); border-radius: 30px; cursor: pointer;
+            z-index: 100; transition: all 0.3s ease; font-size: 13px;
+            text-transform: uppercase; letter-spacing: 1px; text-decoration: none;
+            display: flex; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        #feedback-btn:hover { background: var(--text-main); color: var(--bg-header); }
+
         /* Footer */
         .site-footer{background:var(--bg-footer);border-top:1px solid var(--border-color);padding:25px 20px 15px;margin-top:40px;color:var(--text-main);font-size:14px}.footer-content{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px}.footer-section{display:flex;flex-direction:column;gap:4px}.footer-section h4{margin-bottom:6px;color:#f5d98c;font-size:13px}.footer-section a{color:var(--text-main);text-decoration:none;font-size:12px}.footer-section a:hover{color:#f5d98c}.footer-legal{margin-top:10px;padding-top:10px;border-top:1px solid var(--border-color)}.footer-bottom{text-align:center;margin-top:15px;font-size:12px;opacity:0.7}.site-version{display:block;margin-top:5px}
     </style>
@@ -87,7 +99,7 @@
 <main class="view">
     <section class="hero">
         <h1 class="gold-text" data-key="strap-title">Les Bracelets d'Horlogerie</h1>
-        <p data-key="strap-intro">Cliquez sur une catégorie pour découvrir les différents styles.</p>
+        <p data-key="strap-intro">Explorez les différents types de bracelets pour transformer l'esthétique de votre garde-temps. Cette galerie vous offre une première approche visuelle des styles emblématiques, du cuir classique aux mailles métalliques robustes.</p>
     </section>
 
     <section class="strap-gallery">
@@ -150,6 +162,8 @@
     </section>
 </main>
 
+<a href="mailto:feedback@chronobase.com?subject=Avis sur ChronoBase&body=Bonjour, voici mon retour concernant le site :" id="feedback-btn" data-key="btn-feedback">Donner mon avis</a>
+
 <button id="back-to-top" onclick="scrollToTop()">↑</button>
 
 <footer class="site-footer">
@@ -203,17 +217,21 @@
 <script>
     const translations = {
         fr: {
-            "nav-home": "Accueil", "nav-watches": "Les montres", "nav-workshop": "L'atelier", "nav-about": "À propos",
-            "strap-title": "Les Bracelets d'Horlogerie", "strap-intro": "Cliquez sur une catégorie pour découvrir les différents styles.",
+            "nav-home": "Accueil", "nav-watches": "Les montres", "nav-workshop": "L'atelier", "nav-about": "À propos", "nav-res": "Ressources",
+            "strap-title": "Les Bracelets d'Horlogerie", 
+            "strap-intro": "Explorez les différents types de bracelets pour transformer l'esthétique de votre garde-temps. Cette galerie vous offre une première approche visuelle des styles emblématiques, du cuir classique aux mailles métalliques robustes.",
             "cat-classic": "Classiques", "cat-robust": "Robustes", "cat-sport": "Sportifs", "cat-original": "Originaux",
             "s-smooth": "Cuir Lisse", "s-embossed": "Cuir Embossé", "s-rallye": "Rallye", "s-milan": "Milanaise",
+            "btn-feedback": "Donner mon avis",
             "f-nav":"Navigation","f-stats":"Chiffres clés","f-contact":"Contact","f-mail":"Envoyer un email","f-form":"Formulaire (à venir)","f-social":"Nos réseaux sociaux","f-version":"Version","f-hist-v":"Historique des versions","f-hist-u":"Historique des mises à jour","f-contrib":"Nos contributeurs","f-res":"Ressources horlogères","f-map":"Carte des horlogers","f-events":"Événements & bourses","f-equip":"Équipements & achats","f-legal":"Légal","f-mentions":"Mentions légales","f-cgu":"Conditions d’utilisation","f-priv":"Politique de confidentialité","f-reg":"Règlements","f-reg-s":"Règlement du site","f-reg-n":"Règlement des réseaux sociaux","f-cookies":"Gestion des cookies","f-copy":"© 2026 ChronoBase — Tous droits réservés"
         },
         en: {
-            "nav-home": "Home", "nav-watches": "Watches", "nav-workshop": "Workshop", "nav-about": "About",
-            "strap-title": "Watch Straps", "strap-intro": "Click on a category to discover the different styles.",
+            "nav-home": "Home", "nav-watches": "Watches", "nav-workshop": "Workshop", "nav-about": "About", "nav-res": "Resources",
+            "strap-title": "Watch Straps", 
+            "strap-intro": "Explore the different types of straps to transform your timepiece's look. This gallery provides a visual introduction to iconic styles, from classic leather to robust metal bracelets.",
             "cat-classic": "Classic", "cat-robust": "Robust", "cat-sport": "Sport", "cat-original": "Original",
             "s-smooth": "Smooth Leather", "s-embossed": "Embossed Leather", "s-rallye": "Rally", "s-milan": "Milanese",
+            "btn-feedback": "Give Feedback",
             "f-nav":"Navigation","f-stats":"Key Figures","f-contact":"Contact","f-mail":"Send an email","f-form":"Form (coming soon)","f-social":"Social Media","f-version":"Version","f-hist-v":"Version History","f-hist-u":"Update History","f-contrib":"Our Contributors","f-res":"Watchmaking Resources","f-map":"Watchmakers Map","f-events":"Events & Fairs","f-equip":"Equipment & Purchases","f-legal":"Legal","f-mentions":"Legal Notice","f-cgu":"Terms of Use","f-priv":"Privacy Policy","f-reg":"Regulations","f-reg-s":"Site Rules","f-reg-n":"Social Media Rules","f-cookies":"Cookie Management","f-copy":"© 2026 ChronoBase — All rights reserved"
         }
     };
