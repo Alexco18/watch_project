@@ -5,53 +5,38 @@
 <link rel="icon" type="image/png" href="favicon.jpg">
 <title>ChronoBase</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-
 <style>
-/* ---------------------- VARIABLES ---------------------- */
 :root {
   --gold-gradient: linear-gradient(90deg,#d4af37,#f5d98c,#c8a951);
-
-  /* Thème sombre */
   --bg-main: radial-gradient(circle at top,#1a1a1a 0%,#0b0b0b 60%,#000 100%);
   --bg-header: #0b0b0b;
   --bg-footer: #0b0b0b;
   --bg-card: linear-gradient(180deg,#111,#0c0c0c);
-
   --text-main: #d4af37;
   --text-secondary: #c1a96b;
-
   --border-color: rgba(212,175,55,0.2);
 }
-
-/* Thème clair */
 .light-theme {
   --bg-main: #ffffff;
   --bg-header: #ffffff;
   --bg-footer: #ffffff;
   --bg-card: #f7f7f7;
-
   --text-main: #000000;
   --text-secondary: #444444;
-
   --border-color: rgba(0,0,0,0.2);
 }
-
-/* ---------------------- GLOBAL ---------------------- */
 body{
   margin:0;padding:0;font-family:'Montserrat',sans-serif;
   background:var(--bg-main);
   color:var(--text-main);
   font-weight:300;overflow-x:hidden;
 }
-
 .gold-text{
   background:var(--gold-gradient);
   -webkit-background-clip:text;color:transparent;
   animation:shine 6s infinite linear;background-size:200%;
 }
 @keyframes shine{0%{background-position:0%}100%{background-position:200%}}
-
-/* ---------------------- HEADER ---------------------- */
 header{
   width:100%;padding:12px 0;border-bottom:1px solid var(--border-color);
   background:var(--bg-header);position:fixed;top:0;left:0;z-index:10;
@@ -60,20 +45,16 @@ header{
   max-width:1200px;margin:auto;display:flex;justify-content:space-between;
   align-items:center;padding:0 20px;
 }
-
 .header-left {
   display: flex;
   align-items: center;
   gap: 15px;
 }
-
 nav a{
   margin-left:30px;text-decoration:none;color:var(--text-main);
   font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;
 }
 nav a:hover{color:#f5d98c}
-
-/* ---------------------- SWITCHES (THEME & LANG) ---------------------- */
 #theme-switch, #lang-switch {
   width: 50px;
   height: 26px;
@@ -87,7 +68,6 @@ nav a:hover{color:#f5d98c}
   padding: 3px;
   user-select: none;
 }
-
 .switch-handle {
   width: 20px;
   height: 20px;
@@ -101,28 +81,21 @@ nav a:hover{color:#f5d98c}
   font-weight: bold;
   color: var(--bg-header);
 }
-
 .light-theme #theme-switch .switch-handle {
   transform: translateX(24px);
   background: #000;
 }
-
 #lang-switch .switch-handle {
     transform: translateX(0px);
 }
 body.lang-en #lang-switch .switch-handle {
     transform: translateX(24px);
 }
-
-/* ---------------------- VUES ---------------------- */
 .view{min-height:100vh;padding-top:120px;display:none;opacity:0;transition:.5s}
 .view.active{display:block;opacity:1}
-
 .hero{text-align:center;padding:0 20px}
 .hero h1{font-size:55px;font-weight:300}
 .hero p{color:var(--text-secondary);font-size:18px;max-width:600px;margin:20px auto}
-
-/* ---------------------- SECTIONS ---------------------- */
 .sections{
   max-width:1200px;margin:40px auto;
   display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
@@ -134,8 +107,6 @@ body.lang-en #lang-switch .switch-handle {
   padding:30px;border-radius:12px;
 }
 .card:hover{border-color:rgba(212,175,55,.35)}
-
-/* ---------------------- CARROUSEL PUBLICITAIRE ---------------------- */
 #carousel-container {
   max-width: 1000px;
   margin: 40px auto;
@@ -146,7 +117,6 @@ body.lang-en #lang-switch .switch-handle {
   border: 1px solid var(--border-color);
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
-
 .carousel-slide {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
@@ -158,15 +128,12 @@ body.lang-en #lang-switch .switch-handle {
   background-size: cover;
   background-position: center;
 }
-
 .carousel-slide.active { opacity: 1; z-index: 1; }
-
 .carousel-overlay {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
   background: rgba(0,0,0,0.5);
 }
-
 .carousel-content {
   position: relative;
   z-index: 2;
@@ -174,7 +141,6 @@ body.lang-en #lang-switch .switch-handle {
   padding: 20px;
   color: #fff;
 }
-
 .carousel-content h2 {
   font-size: 28px;
   margin-bottom: 10px;
@@ -182,13 +148,11 @@ body.lang-en #lang-switch .switch-handle {
   letter-spacing: 2px;
   color: #f5d98c;
 }
-
 .carousel-content p {
   font-size: 18px;
   max-width: 600px;
   margin-bottom: 15px;
 }
-
 .carousel-link {
   display: inline-block;
   color: #f5d98c;
@@ -198,12 +162,10 @@ body.lang-en #lang-switch .switch-handle {
   transition: 0.3s;
   cursor: pointer;
 }
-
 .carousel-link:hover {
   border-bottom: 1px solid #f5d98c;
   letter-spacing: 1px;
 }
-
 .carousel-btn {
   position: absolute;
   top: 50%;
@@ -220,11 +182,9 @@ body.lang-en #lang-switch .switch-handle {
   width: 50px; height: 50px;
   display: flex; align-items: center; justify-content: center;
 }
-
 .carousel-btn:hover { background: rgba(212,175,55,0.8); }
 .btn-prev { left: 20px; }
 .btn-next { right: 20px; }
-
 .carousel-dots {
   position: absolute;
   bottom: 15px;
@@ -234,7 +194,6 @@ body.lang-en #lang-switch .switch-handle {
   gap: 10px;
   z-index: 4;
 }
-
 .dot {
   width: 12px;
   height: 12px;
@@ -244,31 +203,25 @@ body.lang-en #lang-switch .switch-handle {
   transition: 0.3s;
   background: transparent;
 }
-
 .dot.active {
   background: #f5d98c;
 }
-
-/* ---------------------- NOUVEAU CONTENU ACCUEIL ---------------------- */
 .welcome-intro {
   max-width: 800px;
   margin: 60px auto 20px;
   text-align: center;
   padding: 0 20px;
 }
-
 .welcome-intro h2 {
   font-size: 32px;
   font-weight: 300;
   margin-bottom: 20px;
 }
-
 .welcome-intro p {
   line-height: 1.8;
   color: var(--text-secondary);
   font-size: 17px;
 }
-
 .stats-bar {
   display: flex;
   justify-content: center;
@@ -277,28 +230,23 @@ body.lang-en #lang-switch .switch-handle {
   max-width: 1000px;
   flex-wrap: wrap;
 }
-
 .stat-item {
   text-align: center;
   border-left: 1px solid var(--border-color);
   padding-left: 20px;
 }
-
 .stat-number {
   display: block;
   font-size: 24px;
   color: #f5d98c;
   font-weight: 500;
 }
-
 .stat-label {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1px;
   opacity: 0.7;
 }
-
-/* ---------------------- FOOTER COMPACT ---------------------- */
 .site-footer {
   background: var(--bg-footer);
   border-top: 1px solid var(--border-color);
@@ -307,7 +255,6 @@ body.lang-en #lang-switch .switch-handle {
   color: var(--text-main);
   font-size: 14px;
 }
-
 .footer-content {
   max-width: 1200px;
   margin: auto;
@@ -315,41 +262,34 @@ body.lang-en #lang-switch .switch-handle {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 25px;
 }
-
 .footer-section {
   min-height: auto;
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
-
 .footer-section h4 {
   margin-bottom: 6px;
   color: #f5d98c;
   font-size: 13px;
 }
-
 .footer-section a {
   color: var(--text-main);
   text-decoration: none;
   font-size: 12px;
 }
-
 .footer-section a:hover { color: #f5d98c; }
-
 .footer-legal {
   margin-top: 10px;
   padding-top: 10px;
   border-top: 1px solid var(--border-color);
 }
-
 .footer-bottom {
   text-align: center;
   margin-top: 15px;
   font-size: 12px;
   opacity: 0.7;
 }
-
 .site-version {
   margin-top: 5px;
   font-size: 12px;
@@ -362,8 +302,6 @@ body.lang-en #lang-switch .switch-handle {
   color: #f5d98c;
   cursor: pointer;
 }
-
-/* ---------------------- CHATBOT ---------------------- */
 #cb-bubble {
   position: fixed;
   bottom: 25px;
@@ -385,7 +323,6 @@ body.lang-en #lang-switch .switch-handle {
 #cb-bubble:hover {
   transform: scale(1.1);
 }
-
 #cb-window {
   position: fixed;
   bottom: 95px;
@@ -400,7 +337,6 @@ body.lang-en #lang-switch .switch-handle {
   z-index: 9999;
   box-shadow: 0 0 15px rgba(0,0,0,0.5);
 }
-
 #cb-header {
   padding: 8px;
   background: var(--bg-card);
@@ -417,19 +353,16 @@ body.lang-en #lang-switch .switch-handle {
 #cb-header:active {
   cursor: grabbing;
 }
-
 #cb-close {
   cursor: pointer;
   user-select: none;
 }
-
 #cb-content {
   padding: 10px;
   overflow-y: auto;
   color: var(--text-main);
   font-size: 13px;
 }
-
 .cb-btn {
   background: var(--bg-card);
   color: var(--text-main);
@@ -447,21 +380,17 @@ body.lang-en #lang-switch .switch-handle {
 </style>
 </head>
 <body class="lang-fr">
-
 <header>
   <div class="header-container">
     <div class="header-left">
       <h2 class="gold-text">ChronoBase</h2>
-
       <div id="theme-switch" onclick="toggleTheme()">
         <div class="switch-handle"></div>
       </div>
-
       <div id="lang-switch" onclick="toggleLang()">
         <div class="switch-handle" id="lang-label">FR</div>
       </div>
     </div>
-
     <nav>
       <a onclick="showView('home-view')" data-key="nav-home">Accueil</a>
       <a href="montre.html" data-key="nav-watches">Les montres</a>
@@ -471,13 +400,11 @@ body.lang-en #lang-switch .switch-handle {
     </nav>
   </div>
 </header>
-
 <section id="home-view" class="view active">
   <div class="hero">
     <h1 class="gold-text" data-key="hero-title">La référence mondiale des montres</h1>
     <p data-key="hero-sub">Explorez l’histoire horlogère à travers des modèles mythiques.</p>
   </div>
-
   <div id="carousel-container">
     <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop');">
       <div class="carousel-overlay"></div>
@@ -518,7 +445,6 @@ body.lang-en #lang-switch .switch-handle {
         <a href="avis.html" class="carousel-link" data-key="slide-link-review">Laissez un avis sur le site →</a>
       </div>
     </div>
-
     <div class="carousel-dots">
       <div class="dot active" onclick="currentSlide=0; showSlide(0); resetTimer();"></div>
       <div class="dot" onclick="currentSlide=1; showSlide(1); resetTimer();"></div>
@@ -526,11 +452,9 @@ body.lang-en #lang-switch .switch-handle {
       <div class="dot" onclick="currentSlide=3; showSlide(3); resetTimer();"></div>
       <div class="dot" onclick="currentSlide=4; showSlide(4); resetTimer();"></div>
     </div>
-
     <button class="carousel-btn btn-prev" onclick="changeSlide(-1)">❮</button>
     <button class="carousel-btn btn-next" onclick="changeSlide(1)">❯</button>
   </div>
-
   <div class="welcome-intro">
     <h2 class="gold-text" data-key="welcome-title">Un espace pour tous les passionnés</h2>
     <p data-key="welcome-desc">
@@ -538,7 +462,6 @@ body.lang-en #lang-switch .switch-handle {
         Ici, la passion n'a pas de niveau : nous célébrons aussi bien la haute horlogerie que les modèles les plus accessibles. Plongez dans notre catalogue et laissez-vous guider par le battement des calibres.
     </p>
   </div>
-
   <div class="stats-bar">
     <div class="stat-item">
         <span class="stat-number">1,240+</span>
@@ -553,13 +476,11 @@ body.lang-en #lang-switch .switch-handle {
         <span class="stat-label" data-key="stat-access">Accès libre</span>
     </div>
   </div>
-
   <section class="sections">
     <div class="card">
       <h3 data-key="card1-title">Dernières montres ajoutées</h3>
       <div id="latest-watches"></div>
     </div>
-
     <div class="card">
       <h3 data-key="card2-title">Pourquoi ChronoBase ?</h3>
       <p data-key="card2-desc">
@@ -570,7 +491,6 @@ body.lang-en #lang-switch .switch-handle {
         → Découvrir le projet
       </p>
     </div>
-
     <div class="card">
         <h3 data-key="expert-title">L'œil de l'expert</h3>
         <p style="font-style: italic; font-size: 14px; color: var(--text-secondary);" data-key="expert-quote">
@@ -582,7 +502,6 @@ body.lang-en #lang-switch .switch-handle {
     </div>
   </section>
 </section>
-
 <footer class="site-footer">
   <div class="footer-content">
     <div class="footer-section">
@@ -612,7 +531,6 @@ body.lang-en #lang-switch .switch-handle {
       <a href="achats.html" data-key="f-equip">Équipements & achats</a>
     </div>
   </div>
-
   <div class="footer-content footer-legal">
     <div class="footer-section">
       <h4 data-key="f-legal">Légal</h4>
@@ -626,15 +544,12 @@ body.lang-en #lang-switch .switch-handle {
       <a href="reglement-reseaux.html" data-key="f-reg-n">Règlement des réseaux sociaux</a>
     </div>
   </div>
-
   <div class="footer-bottom">
     <span data-key="f-copy">© 2026 ChronoBase — Tous droits réservés</span>
     <div class="site-version" onclick="window.location='versions.html'">v1.0.0</div>
   </div>
 </footer>
-
 <script>
-// ---------- ANECDOTES LOGIC ----------
 const anecdotes_fr = [
   "Le premier mouvement automatique a été inventé en 1770 par Abraham-Louis Perrelet.",
   "La Rolex GMT-Master a été conçue à l'origine pour les pilotes de la Pan Am.",
@@ -657,7 +572,6 @@ const anecdotes_fr = [
   "Le tritium était utilisé autrefois pour rendre les aiguilles lumineuses dans le noir.",
   "Le verre saphir d'une montre est presque aussi dur qu'un diamant."
 ];
-
 const anecdotes_en = [
   "The first automatic movement was invented in 1770 by Abraham-Louis Perrelet.",
   "The Rolex GMT-Master was originally designed for Pan Am pilots.",
@@ -680,7 +594,6 @@ const anecdotes_en = [
   "Tritium was formerly used to make watch hands glow in the dark.",
   "A watch's sapphire crystal is almost as hard as a diamond."
 ];
-
 function setRandomAnecdote() {
   const currentLang = document.body.classList.contains("lang-en") ? "en" : "fr";
   const list = currentLang === "en" ? anecdotes_en : anecdotes_fr;
@@ -688,37 +601,27 @@ function setRandomAnecdote() {
   const textElement = document.getElementById("anecdote-text");
   if(textElement) textElement.textContent = list[randomIndex];
 }
-
-// ---------- CARROUSEL LOGIC ----------
 let currentSlide = 0;
 const slides = document.querySelectorAll('.carousel-slide');
 const dots = document.querySelectorAll('.dot'); 
-
 function showSlide(index) {
   if (index >= slides.length) currentSlide = 0;
   else if (index < 0) currentSlide = slides.length - 1;
   else currentSlide = index;
-
   slides.forEach(s => s.classList.remove('active'));
   slides[currentSlide].classList.add('active');
-
   dots.forEach(d => d.classList.remove('active'));
   dots[currentSlide].classList.add('active');
 }
-
 function changeSlide(n) {
   showSlide(currentSlide + n);
   resetTimer();
 }
-
 let autoScroll = setInterval(() => changeSlide(1), 5000); 
-
 function resetTimer() {
   clearInterval(autoScroll);
   autoScroll = setInterval(() => changeSlide(1), 5000);
 }
-
-// ---------- TRADUCTIONS ----------
 const translations = {
     fr: {
         "nav-home": "Accueil", "nav-watches": "Les montres", "nav-res": "Ressources", "nav-about": "À propos",
@@ -761,13 +664,11 @@ const translations = {
         "f-reg": "Regulations", "f-reg-s": "Site rules", "f-reg-n": "Social media rules", "f-copy": "© 2026 ChronoBase — All rights reserved"
     }
 };
-
 function toggleLang() {
     const body = document.body;
     const label = document.getElementById("lang-label");
     const isFr = body.classList.contains("lang-fr");
     const newLang = isFr ? "en" : "fr";
-
     body.classList.remove("lang-fr", "lang-en");
     body.classList.add("lang-" + newLang);
     label.textContent = newLang.toUpperCase();
@@ -775,7 +676,6 @@ function toggleLang() {
     applyTranslations(newLang);
     setRandomAnecdote(); // Rafraîchir l'anecdote avec la bonne langue
 }
-
 function applyTranslations(lang) {
     document.querySelectorAll("[data-key]").forEach(el => {
         const key = el.getAttribute("data-key");
@@ -784,21 +684,15 @@ function applyTranslations(lang) {
         }
     });
 }
-
-// ---------- VUES ----------
 function showView(id){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
-
-// ---------- DONNÉES ----------
 const watches = [
   {id:"rolex-daytona",brand:"Rolex",name:"Daytona",year:2016},
   {id:"omega-speedmaster",brand:"Omega",name:"Speedmaster",year:1969},
   {id:"patek-calatrava",brand:"Patek Philippe",name:"Calatrava",year:1932}
 ];
-
-// ---------- DERNIÈRES MONTRES ----------
 function displayLatestWatches(){
   const c=document.getElementById("latest-watches");
   if(!c) return;
@@ -808,33 +702,25 @@ function displayLatestWatches(){
   });
 }
 displayLatestWatches();
-
-// ---------- THEME SWITCH ----------
 function toggleTheme() {
   document.body.classList.toggle("light-theme");
   const isLight = document.body.classList.contains("light-theme");
   localStorage.setItem("theme", isLight ? "light" : "dark");
 }
-
 (function() {
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "light") document.body.classList.add("light-theme");
-  
   const savedLang = localStorage.getItem("lang") || "fr";
   const body = document.body;
   const label = document.getElementById("lang-label");
-  
   body.classList.remove("lang-fr", "lang-en");
   body.classList.add("lang-" + savedLang);
   if(label) label.textContent = savedLang.toUpperCase();
   applyTranslations(savedLang);
-
   setRandomAnecdote();
 })();
 </script>
-
 <div id="cb-bubble">💬</div>
-
 <div id="cb-window">
   <div id="cb-header">
     Assistant
@@ -842,19 +728,16 @@ function toggleTheme() {
   </div>
   <div id="cb-content"></div>
 </div>
-
 <script>
 const bubble = document.getElementById("cb-bubble");
 const win = document.getElementById("cb-window");
 const closeBtn = document.getElementById("cb-close");
 const content = document.getElementById("cb-content");
-
 bubble.onclick = () => {
   win.style.display = "flex";
   startChat();
 };
 closeBtn.onclick = () => win.style.display = "none";
-
 function startChat() {
   content.innerHTML = `
     <p>Choisissez votre langue :</p>
@@ -862,7 +745,6 @@ function startChat() {
     <div class="cb-btn" onclick="chooseLang('en')">🇬🇧 English</div>
   `;
 }
-
 function chooseLang(lang) {
   window.cbLang = lang;
   const text = {
@@ -877,7 +759,6 @@ function chooseLang(lang) {
     <div class="cb-btn" onclick="goSection('version')">Versions</div>
   `;
 }
-
 function goSection(section) {
   const lang = window.cbLang;
   const labels = {
@@ -906,18 +787,14 @@ function goSection(section) {
     <div class="cb-btn" onclick="startChat()">↩ Retour</div>
   `;
 }
-
-/* ---------------------- DRAG & DROP ---------------------- */
 let isDragging = false;
 let offsetX, offsetY;
 const cbHeader = document.getElementById("cb-header");
-
 cbHeader.addEventListener("mousedown", (e) => {
   isDragging = true;
   offsetX = e.clientX - win.offsetLeft;
   offsetY = e.clientY - win.offsetTop;
 });
-
 document.addEventListener("mousemove", (e) => {
   if (isDragging) {
     win.style.left = (e.clientX - offsetX) + "px";
@@ -926,11 +803,9 @@ document.addEventListener("mousemove", (e) => {
     win.style.right = "auto";
   }
 });
-
 document.addEventListener("mouseup", () => {
   isDragging = false;
 });
 </script>
-
 </body>
 </html>
